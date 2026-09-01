@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/*
+ * "SFT Schrifted Sans" is the brand typeface, but it is a licensed commercial
+ * face and no files are present in this repo — the @font-face rules that used
+ * to live here pointed at /fonts/*.woff2 and 404'd on every page load. Inter
+ * (self-hosted via next/font in app/layout.tsx) is the interim stack and shares
+ * similar metrics. To restore the brand face: drop the licensed .woff2 files
+ * into /public/fonts, re-add @font-face rules for them here, and prepend the
+ * family to the `body` font stack below.
+ */
+
+:root {
+  --color-primary: #1c1917;
+  --color-accent: #c8a96e;
+  --background: #030305;
+  --foreground: #fafaf9;
+  --color-muted: #44403c;
+
+  /* Brand palette */
+  --color-vermilion: #ec4438;
+  --color-electric-blue: #4b3ff2;
+  --color-aqua: #2dd4bf;
+  --color-magenta: #d6336c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-vermilion: var(--color-vermilion);
+  --color-electric-blue: var(--color-electric-blue);
+  --color-aqua: var(--color-aqua);
+  --color-magenta: var(--color-magenta);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(200, 169, 110, 0.2);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
