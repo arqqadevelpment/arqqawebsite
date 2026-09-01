@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { signalHeroReady, whenGateOpen } from "@/lib/preloader";
+import { registerHero, reportHeroFrame, whenGateOpen } from "@/lib/preloader";
 
 // Eight single-line headline beats, each synced to a distinct scene in the
 // source video (see the timing table this was built from). Beat 0 plays
@@ -107,14 +107,18 @@ export function HeroSection() {
     let desiredFrame = 0;
     let lastDrawn = -1;
 
-    // The preloader waits on this: the intro is only worth starting once its
-    // frames are in memory. Errors count as settled too — a missing frame must
-    // not hold the overlay up, drawIndex() already falls back to a neighbour.
-    let introSettled = 0;
+    // The preloader holds the page until every intro frame is in memory, and
+    // shows this count as its percentage. Errors count as settled too — a
+    // missing frame must not stall the overlay, and drawIndex() already falls
+    // back to the nearest neighbour it has.
+    const unregisterHero = registerHero(INTRO_FRAME);
     function settleIntroFrame(i: number) {
       if (i >= INTRO_FRAME) return;
-      introSettled++;
-      if (introSettled >= INTRO_FRAME) signalHeroReady();
+      reportHeroFrame();
+      // Paint frame 0 the moment it exists. The reveal then lands on the true
+      // opening frame instead of an empty canvas, so the sequence never looks
+      // like it started part-way through.
+      if (i === 0) drawIndex(0);
     }
 
     function ensureFrame(i: number, onLoad?: () => void) {
@@ -395,6 +399,7 @@ export function HeroSection() {
 
     return () => {
       destroyed = true;
+      unregisterHero();
       cancelGateWait();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);

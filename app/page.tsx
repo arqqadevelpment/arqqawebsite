@@ -1,5 +1,4 @@
 import { PageShell } from "@/components/layout/PageShell";
-import { Preloader } from "@/components/preloader/Preloader";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { FactsSection } from "@/components/facts/FactsSection";
 import { FolkloreSection } from "@/components/folklore/FolkloreSection";
@@ -14,14 +13,7 @@ export default function Home() {
   return (
     <PageShell
       variant="home"
-      // Homepage only, and only on a real page load — a client-side
-      // navigation back to `/` finds it already spent and skips it.
-      above={
-        <>
-          <Preloader />
-          <HeroSection />
-        </>
-      }
+      above={<HeroSection />}
       seam
     >
       <FactsSection />
