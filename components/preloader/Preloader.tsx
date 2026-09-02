@@ -54,6 +54,34 @@ const FAILSAFE_MS = 10000;
 /** Beat at 100% before fading, so the number is readable at its end state. */
 const HOLD_AT_FULL_MS = 260;
 
+/* ── Sizing ────────────────────────────────────────────────────────────────
+ * Everything is derived from one token so the sphere, the ring around it and
+ * the counter inside it can never drift apart.
+ *
+ * The source video is 4:3 with the sphere occupying a measured 45% of its
+ * width, centred on pure black. `object-fit: cover` would fill the frame but
+ * crop the sphere on a tall phone, and `contain` would leave it small — so
+ * instead the video is sized so the SPHERE lands at the size we want, and the
+ * surrounding black is allowed to overflow and clip. Black on black: the
+ * overflow is invisible and the sphere is never cropped at any aspect ratio.
+ */
+
+/** Rendered diameter of the sphere itself. */
+const SPHERE = "min(34vmin, 230px)";
+
+/** 1 / 0.445 — the video is this much wider than the sphere inside it. */
+const MEDIA_WIDTH = `calc(${SPHERE} * 2.247)`;
+
+/** The ring clears the sphere's edge by ~9% of its diameter on each side. */
+const RING_SIZE = `calc(${SPHERE} * 1.18)`;
+
+/** Counter scales with the sphere, with sane floors and ceilings. */
+const COUNTER_SIZE = "clamp(1.25rem, 3.4vmin, 1.9rem)";
+
+// Ring geometry in the SVG's own 120x120 user space.
+const RING_RADIUS = 54;
+const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+
 /**
  * Progress from the images the first screen actually needs: 0-1, and 1 when
  * there are none.
@@ -236,15 +264,51 @@ export function Preloader() {
         />
       )}
 
-      {/* The counter sits at the centre of the sphere rather than below it.
+      {/* Progress ring — orbits the sphere rather than sitting under it.
 
-          Below it does not survive contact with real viewports: the sphere is
-          78% of the smaller axis, so on a 16:9 desktop or a landscape phone
-          there is simply no room left underneath, and the number lands on top
-          of the artwork anyway. Centred, it works at every aspect ratio
-          without shrinking the sphere, and the middle of the sphere is the
-          darkest, calmest part of the frame throughout the loop — so white
-          type reads cleanly against it. */}
+          Concentric with the sphere and sized off the same token, so the two
+          stay locked together at every viewport. Rotated -90deg so the arc
+          starts at twelve o'clock and fills clockwise. */}
+      <svg
+        viewBox="0 0 120 120"
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          width: RING_SIZE,
+          height: RING_SIZE,
+          transform: `translate(-50%, -50%) rotate(-90deg) scale(${leaving ? 0.94 : 1})`,
+          transition: `transform ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
+          opacity: leaving ? 0 : 1,
+          overflow: "visible",
+        }}
+      >
+        <circle
+          cx="60"
+          cy="60"
+          r={RING_RADIUS}
+          fill="none"
+          stroke="rgba(255,255,255,0.16)"
+          strokeWidth="1.5"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r={RING_RADIUS}
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeDasharray={RING_CIRCUMFERENCE}
+          // Counts down from a full circumference to zero as percent climbs.
+          strokeDashoffset={RING_CIRCUMFERENCE * (1 - percent / 100)}
+          style={{ transition: "stroke-dashoffset 180ms linear" }}
+        />
+      </svg>
+
+      {/* The counter sits at the centre of the sphere, inside the ring. The
+          middle of the sphere is the darkest, calmest part of the frame
+          throughout the loop, so white type reads cleanly against it. */}
       <div
         style={{
           position: "absolute",
@@ -254,76 +318,46 @@ export function Preloader() {
           textAlign: "center",
           opacity: leaving ? 0 : 1,
           transition: `opacity ${FADE_MS / 2}ms ease`,
+          // Matches the site's own numerals (see FactsSection): same family as
+          // the body, bold, tight tracking.
+          fontFamily: "var(--font-inter), system-ui, sans-serif",
+          fontWeight: 700,
+          letterSpacing: "-0.03em",
+          color: "#ffffff",
+          lineHeight: 1,
         }}
       >
-        <div
+        <span
           style={{
-            fontSize: "clamp(2rem, 7vmin, 3.75rem)",
-            fontWeight: 300,
-            letterSpacing: "-0.02em",
-            color: "#ffffff",
+            fontSize: COUNTER_SIZE,
             // Tabular figures stop the number jittering as digits change.
             fontVariantNumeric: "tabular-nums",
-            lineHeight: 1,
             // Holds the number legible over the brighter swirls that pass
             // through the middle of the sphere as the loop plays.
             textShadow: "0 2px 24px rgba(0,0,0,0.75)",
           }}
         >
           {percent}
-          <span style={{ fontSize: "0.45em", marginLeft: "0.15em", opacity: 0.55 }}>
+          <span style={{ fontSize: "0.45em", marginLeft: "0.12em", opacity: 0.55 }}>
             %
           </span>
-        </div>
-
-        {/* The same value read at a glance, under the number. Narrow enough
-            to stay well inside the sphere on the smallest phone. */}
-        <div
-          style={{
-            margin: "1.1rem auto 0",
-            width: "min(34vmin, 220px)",
-            height: "2px",
-            borderRadius: "2px",
-            background: "rgba(255,255,255,0.22)",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              width: `${percent}%`,
-              height: "100%",
-              background: "rgba(255,255,255,0.9)",
-              transition: "width 180ms linear",
-            }}
-          />
-        </div>
+        </span>
       </div>
     </div>
   );
 }
 
-/**
- * Full-screen sizing, measured off the sphere rather than the video frame.
- *
- * The source is 4:3 with the sphere occupying a measured 45% of its width,
- * centred on pure black. `object-fit: cover` would fill the screen but crop
- * the sphere on a tall phone; `contain` would keep it whole but leave it
- * small. So the video is sized so the SPHERE lands at ~78% of the viewport's
- * smaller axis (78 / 0.45 ≈ 175vmin of video width) and the surrounding black
- * overflows and clips. Black on black — invisible, and never cropped.
- *
- * Centred by transform, not grid or flex alignment: those silently fall back
- * to start-alignment for an item larger than its container, which pins the
- * sphere into a corner.
- */
 function mediaStyle(leaving: boolean): React.CSSProperties {
   return {
     position: "absolute",
     left: "50%",
     top: "50%",
-    width: "175vmin",
+    width: MEDIA_WIDTH,
     height: "auto",
     maxWidth: "none",
+    // Centred by transform, not grid or flex alignment: those silently fall
+    // back to start-alignment for an item larger than its container, which
+    // pins the sphere into a corner.
     transform: `translate(-50%, -50%) scale(${leaving ? 0.94 : 1})`,
     transition: `transform ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
   };
