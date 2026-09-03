@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import Link from "next/link";
+import { OfficesSection } from "@/components/contact/OfficesSection";
 
 /* ── Content — sourced from the Catalyst System page spec ── */
 
@@ -1560,6 +1561,9 @@ export function CatalystSystemPageContent() {
             </div>
           </div>
         </section>
+
+        {/* ══ Offices — contact details, directly above the closing CTA ══ */}
+        <OfficesSection />
 
         {/* ══════════════ CTA ══════════════ */}
         <section className="relative px-6 py-24 sm:py-32 overflow-hidden">
