@@ -6,7 +6,6 @@ import type { ApproachPage } from "./approach-pages-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { OfficesSection } from "@/components/contact/OfficesSection";
 
 /* ══════════════════════════════════════════════════════════════════════
    Shared primitives
@@ -2100,9 +2099,6 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
           </div>
         </div>
       </section>
-
-      {/* ══ Offices — contact details, directly above the closing CTA ══ */}
-      <OfficesSection />
 
       {/* ══ 13 · Closing CTA ══ */}
       <section className="relative w-full overflow-hidden" style={{ padding: "1rem 1.5rem 9rem" }}>

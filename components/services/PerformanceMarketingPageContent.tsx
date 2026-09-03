@@ -1955,7 +1955,9 @@ export function PerformanceMarketingPageContent() {
       <OfficesSection />
 
       {/* ══ 13 · Closing CTA ══ */}
-      <section className="relative w-full overflow-hidden" style={{ padding: "1rem 1.5rem 9rem" }}>
+      {/* Top padding carries the whole gap above the CTA: the offices section
+          before it ends tight at 2rem, so 1rem here left the two crowded. */}
+      <section className="relative w-full overflow-hidden" style={{ padding: "6rem 1.5rem 9rem" }}>
         {/* Horizon light-streak backdrop, masked so it dissolves at both edges.
             The long fade in from black at the top keeps the artwork from
             starting on a visible edge under the section above. */}
