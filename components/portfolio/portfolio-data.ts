@@ -206,7 +206,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "africa-music-initiative",
-    client: "Africa Music Initiative",
+    client: "BIC Art Master Competition",
     industry: "Entertainment",
     market: "UAE / Africa",
     services: ["Community Management", "Content", "Strategy & Consulting"],
@@ -217,6 +217,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metric: "52",
     metricLabel: "Countries engaged",
     image: "/portfolio/africa-music-initiative.webp",
+    logo: "/logos/clients/bic.webp",
     challenge:
       "Africa Music Initiative needed to run a submissions campaign across 52 countries with no existing listening infrastructure and no escalation path — a single mishandled complaint could have compromised the entire continent-wide launch.",
     approach: {

@@ -23,6 +23,13 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
    Capping only height would render a 6:1 wordmark six times the width of a
    square mark. Cards whose client has no logo file render nothing and keep
    their existing layout. */
+
+/* Marks close to square are height-limited, so they cover far less area than a
+   wide wordmark on the same frame and read as smaller. These get a larger cap
+   to even that out optically. The wrapper is tall enough for the biggest of
+   them, so every card keeps identical spacing regardless. */
+const LOGO_BUMPED = ["ebc", "allure", "nile-air"];
+
 function CardLogo({
   src,
   client,
@@ -33,18 +40,21 @@ function CardLogo({
   hovered: boolean;
 }) {
   if (!src) return null;
+  const file = src.split("/").pop()?.replace(".webp", "") ?? "";
+  const bumped = LOGO_BUMPED.includes(file);
+
   return (
     <span
-      className="flex items-center mb-5"
-      style={{ height: "1.75rem" }}
+      className="flex items-center justify-end mb-5"
+      style={{ height: "2.25rem" }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src.replace("/logos/clients/", "/logos/clients/trimmed/")}
         alt={`${client} logo`}
         style={{
-          maxHeight: "1.75rem",
-          maxWidth: "7.5rem",
+          maxHeight: bumped ? "2.25rem" : "1.75rem",
+          maxWidth: bumped ? "9rem" : "7.5rem",
           width: "auto",
           height: "auto",
           objectFit: "contain",
