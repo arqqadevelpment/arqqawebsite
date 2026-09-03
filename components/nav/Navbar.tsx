@@ -7,9 +7,10 @@ const LINKS = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "The Catalyst System™", href: "/catalyst-system" },
-  { label: "Portfolio", href: "/work" },
+  { label: "Work", href: "/work" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
+  { label: "Career", href: "/career" },
   { label: "Contact", href: "/start" },
 ];
 
