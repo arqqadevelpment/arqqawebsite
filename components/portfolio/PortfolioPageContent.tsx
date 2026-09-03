@@ -147,16 +147,19 @@ function CardHoverPanel({
       >
         {title}
       </h3>
+      {/* No backdrop-filter here on purpose. The card already carries
+          blur(20px), and Chrome clips a nested backdrop-filter to the square
+          border-box rather than the rounded one — which showed up as squared
+          corners and a visible seam around this pill. A flat translucent fill
+          gets the same separation with nothing to glitch. */}
       <span
         className="inline-flex items-center gap-2 rounded-full font-medium"
         style={{
           padding: "0.6rem 1.3rem",
           fontSize: "0.8125rem",
           color: "#ffffff",
-          background: "rgba(8,10,18,0.55)",
+          background: "rgba(8,10,18,0.72)",
           border: "1px solid rgba(255,255,255,0.55)",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
         }}
       >
         {cta}
