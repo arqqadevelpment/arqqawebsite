@@ -101,15 +101,21 @@ function CardHeader({
   );
 }
 
-/* Light wash laid over the revealed image on hover — enough to carry white
-   text and the CTA, well short of the old treatment that dropped the image to
-   42% opacity under a near-opaque scrim. */
-const HOVER_DIM = "rgba(4,5,10,0.38)";
+/* Scrim over a card's artwork. Full strength at rest, where it holds the copy
+   legible over the faint image behind it; eased to half on hover, which lets
+   the image through while still carrying the centred name and CTA. */
+const CARD_SCRIM =
+  "linear-gradient(180deg, rgba(4,5,10,0.6) 0%, rgba(4,5,10,0.74) 55%, rgba(4,5,10,0.9) 100%)";
+const SCRIM_HOVER_OPACITY = 0.5;
+
+/* Resting opacity for a card's artwork — a hint of the image behind the copy
+   before the hover brings it up to full. */
+const IDLE_IMAGE_OPACITY = 0.14;
 
 /* ── Hover state — client name and the call to action, centred ────────────
    On hover the card's detail fades out and this takes its place over the
-   image, which is revealed at full opacity under HOVER_DIM. A text shadow and
-   a pill behind the CTA do the rest of the legibility work.
+   image, which comes up to full opacity under an eased CARD_SCRIM. A text
+   shadow and a pill behind the CTA do the rest of the legibility work.
 
    Purely a restatement of copy the card already renders underneath, so it is
    hidden from assistive tech to avoid announcing the client name twice. */
@@ -246,7 +252,7 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
             backgroundImage: `url(${caseStudy.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 1 : 0,
+            opacity: hovered ? 1 : IDLE_IMAGE_OPACITY,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
           }}
@@ -264,13 +270,13 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
           }}
         />
 
-        {/* Light wash so the name and CTA carry over the photo */}
+        {/* Scrim — full at rest over the faint image, eased on hover */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: HOVER_DIM,
-            opacity: hovered ? 1 : 0,
+            background: CARD_SCRIM,
+            opacity: hovered ? SCRIM_HOVER_OPACITY : 1,
             transition: "opacity 0.55s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
@@ -382,7 +388,7 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
             backgroundImage: `url(${card.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 1 : 0,
+            opacity: hovered ? 1 : IDLE_IMAGE_OPACITY,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
           }}
@@ -399,13 +405,13 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
           }}
         />
 
-        {/* Light wash so the name and CTA carry over the photo */}
+        {/* Scrim — full at rest over the faint image, eased on hover */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: HOVER_DIM,
-            opacity: hovered ? 1 : 0,
+            background: CARD_SCRIM,
+            opacity: hovered ? SCRIM_HOVER_OPACITY : 1,
             transition: "opacity 0.55s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
@@ -516,7 +522,7 @@ function PerformanceCard({
             backgroundImage: `url(${study.card.image ?? "/services/metric-card-bg.webp"})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 1 : 0.14,
+            opacity: hovered ? 1 : IDLE_IMAGE_OPACITY,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
           }}
@@ -527,9 +533,8 @@ function PerformanceCard({
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(4,5,10,0.6) 0%, rgba(4,5,10,0.74) 55%, rgba(4,5,10,0.9) 100%)",
-            opacity: hovered ? 0.5 : 1,
+            background: CARD_SCRIM,
+            opacity: hovered ? SCRIM_HOVER_OPACITY : 1,
             transition: "opacity 0.6s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
