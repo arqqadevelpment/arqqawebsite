@@ -101,10 +101,15 @@ function CardHeader({
   );
 }
 
+/* Light wash laid over the revealed image on hover — enough to carry white
+   text and the CTA, well short of the old treatment that dropped the image to
+   42% opacity under a near-opaque scrim. */
+const HOVER_DIM = "rgba(4,5,10,0.38)";
+
 /* ── Hover state — client name and the call to action, centred ────────────
    On hover the card's detail fades out and this takes its place over the
-   now fully-opaque image. Legibility comes from a text shadow and a pill
-   behind the CTA rather than a scrim, so the image itself stays undimmed.
+   image, which is revealed at full opacity under HOVER_DIM. A text shadow and
+   a pill behind the CTA do the rest of the legibility work.
 
    Purely a restatement of copy the card already renders underneath, so it is
    hidden from assistive tech to avoid announcing the client name twice. */
@@ -256,6 +261,17 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
           }}
         />
 
+        {/* Light wash so the name and CTA carry over the photo */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: HOVER_DIM,
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.55s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        />
+
         <CardHoverPanel title={caseStudy.client} cta="Read the case study" hovered={hovered} />
 
         <div
@@ -380,6 +396,17 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
           }}
         />
 
+        {/* Light wash so the name and CTA carry over the photo */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: HOVER_DIM,
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.55s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        />
+
         <CardHoverPanel title={project.client} cta="Explore the project" hovered={hovered} />
 
         <div
@@ -497,7 +524,7 @@ function PerformanceCard({
           style={{
             background:
               "linear-gradient(180deg, rgba(4,5,10,0.6) 0%, rgba(4,5,10,0.74) 55%, rgba(4,5,10,0.9) 100%)",
-            opacity: hovered ? 0 : 1,
+            opacity: hovered ? 0.5 : 1,
             transition: "opacity 0.6s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
