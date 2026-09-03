@@ -469,31 +469,51 @@ const TESTIMONIALS = [
   },
 ];
 
+/* `phone` is what the reader sees; `tel` is the E.164 form the link dials, so
+   it works from any country. Same pairing the footer and OfficesSection use. */
 const REGIONS: {
   market: string;
   body: string;
-  offices: { label?: string; lines: string[] }[];
+  offices: { label?: string; lines: string[]; phone: string; tel: string }[];
 }[] = [
   {
     market: "Egypt — Cairo HQ",
     body: "Our home base. 13 years of building websites for Egyptian businesses — from startups to enterprises. Local payment integrations (Fawry, Paymob, ValU).",
     offices: [
-      { lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"] },
+      {
+        lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"],
+        phone: "011 1011 5557",
+        tel: "+201110115557",
+      },
     ],
   },
   {
     market: "Saudi Arabia — Riyadh",
     body: "Vision 2030-aligned digital presence. Arabic-first design. Salla and Shopify expertise. STC Pay, Tamara, Tabby integrations.",
     offices: [
-      { lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"] },
+      {
+        lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"],
+        phone: "+966 54 110 2224",
+        tel: "+966541102224",
+      },
     ],
   },
   {
     market: "UAE — Abu Dhabi / Dubai",
     body: "Premium corporate and interactive websites for GCC enterprises. Multi-language (AR/EN). Regional hosting for speed.",
     offices: [
-      { label: "Abu Dhabi", lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"] },
-      { label: "Dubai", lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"] },
+      {
+        label: "Abu Dhabi",
+        lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"],
+        phone: "+971 50 726 6877",
+        tel: "+971507266877",
+      },
+      {
+        label: "Dubai",
+        lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"],
+        phone: "+971 50 726 6877",
+        tel: "+971507266877",
+      },
     ],
   },
 ];
@@ -2019,6 +2039,22 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
                             </span>
                           ))}
                         </p>
+
+                        <a
+                          href={`tel:${office.tel}`}
+                          className="inline-flex items-center gap-2 mt-2 font-medium"
+                          style={{ fontSize: "0.8125rem", color: "#9fc8ff", textDecoration: "none" }}
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path
+                              d="M6.6 3.5h3l1.5 3.7-2 1.4a12.5 12.5 0 0 0 6.3 6.3l1.4-2 3.7 1.5v3a1.6 1.6 0 0 1-1.7 1.6A16.6 16.6 0 0 1 5 5.2 1.6 1.6 0 0 1 6.6 3.5z"
+                              stroke="currentColor"
+                              strokeWidth="1.7"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          {office.phone}
+                        </a>
                       </div>
                     ))}
                   </div>
