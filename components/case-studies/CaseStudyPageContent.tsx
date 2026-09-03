@@ -228,23 +228,80 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </div>
       </header>
 
-      {/* ══ The Challenge ══ */}
+      {/* ══ The Challenge ══
+          Two columns where the study has artwork — copy left, image right,
+          matching the portfolio case studies. Falls back to the original
+          centred column for any study without one. */}
       <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
-        <div className="relative max-w-5xl mx-auto">
-          <SectionHead eyebrow="The Challenge" title="What was broken." center />
-          <Reveal delay={0.06} className="text-center">
-            <p
-              className="font-light mx-auto"
-              style={{
-                fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
-                lineHeight: 1.85,
-                color: "rgba(255,255,255,0.68)",
-                maxWidth: "46rem",
-              }}
-            >
-              {study.challenge}
-            </p>
-          </Reveal>
+        <div className={`relative mx-auto ${study.card.image ? "max-w-6xl" : "max-w-5xl"}`}>
+          {study.card.image ? (
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
+              <Reveal>
+                <Eyebrow className="mb-5">The Challenge</Eyebrow>
+                <h2
+                  className="font-bold"
+                  style={{
+                    fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                    lineHeight: 1.2,
+                    letterSpacing: "-0.02em",
+                    color: "#ffffff",
+                  }}
+                >
+                  What was broken.
+                </h2>
+                <p
+                  className="font-light mt-4"
+                  style={{
+                    fontSize: "1rem",
+                    lineHeight: 1.8,
+                    color: "rgba(255,255,255,0.62)",
+                    maxWidth: "34rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.15} className="flex justify-center lg:justify-end">
+                <div
+                  className="relative rounded-3xl overflow-hidden"
+                  style={{
+                    width: "min(34rem, 100%)",
+                    aspectRatio: "4 / 3",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "0 24px 60px -24px rgba(20,60,200,0.45)",
+                    animation: "challengeImageFloat 6s ease-in-out 1.1s infinite",
+                  }}
+                >
+                  {/* Decorative — the copy beside it carries the meaning. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={study.card.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          ) : (
+            <>
+              <SectionHead eyebrow="The Challenge" title="What was broken." center />
+              <Reveal delay={0.06} className="text-center">
+                <p
+                  className="font-light mx-auto"
+                  style={{
+                    fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.68)",
+                    maxWidth: "46rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+            </>
+          )}
         </div>
       </section>
 
@@ -622,6 +679,16 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       </section>
 
       <style>{`
+        /* Slow drift on the Challenge artwork, same as the portfolio case
+           studies. Held still for anyone who asks for reduced motion. */
+        @keyframes challengeImageFloat {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-10px) scale(1.015); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="challengeImageFloat"] { animation: none !important; }
+        }
+
         /* Dissolves the hero artwork into the page backdrop instead of
            cutting it off on a hard edge. */
         .cs-hero-fade {
