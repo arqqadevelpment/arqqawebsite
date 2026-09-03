@@ -22,6 +22,10 @@ export type CaseStudy = {
   metricLabel: string;
   /** Revealed on hover behind the hub card */
   image: string;
+  /** Client mark shown on the hub card; omitted where no logo file exists */
+  logo?: string;
+  /** Optical scale for logos whose source file carries heavy whitespace */
+  logoScale?: number;
   /** Optional full-bleed background for this case study's hero banner */
   heroImage?: string;
   /** Optional supporting visual for the Challenge section */
@@ -71,6 +75,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metric: "6M",
     metricLabel: "App installs",
     image: "/portfolio/fawry.webp",
+    logo: "/logos/clients/fawry.webp",
     heroImage: "/portfolio/fawry-hero.webp",
     challengeImage: "/portfolio/fawry-challenge.webp",
     ctaImage: "/portfolio/fawry-cta-bg.webp",
@@ -121,6 +126,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metric: "237x",
     metricLabel: "Return on ad spend",
     image: "/portfolio/nile-air.webp",
+    logo: "/logos/clients/nile-air.webp",
     challenge:
       "Nile Air was bidding against itself across three separate agencies, with no unified measurement framework and a booking funnel that leaked at every step between search and confirmed ticket.",
     approach: {
@@ -166,6 +172,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metric: "25%",
     metricLabel: "Registration conversion",
     image: "/portfolio/kenzup.webp",
+    logo: "/logos/clients/kenzup.webp",
     challenge:
       "Kenz'Up needed to launch a new marketplace app into a crowded category with no brand recognition — and an onboarding flow that lost seven in ten users before registration ever completed.",
     approach: {

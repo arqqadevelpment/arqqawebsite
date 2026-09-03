@@ -10,6 +10,52 @@ import { PERFORMANCE_CASE_STUDIES } from "@/components/case-studies/case-study-d
 import type { PerformanceCaseStudy } from "@/components/case-studies/case-study-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
+/* ── Client mark, shown at the top of every hub card ──────────────────────
+   Draws from /logos/clients/trimmed, where each mark has had its transparent
+   margin cropped. The source files carry wildly different amounts of internal
+   whitespace — from 28% of the canvas filled to 91% — so rendering those
+   directly makes some marks look half the size of others on an identical
+   frame. Trimming first means one box sizes them all, with no per-logo fudge
+   factors to keep in sync.
+
+   The box caps height AND width so the two shapes in the set balance: wide
+   wordmarks run out of width first, square emblems run out of height first.
+   Capping only height would render a 6:1 wordmark six times the width of a
+   square mark. Cards whose client has no logo file render nothing and keep
+   their existing layout. */
+function CardLogo({
+  src,
+  client,
+  hovered,
+}: {
+  src?: string;
+  client: string;
+  hovered: boolean;
+}) {
+  if (!src) return null;
+  return (
+    <span
+      className="flex items-center mb-5"
+      style={{ height: "1.75rem" }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src.replace("/logos/clients/", "/logos/clients/trimmed/")}
+        alt={`${client} logo`}
+        style={{
+          maxHeight: "1.75rem",
+          maxWidth: "7.5rem",
+          width: "auto",
+          height: "auto",
+          objectFit: "contain",
+          opacity: hovered ? 1 : 0.75,
+          transition: "opacity 0.35s ease",
+        }}
+      />
+    </span>
+  );
+}
+
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
   children,
@@ -116,6 +162,7 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
         />
 
         <div className="relative p-8 flex flex-col h-full">
+          <CardLogo src={caseStudy.logo} client={caseStudy.client} hovered={hovered} />
           <span
             className="font-bold"
             style={{
@@ -250,6 +297,7 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
         />
 
         <div className="relative p-8 flex flex-col h-full">
+          <CardLogo src={project.logo} client={project.client} hovered={hovered} />
           <span
             className="font-bold"
             style={{
@@ -368,6 +416,7 @@ function PerformanceCard({
         />
 
         <div className="relative p-8 flex flex-col h-full">
+          <CardLogo src={study.logo} client={study.client} hovered={hovered} />
           <span
             className="font-bold"
             style={{
