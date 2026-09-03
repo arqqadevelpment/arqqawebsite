@@ -45,7 +45,7 @@ function CardLogo({
 
   return (
     <span
-      className="flex items-center justify-end mb-5"
+      className="flex items-center justify-end shrink-0"
       style={{ height: "2.25rem" }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -63,6 +63,101 @@ function CardLogo({
         }}
       />
     </span>
+  );
+}
+
+/* ── Card header — category line and client mark on one row ───────────────
+   Top-aligned so the copy starts on the logo's top edge rather than below it,
+   which is what keeps the left column reading as one continuous block. */
+function CardHeader({
+  eyebrow,
+  logo,
+  client,
+  hovered,
+}: {
+  eyebrow: React.ReactNode;
+  logo?: string;
+  client: string;
+  hovered: boolean;
+}) {
+  return (
+    <div className="flex items-start justify-between gap-4 mb-4">
+      <span
+        className="font-bold"
+        style={{
+          fontSize: "0.75rem",
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          color: "transparent",
+        }}
+      >
+        {eyebrow}
+      </span>
+      <CardLogo src={logo} client={client} hovered={hovered} />
+    </div>
+  );
+}
+
+/* ── Hover state — client name and the call to action, centred ────────────
+   On hover the card's detail fades out and this takes its place over the
+   now fully-opaque image. Legibility comes from a text shadow and a pill
+   behind the CTA rather than a scrim, so the image itself stays undimmed.
+
+   Purely a restatement of copy the card already renders underneath, so it is
+   hidden from assistive tech to avoid announcing the client name twice. */
+function CardHoverPanel({
+  title,
+  cta,
+  hovered,
+}: {
+  title: string;
+  cta: string;
+  hovered: boolean;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-8 text-center pointer-events-none"
+      style={{
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? "translateY(0)" : "translateY(8px)",
+        transition: "opacity 0.45s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1)",
+      }}
+    >
+      <h3
+        className="font-bold"
+        style={{
+          fontSize: "1.5rem",
+          lineHeight: 1.2,
+          letterSpacing: "-0.01em",
+          color: "#ffffff",
+          /* Layered tight-to-wide so the name holds up over a busy photo
+             without a scrim over the image. */
+          textShadow:
+            "0 1px 2px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.9), 0 0 22px rgba(0,0,0,0.85), 0 0 40px rgba(0,0,0,0.7)",
+        }}
+      >
+        {title}
+      </h3>
+      <span
+        className="inline-flex items-center gap-2 rounded-full font-medium"
+        style={{
+          padding: "0.6rem 1.3rem",
+          fontSize: "0.8125rem",
+          color: "#ffffff",
+          background: "rgba(8,10,18,0.55)",
+          border: "1px solid rgba(255,255,255,0.55)",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
+      >
+        {cta}
+        <span aria-hidden="true">→</span>
+      </span>
+    </div>
   );
 }
 
@@ -135,7 +230,7 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
           transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
         }}
       >
-        {/* Client image — hidden by default, fades and settles in on hover */}
+        {/* Client image — hidden by default, revealed at full opacity on hover */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -143,22 +238,12 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
             backgroundImage: `url(${caseStudy.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 0.42 : 0,
+            opacity: hovered ? 1 : 0,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
-        {/* Scrim — keeps title and copy readable over the revealed image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(4,5,10,0.55) 0%, rgba(4,5,10,0.7) 55%, rgba(4,5,10,0.88) 100%)",
-            opacity: hovered ? 1 : 0,
-            transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1)",
-          }}
-        />
+        {/* Accent wash — clears on hover so nothing tints the image */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -166,30 +251,29 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
             background: isOrange
               ? "radial-gradient(60% 60% at 100% 0%, rgba(255,110,50,0.14) 0%, transparent 65%)"
               : "radial-gradient(60% 60% at 0% 0%, rgba(60,125,255,0.15) 0%, transparent 65%)",
-            opacity: hovered ? 0.5 : 1,
+            opacity: hovered ? 0 : 1,
             transition: "opacity 0.5s ease",
           }}
         />
 
-        <div className="relative p-8 flex flex-col h-full">
-          <CardLogo src={caseStudy.logo} client={caseStudy.client} hovered={hovered} />
-          <span
-            className="font-bold"
-            style={{
-              fontSize: "0.75rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            {caseStudy.industry} · {caseStudy.market}
-          </span>
+        <CardHoverPanel title={caseStudy.client} cta="Read the case study" hovered={hovered} />
+
+        <div
+          className="relative p-8 flex flex-col h-full"
+          style={{
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.4s ease",
+          }}
+        >
+          <CardHeader
+            eyebrow={`${caseStudy.industry} · ${caseStudy.market}`}
+            logo={caseStudy.logo}
+            client={caseStudy.client}
+            hovered={hovered}
+          />
 
           <h3
-            className="font-bold mt-4"
+            className="font-bold"
             style={{ fontSize: "1.375rem", lineHeight: 1.25, letterSpacing: "-0.01em", color: "#ffffff" }}
           >
             {caseStudy.client}
@@ -279,19 +363,9 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
             backgroundImage: `url(${card.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 0.42 : 0,
+            opacity: hovered ? 1 : 0,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(4,5,10,0.55) 0%, rgba(4,5,10,0.7) 55%, rgba(4,5,10,0.88) 100%)",
-            opacity: hovered ? 1 : 0,
-            transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
         <div
@@ -301,30 +375,29 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
             background: isOrange
               ? "radial-gradient(60% 60% at 100% 0%, rgba(255,110,50,0.14) 0%, transparent 65%)"
               : "radial-gradient(60% 60% at 0% 0%, rgba(60,125,255,0.15) 0%, transparent 65%)",
-            opacity: hovered ? 0.5 : 1,
+            opacity: hovered ? 0 : 1,
             transition: "opacity 0.5s ease",
           }}
         />
 
-        <div className="relative p-8 flex flex-col h-full">
-          <CardLogo src={project.logo} client={project.client} hovered={hovered} />
-          <span
-            className="font-bold"
-            style={{
-              fontSize: "0.75rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Web Design · {card.market}
-          </span>
+        <CardHoverPanel title={project.client} cta="Explore the project" hovered={hovered} />
+
+        <div
+          className="relative p-8 flex flex-col h-full"
+          style={{
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.4s ease",
+          }}
+        >
+          <CardHeader
+            eyebrow={`Web Design · ${card.market}`}
+            logo={project.logo}
+            client={project.client}
+            hovered={hovered}
+          />
 
           <h3
-            className="font-bold mt-4"
+            className="font-bold"
             style={{ fontSize: "1.375rem", lineHeight: 1.25, letterSpacing: "-0.01em", color: "#ffffff" }}
           >
             {project.client}
@@ -411,39 +484,42 @@ function PerformanceCard({
             backgroundImage: "url(/services/metric-card-bg.webp)",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: hovered ? 0.4 : 0.14,
+            opacity: hovered ? 1 : 0.14,
             transform: hovered ? "scale(1)" : "scale(1.08)",
             transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
+        {/* Scrim holds the resting state's copy legible over the texture, and
+            clears on hover so the artwork comes through undimmed. */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
               "linear-gradient(180deg, rgba(4,5,10,0.6) 0%, rgba(4,5,10,0.74) 55%, rgba(4,5,10,0.9) 100%)",
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.6s cubic-bezier(0.22,1,0.36,1)",
           }}
         />
 
-        <div className="relative p-8 flex flex-col h-full">
-          <CardLogo src={study.logo} client={study.client} hovered={hovered} />
-          <span
-            className="font-bold"
-            style={{
-              fontSize: "0.75rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Performance · {study.market}
-          </span>
+        <CardHoverPanel title={study.client} cta="Read the case study" hovered={hovered} />
+
+        <div
+          className="relative p-8 flex flex-col h-full"
+          style={{
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.4s ease",
+          }}
+        >
+          <CardHeader
+            eyebrow={`Performance · ${study.market}`}
+            logo={study.logo}
+            client={study.client}
+            hovered={hovered}
+          />
 
           <h3
-            className="font-bold mt-4"
+            className="font-bold"
             style={{ fontSize: "1.375rem", lineHeight: 1.25, letterSpacing: "-0.01em", color: "#ffffff" }}
           >
             {study.client}
