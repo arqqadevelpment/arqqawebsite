@@ -511,7 +511,9 @@ function PerformanceCard({
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "url(/services/metric-card-bg.webp)",
+            /* The client photo where there is one, otherwise the shared
+               texture these cards used before any had artwork. */
+            backgroundImage: `url(${study.card.image ?? "/services/metric-card-bg.webp"})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: hovered ? 1 : 0.14,

@@ -71,6 +71,8 @@ export type PerformanceCaseStudy = {
     sector: string;
     /** Card copy — one line, the result in plain terms */
     summary: string;
+    /** Revealed on hover behind the hub card */
+    image?: string;
   };
 
   /** Slugs of related case studies */
@@ -144,6 +146,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Beauty & Wellness",
       summary:
         "+105% ROAS and a complete sellout of stagnant stock — a full-funnel rebuild that raised return while cutting spend.",
+      image: "/portfolio/everher.webp",
     },
     related: ["merova", "perfect-body"],
   },
@@ -209,6 +212,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Fashion E-Commerce",
       summary:
         "Monthly sales nearly doubled and 3.5–4.0x ROAS held through peak season, without discounting on price.",
+      image: "/portfolio/merova.webp",
     },
     related: ["everher", "perfect-body"],
   },
@@ -264,6 +268,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Government & Public Sector",
       summary:
         "+71.5% follower growth and 7.37M engagements in six months, scaling a national regulator's public voice.",
+      image: "/portfolio/ntra.webp",
     },
     related: ["gts-holding", "zenith-arabia-ai"],
   },
@@ -320,6 +325,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Healthcare",
       summary:
         "17,367+ leads across Meta, TikTok and Snapchat — single-channel dependency turned into a diversified engine.",
+      image: "/portfolio/allure-clinics.webp",
     },
     related: ["everher", "perfect-body"],
   },
@@ -383,6 +389,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Enterprise IT & Cybersecurity",
       summary:
         "1.89M impressions from a structured, always-on LinkedIn program built for CIO and CISO buying committees.",
+      image: "/portfolio/gts-holding.webp",
     },
     related: ["zenith-arabia-ai", "ntra"],
   },
@@ -451,6 +458,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Financial Services & AI",
       summary:
         "A full-funnel ABM system across Google, LinkedIn, SEO and automation, built for KSA banking.",
+      image: "/portfolio/zenith-arabia-ai.webp",
     },
     related: ["gts-holding", "ntra"],
   },
@@ -507,6 +515,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Fashion E-Commerce",
       summary:
         "4.07x average ROAS sustained across a full year and 76 campaigns of continuous testing.",
+      image: "/portfolio/perfect-body.webp",
     },
     related: ["merova", "everher"],
   },
