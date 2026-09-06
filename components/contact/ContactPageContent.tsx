@@ -272,20 +272,35 @@ export function ContactPageContent() {
                           />
                         </Field>
                       </div>
-                      <div className="sm:col-span-2">
-                        <button
-                          type="submit"
-                          className="w-full inline-flex items-center justify-center rounded-2xl font-medium mt-2"
+                      <div className="sm:col-span-2 mt-2">
+                        {/* Same two-layer gradient-border treatment as the
+                            site's PrimaryCTA — a 1px gradient ring around a
+                            solid dark fill — rather than the flat orange fill
+                            this button used on its own. */}
+                        <div
+                          className="rounded-2xl"
                           style={{
-                            padding: "0.9375rem 2rem",
-                            background: "linear-gradient(120deg, #ff7a3d 0%, #b6541f 60%, #8a3a18 100%)",
-                            color: "#ffffff",
-                            fontSize: "0.9375rem",
-                            boxShadow: "0 10px 32px -10px rgba(255,122,61,0.45)",
+                            padding: "1px",
+                            background:
+                              "linear-gradient(120deg, #ff7a3d 0%, #b6541f 22%, rgba(255,255,255,0.14) 50%, #2f6bff 82%, #5aa2ff 100%)",
+                            boxShadow:
+                              "0 -10px 32px -6px rgba(255,122,61,0.35), 0 10px 32px -10px rgba(47,107,255,0.3)",
                           }}
                         >
-                          Book My Strategy Call
-                        </button>
+                          <button
+                            type="submit"
+                            className="w-full inline-flex items-center justify-center gap-2 rounded-2xl font-medium"
+                            style={{
+                              padding: "0.9375rem 2rem",
+                              background: "linear-gradient(180deg, #0b0c12 0%, #05060a 100%)",
+                              color: "#ffffff",
+                              fontSize: "0.9375rem",
+                            }}
+                          >
+                            Book My Strategy Call
+                            <span aria-hidden="true">→</span>
+                          </button>
+                        </div>
                       </div>
                     </form>
                   )}
@@ -311,7 +326,7 @@ export function ContactPageContent() {
                 label: "Egypt HQ",
                 value: "Cairo",
                 lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"] as string[],
-                phone: "011 1011 5557",
+                phone: "+2 011 1011 5557",
                 tel: "+201110115557",
               },
               {
