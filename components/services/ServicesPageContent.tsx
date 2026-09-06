@@ -6,6 +6,7 @@ import { SERVICES } from "./service-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import Link from "next/link";
+import { whenGateOpen } from "@/lib/preloader";
 
 /* All copy lives in service-data.ts — the hub and every inner page share it */
 type Service = ServiceDetail;
@@ -16,8 +17,14 @@ type Service = ServiceDetail;
    the text is painted by a gradient wider than itself, and the animation
    moves that gradient rather than the text.
 
-   Each line runs on its own delay so the two arrive in sequence. Fires when
-   the heading enters the viewport, and plays once. */
+   Each line runs on its own delay so the two arrive in sequence, and plays
+   once.
+
+   It waits on two things, not one. The heading has to be in view, and the
+   preloader has to have cleared — that overlay holds for five seconds on a
+   first load, and the hero sits under it the whole time, so keying off the
+   viewport alone ran the whole sweep behind the cover and left nothing to see.
+   `whenGateOpen` is the preloader's own signal for this. */
 function ChromaLine({
   children,
   delay = 0,
@@ -26,7 +33,8 @@ function ChromaLine({
   delay?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [uncovered, setUncovered] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -34,7 +42,7 @@ function ChromaLine({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setInView(true);
           observer.disconnect();
         }
       },
@@ -43,6 +51,10 @@ function ChromaLine({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => whenGateOpen(() => setUncovered(true)), []);
+
+  const visible = inView && uncovered;
 
   return (
     <span
