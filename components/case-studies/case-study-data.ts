@@ -343,7 +343,6 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       challengeBanner: true,
       approach: "/portfolio/allure-approach.webp",
       afterResults: "/portfolio/allure-results.webp",
-      outcome: "/portfolio/allure-takeaway.webp",
     },
 
     card: {

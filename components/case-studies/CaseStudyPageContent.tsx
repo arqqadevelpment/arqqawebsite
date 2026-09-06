@@ -600,14 +600,11 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </div>
       </section>
 
-      {/* ══ Banner between the Results and the Takeaway ══ */}
-      {study.sectionMedia?.afterResults ? (
-        <section className="relative w-full" style={{ padding: "1rem 1.5rem" }}>
-          <SectionBanner src={study.sectionMedia.afterResults} />
-        </section>
-      ) : null}
-
-      {/* ══ The Outcome / Takeaway ══ */}
+      {/* ══ The Outcome / Takeaway ══
+          Always the plain, full-width column now — sectionMedia.outcome is
+          kept on the type for any future case study that wants an image here,
+          but nothing currently sets it, so the two-column branch stays dead
+          code intentionally rather than being deleted outright. */}
       {study.outcome ? (
         <section className="relative w-full overflow-hidden" style={{ padding: "5rem 1.5rem 7rem" }}>
           <div
@@ -662,6 +659,15 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
               ) : null}
             </div>
           </div>
+        </section>
+      ) : null}
+
+      {/* ══ Banner — now runs after the Takeaway rather than before it, so the
+          full-width photo caps the story instead of interrupting the run from
+          Results into Takeaway. ══ */}
+      {study.sectionMedia?.afterResults ? (
+        <section className="relative w-full" style={{ padding: "1rem 1.5rem" }}>
+          <SectionBanner src={study.sectionMedia.afterResults} />
         </section>
       ) : null}
 
