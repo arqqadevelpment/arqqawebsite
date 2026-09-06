@@ -67,10 +67,21 @@ export function TrustSignalsSection() {
           .trust-anim { animation: none !important; opacity: 1 !important; transform: none !important; }
           .trust-progress-fill { animation: none; width: 100%; }
         }
+
+        /* Fades the slider's own top and bottom edges to transparent, so the
+           page's continuous background gradient (painted once, behind every
+           homepage section, in PageShell) shows through at both seams instead
+           of the photo cutting off on a hard line against the sections above
+           and below. The band is narrow relative to a full viewport height,
+           so it clears the vertically-centered text comfortably. */
+        .trust-fade {
+          -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%);
+        }
       `}</style>
 
       {/* ── Full-screen storytelling slider — keeps rotating regardless of hover ── */}
-      <div className="relative h-screen overflow-hidden">
+      <div className="trust-fade relative h-screen overflow-hidden">
         {/* Backgrounds — stacked, crossfading; active gets a slow settle */}
         {SLIDES.map((sl, i) => (
           <div
