@@ -66,6 +66,21 @@ export type PerformanceCaseStudy = {
   whatsNext?: string;
 
   /** How this case study shows up as a card on the /work hub. */
+  /** Extra section artwork. Every field is optional and each section keeps its
+      existing layout when the matching one is absent, so a case study without
+      these renders is unaffected. */
+  sectionMedia?: {
+    /** Runs the Challenge as centred copy with a full-width banner beneath,
+        instead of the two-column layout. */
+    challengeBanner?: boolean;
+    /** Sits to the right of the Approach intro. */
+    approach?: string;
+    /** Full-width banner between the Results and the Takeaway. */
+    afterResults?: string;
+    /** Sits to the right of the Takeaway points. */
+    outcome?: string;
+  };
+
   card: {
     /** Short sector label for the card's footer pill */
     sector: string;
@@ -321,6 +336,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         "Two years of cross-platform data now guide where every new unit of budget works hardest, by doctor, offer, and channel.",
       ],
     },
+    sectionMedia: {
+      challengeBanner: true,
+      approach: "/portfolio/allure-approach.webp",
+      afterResults: "/portfolio/allure-results.webp",
+      outcome: "/portfolio/allure-takeaway.webp",
+    },
+
     card: {
       sector: "Healthcare",
       summary:

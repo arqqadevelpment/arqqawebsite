@@ -80,6 +80,63 @@ function SectionHead({
   );
 }
 
+/* Wide banner — a rounded panel inset from the viewport edges, carrying the
+   whole frame rather than a crop of it. Height comes from the image's own
+   ratio (`h-auto`, no fixed height and no object-cover), so nothing is cut off
+   at the top or bottom. Breaks out of the parent's max-width and sits inside
+   the section's overflow-x clip, so the wider element adds no scrollbar. */
+function SectionBanner({ src, className = "" }: { src: string; className?: string }) {
+  return (
+    <Reveal delay={0.12} className={className}>
+      <div
+        style={{
+          width: "min(96vw, 100rem)",
+          marginLeft: "calc(50% - min(48vw, 50rem))",
+        }}
+      >
+        <div
+          className="relative overflow-hidden rounded-3xl"
+          style={{
+            border: "1px solid rgba(255,255,255,0.1)",
+            boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+          }}
+        >
+          {/* Decorative — the copy around it carries the meaning. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+/* Framed image for the two-column sections — same treatment as the Challenge
+   artwork so the page reads as one set. */
+function SectionImage({ src, delay = 0.15 }: { src: string; delay?: number }) {
+  return (
+    <Reveal delay={delay} className="flex justify-center lg:justify-end">
+      <div
+        className="relative rounded-3xl overflow-hidden"
+        style={{
+          width: "min(34rem, 100%)",
+          aspectRatio: "4 / 3",
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 24px 60px -24px rgba(20,60,200,0.45)",
+          animation: "challengeImageFloat 6s ease-in-out 1.1s infinite",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+    </Reveal>
+  );
+}
+
 export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy }) {
   const related = getRelated(study.related);
 
@@ -232,9 +289,35 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
           Two columns where the study has artwork — copy left, image right,
           matching the portfolio case studies. Falls back to the original
           centred column for any study without one. */}
-      <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
-        <div className={`relative mx-auto ${study.card.image ? "max-w-6xl" : "max-w-5xl"}`}>
-          {study.card.image ? (
+      <section className="relative w-full overflow-x-hidden" style={{ padding: "5rem 1.5rem" }}>
+        <div
+          className={`relative mx-auto ${
+            study.sectionMedia?.challengeBanner
+              ? "max-w-6xl"
+              : study.card.image
+                ? "max-w-6xl"
+                : "max-w-5xl"
+          }`}
+        >
+          {study.sectionMedia?.challengeBanner && study.card.image ? (
+            <>
+              <SectionHead eyebrow="The Challenge" title="What was broken." center />
+              <Reveal delay={0.06} className="text-center">
+                <p
+                  className="font-light mx-auto"
+                  style={{
+                    fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.68)",
+                    maxWidth: "46rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+              <SectionBanner src={study.card.image} className="mt-14" />
+            </>
+          ) : study.card.image ? (
             <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
               <Reveal>
                 <Eyebrow className="mb-5">The Challenge</Eyebrow>
@@ -308,22 +391,50 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       {/* ══ The Approach ══ */}
       <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
-          <SectionHead eyebrow="The Approach" title="What we did about it." center />
-          {study.approach.intro ? (
-            <Reveal delay={0.05} className="mb-10 text-center">
-              <p
-                className="font-light mx-auto"
-                style={{
-                  fontSize: "1rem",
-                  lineHeight: 1.8,
-                  color: "rgba(255,255,255,0.62)",
-                  maxWidth: "44rem",
-                }}
-              >
-                {study.approach.intro}
-              </p>
-            </Reveal>
-          ) : null}
+          {study.sectionMedia?.approach ? (
+            /* Copy left, artwork right — the move cards still run full width
+               below, so only the heading block splits into two columns. */
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center mb-14">
+              <div>
+                <SectionHead eyebrow="The Approach" title="What we did about it." />
+                {study.approach.intro ? (
+                  <Reveal delay={0.05}>
+                    <p
+                      className="font-light"
+                      style={{
+                        fontSize: "1rem",
+                        lineHeight: 1.8,
+                        color: "rgba(255,255,255,0.62)",
+                        maxWidth: "34rem",
+                      }}
+                    >
+                      {study.approach.intro}
+                    </p>
+                  </Reveal>
+                ) : null}
+              </div>
+              <SectionImage src={study.sectionMedia.approach} />
+            </div>
+          ) : (
+            <>
+              <SectionHead eyebrow="The Approach" title="What we did about it." center />
+              {study.approach.intro ? (
+                <Reveal delay={0.05} className="mb-10 text-center">
+                  <p
+                    className="font-light mx-auto"
+                    style={{
+                      fontSize: "1rem",
+                      lineHeight: 1.8,
+                      color: "rgba(255,255,255,0.62)",
+                      maxWidth: "44rem",
+                    }}
+                  >
+                    {study.approach.intro}
+                  </p>
+                </Reveal>
+              ) : null}
+            </>
+          )}
 
           {/* Cards sit in one row where they fit and wrap on narrower
               viewports — auto-fit rather than a fixed column count, because
@@ -442,6 +553,13 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </div>
       </section>
 
+      {/* ══ Banner between the Results and the Takeaway ══ */}
+      {study.sectionMedia?.afterResults ? (
+        <section className="relative w-full overflow-x-hidden">
+          <SectionBanner src={study.sectionMedia.afterResults} />
+        </section>
+      ) : null}
+
       {/* ══ The Outcome / Takeaway ══ */}
       {study.outcome ? (
         <section className="relative w-full overflow-hidden" style={{ padding: "5rem 1.5rem 7rem" }}>
@@ -468,10 +586,22 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 "linear-gradient(180deg, transparent 0%, rgba(3,3,5,0.5) 20%, rgba(3,3,5,0.5) 78%, transparent 100%)",
             }}
           />
-          <div className="relative max-w-5xl mx-auto">
-            <SectionHead eyebrow={study.outcome.title} title="What it leaves behind." />
-            <div className="flex flex-col gap-3.5">
-              {study.outcome.points.map((point, i) => (
+          <div
+            className={`relative mx-auto ${
+              study.sectionMedia?.outcome ? "max-w-6xl" : "max-w-5xl"
+            }`}
+          >
+            <div
+              className={
+                study.sectionMedia?.outcome
+                  ? "grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center"
+                  : ""
+              }
+            >
+              <div>
+                <SectionHead eyebrow={study.outcome.title} title="What it leaves behind." />
+                <div className="flex flex-col gap-3.5">
+                  {study.outcome.points.map((point, i) => (
                 <Reveal key={point} delay={Math.min(i * 0.05, 0.25)}>
                   <div className="flex items-start gap-3.5">
                     <span
@@ -499,7 +629,13 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                     </p>
                   </div>
                 </Reveal>
-              ))}
+                  ))}
+                </div>
+              </div>
+
+              {study.sectionMedia?.outcome ? (
+                <SectionImage src={study.sectionMedia.outcome} />
+              ) : null}
             </div>
           </div>
         </section>
