@@ -2040,8 +2040,13 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
                           ))}
                         </p>
 
+                        {/* Opens the number in WhatsApp rather than dialing —
+                            tel: on iOS Safari can surface a FaceTime prompt
+                            instead of the phone app, which this sidesteps. */}
                         <a
-                          href={`tel:${office.tel}`}
+                          href={`https://wa.me/${office.tel.replace(/\D/g, "")}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 mt-2 font-medium"
                           style={{ fontSize: "0.8125rem", color: "#9fc8ff", textDecoration: "none" }}
                         >

@@ -17,8 +17,9 @@ const QUICK_LINKS = [
   { label: "Contact Us", href: "/start" },
 ];
 
-/* Dial link uses the international form so it works from any country. */
-const PHONE = { display: "011 1011 5557", href: "tel:+201110115557" };
+/* WhatsApp click-to-chat rather than tel: — on iOS Safari, tel: can surface a
+   FaceTime prompt instead of the phone app, which this sidesteps entirely. */
+const PHONE = { display: "011 1011 5557", href: "https://wa.me/201110115557" };
 
 /* Footer carries the HQ only — the full office list lives on /start. */
 const OFFICES = [
@@ -218,6 +219,8 @@ export function Footer() {
               </a>
               <a
                 href={PHONE.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-light"
                 style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.72)" }}
               >

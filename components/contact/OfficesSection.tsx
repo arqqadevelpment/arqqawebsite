@@ -210,8 +210,13 @@ export function OfficesSection() {
                   ))}
                 </p>
 
+                {/* Opens the number in WhatsApp rather than dialing — tel:
+                    on iOS Safari can surface a FaceTime prompt instead of the
+                    phone app, which WhatsApp sidesteps entirely. */}
                 <a
-                  href={`tel:${office.tel}`}
+                  href={`https://wa.me/${office.tel.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-4 font-medium"
                   style={{
                     fontSize: "0.875rem",
