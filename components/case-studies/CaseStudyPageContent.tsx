@@ -22,7 +22,11 @@ import type { PerformanceCaseStudy } from "./case-study-data";
 function useParallaxDrift(
   ref: React.RefObject<HTMLElement | null>,
   enabled: boolean,
-  strength = 10
+  strength = 10,
+  // Kept proportional to strength at each call site: enough oversize that the
+  // translateY this produces (~strength * scale, since the transform's scale
+  // wraps the translate) never runs past the buffer at the extremes.
+  scale = 1.12
 ) {
   const reduced = useReducedMotion();
   const [y, setY] = useState(0);
@@ -57,7 +61,7 @@ function useParallaxDrift(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled, reduced, strength]);
 
-  return `scale(1.12) translateY(${y}%)`;
+  return `scale(${scale}) translateY(${y}%)`;
 }
 
 /* ── Reveal-on-scroll ──
@@ -205,7 +209,11 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
   const related = getRelated(study.related);
   const parallaxOn = !!study.sectionMedia?.parallax;
   const heroBgRef = useRef<HTMLDivElement>(null);
-  const heroTransform = useParallaxDrift(heroBgRef, parallaxOn);
+  // 50% further travel than the default (10) — the header reads as the more
+  // dramatic of the two parallax spots, so it gets more range than Takeaway.
+  // Scale bumped in proportion (1.12 -> 1.18) so the extra travel still stays
+  // inside the oversized buffer at the extremes.
+  const heroTransform = useParallaxDrift(heroBgRef, parallaxOn, 15, 1.18);
   const outcomeBgRef = useRef<HTMLImageElement>(null);
   const outcomeTransform = useParallaxDrift(outcomeBgRef, parallaxOn);
 
