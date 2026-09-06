@@ -666,7 +666,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
           full-width photo caps the story instead of interrupting the run from
           Results into Takeaway. ══ */}
       {study.sectionMedia?.afterResults ? (
-        <section className="relative w-full" style={{ padding: "1rem 1.5rem" }}>
+        <section className="relative w-full" style={{ padding: "1rem 1.5rem 5rem" }}>
           <SectionBanner src={study.sectionMedia.afterResults} />
         </section>
       ) : null}
