@@ -9,6 +9,16 @@ import { ShiftSection } from "@/components/shift/ShiftSection";
 import { TrustSection } from "@/components/trust/TrustSection";
 import { ClosingSection } from "@/components/closing/ClosingSection";
 
+/**
+ * Section order below the hero, per the 2026-09-06 homepage feedback:
+ * By the Numbers -> The Catalyst System(tm) -> Service Ecosystem ->
+ * Trust Signals -> Myth vs. Fact -> From Agency to System.
+ *
+ * Two sections outside that list keep their prior positions: Proof
+ * ("Numbers That Speak") wasn't named in the requested order, so it's kept
+ * — placed after the named seven rather than dropped — and Closing stays
+ * last as the page's closing CTA, as it did before this reorder.
+ */
 export default function Home() {
   return (
     <PageShell
@@ -17,12 +27,12 @@ export default function Home() {
       seam
     >
       <FactsSection />
-      <FolkloreSection />
       <CatalystSection />
-      <ProofSection />
       <ServicesSection />
-      <ShiftSection />
       <TrustSection />
+      <FolkloreSection />
+      <ShiftSection />
+      <ProofSection />
       <ClosingSection />
     </PageShell>
   );
