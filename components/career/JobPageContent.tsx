@@ -177,8 +177,8 @@ export function JobPageContent({ job }: { job: Job }) {
             </p>
 
             <div className="mt-9">
-              <a
-                href={applyHref}
+              <Link
+                href={`/career/${job.slug}/apply`}
                 className="relative inline-flex rounded-2xl"
                 style={{
                   padding: "1px",
@@ -199,7 +199,7 @@ export function JobPageContent({ job }: { job: Job }) {
                 >
                   Apply for this role
                 </span>
-              </a>
+              </Link>
             </div>
           </Reveal>
         </div>
@@ -316,10 +316,8 @@ export function JobPageContent({ job }: { job: Job }) {
                   Apply by Email
                 </span>
               </a>
-              <a
-                href={job.sourceHref}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/career/${job.slug}/apply`}
                 className="inline-flex items-center justify-center rounded-2xl font-medium"
                 style={{
                   padding: "1rem 2.25rem",
@@ -330,7 +328,7 @@ export function JobPageContent({ job }: { job: Job }) {
                 }}
               >
                 Apply via Form →
-              </a>
+              </Link>
             </div>
           </Reveal>
         </div>
