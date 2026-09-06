@@ -114,17 +114,7 @@ function SuccessNote({ title, body }: { title: string; body: string }) {
 }
 
 export function ContactPageContent() {
-  const [activeTab, setActiveTab] = useState<"call" | "audit">("call");
   const [callSubmitted, setCallSubmitted] = useState(false);
-  const [auditSubmitted, setAuditSubmitted] = useState(false);
-
-  // Land on the right tab when arriving via #book-strategy-call / #growth-audit.
-  // The hash is only readable on the client, so this has to run after mount —
-  // deriving it during render would not match the server-rendered HTML.
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser-only value, see above
-    if (window.location.hash === "#growth-audit") setActiveTab("audit");
-  }, []);
 
   return (
     <>
@@ -168,7 +158,7 @@ export function ContactPageContent() {
               className="font-bold mx-auto"
               style={{ fontSize: "clamp(2.25rem, 5.2vw, 3.75rem)", lineHeight: 1.1, letterSpacing: "-0.03em", color: "#ffffff" }}
             >
-              Two Ways{" "}
+              Let&apos;s{" "}
               <span
                 style={{
                   backgroundImage: "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
@@ -178,15 +168,15 @@ export function ContactPageContent() {
                   filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
                 }}
               >
-                to Start.
+                Talk Growth.
               </span>
             </h1>
             <p
               className="font-light mt-6 mx-auto max-w-xl"
               style={{ fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(255,255,255,0.58)" }}
             >
-              Whether you&apos;re ready to move or still exploring, there&apos;s
-              a next step designed for you.
+              A 30-minute call with a senior strategist — no sales pitch,
+              just a clear next step.
             </p>
           </Reveal>
         </div>
@@ -195,92 +185,15 @@ export function ContactPageContent() {
       {/* ══ The Fork — dual path, tab-selected ══ */}
       <section className="relative w-full" style={{ padding: "1rem 1.5rem 7rem" }}>
         <div className="relative max-w-3xl mx-auto">
-          {/* Invisible anchors — keep #book-strategy-call / #growth-audit links
-              working; the effect above reads the hash to pick the right tab */}
+          {/* Invisible anchor — keeps existing #book-strategy-call links working
+              now that this is the only path on the page. */}
           <span id="book-strategy-call" className="block scroll-mt-28" aria-hidden="true" />
-          <span id="growth-audit" className="block scroll-mt-28" aria-hidden="true" />
 
-          {/* Tab selector */}
-          <Reveal className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => setActiveTab("call")}
-              className="relative rounded-2xl text-left"
-              style={{
-                padding: "1.25rem 1.5rem",
-                background:
-                  activeTab === "call"
-                    ? "linear-gradient(170deg, rgba(255,122,61,0.14) 0%, rgba(14,16,26,0.6) 100%)"
-                    : "linear-gradient(170deg, rgba(14,16,26,0.45) 0%, rgba(6,8,14,0.5) 100%)",
-                border: activeTab === "call" ? "1px solid rgba(255,138,90,0.55)" : "1px solid rgba(255,255,255,0.11)",
-                boxShadow: activeTab === "call" ? "0 -10px 30px -18px rgba(255,122,61,0.4)" : "none",
-                transition: "background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease",
-              }}
-            >
-              <p
-                className="font-bold"
-                style={{
-                  fontSize: "0.6875rem",
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                  color: activeTab === "call" ? "#ff9a5a" : "rgba(255,255,255,0.4)",
-                  transition: "color 0.35s ease",
-                }}
-              >
-                THE 5% · READY TO MOVE
-              </p>
-              <p
-                className="font-bold mt-2"
-                style={{ fontSize: "1.0625rem", color: activeTab === "call" ? "#ffffff" : "rgba(255,255,255,0.65)", transition: "color 0.35s ease" }}
-              >
-                Book a Strategy Call
-              </p>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab("audit")}
-              className="relative rounded-2xl text-left"
-              style={{
-                padding: "1.25rem 1.5rem",
-                background:
-                  activeTab === "audit"
-                    ? "linear-gradient(170deg, rgba(60,125,255,0.14) 0%, rgba(14,16,26,0.6) 100%)"
-                    : "linear-gradient(170deg, rgba(14,16,26,0.45) 0%, rgba(6,8,14,0.5) 100%)",
-                border: activeTab === "audit" ? "1px solid rgba(90,162,255,0.5)" : "1px solid rgba(255,255,255,0.11)",
-                boxShadow: activeTab === "audit" ? "0 -10px 30px -18px rgba(60,125,255,0.4)" : "none",
-                transition: "background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease",
-              }}
-            >
-              <p
-                className="font-bold"
-                style={{
-                  fontSize: "0.6875rem",
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                  color: activeTab === "audit" ? "#9fc8ff" : "rgba(255,255,255,0.4)",
-                  transition: "color 0.35s ease",
-                }}
-              >
-                THE 95% · STILL EXPLORING
-              </p>
-              <p
-                className="font-bold mt-2"
-                style={{ fontSize: "1.0625rem", color: activeTab === "audit" ? "#ffffff" : "rgba(255,255,255,0.65)", transition: "color 0.35s ease" }}
-              >
-                Download the Growth Audit
-              </p>
-            </button>
-          </Reveal>
-
-          {/* Content panel — swaps with the active tab */}
           <div className="relative mt-6">
-            {activeTab === "call" ? (
-              <div
-                key="call"
-                className="relative rounded-3xl overflow-hidden"
-                style={{ animation: "arqqaFadeIn 0.45s cubic-bezier(0.22,1,0.36,1) both" }}
-              >
+            <div
+              className="relative rounded-3xl overflow-hidden"
+              style={{ animation: "arqqaFadeIn 0.45s cubic-bezier(0.22,1,0.36,1) both" }}
+            >
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 pointer-events-none"
@@ -376,97 +289,8 @@ export function ContactPageContent() {
                       </div>
                     </form>
                   )}
-                </div>
               </div>
-            ) : (
-              <div
-                key="audit"
-                className="relative rounded-3xl overflow-hidden"
-                style={{ animation: "arqqaFadeIn 0.45s cubic-bezier(0.22,1,0.36,1) both" }}
-              >
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(90% 70% at 100% 0%, rgba(60,125,255,0.16) 0%, transparent 65%)",
-                  }}
-                />
-                {/* Subtle particle dots — nurture path */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    backgroundImage: "radial-gradient(rgba(159,200,255,0.35) 1px, transparent 1px)",
-                    backgroundSize: "26px 26px",
-                    opacity: 0.4,
-                    maskImage: "radial-gradient(80% 80% at 70% 20%, black 0%, transparent 75%)",
-                    WebkitMaskImage: "radial-gradient(80% 80% at 70% 20%, black 0%, transparent 75%)",
-                  }}
-                />
-                <div
-                  className="relative h-full p-8 sm:p-10 rounded-3xl"
-                  style={{
-                    background: "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
-                    border: "1px solid rgba(90,162,255,0.25)",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
-                  }}
-                >
-                  <p
-                    className="font-light"
-                    style={{ fontSize: "0.9375rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)" }}
-                  >
-                    A self-assessment framework that scores your current
-                    marketing infrastructure across 7 dimensions: strategy
-                    clarity, creative integration, media efficiency,
-                    technology stack, data maturity, team structure, and
-                    reporting quality. 15 minutes. Unlimited insight.
-                  </p>
-
-                  {auditSubmitted ? (
-                    <SuccessNote
-                      title="On its way."
-                      body="The audit is headed to your inbox now. Over the next two weeks you'll also get a related case study and the playbook for your industry."
-                    />
-                  ) : (
-                    <form
-                      className="mt-8 grid grid-cols-1 gap-4"
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        setAuditSubmitted(true);
-                      }}
-                    >
-                      <Field label="Name">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
-                      </Field>
-                      <Field label="Email">
-                        <input required type="email" className="arqqa-field" style={fieldStyle} placeholder="you@company.com" />
-                      </Field>
-                      <Field label="Company">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Company name" />
-                      </Field>
-                      <Field label="Industry">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Retail & E-commerce" />
-                      </Field>
-                      <button
-                        type="submit"
-                        className="w-full inline-flex items-center justify-center rounded-2xl font-medium mt-2"
-                        style={{
-                          padding: "0.9375rem 2rem",
-                          background: "rgba(255,255,255,0.03)",
-                          border: "1px solid rgba(159,200,255,0.4)",
-                          color: "#ffffff",
-                          fontSize: "0.9375rem",
-                        }}
-                      >
-                        Send Me the Audit
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
@@ -487,21 +311,29 @@ export function ContactPageContent() {
                 label: "Egypt HQ",
                 value: "Cairo",
                 lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"] as string[],
+                phone: "011 1011 5557",
+                tel: "+201110115557",
               },
               {
                 label: "Abu Dhabi Office",
                 value: "Abu Dhabi",
                 lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"],
+                phone: "+971 50 726 6877",
+                tel: "+971507266877",
               },
               {
                 label: "Dubai Office",
                 value: "Dubai",
                 lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"],
+                phone: "+971 50 726 6877",
+                tel: "+971507266877",
               },
               {
                 label: "Riyadh Office",
                 value: "Riyadh",
                 lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"],
+                phone: "+966 54 110 2224",
+                tel: "+966541102224",
               },
             ].map((loc, i) => (
               <Reveal key={loc.label} delay={Math.min(i * 0.08, 0.3)}>
@@ -536,6 +368,21 @@ export function ContactPageContent() {
                       ))}
                     </p>
                   )}
+                  <a
+                    href={`tel:${loc.tel}`}
+                    className="inline-flex items-center gap-2 mt-4 font-medium"
+                    style={{ fontSize: "0.875rem", color: "#9fc8ff", textDecoration: "none" }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M6.6 3.5h3l1.5 3.7-2 1.4a12.5 12.5 0 0 0 6.3 6.3l1.4-2 3.7 1.5v3a1.6 1.6 0 0 1-1.7 1.6A16.6 16.6 0 0 1 5 5.2 1.6 1.6 0 0 1 6.6 3.5z"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {loc.phone}
+                  </a>
                 </div>
               </Reveal>
             ))}
