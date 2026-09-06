@@ -127,10 +127,6 @@ export const SERVICES: ServiceDetail[] = [
           href: "/services/strategy-consulting/go-to-market",
         },
       ],
-      cta: {
-        primary: { label: "Book a Strategy Session", href: "/start#book-strategy-call" },
-        secondary: { label: "Download the Growth Audit Framework", href: "/start#growth-audit" },
-      },
     },
     included: {
       groups: [
@@ -168,7 +164,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
     },
     related: ["catalyst-system", "asset-building", "technology"],
-    playbook: "Growth Audit",
+    playbook: "Strategy & Consulting",
   },
   {
     slug: "asset-building",

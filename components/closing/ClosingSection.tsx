@@ -167,12 +167,11 @@ export function ClosingSection() {
           multiply your ROI.
         </p>
 
-        {/* ── Dual CTA — the fork ── */}
+        {/* ── CTA ── */}
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-14"
           style={reveal(0.46)}
         >
-          {/* Harvest CTA — books a strategy call */}
           <Link
               href="/start#book-strategy-call"
               className="group relative inline-flex rounded-2xl"
@@ -213,24 +212,6 @@ export function ClosingSection() {
                 <span aria-hidden="true">⚡</span>
                 <SlideLabel text="Start a Strategy Call" />
               </span>
-            </Link>
-
-          {/* Nurture CTA — gated growth audit */}
-          <Link
-              href="/start#growth-audit"
-              className="group inline-flex items-center justify-center gap-2 rounded-2xl font-medium"
-              style={{
-                padding: "1.0625rem 2.25rem",
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.22)",
-                color: "#ffffff",
-                fontSize: "1rem",
-                letterSpacing: "0.01em",
-                transition: "background 0.3s ease, border-color 0.3s ease",
-              }}
-            >
-              <span aria-hidden="true">📋</span>
-              <SlideLabel text="Download the Growth Audit" />
             </Link>
         </div>
       </div>

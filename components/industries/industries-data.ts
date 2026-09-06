@@ -163,7 +163,7 @@ export const INDUSTRIES: Industry[] = [
       workSlug: "kenzup",
     },
     services: ["Shopify & Salla", "Full-Funnel Campaigns", "Social Commerce", "AOV Optimization"],
-    playbook: "The E-Commerce Growth Audit Template",
+    playbook: "The E-Commerce Growth Playbook",
   },
   {
     slug: "telco",

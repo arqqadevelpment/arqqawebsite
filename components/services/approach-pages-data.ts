@@ -191,8 +191,8 @@ export const APPROACH_PAGES: ApproachPage[] = [
       },
     ],
     cta: {
-      primary: { label: "Request a Growth Audit", href: "/start#growth-audit" },
-      secondary: { label: "Download the Self-Assessment Version", href: "/start#growth-audit" },
+      primary: { label: "Book a Strategy Session", href: "/start#book-strategy-call" },
+      secondary: { label: "See How We Applied This for Nile Air", href: "/work/nile-air" },
     },
   },
   {
