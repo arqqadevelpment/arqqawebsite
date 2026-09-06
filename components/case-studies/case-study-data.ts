@@ -70,6 +70,8 @@ export type PerformanceCaseStudy = {
       existing layout when the matching one is absent, so a case study without
       these renders is unaffected. */
   sectionMedia?: {
+    /** Replaces the shared grid artwork behind the hero. */
+    hero?: string;
     /** Runs the Challenge as centred copy with a full-width banner beneath,
         instead of the two-column layout. */
     challengeBanner?: boolean;
@@ -337,6 +339,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
     },
     sectionMedia: {
+      hero: "/portfolio/allure-hero.webp",
       challengeBanner: true,
       approach: "/portfolio/allure-approach.webp",
       afterResults: "/portfolio/allure-results.webp",

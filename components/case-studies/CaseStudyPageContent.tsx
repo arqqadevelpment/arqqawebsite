@@ -80,31 +80,24 @@ function SectionHead({
   );
 }
 
-/* Wide banner — a rounded panel inset from the viewport edges, carrying the
-   whole frame rather than a crop of it. Height comes from the image's own
-   ratio (`h-auto`, no fixed height and no object-cover), so nothing is cut off
-   at the top or bottom. Breaks out of the parent's max-width and sits inside
-   the section's overflow-x clip, so the wider element adds no scrollbar. */
+/* Banner — a rounded panel running the width of the page's content column,
+   the same max-w-6xl the website case studies use for their hero artwork, so
+   the two page types sit at one scale. Height comes from the image's own ratio
+   (`h-auto`, no fixed height and no object-cover), so the whole frame shows
+   rather than a crop of it. */
 function SectionBanner({ src, className = "" }: { src: string; className?: string }) {
   return (
     <Reveal delay={0.12} className={className}>
       <div
+        className="relative overflow-hidden rounded-3xl mx-auto w-full max-w-6xl"
         style={{
-          width: "min(96vw, 100rem)",
-          marginLeft: "calc(50% - min(48vw, 50rem))",
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
         }}
       >
-        <div
-          className="relative overflow-hidden rounded-3xl"
-          style={{
-            border: "1px solid rgba(255,255,255,0.1)",
-            boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
-          }}
-        >
-          {/* Decorative — the copy around it carries the meaning. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
-        </div>
+        {/* Decorative — the copy around it carries the meaning. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
       </div>
     </Reveal>
   );
@@ -155,7 +148,9 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
           aria-hidden="true"
           className="absolute inset-0 cs-hero-fade"
           style={{
-            backgroundImage: "url(/services/case-study-hero-bg.webp)",
+            backgroundImage: `url(${
+              study.sectionMedia?.hero ?? "/services/case-study-hero-bg.webp"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -289,7 +284,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
           Two columns where the study has artwork — copy left, image right,
           matching the portfolio case studies. Falls back to the original
           centred column for any study without one. */}
-      <section className="relative w-full overflow-x-hidden" style={{ padding: "5rem 1.5rem" }}>
+      <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
         <div
           className={`relative mx-auto ${
             study.sectionMedia?.challengeBanner
@@ -392,27 +387,59 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
           {study.sectionMedia?.approach ? (
-            /* Copy left, artwork right — the move cards still run full width
-               below, so only the heading block splits into two columns. */
-            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center mb-14">
+            /* Two columns: heading, intro and the move cards all sit in the
+               left column, artwork in the right. Top-aligned so the heading
+               starts level with the artwork rather than floating in the middle
+               of the taller column. */
+            <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
               <div>
                 <SectionHead eyebrow="The Approach" title="What we did about it." />
                 {study.approach.intro ? (
-                  <Reveal delay={0.05}>
+                  <Reveal delay={0.05} className="mb-10">
                     <p
                       className="font-light"
                       style={{
                         fontSize: "1rem",
                         lineHeight: 1.8,
                         color: "rgba(255,255,255,0.62)",
-                        maxWidth: "34rem",
                       }}
                     >
                       {study.approach.intro}
                     </p>
                   </Reveal>
                 ) : null}
+
+                {/* Stacked one per row — the column is too narrow to sit three
+                    cards side by side without them turning into slivers. */}
+                <div className="cs-moves cs-moves-grid" style={{ gridTemplateColumns: "1fr" }}>
+                  {study.approach.moves.map((move, i) => (
+                    <Reveal key={move.title} delay={Math.min(i * 0.06, 0.3)}>
+                      <div className="cs-move relative rounded-2xl p-6 flex flex-col">
+                        <span className="cs-move-num relative inline-flex items-center justify-center rounded-full font-bold">
+                          {move.num ?? String(i + 1).padStart(2, "0")}
+                        </span>
+                        <h3
+                          className="font-bold mt-6"
+                          style={{ fontSize: "1.0625rem", lineHeight: 1.3, color: "#ffffff" }}
+                        >
+                          {move.title}
+                        </h3>
+                        <p
+                          className="font-light mt-4"
+                          style={{
+                            fontSize: "0.9375rem",
+                            lineHeight: 1.75,
+                            color: "rgba(255,255,255,0.62)",
+                          }}
+                        >
+                          {move.body}
+                        </p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
               </div>
+
               <SectionImage src={study.sectionMedia.approach} />
             </div>
           ) : (
@@ -433,14 +460,12 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                   </p>
                 </Reveal>
               ) : null}
-            </>
-          )}
 
-          {/* Cards sit in one row where they fit and wrap on narrower
-              viewports — auto-fit rather than a fixed column count, because
-              the number of moves varies from three to seven by case study.
-              A hairline connector runs from each badge to the next. */}
-          <div className={`cs-moves ${study.approach.oneRow ? "cs-moves-row" : "cs-moves-grid"}`}>
+              {/* Cards sit in one row where they fit and wrap on narrower
+                  viewports — auto-fit rather than a fixed column count, because
+                  the number of moves varies from three to seven by case study.
+                  A hairline connector runs from each badge to the next. */}
+              <div className={`cs-moves ${study.approach.oneRow ? "cs-moves-row" : "cs-moves-grid"}`}>
             {study.approach.moves.map((move, i) => (
               <Reveal key={move.title} delay={Math.min(i * 0.06, 0.3)}>
                 <div className="cs-move relative rounded-2xl p-6 flex flex-col">
@@ -466,7 +491,9 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 </div>
               </Reveal>
             ))}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -555,7 +582,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
 
       {/* ══ Banner between the Results and the Takeaway ══ */}
       {study.sectionMedia?.afterResults ? (
-        <section className="relative w-full overflow-x-hidden">
+        <section className="relative w-full" style={{ padding: "1rem 1.5rem" }}>
           <SectionBanner src={study.sectionMedia.afterResults} />
         </section>
       ) : null}
@@ -563,29 +590,6 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       {/* ══ The Outcome / Takeaway ══ */}
       {study.outcome ? (
         <section className="relative w-full overflow-hidden" style={{ padding: "5rem 1.5rem 7rem" }}>
-          {/* Particle-vortex artwork, masked at both ends so it dissolves into
-              the sections above and below. */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: "url(/services/case-study-outcome-bg.webp)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              maskImage:
-                "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 16%, black 40%, black 76%, rgba(0,0,0,0.35) 92%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 16%, black 40%, black 76%, rgba(0,0,0,0.35) 92%, transparent 100%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, transparent 0%, rgba(3,3,5,0.5) 20%, rgba(3,3,5,0.5) 78%, transparent 100%)",
-            }}
-          />
           <div
             className={`relative mx-auto ${
               study.sectionMedia?.outcome ? "max-w-6xl" : "max-w-5xl"
