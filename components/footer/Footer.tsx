@@ -19,7 +19,7 @@ const QUICK_LINKS = [
 
 /* WhatsApp click-to-chat rather than tel: — on iOS Safari, tel: can surface a
    FaceTime prompt instead of the phone app, which this sidesteps entirely. */
-const PHONE = { display: "011 1011 5557", href: "https://wa.me/201110115557" };
+const PHONE = { display: "+2 011 1011 5557", href: "https://wa.me/201110115557" };
 
 /* Footer carries the HQ only — the full office list lives on /start. */
 const OFFICES = [

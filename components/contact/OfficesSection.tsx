@@ -47,7 +47,7 @@ const OFFICES: Office[] = [
   {
     label: "Cairo Office",
     lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"],
-    phone: "011 1011 5557",
+    phone: "+2 011 1011 5557",
     tel: "+201110115557",
   },
 ];
