@@ -77,8 +77,8 @@ export type PerformanceCaseStudy = {
     challengeBanner?: boolean;
     /** Sits to the right of the Approach intro. */
     approach?: string;
-    /** Full-width banner between the Results and the Takeaway. */
-    afterResults?: string;
+    /** Background image for the Takeaway section. */
+    outcomeBg?: string;
     /** Sits to the right of the Takeaway points. */
     outcome?: string;
   };
@@ -342,7 +342,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       hero: "/portfolio/allure-hero.webp",
       challengeBanner: true,
       approach: "/portfolio/allure-approach.webp",
-      afterResults: "/portfolio/allure-results.webp",
+      outcomeBg: "/portfolio/allure-takeaway-bg.webp",
     },
 
     card: {

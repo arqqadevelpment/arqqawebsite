@@ -601,12 +601,34 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       </section>
 
       {/* ══ The Outcome / Takeaway ══
-          Always the plain, full-width column now — sectionMedia.outcome is
-          kept on the type for any future case study that wants an image here,
-          but nothing currently sets it, so the two-column branch stays dead
-          code intentionally rather than being deleted outright. */}
+          sectionMedia.outcomeBg paints a full-bleed background behind the
+          copy where a study sets it (Allure); sectionMedia.outcome (a framed
+          side-by-side image) is kept on the type for a future case study that
+          wants that layout instead, though nothing currently uses it. */}
       {study.outcome ? (
         <section className="relative w-full overflow-hidden" style={{ padding: "5rem 1.5rem 7rem" }}>
+          {study.sectionMedia?.outcomeBg ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={study.sectionMedia.outcomeBg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* Darkens the photo enough for the bullet copy to stay
+                  legible, feathered so the section still blends into the
+                  page above and below it rather than reading as a hard box. */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(3,3,5,0.9) 0%, rgba(3,3,5,0.72) 14%, rgba(3,3,5,0.8) 86%, rgba(3,3,5,0.95) 100%)",
+                }}
+              />
+            </>
+          ) : null}
           <div
             className={`relative mx-auto ${
               study.sectionMedia?.outcome ? "max-w-6xl" : "max-w-5xl"
@@ -659,15 +681,6 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
               ) : null}
             </div>
           </div>
-        </section>
-      ) : null}
-
-      {/* ══ Banner — now runs after the Takeaway rather than before it, so the
-          full-width photo caps the story instead of interrupting the run from
-          Results into Takeaway. ══ */}
-      {study.sectionMedia?.afterResults ? (
-        <section className="relative w-full" style={{ padding: "1rem 1.5rem 5rem" }}>
-          <SectionBanner src={study.sectionMedia.afterResults} />
         </section>
       ) : null}
 
