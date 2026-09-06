@@ -72,6 +72,11 @@ export type PerformanceCaseStudy = {
   sectionMedia?: {
     /** Replaces the shared grid artwork behind the hero. */
     hero?: string;
+    /** Drifts the hero and Takeaway background images slightly slower than
+        the page scrolls, for a subtle depth effect. Opt-in per case study
+        rather than automatic whenever `hero`/`outcomeBg` is set, so adding a
+        custom image elsewhere doesn't silently turn motion on. */
+    parallax?: boolean;
     /** Runs the Challenge as centred copy with a full-width banner beneath,
         instead of the two-column layout. */
     challengeBanner?: boolean;
@@ -340,6 +345,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     },
     sectionMedia: {
       hero: "/portfolio/allure-hero.webp",
+      parallax: true,
       challengeBanner: true,
       approach: "/portfolio/allure-approach.webp",
       outcomeBg: "/portfolio/allure-takeaway-bg.webp",

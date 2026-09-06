@@ -3,8 +3,62 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { CASE_STUDY_WASH, getRelated } from "./case-study-data";
 import type { PerformanceCaseStudy } from "./case-study-data";
+
+/* ── Parallax drift ──────────────────────────────────────────────────────
+   Tracks how far an element's centre sits from the viewport's centre (as a
+   fraction of viewport height, clamped to ±1) and hands back a small
+   translateY driven by that. The element itself is scaled up ~12% via
+   transform so the few percent of vertical travel this produces never
+   uncovers empty space at its edges — both call sites sit inside an
+   `overflow-hidden` ancestor that clips it regardless.
+
+   Runs on scroll/resize via rAF rather than an IntersectionObserver, since
+   the offset has to keep tracking continuously while the element is on
+   screen, not just fire once on entry. Disabled under prefers-reduced-motion,
+   where the element stays at its scaled resting position with no drift. */
+function useParallaxDrift(
+  ref: React.RefObject<HTMLElement | null>,
+  enabled: boolean,
+  strength = 10
+) {
+  const reduced = useReducedMotion();
+  const [y, setY] = useState(0);
+
+  useEffect(() => {
+    if (!enabled || reduced) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let raf = 0;
+    function update() {
+      raf = 0;
+      const rect = el!.getBoundingClientRect();
+      const centreOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const travel = Math.max(-1, Math.min(1, centreOffset / window.innerHeight));
+      setY(travel * strength);
+    }
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+    // `ref` is a stable object identity from useRef in the caller, not state,
+    // so it is intentionally left out of the dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, reduced, strength]);
+
+  return `scale(1.12) translateY(${y}%)`;
+}
 
 /* ── Reveal-on-scroll ──
    threshold 0 with a bottom rootMargin: some blocks are taller than the
@@ -149,6 +203,11 @@ function SectionImage({
 
 export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy }) {
   const related = getRelated(study.related);
+  const parallaxOn = !!study.sectionMedia?.parallax;
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const heroTransform = useParallaxDrift(heroBgRef, parallaxOn);
+  const outcomeBgRef = useRef<HTMLImageElement>(null);
+  const outcomeTransform = useParallaxDrift(outcomeBgRef, parallaxOn);
 
   return (
     <div className="relative">
@@ -162,6 +221,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
             page's gradient backdrop; dissolving instead lets that backdrop
             carry straight through with no seam. */}
         <div
+          ref={heroBgRef}
           aria-hidden="true"
           className="absolute inset-0 cs-hero-fade"
           style={{
@@ -170,6 +230,8 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
             })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            transform: parallaxOn ? heroTransform : undefined,
+            willChange: parallaxOn ? "transform" : undefined,
           }}
         />
         <div
@@ -611,10 +673,15 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                ref={outcomeBgRef}
                 src={study.sectionMedia.outcomeBg}
                 alt=""
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  transform: parallaxOn ? outcomeTransform : undefined,
+                  willChange: parallaxOn ? "transform" : undefined,
+                }}
               />
               {/* Two washes rather than one flat scrim: a left-to-right gradient
                   keeps the copy's own column legible while leaving the right
