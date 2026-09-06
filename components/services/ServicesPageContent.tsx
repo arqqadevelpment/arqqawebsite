@@ -10,6 +10,51 @@ import Link from "next/link";
 /* All copy lives in service-data.ts — the hub and every inner page share it */
 type Service = ServiceDetail;
 
+/* ── Chroma text reveal ───────────────────────────────────────────────────
+   One line of the hero headline. The line rises into view and a band of the
+   brand gradient sweeps across it left to right, settling back to white —
+   the text is painted by a gradient wider than itself, and the animation
+   moves that gradient rather than the text.
+
+   Each line runs on its own delay so the two arrive in sequence. Fires when
+   the heading enters the viewport, and plays once. */
+function ChromaLine({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <span
+      ref={ref}
+      className={`svc-chroma ${visible ? "is-in" : ""}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </span>
+  );
+}
+
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
   children,
@@ -219,8 +264,52 @@ export function ServicesPageContent() {
           border-color: rgba(255,138,90,0.75);
           box-shadow: 0 0 26px rgba(255,90,43,0.45);
         }
+        /* Chroma text reveal — the line is painted by a gradient three times
+           its own width: white at both ends with the brand ramp banded in the
+           middle. Sliding that gradient sweeps colour across the words and
+           leaves them white. background-clip:text needs a transparent fill,
+           so the text has no colour of its own. */
+        .svc-chroma {
+          display: block;
+          background-image: linear-gradient(
+            100deg,
+            #ffffff 0%,
+            #ffffff 30%,
+            #3444e0 40%,
+            #6f5be0 50%,
+            #ff5a2b 60%,
+            #ffffff 70%,
+            #ffffff 100%
+          );
+          background-size: 300% 100%;
+          background-position: 100% 0;
+          background-repeat: no-repeat;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          opacity: 0;
+          transform: translateY(0.35em);
+          will-change: background-position, opacity, transform;
+        }
+        .svc-chroma.is-in {
+          animation: svcChromaReveal 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes svcChromaReveal {
+          0%   { opacity: 0; transform: translateY(0.35em); background-position: 100% 0; }
+          30%  { opacity: 1; transform: translateY(0); }
+          100% { opacity: 1; transform: translateY(0); background-position: 0% 0; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .svc-wheel, .svc-upright { animation: none; }
+          /* No sweep, no rise — the line is simply present, in plain white. */
+          .svc-chroma {
+            animation: none !important;
+            opacity: 1;
+            transform: none;
+            background-image: none;
+            color: #ffffff;
+          }
         }
       `}</style>
 
@@ -269,19 +358,8 @@ export function ServicesPageContent() {
                 textShadow: "0 2px 40px rgba(0,0,0,0.6)",
               }}
             >
-              Everything Connects.{" "}
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
-                }}
-              >
-                Nothing Operates in Isolation.
-              </span>
+              <ChromaLine>Everything Connects.</ChromaLine>
+              <ChromaLine delay={0.28}>Nothing Operates in Isolation.</ChromaLine>
             </h1>
             <p
               className="font-light mt-3 mx-auto max-w-2xl"
@@ -291,7 +369,7 @@ export function ServicesPageContent() {
                 color: "rgba(255,255,255,0.6)",
               }}
             >
-              Six integrated verticals. One unified system. Every service is
+              Seven integrated verticals. One unified system. Every service is
               engineered to compound the impact of every other.
             </p>
           </Reveal>
@@ -331,7 +409,7 @@ export function ServicesPageContent() {
                 color: "#ffffff",
               }}
             >
-              Six Verticals.{" "}
+              Seven Verticals.{" "}
               <span
                 style={{
                   backgroundImage:
