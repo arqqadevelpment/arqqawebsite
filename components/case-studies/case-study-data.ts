@@ -308,15 +308,15 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       moves: [
         {
           title: "Multi-Platform Expansion",
-          body: "Launched dedicated lead-generation programs on Snapchat and TikTok alongside Meta, spreading acquisition risk and unlocking new, lower-cost audiences.",
+          body: "Lead-generation programs on Snapchat and TikTok alongside Meta — spreading risk, unlocking lower-cost audiences.",
         },
         {
           title: "Doctor & Offer Segmentation",
-          body: "Built individual campaigns per doctor and per seasonal offer, so budget and creative could be optimized independently rather than blended into one undifferentiated pool.",
+          body: "Individual campaigns per doctor and per seasonal offer, so budget and creative could be optimized independently.",
         },
         {
           title: "Full-Funnel, Video-First Testing",
-          body: "Ran video-view campaigns to build warm audience pools on TikTok and Snapchat, feeding cheaper, higher-intent traffic into the lead campaigns that followed.",
+          body: "Video-view campaigns built warm audience pools, feeding cheaper, higher-intent traffic into the lead campaigns.",
         },
       ],
     },

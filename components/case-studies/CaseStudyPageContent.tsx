@@ -104,18 +104,35 @@ function SectionBanner({ src, className = "" }: { src: string; className?: strin
 }
 
 /* Framed image for the two-column sections — same treatment as the Challenge
-   artwork so the page reads as one set. */
-function SectionImage({ src, delay = 0.15 }: { src: string; delay?: number }) {
+   artwork so the page reads as one set.
+
+   `stretch` drops the fixed 4:3 ratio and lets the frame take the height of the
+   taller column beside it. Used where copy sets the column height and a
+   ratio-locked image would leave dead space under it. The float is dropped in
+   that mode: a transform on a stretched item fights the grid's sizing. */
+function SectionImage({
+  src,
+  delay = 0.15,
+  stretch = false,
+}: {
+  src: string;
+  delay?: number;
+  stretch?: boolean;
+}) {
   return (
-    <Reveal delay={delay} className="flex justify-center lg:justify-end">
+    <Reveal
+      delay={delay}
+      className={`flex justify-center lg:justify-end ${stretch ? "self-stretch h-full" : ""}`}
+    >
       <div
         className="relative rounded-3xl overflow-hidden"
         style={{
-          width: "min(34rem, 100%)",
-          aspectRatio: "4 / 3",
+          width: stretch ? "100%" : "min(34rem, 100%)",
+          ...(stretch
+            ? { height: "100%", minHeight: "20rem" }
+            : { aspectRatio: "4 / 3", animation: "challengeImageFloat 6s ease-in-out 1.1s infinite" }),
           border: "1px solid rgba(255,255,255,0.1)",
           boxShadow: "0 24px 60px -24px rgba(20,60,200,0.45)",
-          animation: "challengeImageFloat 6s ease-in-out 1.1s infinite",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -410,25 +427,28 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 ) : null}
 
                 {/* Stacked one per row — the column is too narrow to sit three
-                    cards side by side without them turning into slivers. */}
-                <div className="cs-moves cs-moves-grid" style={{ gridTemplateColumns: "1fr" }}>
+                    cards side by side without them turning into slivers.
+                    No number badge and tighter padding here: the column runs
+                    alongside the artwork, and the badge's own height was enough
+                    to push the stack well past the bottom of the image. */}
+                <div
+                  className="cs-moves cs-moves-grid"
+                  style={{ gridTemplateColumns: "1fr", gap: "0.875rem" }}
+                >
                   {study.approach.moves.map((move, i) => (
                     <Reveal key={move.title} delay={Math.min(i * 0.06, 0.3)}>
-                      <div className="cs-move relative rounded-2xl p-6 flex flex-col">
-                        <span className="cs-move-num relative inline-flex items-center justify-center rounded-full font-bold">
-                          {move.num ?? String(i + 1).padStart(2, "0")}
-                        </span>
+                      <div className="cs-move relative rounded-2xl p-5 flex flex-col">
                         <h3
-                          className="font-bold mt-6"
-                          style={{ fontSize: "1.0625rem", lineHeight: 1.3, color: "#ffffff" }}
+                          className="font-bold"
+                          style={{ fontSize: "1rem", lineHeight: 1.3, color: "#ffffff" }}
                         >
                           {move.title}
                         </h3>
                         <p
-                          className="font-light mt-4"
+                          className="font-light mt-2"
                           style={{
-                            fontSize: "0.9375rem",
-                            lineHeight: 1.75,
+                            fontSize: "0.875rem",
+                            lineHeight: 1.65,
                             color: "rgba(255,255,255,0.62)",
                           }}
                         >
@@ -440,7 +460,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 </div>
               </div>
 
-              <SectionImage src={study.sectionMedia.approach} />
+              <SectionImage src={study.sectionMedia.approach} stretch />
             </div>
           ) : (
             <>
