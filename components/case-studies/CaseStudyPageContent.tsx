@@ -616,15 +616,25 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Darkens the photo enough for the bullet copy to stay
-                  legible, feathered so the section still blends into the
-                  page above and below it rather than reading as a hard box. */}
+              {/* Two washes rather than one flat scrim: a left-to-right gradient
+                  keeps the copy's own column legible while leaving the right
+                  side of the photo — where the second reflection sits — much
+                  closer to full strength, and a light top/bottom feather still
+                  blends the section into the page above and below it. */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(3,3,5,0.9) 0%, rgba(3,3,5,0.72) 14%, rgba(3,3,5,0.8) 86%, rgba(3,3,5,0.95) 100%)",
+                    "linear-gradient(100deg, rgba(3,3,5,0.75) 0%, rgba(3,3,5,0.55) 30%, rgba(3,3,5,0.22) 60%, rgba(3,3,5,0.12) 100%)",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(3,3,5,0.55) 0%, transparent 16%, transparent 84%, rgba(3,3,5,0.6) 100%)",
                 }}
               />
             </>
@@ -665,7 +675,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                         fontSize: "1rem",
                         lineHeight: 1.8,
                         color: "rgba(255,255,255,0.65)",
-                        maxWidth: "46rem",
+                        maxWidth: "32rem",
                       }}
                     >
                       {point}
