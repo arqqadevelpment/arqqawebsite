@@ -92,6 +92,7 @@ export const VIDEO_PROJECTS: VideoProject[] = [
     subtitle: "An industrial brand film on food-safe gas technology.",
     description:
       "A brand film for Gulf Cryo, one of the region's leading industrial gas providers, framing its technology around the outcomes it protects — reducing waste and ensuring food safety across the supply chain.",
+    logo: "/logos/clients/gulf-cryo.webp",
     vimeoId: "1178900937",
     vimeoHash: "bd6d03b32a",
     card: {
