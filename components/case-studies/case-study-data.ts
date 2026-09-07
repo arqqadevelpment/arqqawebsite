@@ -527,6 +527,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Full-Funnel Performance Marketing — Meta",
     logo: "/logos/clients/perfect-body-white.webp",
     accent: "orange",
+    sectionMedia: {
+      hero: "/portfolio/perfect-body-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/perfect-body-challenge.webp",
+      afterResults: "/portfolio/perfect-body-results-banner.webp",
+    },
     heroHeadline: "A Year of Full-Funnel Performance — 4.07x Return on Every Dollar Spent.",
     heroSub:
       "A corset brand in Kuwait built a full-funnel Meta program that turned engaged shoppers into a sustained, scalable return across a full year of testing and optimization.",
