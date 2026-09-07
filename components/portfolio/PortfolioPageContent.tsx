@@ -11,6 +11,7 @@ import type { PerformanceCaseStudy } from "@/components/case-studies/case-study-
 import { VIDEO_PROJECTS } from "@/components/videos/video-data";
 import type { VideoProject } from "@/components/videos/video-data";
 import { SOCIAL_PROJECTS } from "@/components/social/social-data";
+import { BRANDING_PROJECTS } from "@/components/branding/branding-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
 /* ── Client mark, shown at the top of every hub card ──────────────────────
@@ -730,23 +731,27 @@ function VideoCard({ project, delay }: { project: VideoProject; delay: number })
 export function PortfolioPageContent() {
   const [filter, setFilter] = useState<(typeof INDUSTRY_FILTERS)[number]>("All");
 
-  /* Five sources feed one grid. "Web Design" selects the website showcases,
+  /* Six sources feed one grid. "Web Design" selects the website showcases,
      "Performance" selects the media case studies, "Video & Animation" selects
-     the Vimeo-hosted video projects, "Social Media Production" selects the
-     content-production projects, "All" shows everything, and the remaining
-     tab (Branding) has no matching collection yet — it renders an empty grid
-     until that work is added. The legacy CASE_STUDIES (Fawry, Nile Air,
-     Kenz'up, Africa Music Initiative) keep their `industry` label on the card
-     itself but are no longer filterable by it, since those tabs were
-     retired. */
+     the Vimeo-hosted video projects, "Social Media Production" and
+     "Branding" select their own content-production collections, and "All"
+     shows everything. The legacy CASE_STUDIES (Fawry, Africa Music
+     Initiative) keep their `industry` label on the card itself but are no
+     longer filterable by it, since those tabs were retired. */
   const isAll = filter === "All";
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
   const performance = isAll || filter === "Performance" ? PERFORMANCE_CASE_STUDIES : [];
   const videos = isAll || filter === "Video & Animation" ? VIDEO_PROJECTS : [];
   const socials = isAll || filter === "Social Media Production" ? SOCIAL_PROJECTS : [];
+  const brands = isAll || filter === "Branding" ? BRANDING_PROJECTS : [];
   const allCaseStudies = isAll ? CASE_STUDIES : [];
   const total =
-    allCaseStudies.length + showcases.length + performance.length + videos.length + socials.length;
+    allCaseStudies.length +
+    showcases.length +
+    performance.length +
+    videos.length +
+    socials.length +
+    brands.length;
 
   return (
     <>
@@ -872,12 +877,30 @@ export function PortfolioPageContent() {
                 )}
               />
             ))}
+            {brands.map((project, i) => (
+              <ShowcaseCard
+                key={`brand-${project.slug}`}
+                project={project}
+                basePath="/branding"
+                eyebrowLabel="Branding"
+                delay={Math.min(
+                  (showcases.length + performance.length + videos.length + socials.length + i) *
+                    0.08,
+                  0.32
+                )}
+              />
+            ))}
             {allCaseStudies.map((caseStudy, i) => (
               <CaseStudyCard
                 key={caseStudy.slug}
                 caseStudy={caseStudy}
                 delay={Math.min(
-                  (showcases.length + performance.length + videos.length + socials.length + i) *
+                  (showcases.length +
+                    performance.length +
+                    videos.length +
+                    socials.length +
+                    brands.length +
+                    i) *
                     0.08,
                   0.32
                 )}

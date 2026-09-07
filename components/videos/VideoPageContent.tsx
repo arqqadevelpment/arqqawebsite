@@ -170,7 +170,7 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
       {/* ── Description ── */}
       <section
         className="relative mx-auto w-full max-w-3xl px-6 text-center"
-        style={{ paddingTop: "clamp(3rem, 6vw, 4.5rem)", paddingBottom: "clamp(5rem, 9vw, 7rem)" }}
+        style={{ paddingTop: "clamp(3rem, 6vw, 4.5rem)", paddingBottom: project.gallery ? "0" : "clamp(5rem, 9vw, 7rem)" }}
       >
         <Reveal>
           <p
@@ -183,9 +183,66 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
             {project.description}
           </p>
         </Reveal>
+      </section>
 
+      {/* ── Gallery — production stills, laid out as authored rows ── */}
+      {project.gallery ? (
+        <section
+          className="relative mx-auto w-full max-w-6xl px-6"
+          style={{ paddingTop: "clamp(3rem, 6vw, 4.5rem)", paddingBottom: "clamp(5rem, 9vw, 7rem)" }}
+        >
+          <div className="flex flex-col" style={{ gap: "clamp(1.25rem, 2.5vw, 2rem)" }}>
+            {project.gallery.map((row, rowIndex) => (
+              <div
+                key={row.map((m) => m.src).join("|")}
+                className={`grid grid-cols-1 ${
+                  row.length === 3 ? "sm:grid-cols-3" : row.length === 2 ? "sm:grid-cols-2" : ""
+                }`}
+                style={{ gap: "clamp(1.25rem, 2.5vw, 2rem)" }}
+              >
+                {row.map((media, i) => (
+                  <Reveal key={media.src} delay={Math.min((rowIndex * row.length + i) * 0.05, 0.3)}>
+                    <figure className="m-0">
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{
+                          borderRadius: "1.25rem",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                          background: "linear-gradient(180deg, #08080e 0%, #050509 100%)",
+                          boxShadow: "0 30px 80px -40px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.02) inset",
+                        }}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={media.src}
+                          alt={media.alt}
+                          loading="lazy"
+                          className="block w-full h-auto"
+                        />
+                      </div>
+                      {media.caption ? (
+                        <figcaption
+                          className="mt-4"
+                          style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.8125rem", letterSpacing: "0.04em" }}
+                        >
+                          {media.caption}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section
+        className="relative mx-auto w-full max-w-3xl px-6 text-center"
+        style={{ paddingBottom: "clamp(5rem, 9vw, 7rem)" }}
+      >
         <Reveal delay={0.06}>
-          <div style={{ marginTop: "clamp(3rem, 6vw, 4rem)", paddingTop: "2.5rem", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+          <div style={{ paddingTop: "2.5rem", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
             <Link href="/work" className="showcase-back inline-flex items-center gap-2">
               <span aria-hidden="true" className="showcase-back-arrow">
                 ←

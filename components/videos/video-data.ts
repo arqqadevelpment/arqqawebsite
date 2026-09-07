@@ -23,6 +23,11 @@ export type VideoProject = {
   logo?: string;
   vimeoId: string;
   vimeoHash: string;
+  /** Production stills / behind-the-scenes frames shown below the video, as
+      an authored sequence of rows — each row's own image count sets that
+      row's column count (1, 2, or 3). Optional: most video projects rely on
+      the embed alone. */
+  gallery?: { src: string; alt: string; caption?: string }[][];
   /** How this project shows up as a card on the /work hub. */
   card: {
     market: string;
@@ -125,10 +130,48 @@ export const VIDEO_PROJECTS: VideoProject[] = [
     title: "Fawry Pay — Campaign Film",
     subtitle: "A campaign film for Egypt's leading digital payment brand.",
     description:
-      "A campaign film for Fawry Pay promoting the easiest way to shop online in Egypt, produced end-to-end with a full production crew — from direction and styling to colour grading and sound design.",
+      "A comedic, retro-styled campaign film for Fawry Pay, following a group of women mid-appointment at a vintage salon — under dryers, in curlers, mid-facial — as one leaves ready to shop, bags in hand, without ever queuing to pay. ARQQA led the project end to end: concept, direction, and production, from storyboard through the final cut, promoting #Fawry_Pay as the easiest way to shop online.",
     logo: "/logos/clients/fawry-pay.webp",
     vimeoId: "295768203",
     vimeoHash: "204d183f97",
+    gallery: [
+      [
+        {
+          src: "/work/video/fawry-pay-gallery/shot-01.webp",
+          alt: "Woman celebrating with shopping bags raised in a vintage Egyptian salon",
+          caption: "The final beat — out the door before the appointment's even over",
+        },
+      ],
+      [
+        {
+          src: "/work/video/fawry-pay-gallery/shot-06.webp",
+          alt: "Two women mid-treatment, one checking her phone under a dryer",
+          caption: "Behind the scenes on set",
+        },
+        {
+          src: "/work/video/fawry-pay-gallery/shot-08.webp",
+          alt: "Final frame of a woman walking out of the salon with shopping bags, smiling",
+          caption: "Storyboard to final frame",
+        },
+      ],
+      [
+        {
+          src: "/work/video/fawry-pay-gallery/shot-03.webp",
+          alt: "Woman with a face mask and cucumber slices giving a thumbs up",
+          caption: "Character work — every extra given a real beat",
+        },
+        {
+          src: "/work/video/fawry-pay-gallery/shot-04.webp",
+          alt: "Woman in a red shirt with retro sunglasses and cat-eye glasses",
+          caption: "Character work — every extra given a real beat",
+        },
+        {
+          src: "/work/video/fawry-pay-gallery/shot-05.webp",
+          alt: "Woman under a vintage salon hair dryer wearing a hairnet with curlers",
+          caption: "Production design — the salon set, dressed for period",
+        },
+      ],
+    ],
     card: {
       market: "Egypt",
       summary: "A full-production campaign film promoting Fawry Pay as the easiest way to shop online.",
