@@ -260,6 +260,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     category: "Social Media Production",
     intro:
       "Always-on content for a national carrier — destination campaigns, seasonal offers, and the day-to-day posts that keep an airline's feed worth following between bookings.",
+    heroImage: "/work/nile-air-social/hero.webp",
     logo: "/logos/clients/nile-air.webp",
     facts: [
       { label: "Client", value: "Nile Air" },
