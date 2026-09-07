@@ -111,98 +111,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         "ARQQA treated every install like it had to earn its place. That discipline is the only reason we can say our growth is real.",
       role: "Head of Growth, Fawry",
     },
-    related: ["nile-air", "kenzup"],
-  },
-  {
-    slug: "nile-air",
-    client: "Nile Air",
-    industry: "Airlines",
-    market: "KSA",
-    services: ["Strategy & Consulting", "Technology", "Performance Marketing"],
-    accent: "orange",
-    heroLine: "237x ROAS in 12 Months",
-    summary:
-      "A repositioning audit and a conversion-first booking rebuild turned a leaking funnel into the airline's top revenue channel.",
-    metric: "237x",
-    metricLabel: "Return on ad spend",
-    image: "/portfolio/nile-air.webp",
-    logo: "/logos/clients/nile-air.webp",
-    challenge:
-      "Nile Air was bidding against itself across three separate agencies, with no unified measurement framework and a booking funnel that leaked at every step between search and confirmed ticket.",
-    approach: {
-      body: "Strategy came first and stayed the anchor: no media was consolidated and no line of code shipped until the blueprint was signed off.",
-      moves: [
-        "Repositioning audit consolidating spend across three agencies into one accountable system",
-        "Amadeus platform integration wired directly into the booking flow",
-        "Conversion-first booking rebuild, engineered before traffic was scaled",
-        "Unified KPI framework so every channel reported into the same number",
-      ],
-    },
-    execution: {
-      channels: ["Google Search & Performance Max", "Meta", "Programmatic display"],
-      creative: "Route-specific dynamic creative, swapped by origin market and fare season.",
-      technology:
-        "Amadeus PSS integration, server-side event tracking, and a rebuilt booking flow holding a sub-2-second median load.",
-      timeline: "4-month conversion rebuild, followed by an ongoing media retainer.",
-      team: "A strategy lead, a technology squad, and a dedicated media buying team.",
-    },
-    results: [
-      { value: "237x", label: "Return on ad spend achieved" },
-      { value: "83M", label: "SAR digital revenue unlocked" },
-      { value: "350K", label: "SAR total spend behind it" },
-      { value: "<2s", label: "Median booking-flow load time" },
-    ],
-    testimonial: {
-      quote:
-        "We were paying three agencies to compete with each other. ARQQA gave us one system and one number to trust.",
-      role: "Director of Digital, Nile Air",
-    },
-    related: ["fawry", "kenzup"],
-  },
-  {
-    slug: "kenzup",
-    client: "Kenz'Up",
-    industry: "E-commerce",
-    market: "Morocco",
-    services: ["Asset Building", "Technology", "App Growth"],
-    accent: "blue",
-    heroLine: "25% Registration Conversion. 5M+ Installs.",
-    summary:
-      "A full identity and onboarding rebuild turned a leaking registration funnel into the marketplace's strongest growth lever.",
-    metric: "25%",
-    metricLabel: "Registration conversion",
-    image: "/portfolio/kenzup.webp",
-    logo: "/logos/clients/kenzup.webp",
-    challenge:
-      "Kenz'Up needed to launch a new marketplace app into a crowded category with no brand recognition — and an onboarding flow that lost seven in ten users before registration ever completed.",
-    approach: {
-      body: "Identity and product were rebuilt together, so the brand people met in an ad was the same one they met inside the app.",
-      moves: [
-        "Full identity system built for recognition, not decoration",
-        "Onboarding UX rebuilt around the registration event, not the download",
-        "Localized Darija content calendar mapped to acquisition channels",
-        "Influencer seeding paired with performance media at launch",
-      ],
-    },
-    execution: {
-      channels: ["Meta", "TikTok", "Google UAC", "Influencer seeding"],
-      creative: "Onboarding motion assets and localized Darija copy, tested against drop-off data, not opinion.",
-      technology: "Full onboarding UX rebuild with event tracking wired to every step of registration.",
-      timeline: "8 weeks for the identity system, 6 weeks for the app rebuild, run in parallel.",
-      team: "A brand pod and a UX/engineering pod sharing one weekly review.",
-    },
-    results: [
-      { value: "25%", label: "Registration conversion, up from 7%" },
-      { value: "5M+", label: "App installs" },
-      { value: "3.5x", label: "Conversion lift after rebuild" },
-      { value: "14 wks", label: "From kickoff to national launch" },
-    ],
-    testimonial: {
-      quote:
-        "Every previous agency treated our app like a media budget. ARQQA treated it like a product problem — and fixed it like one.",
-      role: "Co-Founder, Kenz'Up",
-    },
-    related: ["fawry", "africa-music-initiative"],
+    related: ["africa-music-initiative"],
   },
   {
     slug: "africa-music-initiative",
@@ -247,7 +156,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         "Fifty-two countries is fifty-two ways for a campaign to go wrong in public. ARQQA made sure none of them did.",
       role: "Campaign Director, Africa Music Initiative",
     },
-    related: ["fawry", "nile-air"],
+    related: ["fawry"],
   },
 ];
 

@@ -295,6 +295,26 @@ export function ShowcaseTemplate({
               );
             }
 
+            if (block.type === "grid") {
+              const cols = Math.min(block.media.length, 3);
+              return (
+                <div
+                  key={block.media.map((m) => m.src).join("|")}
+                  className={`grid grid-cols-1 ${cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}
+                  style={{ gap: "clamp(1.25rem, 2.5vw, 2rem)" }}
+                >
+                  {block.media.map((media, j) => (
+                    <Reveal key={media.src} delay={0.05 + j * 0.05}>
+                      <Figure
+                        media={media}
+                        eager={i === firstVisualIndex && j === 0}
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              );
+            }
+
             /* pair — an authored grouping, but rendered stacked: each image
                gets the full content width so it can be read on its own
                rather than shrunk to half. The gap matches the surrounding

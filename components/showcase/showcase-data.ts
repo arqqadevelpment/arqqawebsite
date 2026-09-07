@@ -6,8 +6,11 @@
  *
  * The body of each page is an authored sequence of blocks rather than a text
  * block followed by an image dump, so reading and looking alternate down the
- * page. Three block types cover the rhythm: a paragraph, a single figure, and
- * a side-by-side pair. Order the array and the layout follows.
+ * page. Block types cover the rhythm: a paragraph, a single figure, a
+ * side-by-side pair (each image full-width, stacked — for two visuals that
+ * each deserve their own moment), and a grid (actually side by side, 2 or 3
+ * columns — for content that reads as a set). Order the array and the
+ * layout follows.
  */
 
 export type ShowcaseMedia = {
@@ -24,8 +27,12 @@ export type ShowcaseBlock =
   | { type: "text"; body: string }
   /** One figure at full container width */
   | { type: "figure"; media: ShowcaseMedia }
-  /** Two figures side by side, stacking on mobile */
-  | { type: "pair"; media: [ShowcaseMedia, ShowcaseMedia] };
+  /** Two figures stacked, each at full width — for visuals that each want
+      their own space rather than sharing a row */
+  | { type: "pair"; media: [ShowcaseMedia, ShowcaseMedia] }
+  /** 2 or 3 figures actually side by side, stacking to one column on
+      mobile — for content that reads as a set (e.g. a reel next to a reel) */
+  | { type: "grid"; media: ShowcaseMedia[] };
 
 export type ShowcaseProject = {
   /** URL slug — the page lives at /our-work/<slug> */
