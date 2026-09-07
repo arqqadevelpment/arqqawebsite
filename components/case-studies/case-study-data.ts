@@ -117,6 +117,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Full-Funnel Performance Marketing",
     logo: "/logos/clients/everher.webp",
     accent: "orange",
+    sectionMedia: {
+      hero: "/portfolio/everher-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/everher-challenge.webp",
+      afterResults: "/portfolio/everher.webp",
+    },
     heroHeadline: "From a Struggling Brand to a Sold-Out Season.",
     heroSub:
       "A full-funnel transformation that took Everher from near-zero profitability to a consistently profitable, sold-out operation — without increasing spend.",
