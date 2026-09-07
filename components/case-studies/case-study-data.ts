@@ -502,7 +502,6 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
     },
     results: {
-      projected: true,
       metrics: [
         { value: "1.60%", label: "Projected blended click-through rate across the all-segments campaign layer" },
         { value: "4", label: "Persona-specific campaign layers, each with its own budget, targeting, and lead projection" },
