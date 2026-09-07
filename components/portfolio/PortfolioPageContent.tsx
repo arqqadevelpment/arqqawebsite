@@ -608,17 +608,16 @@ export function PortfolioPageContent() {
   const [filter, setFilter] = useState<(typeof INDUSTRY_FILTERS)[number]>("All");
 
   /* Three sources feed one grid. "Web Design" selects the website showcases,
-     "Performance" selects the media case studies, every other tab selects the
-     legacy CASE_STUDIES by industry, and "All" shows everything. */
+     "Performance" selects the media case studies, "All" shows everything, and
+     the remaining tabs (Video & Animation, Branding, Social Media Production)
+     have no matching collection yet — they render an empty grid until that
+     work is added. The legacy CASE_STUDIES (Fawry, Nile Air, Kenz'up, Africa
+     Music Initiative) keep their `industry` label on the card itself but are
+     no longer filterable by it, since those tabs were retired. */
   const isAll = filter === "All";
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
   const performance = isAll || filter === "Performance" ? PERFORMANCE_CASE_STUDIES : [];
-  const allCaseStudies =
-    isAll || filter === "Web Design" || filter === "Performance"
-      ? isAll
-        ? CASE_STUDIES
-        : []
-      : CASE_STUDIES.filter((c) => c.industry === filter);
+  const allCaseStudies = isAll ? CASE_STUDIES : [];
   const total = allCaseStudies.length + showcases.length + performance.length;
 
   return (

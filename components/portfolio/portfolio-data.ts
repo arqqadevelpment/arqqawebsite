@@ -272,8 +272,7 @@ export const INDUSTRY_FILTERS = [
   "All",
   "Web Design",
   "Performance",
-  "Fintech",
-  "Airlines",
-  "E-commerce",
-  "Entertainment",
+  "Video & Animation",
+  "Branding",
+  "Social Media Production",
 ] as const;

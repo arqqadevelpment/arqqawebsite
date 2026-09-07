@@ -1678,7 +1678,7 @@ export function PerformanceMarketingPageContent() {
                 <div
                   className="font-bold"
                   style={{
-                    fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                    fontSize: "clamp(2rem, 4.4vw, 3.25rem)",
                     lineHeight: 1,
                     letterSpacing: "-0.03em",
                     backgroundImage:
