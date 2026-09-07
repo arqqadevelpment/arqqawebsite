@@ -447,6 +447,14 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       image: "/portfolio/gts-holding.webp",
     },
     related: ["zenith-arabia-ai", "ntra"],
+    sectionMedia: {
+      hero: "/portfolio/gts-holding-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/gts-holding-challenge.webp",
+      approach: "/portfolio/gts-holding-approach.webp",
+      outcomeBg: "/portfolio/gts-holding-takeaway-bg.webp",
+    },
   },
 
   {
@@ -516,6 +524,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       image: "/portfolio/zenith-arabia-ai.webp",
     },
     related: ["gts-holding", "ntra"],
+    sectionMedia: {
+      hero: "/portfolio/zenith-arabia-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/zenith-arabia-challenge.webp",
+      outcomeBg: "/portfolio/zenith-arabia-takeaway-bg.webp",
+    },
   },
 
   {
