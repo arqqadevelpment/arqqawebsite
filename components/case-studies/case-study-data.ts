@@ -266,6 +266,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Social Media Growth — Meta Ads Program",
     logo: "/logos/clients/ntra.webp",
     accent: "blue",
+    sectionMedia: {
+      hero: "/portfolio/ntra-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/ntra-challenge.webp",
+      afterResults: "/portfolio/ntra.webp",
+    },
     heroHeadline: "Scaling a National Regulator's Voice — 71.5% Follower Growth in Six Months.",
     heroSub:
       "Egypt's National Telecom Regulatory Authority needed to grow its digital voice for public-service messaging. ARQQA built an always-on, multi-objective Meta Ads program that nearly doubled its audience.",
