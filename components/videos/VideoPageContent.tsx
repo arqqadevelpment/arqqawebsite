@@ -99,7 +99,7 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
                 src={project.logo}
                 alt={`${project.client} logo`}
                 style={{
-                  height: "clamp(4rem, 7.5vw, 5.75rem)",
+                  height: "clamp(6rem, 11vw, 8.5rem)",
                   width: "auto",
                   maxWidth: "min(100%, 20rem)",
                   objectFit: "contain",
