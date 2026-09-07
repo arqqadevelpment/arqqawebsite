@@ -459,6 +459,62 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
       image: "/services/work-ebc.webp",
       accent: "blue",
     },
+    next: "lifely-pets",
+  },
+  {
+    slug: "lifely-pets",
+    client: "Lifely Pets",
+    title: "Lifely Pets",
+    category: "Web Design & Development",
+    intro:
+      "An e-commerce storefront for a premium pet-food brand — built to sell dry food for dogs, puppies and cats to owners who think of them as family.",
+    heroImage: "/work/lifely-pets/hero.webp",
+    logo: "/logos/clients/lifely-pets.webp",
+    facts: [
+      { label: "Client", value: "Lifely Pets" },
+      { label: "Industry", value: "Pet Food & Nutrition" },
+      { label: "Scope", value: "UX/UI, Web Development, E-Commerce" },
+      { label: "Market", value: "Egypt" },
+    ],
+    story: [
+      {
+        type: "text",
+        body: "Lifely Pets makes premium dry food for dogs, puppies and cats, sold under the line \"for the house jewel\" — a brand built on treating pets as family rather than livestock. The site had to carry that warmth while doing the practical job of an e-commerce storefront: move people from browsing to checkout.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-01.webp",
+          alt: "Lifely Pets homepage — hero banner with cats and dogs beneath the Lifely Pets wordmark",
+          caption: "Homepage — the animals carry the brand, not the copy",
+        },
+      },
+      {
+        type: "text",
+        body: "Rather than open on a product grid, the homepage leads with the pets themselves — a lineup of cats, dogs and puppies standing in for the brand's whole range. A free-delivery banner and a persistent cart sit above the fold, keeping the commerce close at hand without competing with the hero.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-03.webp",
+          alt: "Lifely Pets careers page shown on a laptop, with a dog in glasses at a desk",
+          caption: "Careers — the brand's tone held even off the storefront",
+        },
+      },
+      {
+        type: "text",
+        body: "That same tone carries through to the site's secondary pages — a careers form styled around the brand's own mascot rather than dropped into a generic template. Shop, Blog, Contact, Careers and Where to Buy sit in one consistent header, giving the storefront, the content and the retail-locator function equal footing.",
+      },
+    ],
+    liveUrl: "https://lifelypets.com",
+    card: {
+      tier: "E-Commerce",
+      market: "Egypt",
+      summary:
+        "A premium pet-food storefront built to sell dry food for dogs, puppies and cats to owners who treat them as family.",
+      image: "/services/work-lifely-pets.webp",
+      accent: "orange",
+    },
     next: "sbs",
   },
 ];
