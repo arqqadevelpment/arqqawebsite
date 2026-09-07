@@ -208,6 +208,10 @@ function SectionImage({
 export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy }) {
   const related = getRelated(study.related);
   const parallaxOn = !!study.sectionMedia?.parallax;
+  // The Challenge banner takes the section's own artwork when a study supplies
+  // it, and otherwise reuses the hub card's image (which is what Allure does).
+  const challengeBannerSrc =
+    study.sectionMedia?.challenge ?? study.card.image;
   const heroBgRef = useRef<HTMLDivElement>(null);
   // 50% further travel than the default (10) — the header reads as the more
   // dramatic of the two parallax spots, so it gets more range than Takeaway.
@@ -381,7 +385,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 : "max-w-5xl"
           }`}
         >
-          {study.sectionMedia?.challengeBanner && study.card.image ? (
+          {study.sectionMedia?.challengeBanner && challengeBannerSrc ? (
             <>
               <SectionHead eyebrow="The Challenge" title="What was broken." center />
               <Reveal delay={0.06} className="text-center">
@@ -397,7 +401,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                   {study.challenge}
                 </p>
               </Reveal>
-              <SectionBanner src={study.card.image} className="mt-14" />
+              <SectionBanner src={challengeBannerSrc} className="mt-14" />
             </>
           ) : study.card.image ? (
             <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
@@ -669,6 +673,13 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
           ) : null}
         </div>
       </section>
+
+      {/* ══ Banner after the Results ══ */}
+      {study.sectionMedia?.afterResults ? (
+        <section className="relative w-full" style={{ padding: "1rem 1.5rem 5rem" }}>
+          <SectionBanner src={study.sectionMedia.afterResults} />
+        </section>
+      ) : null}
 
       {/* ══ The Outcome / Takeaway ══
           sectionMedia.outcomeBg paints a full-bleed background behind the

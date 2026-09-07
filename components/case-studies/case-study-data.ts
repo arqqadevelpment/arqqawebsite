@@ -80,8 +80,14 @@ export type PerformanceCaseStudy = {
     /** Runs the Challenge as centred copy with a full-width banner beneath,
         instead of the two-column layout. */
     challengeBanner?: boolean;
+    /** Artwork for that banner. Falls back to the hub card's own image when
+        unset, which is what Allure uses; set it where the section wants its
+        own image without changing what the /work card shows. */
+    challenge?: string;
     /** Sits to the right of the Approach intro. */
     approach?: string;
+    /** Full-width banner between the Results and whatever follows. */
+    afterResults?: string;
     /** Background image for the Takeaway section. */
     outcomeBg?: string;
     /** Sits to the right of the Takeaway points. */
@@ -182,6 +188,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "E-Commerce Growth — Meta Performance Marketing",
     logo: "/logos/clients/merova.webp",
     accent: "violet",
+    sectionMedia: {
+      hero: "/portfolio/merova-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/merova-challenge.webp",
+      afterResults: "/portfolio/merova.webp",
+    },
     heroHeadline: "Winning Winter — On Merova's Terms.",
     heroSub:
       "A premium Egyptian fashion brand held its ground against heavy seasonal discounting from competitors — and grew instead of retreating.",
@@ -228,8 +241,6 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
       note: "These results were achieved against a backdrop of heavier competitor discounting and seasonal market saturation — validating the testing, tracking, and CRO investments made earlier in the engagement.",
     },
-    whatsNext:
-      "Continued scaling on the proven Meta foundation, expansion into Google Search & Shopping, a TikTok Ads launch, and broader channel diversification to reduce platform dependency.",
     card: {
       sector: "Fashion E-Commerce",
       summary:
