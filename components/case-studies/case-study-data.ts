@@ -595,6 +595,95 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     },
     related: ["merova", "everher"],
   },
+
+  {
+    slug: "joviality",
+    client: "Joviality",
+    category: "Beauty & Personal Care · E-Commerce",
+    market: "Egypt",
+    flag: "🇪🇬",
+    service: "E-Commerce Growth — Meta · Google · TikTok",
+    logo: "/logos/clients/joviality.webp",
+    accent: "violet",
+    heroHeadline: "Scaling Paid Media 2× — Without Giving Up ROAS.",
+    heroSub:
+      "Joviality doubled down on growth across Meta, Google and TikTok — scaling media investment by more than 100% while improving sales efficiency and protecting return on ad spend.",
+    challenge:
+      "Joviality had reached a point familiar to growing e-commerce brands: as acquisition expanded, blended ROAS began to soften. From January 2023, a growing share of new-visitor and new-customer traffic began putting pressure on efficiency, while Google cost-per-conversion grew highly volatile, making it harder to scale spend with confidence. The challenge wasn't simply to spend more — it was to build an acquisition structure capable of absorbing significantly more budget without sacrificing performance.",
+    approach: {
+      intro:
+        "A staged rebuild across every channel, structured around the funnel instead of platform habit:",
+      moves: [
+        {
+          num: "01",
+          title: "Rebuilt the Google Architecture",
+          body: "Instead of relying on a single campaign structure, Google was rebuilt around a staged mix of Performance Max, Search, Shopping, Display and Video — separated by objective, including discovery, product focus, bundles, new acquisition and brand protection.",
+        },
+        {
+          num: "02",
+          title: "Turned TikTok Into a Real Acquisition Channel",
+          body: "TikTok moved beyond experimental spend and became a consistent third demand channel, scaling from a small test allocation into a meaningful part of the media mix and reducing dependency on Meta and Google alone.",
+        },
+        {
+          num: "03",
+          title: "Shifted Meta to Always-On Performance",
+          body: "Rather than relying on isolated campaign bursts, Meta moved toward an always-on structure ahead of the peak Black Friday period, creating a more stable acquisition engine and room to scale budget on performance rather than campaign timing.",
+        },
+        {
+          num: "04",
+          title: "Built the Budget Around the Funnel",
+          body: "Budget allocation was structured around customer intent instead of platform habit: 55% TOFU for new-customer acquisition and discovery, 25% MOFU for engaged visitors and consideration, and the remainder for checkout recovery and past-purchaser reactivation.",
+        },
+        {
+          num: "05",
+          title: "Let ROAS Decide the Creative Mix",
+          body: "Creative planning followed performance data rather than assumptions. Product-focused creative featuring a human element consistently produced stronger ROAS and received the largest share of the content mix, while underperforming lifestyle content was deliberately capped.",
+        },
+        {
+          num: "06",
+          title: "Scaled in Stages, Not All at Once",
+          body: "The Google restructure was rolled out progressively across multiple campaign stages — from Performance Max and Brand Search to Shopping, Search, Video, Display and Dynamic Remarketing — each introduced and evaluated before the next was added.",
+        },
+      ],
+    },
+    results: {
+      intro: "Program totals across the engagement period:",
+      metrics: [
+        { value: "+103%", label: "Paid media spend scaled — EGP 685.7K to EGP 1.39M" },
+        { value: "+114%", label: "Gross sales growth — EGP 2.84M to EGP 6.09M" },
+        { value: "4.38x", label: "Optimized blended ROAS, vs. 4.14x baseline" },
+        { value: "5.94x", label: "Peak single-month blended ROAS, August 2023" },
+        { value: "4.7x", label: "Google conversion volume growth — 153 to 726 conversions" },
+        { value: "−3.6%", label: "Blended Google cost-per-conversion, held while volume scaled" },
+      ],
+      note: "The key result wasn't simply that Joviality spent more. The account absorbed more than twice the media investment while sales grew even faster — with ROAS improving rather than collapsing under scale.",
+    },
+    outcome: {
+      title: "Why It Worked",
+      points: [
+        "Google's rebuilt architecture created room for significantly more conversion volume without sacrificing efficiency.",
+        "TikTok became a genuine acquisition channel instead of a test allocation.",
+        "Creative decisions followed actual ROAS-by-format performance, and budget allocation followed the customer funnel instead of historical platform habits.",
+      ],
+    },
+    whatsNext:
+      "With the new performance structure established, the next objective was carrying that momentum into peak season. Q4 planning targeted higher sales volume while maintaining disciplined ROAS ranges — including an October target of EGP 860K gross sales at 3.8–4.2x ROAS and a November target of EGP 1.2M at approximately 5.0x ROAS. The larger goal: turn a successful restructuring phase into a repeatable framework for sustained e-commerce growth.",
+    card: {
+      sector: "Beauty & Personal Care",
+      summary:
+        "Paid media spend scaled +103% with blended ROAS improving to 4.38x across Meta, Google and TikTok.",
+      image: "/portfolio/joviality.webp",
+    },
+    related: ["perfect-body", "everher"],
+    sectionMedia: {
+      hero: "/portfolio/joviality-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/joviality-challenge.webp",
+      approach: "/portfolio/joviality-approach.webp",
+      outcomeBg: "/portfolio/joviality-takeaway-bg.webp",
+    },
+  },
 ];
 
 export function getCaseStudy(slug: string) {
