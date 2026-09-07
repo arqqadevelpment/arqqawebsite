@@ -8,6 +8,8 @@ import { SHOWCASE_PROJECTS } from "@/components/showcase/showcase-data";
 import type { ShowcaseProject } from "@/components/showcase/showcase-data";
 import { PERFORMANCE_CASE_STUDIES } from "@/components/case-studies/case-study-data";
 import type { PerformanceCaseStudy } from "@/components/case-studies/case-study-data";
+import { VIDEO_PROJECTS } from "@/components/videos/video-data";
+import type { VideoProject } from "@/components/videos/video-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
 /* ── Client mark, shown at the top of every hub card ──────────────────────
@@ -604,21 +606,131 @@ function PerformanceCard({
   );
 }
 
+function VideoCard({ project, delay }: { project: VideoProject; delay: number }) {
+  const [hovered, setHovered] = useState(false);
+  const isOrange = project.card.accent === "orange";
+
+  return (
+    <Reveal delay={delay} className="h-full">
+      <Link
+        href={`/videos/${project.slug}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="relative flex flex-col h-full rounded-3xl overflow-hidden"
+        style={{
+          minHeight: "20rem",
+          background: "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: hovered ? "1px solid rgba(255,138,90,0.5)" : "1px solid rgba(255,255,255,0.11)",
+          boxShadow: hovered
+            ? "0 -14px 40px -18px rgba(255,122,61,0.3), 0 24px 50px -22px rgba(47,107,255,0.28), inset 0 1px 0 rgba(255,175,130,0.2)"
+            : "inset 0 1px 0 rgba(255,255,255,0.05)",
+          transform: hovered ? "translateY(-6px)" : "translateY(0)",
+          transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${project.card.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: hovered ? 1 : IDLE_IMAGE_OPACITY,
+            transform: hovered ? "scale(1)" : "scale(1.08)",
+            transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isOrange
+              ? "radial-gradient(60% 60% at 100% 0%, rgba(255,110,50,0.14) 0%, transparent 65%)"
+              : "radial-gradient(60% 60% at 0% 0%, rgba(60,125,255,0.15) 0%, transparent 65%)",
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.5s ease",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: CARD_SCRIM,
+            opacity: hovered ? SCRIM_HOVER_OPACITY : 1,
+            transition: "opacity 0.55s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        />
+
+        <CardHoverPanel title={project.client} cta="Watch the video" hovered={hovered} />
+
+        <div
+          className="relative p-8 flex flex-col h-full"
+          style={{
+            opacity: hovered ? 0 : 1,
+            transition: "opacity 0.4s ease",
+          }}
+        >
+          <CardHeader
+            eyebrow={`Video & Animation · ${project.card.market}`}
+            logo={project.logo}
+            client={project.client}
+            hovered={hovered}
+          />
+
+          <h3
+            className="font-bold"
+            style={{ fontSize: "1.375rem", lineHeight: 1.25, letterSpacing: "-0.01em", color: "#ffffff" }}
+          >
+            {project.client}
+          </h3>
+
+          <p
+            className="font-light mt-3"
+            style={{ fontSize: "0.9375rem", lineHeight: 1.7, color: "rgba(255,255,255,0.55)" }}
+          >
+            {project.card.summary}
+          </p>
+
+          <div className="mt-auto pt-6 flex items-end justify-end gap-4">
+            <span
+              className="inline-flex items-center gap-2 font-medium shrink-0"
+              style={{ fontSize: "0.8125rem", color: hovered ? "#ffffff" : "rgba(255,255,255,0.55)" }}
+            >
+              Watch the video
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-300"
+                style={{ transform: hovered ? "translateX(3px)" : "none" }}
+              >
+                →
+              </span>
+            </span>
+          </div>
+        </div>
+      </Link>
+    </Reveal>
+  );
+}
+
 export function PortfolioPageContent() {
   const [filter, setFilter] = useState<(typeof INDUSTRY_FILTERS)[number]>("All");
 
-  /* Three sources feed one grid. "Web Design" selects the website showcases,
-     "Performance" selects the media case studies, "All" shows everything, and
-     the remaining tabs (Video & Animation, Branding, Social Media Production)
-     have no matching collection yet — they render an empty grid until that
-     work is added. The legacy CASE_STUDIES (Fawry, Nile Air, Kenz'up, Africa
-     Music Initiative) keep their `industry` label on the card itself but are
-     no longer filterable by it, since those tabs were retired. */
+  /* Four sources feed one grid. "Web Design" selects the website showcases,
+     "Performance" selects the media case studies, "Video & Animation" selects
+     the Vimeo-hosted video projects, "All" shows everything, and the
+     remaining tabs (Branding, Social Media Production) have no matching
+     collection yet — they render an empty grid until that work is added. The
+     legacy CASE_STUDIES (Fawry, Nile Air, Kenz'up, Africa Music Initiative)
+     keep their `industry` label on the card itself but are no longer
+     filterable by it, since those tabs were retired. */
   const isAll = filter === "All";
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
   const performance = isAll || filter === "Performance" ? PERFORMANCE_CASE_STUDIES : [];
+  const videos = isAll || filter === "Video & Animation" ? VIDEO_PROJECTS : [];
   const allCaseStudies = isAll ? CASE_STUDIES : [];
-  const total = allCaseStudies.length + showcases.length + performance.length;
+  const total = allCaseStudies.length + showcases.length + performance.length + videos.length;
 
   return (
     <>
@@ -725,11 +837,21 @@ export function PortfolioPageContent() {
                 delay={Math.min((showcases.length + i) * 0.08, 0.32)}
               />
             ))}
+            {videos.map((project, i) => (
+              <VideoCard
+                key={`video-${project.slug}`}
+                project={project}
+                delay={Math.min((showcases.length + performance.length + i) * 0.08, 0.32)}
+              />
+            ))}
             {allCaseStudies.map((caseStudy, i) => (
               <CaseStudyCard
                 key={caseStudy.slug}
                 caseStudy={caseStudy}
-                delay={Math.min((showcases.length + performance.length + i) * 0.08, 0.32)}
+                delay={Math.min(
+                  (showcases.length + performance.length + videos.length + i) * 0.08,
+                  0.32
+                )}
               />
             ))}
           </div>
