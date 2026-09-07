@@ -117,8 +117,20 @@ function Figure({
   );
 }
 
-export function ShowcaseTemplate({ project }: { project: ShowcaseProject }) {
-  const next = getShowcaseProject(project.next);
+export function ShowcaseTemplate({
+  project,
+  basePath = "/our-work",
+  nextProject,
+}: {
+  project: ShowcaseProject;
+  /** Route prefix for this project's own page and its "next project" link —
+      lets the same template serve /our-work and /social without a fork. */
+  basePath?: string;
+  /** Pre-resolved next project. Falls back to looking `project.next` up in
+      showcase-data's own list, which is all the /our-work pages need. */
+  nextProject?: ShowcaseProject;
+}) {
+  const next = nextProject ?? getShowcaseProject(project.next);
 
   /* The first visual on the page loads eagerly; the rest wait for scroll. */
   const firstVisualIndex = project.story.findIndex((b) => b.type !== "text");
@@ -371,7 +383,7 @@ export function ShowcaseTemplate({ project }: { project: ShowcaseProject }) {
             </Link>
 
             {next ? (
-              <Link href={`/our-work/${next.slug}`} className="showcase-next group block mt-8">
+              <Link href={`${basePath}/${next.slug}`} className="showcase-next group block mt-8">
                 <div
                   style={{
                     color: "rgba(255,255,255,0.4)",

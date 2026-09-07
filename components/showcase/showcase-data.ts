@@ -50,7 +50,7 @@ export type ShowcaseProject = {
   /** How this project shows up as a card on the /work hub. */
   card: {
     /** Build tier, used as the card's category label */
-    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive";
+    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media";
     market: string;
     summary: string;
     image: string;

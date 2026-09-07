@@ -10,6 +10,7 @@ import { PERFORMANCE_CASE_STUDIES } from "@/components/case-studies/case-study-d
 import type { PerformanceCaseStudy } from "@/components/case-studies/case-study-data";
 import { VIDEO_PROJECTS } from "@/components/videos/video-data";
 import type { VideoProject } from "@/components/videos/video-data";
+import { SOCIAL_PROJECTS } from "@/components/social/social-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
 /* ── Client mark, shown at the top of every hub card ──────────────────────
@@ -358,7 +359,19 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
 /* Website project card — same chrome as a case study, but these are project
    showcases, so the footer carries the build tier instead of a metric and the
    link points at /our-work rather than /work. */
-function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: number }) {
+function ShowcaseCard({
+  project,
+  delay,
+  basePath = "/our-work",
+  eyebrowLabel = "Web Design",
+}: {
+  project: ShowcaseProject;
+  delay: number;
+  /** Lets the same card serve both /our-work (website builds) and /social
+      (content-production projects), which share this exact data shape. */
+  basePath?: string;
+  eyebrowLabel?: string;
+}) {
   const [hovered, setHovered] = useState(false);
   const { card } = project;
   const isOrange = card.accent === "orange";
@@ -366,7 +379,7 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
   return (
     <Reveal delay={delay} className="h-full">
       <Link
-        href={`/our-work/${project.slug}`}
+        href={`${basePath}/${project.slug}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative flex flex-col h-full rounded-3xl overflow-hidden"
@@ -428,7 +441,7 @@ function ShowcaseCard({ project, delay }: { project: ShowcaseProject; delay: num
           }}
         >
           <CardHeader
-            eyebrow={`Web Design · ${card.market}`}
+            eyebrow={`${eyebrowLabel} · ${card.market}`}
             logo={project.logo}
             client={project.client}
             hovered={hovered}
@@ -717,20 +730,23 @@ function VideoCard({ project, delay }: { project: VideoProject; delay: number })
 export function PortfolioPageContent() {
   const [filter, setFilter] = useState<(typeof INDUSTRY_FILTERS)[number]>("All");
 
-  /* Four sources feed one grid. "Web Design" selects the website showcases,
+  /* Five sources feed one grid. "Web Design" selects the website showcases,
      "Performance" selects the media case studies, "Video & Animation" selects
-     the Vimeo-hosted video projects, "All" shows everything, and the
-     remaining tabs (Branding, Social Media Production) have no matching
-     collection yet — they render an empty grid until that work is added. The
-     legacy CASE_STUDIES (Fawry, Nile Air, Kenz'up, Africa Music Initiative)
-     keep their `industry` label on the card itself but are no longer
-     filterable by it, since those tabs were retired. */
+     the Vimeo-hosted video projects, "Social Media Production" selects the
+     content-production projects, "All" shows everything, and the remaining
+     tab (Branding) has no matching collection yet — it renders an empty grid
+     until that work is added. The legacy CASE_STUDIES (Fawry, Nile Air,
+     Kenz'up, Africa Music Initiative) keep their `industry` label on the card
+     itself but are no longer filterable by it, since those tabs were
+     retired. */
   const isAll = filter === "All";
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
   const performance = isAll || filter === "Performance" ? PERFORMANCE_CASE_STUDIES : [];
   const videos = isAll || filter === "Video & Animation" ? VIDEO_PROJECTS : [];
+  const socials = isAll || filter === "Social Media Production" ? SOCIAL_PROJECTS : [];
   const allCaseStudies = isAll ? CASE_STUDIES : [];
-  const total = allCaseStudies.length + showcases.length + performance.length + videos.length;
+  const total =
+    allCaseStudies.length + showcases.length + performance.length + videos.length + socials.length;
 
   return (
     <>
@@ -844,12 +860,25 @@ export function PortfolioPageContent() {
                 delay={Math.min((showcases.length + performance.length + i) * 0.08, 0.32)}
               />
             ))}
+            {socials.map((project, i) => (
+              <ShowcaseCard
+                key={`social-${project.slug}`}
+                project={project}
+                basePath="/social"
+                eyebrowLabel="Social Media Production"
+                delay={Math.min(
+                  (showcases.length + performance.length + videos.length + i) * 0.08,
+                  0.32
+                )}
+              />
+            ))}
             {allCaseStudies.map((caseStudy, i) => (
               <CaseStudyCard
                 key={caseStudy.slug}
                 caseStudy={caseStudy}
                 delay={Math.min(
-                  (showcases.length + performance.length + videos.length + i) * 0.08,
+                  (showcases.length + performance.length + videos.length + socials.length + i) *
+                    0.08,
                   0.32
                 )}
               />
