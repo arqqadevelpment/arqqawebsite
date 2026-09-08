@@ -1641,6 +1641,20 @@ export function AutonomousPageContent() {
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
+            backgroundImage: "url(/services/autonomous.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.55,
+            maskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
             background:
               "radial-gradient(60% 55% at 20% 0%, rgba(52,68,224,0.16) 0%, transparent 60%), radial-gradient(55% 50% at 100% 20%, rgba(255,90,43,0.12) 0%, transparent 60%)",
           }}
