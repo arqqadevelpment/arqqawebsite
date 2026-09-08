@@ -512,6 +512,30 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
         type: "text",
         body: "That same tone carries through to the site's secondary pages — a careers form styled around the brand's own mascot rather than dropped into a generic template. Shop, Blog, Contact, Careers and Where to Buy sit in one consistent header, giving the storefront, the content and the retail-locator function equal footing.",
       },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-04.webp",
+          alt: "Lifely Pets shop page header — Premium Quality Pet food, with product bags and pet portraits",
+          caption: "Shop — the same warmth carried into the storefront itself",
+        },
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-05.webp",
+          alt: "Lifely Pets Introducing Lifely section with an accordion for Our Vision, Why Lifely and Our Little Jewels",
+          caption: "Brand story, told as an accordion rather than a wall of text",
+        },
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-06.webp",
+          alt: "Lifely Pets FAQ section with a bow-tied cat and questions about shifting, storage, and delivery",
+          caption: "FAQs — practical answers, still styled to feel like the rest of the brand",
+        },
+      },
     ],
     liveUrl: "https://lifelypets.com",
     card: {
