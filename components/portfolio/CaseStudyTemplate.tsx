@@ -1009,20 +1009,6 @@ export function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
                   Start Your Growth Story
                 </span>
               </Link>
-
-              <Link
-                href="/start#growth-audit"
-                className="inline-flex items-center justify-center rounded-2xl font-medium"
-                style={{
-                  padding: "1rem 2.25rem",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  color: "#ffffff",
-                  fontSize: "0.9375rem",
-                }}
-              >
-                Download the {caseStudy.industry} Playbook
-              </Link>
             </div>
           </Reveal>
         </div>

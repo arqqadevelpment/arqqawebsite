@@ -335,14 +335,6 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         body: "Destination campaigns did the heaviest lifting — one visual system carrying Cairo, Luxor, and Aswan as a single Eid travel push, each city given its own frame while staying instantly recognizable as one Nile Air campaign.",
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/nile-air-social/shot-04.webp",
-          alt: "Nile Air Eid campaign — Discover the Magic of Egypt's Civilizations",
-          caption: "The campaign cover — one line, three cities to follow",
-        },
-      },
-      {
         type: "grid",
         media: [
           {
