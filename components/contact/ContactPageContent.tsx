@@ -175,7 +175,7 @@ export function ContactPageContent() {
               className="font-light mt-6 mx-auto max-w-xl"
               style={{ fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(255,255,255,0.58)" }}
             >
-              A 30-minute call with a senior strategist — no sales pitch,
+              A 30-minute call with a senior strategist, no sales pitch,
               just a clear next step.
             </p>
           </Reveal>
@@ -225,7 +225,7 @@ export function ContactPageContent() {
                   {callSubmitted ? (
                     <SuccessNote
                       title="You're booked in."
-                      body="Check your inbox for a confirmation and a short pre-call questionnaire — it takes two minutes and helps us make the 30 count."
+                      body="Check your inbox for a confirmation and a short pre-call questionnaire. It takes two minutes and helps us make the 30 count."
                     />
                   ) : (
                     <form
@@ -332,21 +332,21 @@ export function ContactPageContent() {
               {
                 label: "Abu Dhabi Office",
                 value: "Abu Dhabi",
-                lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"],
+                lines: ["3 Al Razqi Street, AlDannah", "Floor 8, Office 801"],
                 phone: "+971 50 726 6877",
                 tel: "+971507266877",
               },
               {
                 label: "Dubai Office",
                 value: "Dubai",
-                lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"],
+                lines: ["West Burry Tower 1, Business Bay", "Floor 21st, Office 2106"],
                 phone: "+971 50 726 6877",
                 tel: "+971507266877",
               },
               {
                 label: "Riyadh Office",
                 value: "Riyadh",
-                lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"],
+                lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz, Riyadh 12627"],
                 phone: "+966 54 110 2224",
                 tel: "+966541102224",
               },

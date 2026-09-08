@@ -189,7 +189,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
               <button
                 type="button"
                 onClick={() => onSelect(i)}
-                aria-label={`${s.title} — jump to details`}
+                aria-label={`${s.title}: jump to details`}
                 className="svc-node svc-upright flex flex-col items-center justify-center rounded-full cursor-pointer"
                 style={{
                   width: "clamp(3.25rem, 16vw, 4.75rem)",

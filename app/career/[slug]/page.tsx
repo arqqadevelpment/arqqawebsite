@@ -16,10 +16,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const job = getJob(slug);
-  if (!job) return { title: "Careers — ARQQA" };
+  if (!job) return { title: "Careers | ARQQA" };
 
   return {
-    title: `${job.title} — Careers at ARQQA`,
+    title: `${job.title} | Careers at ARQQA`,
     description: job.intro,
   };
 }

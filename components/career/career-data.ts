@@ -341,11 +341,11 @@ export const JOBS: Job[] = [
       {
         heading: "Responsibilities",
         items: [
-          "Lead Generation — research and identify potential clients in various industries who could benefit from ARQQA's digital marketing services",
-          "Market Research — analyze industry trends, competitor activities, and market opportunities",
-          "Outreach and Communication — connect with prospects via email, phone, and social media",
-          "Proposal Development — assist in creating compelling proposals and presentations",
-          "Relationship Building — nurture client relationships and support onboarding efforts",
+          "Lead Generation, research and identify potential clients in various industries who could benefit from ARQQA's digital marketing services",
+          "Market Research, analyze industry trends, competitor activities, and market opportunities",
+          "Outreach and Communication, connect with prospects via email, phone, and social media",
+          "Proposal Development, assist in creating compelling proposals and presentations",
+          "Relationship Building, nurture client relationships and support onboarding efforts",
         ],
       },
       {

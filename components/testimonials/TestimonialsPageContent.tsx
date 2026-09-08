@@ -13,45 +13,45 @@ const TESTIMONIALS: {
 }[] = [
   {
     quote:
-      "ARQQA didn't just run our campaigns. They rebuilt how we think about growth — the strategy came first, and the media followed it.",
+      "ARQQA didn't just run our campaigns. They rebuilt how we think about growth: the strategy came first, and the media followed it.",
     name: "Client Name",
     role: "Chief Marketing Officer",
-    market: "Egypt — Fintech",
+    market: "Egypt, Fintech",
   },
   {
     quote:
       "One system, one team, zero excuses. The reporting alone changed how our board meetings run.",
     name: "Client Name",
     role: "Managing Director",
-    market: "KSA — Retail",
+    market: "KSA, Retail",
   },
   {
     quote:
       "We had four agencies before this. Now we have one partner who owns the number, and it shows in the results.",
     name: "Client Name",
     role: "Head of Digital",
-    market: "UAE — Airlines",
+    market: "UAE, Airlines",
   },
   {
     quote:
       "The creative finally matches the media strategy. That sounds obvious until you've spent years watching them work in isolation.",
     name: "Client Name",
     role: "Brand Director",
-    market: "Egypt — FMCG",
+    market: "Egypt, FMCG",
   },
   {
     quote:
       "They told us what wasn't working before we asked. That's the difference between a vendor and a partner.",
     name: "Client Name",
     role: "Founder & CEO",
-    market: "Morocco — App Growth",
+    market: "Morocco, App Growth",
   },
   {
     quote:
       "Onboarding took days, not months. Day one we had dashboards, owners, and a plan we could actually hold them to.",
     name: "Client Name",
     role: "VP Growth",
-    market: "KSA — E-commerce",
+    market: "KSA, E-commerce",
   },
 ];
 

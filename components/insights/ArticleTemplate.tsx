@@ -294,14 +294,14 @@ export function ArticleTemplate({ article }: { article: Article }) {
                   )}
                   {article.author && (
                     <span className="font-light" style={{ color: "rgba(255,255,255,0.5)" }}>
-                      {" — "}
+                      {", "}
                       {article.author.role}
                     </span>
                   )}
                 </p>
                 <p className="font-light mt-1" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}>
                   {article.author?.bio ??
-                    "Frameworks and field notes from 13 years of building growth systems across MENA — written by the strategists who run the engagements."}
+                    "Frameworks and field notes from 13 years of building growth systems across MENA, written by the strategists who run the engagements."}
                 </p>
               </div>
             </div>

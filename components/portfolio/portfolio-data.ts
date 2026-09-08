@@ -75,7 +75,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     accent: "blue",
     heroLine: "6 Million Downloads. 1 Million Active Users. Zero Shortcuts.",
     summary:
-      "Building MENA's first fintech super-app — mass adoption without a single vanity install.",
+      "Building MENA's first fintech super-app, mass adoption without a single vanity install.",
     metric: "6M",
     metricLabel: "App installs",
     image: "/portfolio/fawry.webp",
@@ -87,7 +87,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     extraVisuals: ["/portfolio/fawry-extra-01.webp", "/portfolio/fawry-extra-02.webp"],
     resultsBanner: "/portfolio/fawry-extra-banner.webp",
     challenge:
-      "Fawry needed to transition from a payments infrastructure brand to a consumer-facing fintech app — in a market where digital financial literacy was still emerging. The goal: mass adoption. The constraint: every install had to be a real user, not a vanity metric.",
+      "Fawry needed to transition from a payments infrastructure brand to a consumer-facing fintech app, in a market where digital financial literacy was still emerging. The goal: mass adoption. The constraint: every install had to be a real user, not a vanity metric.",
     approach: {
       body: "We activated the full Catalyst System™, with strategy setting the terms every later phase had to answer to.",
       moves: [
@@ -135,7 +135,7 @@ export function getRelatedCaseStudies(slugs: string[]) {
      "Web Design"  → components/showcase/showcase-data.ts   (/our-work/…)
      "Performance" → components/case-studies/case-study-data.ts (/case-studies/…)
      everything else → CASE_STUDIES below                    (/work/…)
-   Merova appears twice on purpose — once for the Shopify build and once for
+   Merova appears twice on purpose, once for the Shopify build and once for
    the Meta performance program. They are separate engagements with separate
    pages, and the category label on each card tells them apart. */
 export const INDUSTRY_FILTERS = [

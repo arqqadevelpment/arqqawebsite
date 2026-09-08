@@ -97,7 +97,7 @@ function SuccessNote({ jobTitle }: { jobTitle: string }) {
         className="font-light mt-2 mx-auto"
         style={{ fontSize: "0.9375rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "26rem" }}
       >
-        Thanks for applying for {jobTitle}. We read every application — if
+        Thanks for applying for {jobTitle}. We read every application; if
         it&apos;s a fit, we&apos;ll be in touch.
       </p>
     </div>

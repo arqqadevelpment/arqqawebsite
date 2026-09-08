@@ -13,9 +13,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ARQQA — Agencies Sell Creativity. We Deliver Certainty.",
+  title: "ARQQA: Agencies Sell Creativity. We Deliver Certainty.",
   description:
-    "ARQQA is a MarTech Growth System. 13 years, 4 MENA markets, 50+ specialists — one integrated engine for strategy, creative, media, and technology.",
+    "ARQQA is a MarTech Growth System. 13 years, 4 MENA markets, 50+ specialists, one integrated engine for strategy, creative, media, and technology.",
 };
 
 export default function RootLayout({

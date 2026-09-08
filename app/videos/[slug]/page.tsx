@@ -16,10 +16,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = getVideoProject(slug);
-  if (!project) return { title: "Our Work — ARQQA" };
+  if (!project) return { title: "Our Work | ARQQA" };
 
   return {
-    title: `${project.title} — ARQQA`,
+    title: `${project.title} | ARQQA`,
     description: project.subtitle,
   };
 }

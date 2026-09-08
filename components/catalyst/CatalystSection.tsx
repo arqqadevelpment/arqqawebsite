@@ -149,7 +149,7 @@ function NumberedPoint({
       onFocus={onEnter}
       onBlur={onLeave}
       onClick={onTap}
-      aria-label={`${phase.num} — ${phase.title}`}
+      aria-label={`${phase.num}: ${phase.title}`}
       className="relative flex items-center justify-center rounded-full cursor-pointer"
       style={{
         width: active ? "3.25rem" : "2.75rem",

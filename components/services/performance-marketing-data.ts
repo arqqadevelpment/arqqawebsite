@@ -58,35 +58,35 @@ export const ECOMMERCE_NUMBERS: BigNumber[] = [
 export const HERO = {
   headline: "We Don't Promise Results.",
   headlineAccent: "We've Already Delivered Them.",
-  sub: "Performance marketing for brands across MENA — built on the same system that has driven millions of impressions, tens of thousands of leads, and measurable growth for clients across fintech, healthcare, fashion, and enterprise.",
+  sub: "Performance marketing for brands across MENA, built on the same system that has driven millions of impressions, tens of thousands of leads, and measurable growth for clients across fintech, healthcare, fashion, and enterprise.",
   ctaLabel: "Get Your Free Performance Audit",
 };
 
 export const PROBLEM = {
   heading: "Most Performance Marketing",
   headingAccent: "Isn't Performing.",
-  body: "You've run ads before. Maybe you're running them right now. But impressions without strategy is just spend. Clicks without a funnel is just traffic. And leads without qualification is just noise. The problem isn't that performance marketing doesn't work — it's that most of it isn't built as a system.",
+  body: "You've run ads before. Maybe you're running them right now. But impressions without strategy is just spend. Clicks without a funnel is just traffic. And leads without qualification is just noise. The problem isn't that performance marketing doesn't work, it's that most of it isn't built as a system.",
   cards: [
     {
       pain: "I'm spending on ads but I can't tell what's actually working.",
       solution:
-        "Every campaign we run is structured for attribution from day one — you'll always know exactly what's driving results.",
+        "Every campaign we run is structured for attribution from day one, you'll always know exactly what's driving results.",
     },
     {
       pain: "My agency shows me impressions, but not outcomes.",
       solution:
-        "We report on leads, conversions, and growth — not vanity metrics dressed up as wins.",
+        "We report on leads, conversions, and growth, not vanity metrics dressed up as wins.",
     },
     {
       pain: "I've scaled spend before and just burned more budget faster.",
       solution:
-        "We scale only on validated winners — tested, proven, then scaled. Never the other way around.",
+        "We scale only on validated winners, tested, proven, then scaled. Never the other way around.",
     },
   ],
 };
 
 /* Each capability is presented as a full-bleed showcase panel, selected by a
-   pill above it — the same pattern the Website Design page uses for its build
+   pill above it, the same pattern the Website Design page uses for its build
    tiers. `media` is optional: until artwork lands, the panel falls back to a
    branded gradient wash keyed by `accent`, so the section is complete and
    reviewable before a single image exists. */
@@ -108,14 +108,14 @@ export type Capability = {
 export const WHAT_WE_DO = {
   heading: "Performance Marketing,",
   headingAccent: "Engineered Like a System.",
-  body: "Not a checklist of deliverables. A structured, testable, scalable approach to paid growth — built on the same Catalyst System™ methodology behind every case study on this page.",
+  body: "Not a checklist of deliverables. A structured, testable, scalable approach to paid growth, built on the same Catalyst System™ methodology behind every case study on this page.",
   capabilities: [
     {
       key: "paid-media",
       num: "01",
       title: "Paid Search & Social",
       forWhom: "Brands that need demand captured and created at the same time.",
-      body: "Google Search, Performance Max, Meta, TikTok, Snapchat, and LinkedIn — platform-native campaigns built for your specific funnel stage, not a one-size-fits-all template.",
+      body: "Google Search, Performance Max, Meta, TikTok, Snapchat, and LinkedIn, platform-native campaigns built for your specific funnel stage, not a one-size-fits-all template.",
       items: [
         "Google Search and Performance Max campaigns",
         "Meta, TikTok, and Snapchat paid social",
@@ -133,7 +133,7 @@ export const WHAT_WE_DO = {
       num: "02",
       title: "Structured Testing",
       forWhom: "Brands that have scaled spend before and burned budget doing it.",
-      body: "Every growth lever — platform, audience, creative angle, offer — is isolated and tested before a single unit of budget is scaled. Scaling on assumption burns budget. Scaling on validated winners compounds it.",
+      body: "Every growth lever, platform, audience, creative angle, offer, is isolated and tested before a single unit of budget is scaled. Scaling on assumption burns budget. Scaling on validated winners compounds it.",
       items: [
         "One variable isolated per test, never bundled",
         "Platform, audience, creative angle, and offer tested separately",
@@ -151,11 +151,11 @@ export const WHAT_WE_DO = {
       num: "03",
       title: "Conversion Rate Optimization",
       forWhom: "Brands with traffic that is not turning into completed conversions.",
-      body: "Landing pages, checkout flows, and lead forms optimized using real behavioral data — closing the gap between traffic and completed conversions.",
+      body: "Landing pages, checkout flows, and lead forms optimized using real behavioral data, closing the gap between traffic and completed conversions.",
       items: [
         "Landing page structure built around a single conversion goal",
         "Checkout and lead-form flow analysis",
-        "Behavioral data review — where users drop, and why",
+        "Behavioral data review, where users drop, and why",
         "Page speed and Core Web Vitals work",
         "Mobile-first optimization for MENA traffic",
         "Iterative testing against a live control",
@@ -169,7 +169,7 @@ export const WHAT_WE_DO = {
       num: "04",
       title: "Attribution & Reporting",
       forWhom: "Brands whose agency shows impressions but never outcomes.",
-      body: "Clean tracking infrastructure and live dashboards. You always know what's working, what isn't, and why — not a static monthly PDF.",
+      body: "Clean tracking infrastructure and live dashboards. You always know what's working, what isn't, and why, not a static monthly PDF.",
       items: [
         "Tracking infrastructure verified before launch",
         "Every lead tagged by campaign, platform, and creative angle",
@@ -187,7 +187,7 @@ export const WHAT_WE_DO = {
       num: "05",
       title: "Full-Funnel Strategy",
       forWhom: "Brands running isolated campaigns that compete with each other.",
-      body: "Awareness, traffic, engagement, and retargeting working together — not isolated campaigns competing for the same budget.",
+      body: "Awareness, traffic, engagement, and retargeting working together, not isolated campaigns competing for the same budget.",
       items: [
         "Awareness, consideration, and retention built as one structure",
         "Retargeting sequenced against funnel stage",
@@ -231,38 +231,38 @@ export const BREAKDOWN = {
       figure: "101,060,687",
       icon: "eye" as MetricIcon,
       label: "Impressions Served",
-      body: "Across LinkedIn B2B campaigns, government-sector Meta programs, healthcare lead generation, and financial-services demand generation — delivered across Egypt, Saudi Arabia, UAE, and multi-market MEA campaigns.",
+      body: "Across LinkedIn B2B campaigns, government-sector Meta programs, healthcare lead generation, and financial-services demand generation, delivered across Egypt, Saudi Arabia, UAE, and multi-market MEA campaigns.",
     },
     {
       figure: "17,367",
       icon: "magnet" as MetricIcon,
       label: "Leads Generated",
-      body: "From structured lead-generation programs across enterprise IT, healthcare, and financial services — each lead attributed to a specific campaign, platform, and creative angle, not a blended guess.",
+      body: "From structured lead-generation programs across enterprise IT, healthcare, and financial services, each lead attributed to a specific campaign, platform, and creative angle, not a blended guess.",
     },
     {
       figure: "386,702",
       icon: "users" as MetricIcon,
       label: "New Followers Gained",
-      body: "Audience growth for a national public-sector brand, built through a disciplined, always-on social program — not a single viral moment.",
+      body: "Audience growth for a national public-sector brand, built through a disciplined, always-on social program, not a single viral moment.",
     },
     {
       figure: "7,370,000",
       icon: "spark" as MetricIcon,
       label: "Engagements Driven",
-      body: "Reactions, comments, shares, saves, and clicks across owned social content — proof that the creative wasn't just seen, it was acted on.",
+      body: "Reactions, comments, shares, saves, and clicks across owned social content, proof that the creative wasn't just seen: it was acted on.",
     },
     {
       figure: "376",
       icon: "grid" as MetricIcon,
       label: "Campaigns Executed",
-      body: "Individually structured, tested, and optimized campaigns across healthcare and fashion e-commerce clients — each one a data point in a repeatable system, not a one-off bet.",
+      body: "Individually structured, tested, and optimized campaigns across healthcare and fashion e-commerce clients, each one a data point in a repeatable system, not a one-off bet.",
     },
   ],
   cta: { label: "See the Full Case Studies", href: "/work" },
 };
 
 /* Each highlight is a vertical card in an auto-scrolling rail, linking to its
-   full case study at /case-studies/<slug>. `logo` is optional — a card falls
+   full case study at /case-studies/<slug>. `logo` is optional, a card falls
    back to a monogram tile if artwork is missing. */
 export type Highlight = {
   slug: string;
@@ -290,7 +290,7 @@ export const HIGHLIGHTS = {
       sector: "Beauty & Wellness",
       market: "Egypt",
       flag: "🇪🇬",
-      body: "+105% ROAS, +272% peak conversion lift, 100% inventory sold out — a full-funnel transformation from struggling to profitable.",
+      body: "+105% ROAS, +272% peak conversion lift, 100% inventory sold out, a full-funnel transformation from struggling to profitable.",
     },
     {
       slug: "ntra",
@@ -299,7 +299,7 @@ export const HIGHLIGHTS = {
       sector: "Government & Public Sector",
       market: "Egypt",
       flag: "🇪🇬",
-      body: "+71.5% follower growth and 7.37M engagements in six months — scaling a national regulator's public voice.",
+      body: "+71.5% follower growth and 7.37M engagements in six months, scaling a national regulator's public voice.",
     },
     {
       slug: "perfect-body",
@@ -317,7 +317,7 @@ export const HIGHLIGHTS = {
       sector: "Healthcare",
       market: "Saudi Arabia",
       flag: "🇸🇦",
-      body: "17,367+ leads generated across three platforms — a diversified, repeatable acquisition engine for a multi-doctor healthcare brand.",
+      body: "17,367+ leads generated across three platforms, a diversified, repeatable acquisition engine for a multi-doctor healthcare brand.",
     },
     {
       slug: "merova",
@@ -326,7 +326,7 @@ export const HIGHLIGHTS = {
       sector: "Fashion E-Commerce",
       market: "Egypt",
       flag: "🇪🇬",
-      body: "Monthly sales nearly doubled and 3.5–4.0x ROAS sustained through peak season — premium pricing held against heavy competitor discounting.",
+      body: "Monthly sales nearly doubled and 3.5–4.0x ROAS sustained through peak season, premium pricing held against heavy competitor discounting.",
     },
     {
       slug: "gts-holding",
@@ -346,7 +346,7 @@ export const HIGHLIGHTS = {
       sector: "Financial Services & AI",
       market: "Saudi Arabia",
       flag: "🇸🇦",
-      body: "A full-funnel ABM system across Google, LinkedIn, SEO, and automation — built for KSA banking's stakeholder-heavy buying committees.",
+      body: "A full-funnel ABM system across Google, LinkedIn, SEO, and automation, built for KSA banking's stakeholder-heavy buying committees.",
     },
   ] as Highlight[],
   cta: { label: "View All Case Studies", href: "/work" },
@@ -359,7 +359,7 @@ export const HIGHLIGHTS = {
 export const CLIENTS = {
   heading: "Brands That Trusted Us",
   headingAccent: "With Their Growth.",
-  body: "From national regulators to regional fintech leaders to fashion and healthcare brands scaling across MENA — these are some of the partners behind the numbers on this page.",
+  body: "From national regulators to regional fintech leaders to fashion and healthcare brands scaling across MENA, these are some of the partners behind the numbers on this page.",
   logos: [
     { name: "QNB", logo: "/logos/clients/QNB.webp" },
     { name: "Air Cairo", logo: "/logos/clients/Air-aciro.webp" },
@@ -384,19 +384,19 @@ export const PROCESS = {
       icon: "compass" as StepIcon,
       num: "01",
       title: "Free Performance Audit",
-      body: "We review your current campaigns, tracking setup, and funnel — and tell you exactly where budget is being wasted and where the opportunity is.",
+      body: "We review your current campaigns, tracking setup, and funnel, and tell you exactly where budget is being wasted and where the opportunity is.",
     },
     {
       icon: "blueprint" as StepIcon,
       num: "02",
       title: "Strategic Input",
-      body: "Market analysis, competitive audit, KPI alignment, and channel mapping — your growth blueprint before a single dollar moves.",
+      body: "Market analysis, competitive audit, KPI alignment, and channel mapping, your growth blueprint before a single dollar moves.",
     },
     {
       icon: "flask" as StepIcon,
       num: "03",
       title: "Structured Testing",
-      body: "Every growth lever isolated and tested — platforms, audiences, creative angles, offers — before any budget is scaled.",
+      body: "Every growth lever isolated and tested, platforms, audiences, creative angles, offers, before any budget is scaled.",
     },
     {
       icon: "growth" as StepIcon,
@@ -408,13 +408,13 @@ export const PROCESS = {
       icon: "gauge" as StepIcon,
       num: "05",
       title: "Live Reporting & Optimization",
-      body: "Real-time dashboards, not static monthly PDFs. You always know what's working and why — and so do we, so we can keep improving it.",
+      body: "Real-time dashboards, not static monthly PDFs. You always know what's working and why, and so do we, so we can keep improving it.",
     },
   ],
 };
 
 /* Radical Transparency runs as a full-screen scroll sequence — one slide per
-   capability — mirroring the Core Value Proposition section on the Catalyst
+   capability, mirroring the Core Value Proposition section on the Catalyst
    System page. `media` is optional: until artwork lands each slide falls back
    to a branded wash, so the sequence is complete and reviewable now. */
 export type TransparencySlide = {
@@ -427,35 +427,35 @@ export type TransparencySlide = {
 export const TRANSPARENCY = {
   heading: "You Don't Wait for a Report.",
   headingAccent: "You Watch It Happen.",
-  body: "Most agencies show you what happened a month ago. We show you what's happening right now. Every impression, click, and lead is tracked in a live dashboard you can open any time — not a static PDF that's already out of date by the time it lands in your inbox.",
+  body: "Most agencies show you what happened a month ago. We show you what's happening right now. Every impression, click, and lead is tracked in a live dashboard you can open any time, not a static PDF that's already out of date by the time it lands in your inbox.",
   slides: [
     {
       title: "Every Impression, As It Happens",
-      body: "Live delivery data across every platform and campaign — not a delayed export, not a summary. The same numbers we're looking at.",
+      body: "Live delivery data across every platform and campaign, not a delayed export, not a summary. The same numbers we're looking at.",
       media: { src: "/services/tp-impressions.webp", type: "image" as const },
       accent: "blue" as const,
     },
     {
       title: "Spend Pacing & Efficiency",
-      body: "Real-time cost per result, budget pacing, and platform-by-platform performance — so you always know where every unit of spend is working hardest.",
+      body: "Real-time cost per result, budget pacing, and platform-by-platform performance, so you always know where every unit of spend is working hardest.",
       media: { src: "/services/tp-spend-pacing.webp", type: "image" as const },
       accent: "violet" as const,
     },
     {
       title: "Lead-Level Visibility",
-      body: "Every lead tracked from the moment it's captured, tagged by campaign, platform, and creative angle — not a blended monthly total with no attribution.",
+      body: "Every lead tracked from the moment it's captured, tagged by campaign, platform, and creative angle, not a blended monthly total with no attribution.",
       media: { src: "/services/tp-lead-visibility.webp", type: "image" as const },
       accent: "orange" as const,
     },
     {
       title: "Campaign & Task Status",
-      body: "The same ClickUp-powered workspace we use internally — you see task status, timelines, and what's in progress, not just what's already finished.",
+      body: "The same ClickUp-powered workspace we use internally, you see task status, timelines, and what's in progress, not just what's already finished.",
       media: { src: "/services/tp-task-status.webp", type: "image" as const },
       accent: "teal" as const,
     },
     {
       title: "Shared KPIs, Not Just Our Metrics",
-      body: "Dashboards built around the outcomes that matter to your business — leads, conversions, growth — not vanity numbers that make a report look good.",
+      body: "Dashboards built around the outcomes that matter to your business, leads, conversions, growth, not vanity numbers that make a report look good.",
       media: { src: "/services/tp-shared-kpis.webp", type: "image" as const },
       accent: "amber" as const,
     },
@@ -480,7 +480,7 @@ export const WHY = {
     {
       icon: "shield" as WhyIcon,
       title: "13 Years. Not 13 Months.",
-      body: "We've survived revolutions, pandemics, and market crashes. We're not going anywhere — and neither is your campaign history.",
+      body: "We've survived revolutions, pandemics, and market crashes. We're not going anywhere, and neither is your campaign history.",
     },
     {
       icon: "badge" as WhyIcon,
@@ -490,12 +490,12 @@ export const WHY = {
     {
       icon: "team" as WhyIcon,
       title: "One Team. No Outsourcing.",
-      body: "50+ in-house specialists. Your campaigns are never handed off to freelancers — the strategist who plans it is accountable for it.",
+      body: "50+ in-house specialists. Your campaigns are never handed off to freelancers, the strategist who plans it is accountable for it.",
     },
     {
       icon: "globe" as WhyIcon,
       title: "Regional Expertise",
-      body: "We understand the MENA buyer, the regional platforms, and the market dynamics — not a generic playbook applied to every geography.",
+      body: "We understand the MENA buyer, the regional platforms, and the market dynamics, not a generic playbook applied to every geography.",
     },
   ],
 };
@@ -524,7 +524,7 @@ export const INDUSTRIES = {
 export const FAQS = [
   {
     q: "How quickly will I see results?",
-    a: "Testing typically surfaces early signal within 2–4 weeks. Meaningful scaling decisions follow once we have enough data to trust the pattern — usually 6–8 weeks in.",
+    a: "Testing typically surfaces early signal within 2–4 weeks. Meaningful scaling decisions follow once we have enough data to trust the pattern, usually 6–8 weeks in.",
   },
   {
     q: "Do you work with my industry?",
@@ -532,7 +532,7 @@ export const FAQS = [
   },
   {
     q: "What platforms do you manage?",
-    a: "Google Search, Performance Max, Meta, TikTok, Snapchat, and LinkedIn — selected based on where your actual buyers are, not a fixed package.",
+    a: "Google Search, Performance Max, Meta, TikTok, Snapchat, and LinkedIn, selected based on where your actual buyers are, not a fixed package.",
   },
   {
     q: "How do you report results?",
@@ -540,18 +540,18 @@ export const FAQS = [
   },
   {
     q: "What does the free audit include?",
-    a: "A full review of your current campaigns, tracking setup, and funnel — with specific, actionable recommendations, whether or not you move forward with us.",
+    a: "A full review of your current campaigns, tracking setup, and funnel, with specific, actionable recommendations, whether or not you move forward with us.",
   },
   {
     q: "Is there a minimum budget?",
-    a: "It depends on your industry and goals — we'll be upfront about what's realistic during your audit call, not after you've signed a contract.",
+    a: "It depends on your industry and goals, we'll be upfront about what's realistic during your audit call, not after you've signed a contract.",
   },
 ];
 
 export const LEAD_FORM = {
   heading: "See What a System Like This",
   headingAccent: "Could Do for Your Brand.",
-  body: "Fill out the form below and a senior strategist will review your current setup and get back to you within 24 hours with specific, actionable findings — no generic pitch deck.",
+  body: "Fill out the form below and a senior strategist will review your current setup and get back to you within 24 hours with specific, actionable findings, no generic pitch deck.",
   submitLabel: "Get My Free Audit",
   trustSignals: [
     "Response within 24 hours",
@@ -580,6 +580,6 @@ export const LEAD_FORM = {
 
 export const CLOSING = {
   line: "101M+ Impressions. 17,350+ Leads. 386K+ Followers. 7.3M+ Engagements.",
-  body: "Every number on this page is a result we've already delivered — not a projection of what we might do for you.",
+  body: "Every number on this page is a result we've already delivered, not a projection of what we might do for you.",
   ctaLabel: "Get Your Free Performance Audit",
 };

@@ -241,7 +241,7 @@ export function InsightsPageContent() {
           </div>
           {filtered.length === 0 && (
             <p className="text-center font-light mt-16" style={{ color: "rgba(255,255,255,0.45)" }}>
-              No articles in this category yet — check back soon.
+              No articles in this category yet. Check back soon.
             </p>
           )}
 

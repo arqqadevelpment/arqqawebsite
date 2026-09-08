@@ -283,7 +283,7 @@ export function CareerPageContent() {
               style={{ fontSize: "1.0625rem", lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}
             >
               50+ specialists. 13 years in operation. One in-house team that designs,
-              builds, and runs the work — no outsourcing. If that&apos;s how you want to
+              builds, and runs the work, no outsourcing. If that&apos;s how you want to
               work, we&apos;d like to meet you.
             </p>
           </Reveal>
@@ -355,7 +355,7 @@ export function CareerPageContent() {
                   className="font-light mt-2"
                   style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.55)" }}
                 >
-                  Try clearing a filter — or send us your portfolio anyway.
+                  Try clearing a filter, or send us your portfolio anyway.
                 </p>
               </div>
             </Reveal>
