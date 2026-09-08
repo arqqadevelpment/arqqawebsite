@@ -342,38 +342,37 @@ function PainCard({ stat, body, index }: { stat: string; body: string; index: nu
   );
 }
 
-/* ── Timestamped timeline — the hospital booking-flow example ── */
+/* ── Timestamped timeline — each step its own boxed card, the hospital
+   booking-flow example — one card gets an accent border to mark the
+   moment that matters most (e.g. the deposit landing). ── */
 function Timeline({
   steps,
 }: {
-  steps: { time: string; title: string; body: string }[];
+  steps: { time: string; title: string; body: string; highlight?: boolean }[];
 }) {
   return (
-    <div className="flex flex-col" style={{ gap: "1.5rem" }}>
+    <div className="flex flex-col" style={{ gap: "0.875rem" }}>
       {steps.map((s, i) => (
         <Reveal key={s.time + s.title} delay={Math.min(i * 0.08, 0.3)}>
-          <div className="flex gap-5">
-            <div className="shrink-0 flex flex-col items-center">
-              <span
-                className="font-bold"
-                style={{
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.04em",
-                  color: "#ff9a5a",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {s.time}
-              </span>
-              {i < steps.length - 1 ? (
-                <span
-                  aria-hidden="true"
-                  className="mt-2"
-                  style={{ width: "1px", flex: 1, minHeight: "2rem", background: "rgba(255,255,255,0.14)" }}
-                />
-              ) : null}
-            </div>
-            <div className="pb-1">
+          <div
+            className="rounded-2xl p-5 flex gap-4"
+            style={{
+              ...glass,
+              border: s.highlight ? "1px solid rgba(255,138,90,0.5)" : glass.border,
+            }}
+          >
+            <span
+              className="shrink-0 font-bold"
+              style={{
+                fontSize: "0.8125rem",
+                letterSpacing: "0.04em",
+                color: "#ff9a5a",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {s.time}
+            </span>
+            <div>
               <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
                 {s.title}
               </p>
@@ -388,6 +387,171 @@ function Timeline({
         </Reveal>
       ))}
     </div>
+  );
+}
+
+/* ── Phone-style chat mock — the hospital booking flow playing out in a
+   WhatsApp-shaped thread, restyled in ARQQA's own dark-glass palette
+   rather than borrowed WhatsApp green. ── */
+function HospitalChatMock() {
+  const bubbleBase: React.CSSProperties = {
+    borderRadius: "1rem",
+    padding: "0.625rem 0.875rem",
+    fontSize: "0.8125rem",
+    lineHeight: 1.55,
+    maxWidth: "86%",
+  };
+  const them: React.CSSProperties = {
+    ...bubbleBase,
+    borderBottomLeftRadius: "0.25rem",
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    color: "rgba(255,255,255,0.8)",
+    alignSelf: "flex-start",
+  };
+  const me: React.CSSProperties = {
+    ...bubbleBase,
+    borderBottomRightRadius: "0.25rem",
+    background: "linear-gradient(155deg, rgba(52,68,224,0.35) 0%, rgba(111,91,224,0.28) 100%)",
+    border: "1px solid rgba(111,91,224,0.4)",
+    color: "rgba(255,255,255,0.92)",
+    alignSelf: "flex-end",
+  };
+  const stamp: React.CSSProperties = {
+    display: "block",
+    marginTop: "0.375rem",
+    fontSize: "0.625rem",
+    color: "rgba(255,255,255,0.35)",
+    textAlign: "right",
+  };
+
+  return (
+    <Reveal delay={0.15}>
+      <div className="rounded-3xl overflow-hidden" style={glass}>
+        <div
+          className="flex items-center gap-3 px-5 py-4"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          <span
+            className="inline-flex items-center justify-center rounded-full font-bold shrink-0"
+            style={{
+              width: "2.25rem",
+              height: "2.25rem",
+              background: "linear-gradient(160deg, #3444e0 0%, #6f5be0 100%)",
+              fontSize: "0.875rem",
+              color: "#ffffff",
+            }}
+          >
+            H
+          </span>
+          <div className="flex-1">
+            <p className="font-medium" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
+              The hospital
+            </p>
+            <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.4)" }}>
+              online
+            </p>
+          </div>
+          <span aria-hidden="true" style={{ color: "rgba(255,255,255,0.3)", fontSize: "1rem" }}>
+            ⋯
+          </span>
+        </div>
+
+        <div className="flex flex-col p-5" style={{ gap: "0.75rem", maxHeight: "24rem", overflowY: "auto" }}>
+          <div style={them}>
+            My back has been hurting for three days
+            <span style={stamp}>23:41</span>
+          </div>
+          <div style={me}>
+            I can&apos;t advise on symptoms — that&apos;s the doctor&apos;s call. But I can get you to the right
+            one tonight. Is it from an injury, or did it start on its own?
+            <span style={stamp}>23:41</span>
+          </div>
+          <div style={them}>
+            On its own
+            <span style={stamp}>23:42</span>
+          </div>
+          <div style={{ ...me, maxWidth: "92%" }}>
+            Orthopaedics, then. Nearest opening at the Maadi branch:
+            <div
+              className="rounded-xl mt-2 p-3"
+              style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              <p className="font-bold" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
+                Dr. Hany Sabry
+              </p>
+              <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.5)" }}>
+                Orthopaedics · Maadi · EGP 650 · 18 yrs
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {["Tonight 20:30", "Tomorrow 09:15", "Tomorrow 18:00"].map((slot) => (
+                <span
+                  key={slot}
+                  className="rounded-full"
+                  style={{
+                    padding: "0.25rem 0.625rem",
+                    fontSize: "0.6875rem",
+                    border: "1px solid rgba(255,255,255,0.24)",
+                    color: "rgba(255,255,255,0.75)",
+                  }}
+                >
+                  {slot}
+                </span>
+              ))}
+            </div>
+            <span style={stamp}>23:42</span>
+          </div>
+          <div style={them}>
+            Tomorrow 09:15
+            <span style={stamp}>23:43</span>
+          </div>
+          <div style={{ ...me, maxWidth: "92%" }}>
+            Held for ten minutes — EGP 200 deposit now, EGP 450 at the clinic.
+            <div
+              className="rounded-full text-center mt-2 font-bold"
+              style={{
+                padding: "0.5rem 1rem",
+                fontSize: "0.75rem",
+                background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
+                color: "#ffffff",
+              }}
+            >
+              Pay the deposit securely
+            </div>
+            <span style={stamp}>23:43</span>
+          </div>
+          <div style={them}>
+            Paid
+            <span style={stamp}>23:44</span>
+          </div>
+          <div style={me}>
+            Booked. Bring any previous X-rays — Maadi branch, third floor.
+            <span style={stamp}>23:44</span>
+          </div>
+          <div className="flex items-center gap-1" style={{ alignSelf: "flex-start", padding: "0.25rem 0.25rem" }} aria-hidden="true">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="rounded-full"
+                style={{
+                  width: "0.375rem",
+                  height: "0.375rem",
+                  background: "rgba(255,255,255,0.35)",
+                  animation: `arqqaTypingDot 1.2s ease-in-out ${i * 0.15}s infinite`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <style>{`
+        @keyframes arqqaTypingDot {
+          0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+          30% { opacity: 1; transform: translateY(-2px); }
+        }
+      `}</style>
+    </Reveal>
   );
 }
 
@@ -498,6 +662,67 @@ function ChatSample({
     </Reveal>
   );
 }
+
+/* ── Channel glyphs — simple currentColor line icons, matching the
+   site's minimal glyph language rather than borrowed brand marks. ── */
+const CHANNELS: { label: string; icon: React.ReactNode }[] = [
+  {
+    label: "WhatsApp",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <path d="M20 12a8 8 0 1 1-3.8-6.8" strokeLinecap="round" />
+        <path d="M20 4l-4.2 8.4L12 11" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9 10.5c.5 2 2 3.5 4 4l1-1.3c.9.3 1.8.5 2.7.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17" cy="7" r="0.9" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    label: "Messenger",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <path d="M3 12c0-4.7 3.8-8.5 9-8.5s9 3.8 9 8.5-3.8 8.5-9 8.5c-1.1 0-2.2-.2-3.1-.6L4.5 21l1-4.3C4 15.3 3 13.8 3 12Z" strokeLinejoin="round" />
+        <path d="M7 13l3.3-3.3L12.7 12l3.3-3.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    label: "TikTok",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <path d="M14 4v10.5a3 3 0 1 1-2.5-2.96" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M14 4c.5 2.3 2 3.8 4.3 4.1" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    label: "Email",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2.5" />
+        <path d="M4.5 7l7.5 6 7.5-6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    label: "Web Chat",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{ width: "100%", height: "100%" }}>
+        <path d="M4 5.5h16v10H9.5L6 19v-3.5H4Z" strokeLinejoin="round" />
+        <path d="M8 9.5h8M8 12.5h5" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+];
 
 const INDUSTRIES: {
   key: string;
@@ -865,58 +1090,42 @@ export function AutonomousPageContent() {
         style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
       >
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-start">
-          <SectionHead
-            eyebrow="See It Work"
-            title="23:41 on a Tuesday."
-            accentTail="Booked and paid by 23:44."
-            body="A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a real opening, holds the slot and takes the deposit — in the patient's own dialect."
-          />
-          <div className="rounded-3xl p-7" style={glass}>
-            <div className="flex items-center gap-2 mb-6">
-              <span
-                className="inline-flex items-center justify-center rounded-full font-bold"
-                style={{
-                  width: "1.75rem",
-                  height: "1.75rem",
-                  background: "linear-gradient(160deg, #3444e0 0%, #6f5be0 100%)",
-                  fontSize: "0.75rem",
-                  color: "#ffffff",
-                }}
-              >
-                H
-              </span>
-              <span className="font-medium" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
-                The Hospital
-              </span>
-              <span className="font-light" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-                · Online
-              </span>
-            </div>
-            <Timeline
-              steps={[
-                {
-                  time: "23:42",
-                  title: "Triaged, never diagnosed",
-                  body: "Medical judgement stays with your doctors — enforced in the system, not left to the model's discretion.",
-                },
-                {
-                  time: "23:42",
-                  title: "A real consultant, a real opening",
-                  body: "Specialty, branch, price and slots that actually exist in your calendar — read live, never invented.",
-                },
-                {
-                  time: "23:44",
-                  title: "Slot held, deposit taken",
-                  body: "Payment collected at midnight. No call back, no morning queue, no admissions desk involved.",
-                },
-                {
-                  time: "09:00",
-                  title: "And it follows up",
-                  body: "The reminder the next morning, the post-visit check three days later, the patient who never rebooked.",
-                },
-              ]}
+          <div>
+            <SectionHead
+              eyebrow="See It Work"
+              title="23:41 on a Tuesday."
+              accentTail="Booked and paid by 23:44."
+              body="A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a real opening, holds the slot and takes the deposit — in the patient's own dialect."
             />
+            <div className="mt-8">
+              <HospitalChatMock />
+            </div>
           </div>
+          <Timeline
+            steps={[
+              {
+                time: "23:42",
+                title: "Triaged, never diagnosed",
+                body: "Medical judgement stays with your doctors — enforced in the system, not left to the model's discretion.",
+              },
+              {
+                time: "23:42",
+                title: "A real consultant, a real opening",
+                body: "Specialty, branch, price and slots that actually exist in your calendar — read live, never invented.",
+              },
+              {
+                time: "23:44",
+                title: "Slot held, deposit taken",
+                body: "Payment collected at midnight. No call back, no morning queue, no admissions desk involved.",
+                highlight: true,
+              },
+              {
+                time: "09:00",
+                title: "And it follows up",
+                body: "The reminder the next morning, the post-visit check three days later, the patient who never rebooked.",
+              },
+            ]}
+          />
         </div>
       </section>
 
@@ -936,10 +1145,10 @@ export function AutonomousPageContent() {
           />
 
           <Reveal delay={0.1} className="flex flex-wrap items-center justify-center gap-3 mt-10">
-            {["WhatsApp", "Instagram", "Messenger", "TikTok", "Email", "Web Chat"].map((ch) => (
+            {CHANNELS.map((ch) => (
               <span
-                key={ch}
-                className="inline-flex items-center rounded-full font-medium"
+                key={ch.label}
+                className="inline-flex items-center gap-2 rounded-full font-medium"
                 style={{
                   padding: "0.5rem 1.125rem",
                   fontSize: "0.8125rem",
@@ -948,7 +1157,10 @@ export function AutonomousPageContent() {
                   border: "1px solid rgba(255,255,255,0.16)",
                 }}
               >
-                {ch}
+                <span aria-hidden="true" style={{ display: "inline-flex", width: "1rem", height: "1rem" }}>
+                  {ch.icon}
+                </span>
+                {ch.label}
               </span>
             ))}
           </Reveal>
