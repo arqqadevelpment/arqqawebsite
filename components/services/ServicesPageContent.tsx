@@ -388,7 +388,7 @@ export function ServicesPageContent() {
                 color: "rgba(255,255,255,0.6)",
               }}
             >
-              Seven integrated verticals. One unified system. Every service is
+              Eight integrated verticals. One unified system. Every service is
               engineered to compound the impact of every other.
             </p>
           </Reveal>
@@ -428,7 +428,7 @@ export function ServicesPageContent() {
                 color: "#ffffff",
               }}
             >
-              Seven Verticals.{" "}
+              Eight Verticals.{" "}
               <span
                 style={{
                   backgroundImage:

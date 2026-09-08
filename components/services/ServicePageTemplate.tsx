@@ -657,21 +657,23 @@ export function ServicePageTemplate({ service }: { service: ServiceDetail }) {
                   ))}
                 </div>
 
-                <Link
-                  href={`/work/${PROOF_CLIENT_SLUG[service.proof.client] ?? ""}`}
-                  className="inline-flex items-center gap-2 font-medium mt-10 self-start"
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "#ffffff",
-                    borderBottom: "1px solid rgba(255,138,90,0.6)",
-                    paddingBottom: "3px",
-                  }}
-                >
-                  Read the full case study
-                  <span aria-hidden="true" style={{ color: "#ff9a5a" }}>
-                    →
-                  </span>
-                </Link>
+                {PROOF_CLIENT_SLUG[service.proof.client] ? (
+                  <Link
+                    href={`/work/${PROOF_CLIENT_SLUG[service.proof.client]}`}
+                    className="inline-flex items-center gap-2 font-medium mt-10 self-start"
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "#ffffff",
+                      borderBottom: "1px solid rgba(255,138,90,0.6)",
+                      paddingBottom: "3px",
+                    }}
+                  >
+                    Read the full case study
+                    <span aria-hidden="true" style={{ color: "#ff9a5a" }}>
+                      →
+                    </span>
+                  </Link>
+                ) : null}
               </div>
             </div>
           </Reveal>

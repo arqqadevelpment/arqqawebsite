@@ -170,7 +170,7 @@ export const SERVICES: ServiceDetail[] = [
     slug: "asset-building",
     num: "02",
     title: "Brand Strategy & Positioning",
-    short: "Assets",
+    short: "Branding",
     positioning:
       "How you look is how you're remembered — the permanent visual and verbal infrastructure of your brand, built to compound in value the longer it's used.",
     cep: "When nobody remembers your brand — or for the wrong reasons.",
@@ -344,7 +344,7 @@ export const SERVICES: ServiceDetail[] = [
     slug: "technology",
     num: "04",
     title: "Web & App Development",
-    short: "Tech",
+    short: "Development",
     positioning:
       "If the technology doesn't convert, the marketing doesn't matter — the infrastructure your marketing runs on, integrated by design.",
     cep: "When your product doesn't convert and your stack doesn't talk.",
@@ -444,7 +444,7 @@ export const SERVICES: ServiceDetail[] = [
     slug: "community-management",
     num: "05",
     title: "Social Media Management",
-    short: "Community",
+    short: "Social",
     positioning:
       "Your brand is what people say when you're not in the room — we own that conversation, 24 hours a day.",
     cep: "When your community is growing but nobody is managing it.",
@@ -729,6 +729,96 @@ export const SERVICES: ServiceDetail[] = [
     },
     related: ["catalyst-system", "strategy-consulting", "community-management"],
     playbook: "Performance Marketing & App Growth",
+  },
+  {
+    slug: "autonomous",
+    num: "08",
+    title: "CRM, Automation & AI Solutions",
+    short: "Automation",
+    positioning:
+      "Four AI agents inside every inbox and comment section your customers already use — sales, service, moderation and reporting, live in a day.",
+    cep: "When your team can't keep up with every conversation.",
+    image: "/services/card-gradient-001.webp",
+    banner: "/services/go-to-market-cta.webp",
+    accent: "orange",
+    summary:
+      "AI agents inside every inbox and comment section your customers already use. Sales, service, moderation and reporting — automated, on-brand, and live in a day.",
+    problem: {
+      heading: "Your customers are awake. Your business isn't.",
+      body: "More than half of inbound arrives after the office has closed — a comment, a DM, a WhatsApp message that waits until morning for a reply it needed at midnight. Every hour of silence is a lead that cools, or a customer who goes somewhere else.",
+      stats: [
+        { value: "53%", label: "of inbound arrives after hours" },
+        { value: "60×", label: "less likely to qualify a lead after a day of silence" },
+        { value: "2×", label: "cost to re-acquire a customer who waited too long" },
+      ],
+    },
+    approach: {
+      heading: "Four agents. One engine, reading your systems.",
+      body: "A Sales Agent, a Service Agent, a Social Moderation Agent and an Operations Manager work as one team across WhatsApp, Instagram, Messenger, TikTok, email and web chat — reading live from your catalogue, calendar, payments and CRM, and escalating to a human the moment a conversation turns sensitive.",
+      steps: [
+        {
+          num: "01",
+          title: "We read your inbox",
+          body: "What customers actually ask, what was missed, and what that silence cost you last year.",
+        },
+        {
+          num: "02",
+          title: "We set it up",
+          body: "Your prices, calendar, branches and brand voice — and, just as important, what it must never say.",
+        },
+        {
+          num: "03",
+          title: "You approve it",
+          body: "You watch it handle real conversations and sign off before a single customer sees it.",
+        },
+        {
+          num: "04",
+          title: "The 09:00 report",
+          body: "What came in, what closed, what needs a human — in your inbox before your first meeting.",
+        },
+      ],
+      cta: {
+        primary: { label: "Start the Free Audit", href: "/autonomous" },
+        secondary: { label: "Book a Discovery Call", href: "/start#book-strategy-call" },
+      },
+    },
+    included: {
+      groups: [
+        {
+          title: "The Agents",
+          items: [
+            "Sales Agent — quotes, books and takes payment inside the chat",
+            "Service Agent — order tracking, complaints and support, 24/7",
+            "Social Moderation Agent — replies in brand voice, hides spam and scams",
+            "Operations Manager — routes, escalates, and reports every morning",
+          ],
+        },
+        {
+          title: "Deliverables",
+          items: [
+            "CRM and calendar integration (HubSpot, Shopify, Salla and more)",
+            "WhatsApp Business API, Instagram, Messenger and TikTok setup",
+            "Governance rules — what the agent can act on, what it escalates",
+            "Daily 09:00 report on conversations, orders and anomalies",
+          ],
+        },
+      ],
+      timeline: "Live within a day, fully governed within a week",
+      tooling: ["WhatsApp Business API", "Meta Messenger", "Instagram DMs", "HubSpot", "Shopify", "Salla"],
+    },
+    proof: {
+      client: "ARQQA Autonomous Deployments",
+      market: "Retail, Airlines & Banking — MENA",
+      metric: "13s",
+      metricLabel: "Median reply time",
+      body: "Across live deployments, median wait for a real reply drops from over an hour and a half to seconds — measured across three markets, not a single pilot account.",
+      secondary: [
+        { value: "240K+", label: "Interactions handled" },
+        { value: "89%", label: "Closed without a human" },
+      ],
+    },
+    related: ["catalyst-system", "community-management", "technology"],
+    playbook: "CRM, Automation & AI Solutions",
   },
 ];
 
