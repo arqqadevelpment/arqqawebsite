@@ -843,6 +843,187 @@ const INDUSTRIES: {
   },
 ];
 
+/* ── The Need → The Agent Acts → What It Changes — one 3-step flow per
+   sector, switched by tab. ── */
+type FlowStep = {
+  num: string;
+  label: string;
+  text: string;
+  chips?: string[];
+  cta?: string;
+};
+
+const AUTOMATION_FLOWS: { key: string; label: string; steps: FlowStep[] }[] = [
+  {
+    key: "banking",
+    label: "Banking",
+    steps: [
+      {
+        num: "01",
+        label: "The Need",
+        text: "“My credit card is lost and I’m travelling abroad.”",
+        chips: ["03:12", "WhatsApp"],
+      },
+      {
+        num: "02",
+        label: "The Agent Acts",
+        text: "Verifies identity with a secure OTP and locks the card on the spot — in the same thread, no call-centre queue.",
+        chips: ["Service Agent"],
+      },
+      {
+        num: "03",
+        label: "What It Changes",
+        text: "Closes the fraud window in seconds, and stops the cost of nightly card fraud.",
+        cta: "Confirms instantly on any official fraud report",
+      },
+    ],
+  },
+  {
+    key: "airlines",
+    label: "Airlines",
+    steps: [
+      {
+        num: "01",
+        label: "The Need",
+        text: "“Can I add 15kg of baggage to my flight?”",
+        chips: ["02:47", "WhatsApp"],
+      },
+      {
+        num: "02",
+        label: "The Agent Acts",
+        text: "Prices it against live fare rules and takes payment in chat — no app, no airport desk.",
+        chips: ["Sales Agent"],
+      },
+      {
+        num: "03",
+        label: "What It Changes",
+        text: "Captures the revenue at the moment of intent — nothing left for the morning queue.",
+        cta: "Payment and confirmation in the same thread",
+      },
+    ],
+  },
+  {
+    key: "ecommerce",
+    label: "E-Commerce",
+    steps: [
+      {
+        num: "01",
+        label: "The Need",
+        text: "“How much?” — a comment under an Instagram Reel.",
+        chips: ["01:58", "Instagram · Facebook"],
+      },
+      {
+        num: "02",
+        label: "The Agent Acts",
+        text: "Replies publicly in brand voice within seconds, then opens a DM with size, stock and a direct buy link.",
+        chips: ["Social Moderation Agent"],
+      },
+      {
+        num: "03",
+        label: "What It Changes",
+        text: "A public comment turns into a sale instead of going unanswered.",
+        cta: "A public comment turns into a private message",
+      },
+    ],
+  },
+];
+
+function AutomationFlowTabs() {
+  const [active, setActive] = useState(0);
+  const flow = AUTOMATION_FLOWS[active];
+
+  return (
+    <div className="mt-10">
+      <Reveal className="flex flex-wrap justify-center gap-3">
+        {AUTOMATION_FLOWS.map((f, i) => (
+          <button
+            key={f.key}
+            type="button"
+            onClick={() => setActive(i)}
+            className="cursor-pointer rounded-xl font-medium"
+            style={{
+              padding: "0.75rem 1.75rem",
+              fontSize: "0.8125rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: i === active ? "#ff9a5a" : "rgba(255,255,255,0.55)",
+              background: i === active ? "rgba(255,122,61,0.08)" : "rgba(255,255,255,0.03)",
+              border: i === active ? "1px solid rgba(255,122,61,0.5)" : "1px solid rgba(255,255,255,0.12)",
+              transition: "all 0.25s ease",
+            }}
+          >
+            {f.label}
+          </button>
+        ))}
+      </Reveal>
+
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 mt-8 items-stretch">
+        {flow.steps.map((s, i) => (
+          <div key={flow.key + s.num} className="flex items-stretch flex-1">
+            <Reveal delay={Math.min(i * 0.08, 0.2)} className="flex-1">
+              <div className="rounded-2xl p-6 h-full flex flex-col" style={glass}>
+                <p
+                  className="font-bold"
+                  style={{ fontSize: "0.75rem", letterSpacing: "0.12em", color: "#ff9a5a" }}
+                >
+                  {s.num}{" "}
+                  <span style={{ color: "rgba(255,255,255,0.4)", letterSpacing: "0.12em" }}>{s.label.toUpperCase()}</span>
+                </p>
+                <p
+                  className="font-bold mt-4"
+                  style={{ fontSize: "1.0625rem", lineHeight: 1.4, color: "#ffffff" }}
+                >
+                  {s.text}
+                </p>
+                <div className="flex-1" style={{ minHeight: "1rem" }} />
+                {s.chips || s.cta ? (
+                  <div className="pt-4 mt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                    {s.cta ? (
+                      <span
+                        className="inline-flex items-center rounded-full font-medium"
+                        style={{
+                          padding: "0.5rem 1rem",
+                          fontSize: "0.75rem",
+                          color: "#ff9a5a",
+                          border: "1px solid rgba(255,122,61,0.45)",
+                        }}
+                      >
+                        {s.cta}
+                      </span>
+                    ) : (
+                      <div className="flex flex-wrap gap-2">
+                        {s.chips!.map((c) => (
+                          <span
+                            key={c}
+                            className="inline-flex items-center rounded-full font-light"
+                            style={{
+                              padding: "0.375rem 0.875rem",
+                              fontSize: "0.75rem",
+                              color: "rgba(255,255,255,0.6)",
+                              border: "1px solid rgba(255,255,255,0.16)",
+                            }}
+                          >
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+              </div>
+            </Reveal>
+            {i < flow.steps.length - 1 ? (
+              <div className="hidden lg:flex items-center justify-center px-3" aria-hidden="true">
+                <span style={{ color: "rgba(255,255,255,0.25)", fontSize: "1.25rem" }}>→</span>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) {
   return (
     <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-start">
@@ -1098,37 +1279,49 @@ export function AutonomousPageContent() {
               eyebrow="See It Work"
               title="23:41 on a Tuesday."
               accentTail="Booked and paid by 23:44."
-              body="A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a real opening, holds the slot and takes the deposit — in the patient's own dialect."
             />
             <div className="mt-6">
               <HospitalChatMock />
             </div>
           </div>
-          <Timeline
-            steps={[
-              {
-                time: "23:42",
-                title: "Triaged, never diagnosed",
-                body: "Medical judgement stays with your doctors — enforced in the system, not left to the model's discretion.",
-              },
-              {
-                time: "23:42",
-                title: "A real consultant, a real opening",
-                body: "Specialty, branch, price and slots that actually exist in your calendar — read live, never invented.",
-              },
-              {
-                time: "23:44",
-                title: "Slot held, deposit taken",
-                body: "Payment collected at midnight. No call back, no morning queue, no admissions desk involved.",
-                highlight: true,
-              },
-              {
-                time: "09:00",
-                title: "And it follows up",
-                body: "The reminder the next morning, the post-visit check three days later, the patient who never rebooked.",
-              },
-            ]}
-          />
+          <div>
+            <Reveal>
+              <p
+                className="font-light"
+                style={{ fontSize: "1rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+              >
+                A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a
+                real opening, holds the slot and takes the deposit — in the patient&apos;s own dialect.
+              </p>
+            </Reveal>
+            <div className="mt-6">
+              <Timeline
+                steps={[
+                  {
+                    time: "23:42",
+                    title: "Triaged, never diagnosed",
+                    body: "Medical judgement stays with your doctors — enforced in the system, not left to the model's discretion.",
+                  },
+                  {
+                    time: "23:42",
+                    title: "A real consultant, a real opening",
+                    body: "Specialty, branch, price and slots that actually exist in your calendar — read live, never invented.",
+                  },
+                  {
+                    time: "23:44",
+                    title: "Slot held, deposit taken",
+                    body: "Payment collected at midnight. No call back, no morning queue, no admissions desk involved.",
+                    highlight: true,
+                  },
+                  {
+                    time: "09:00",
+                    title: "And it follows up",
+                    body: "The reminder the next morning, the post-visit check three days later, the patient who never rebooked.",
+                  },
+                ]}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1213,16 +1406,17 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[4] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <SectionHead
             eyebrow="High-Impact Automation"
             title="The same question at 3 AM."
             accentTail="Three different businesses."
-            body="Every sector has a moment where a customer needs an answer and nobody is there to give it. The agents work the same way in each one — read the intent, act inside the systems you already run, close the loop."
+            body="Every sector has a moment where a customer needs an answer and nobody is there to give it. Pick a sector — the flow is the same, only the rulebook changes."
             center
           />
+          <AutomationFlowTabs />
         </div>
       </section>
 
