@@ -37,12 +37,19 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         body: "Coffee Fellows is a German coffee-shop brand entering Egypt for the first time — a launch with no local audience or brand memory to draw on. The mandate was to build both from nothing: introduce the menu, establish a visual identity on social, and turn a new storefront into a place people already wanted to visit before it opened.",
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/coffee-fellows/shot-01.webp",
-          alt: "Coffee Fellows branded drink and dessert shot with the tagline Make Today Extraordinary",
-          caption: "Launch content — product photography built around the brand's own voice",
-        },
+        type: "grid",
+        media: [
+          {
+            src: "/work/coffee-fellows/shot-01.webp",
+            alt: "Coffee Fellows branded drink and dessert shot with the tagline Make Today Extraordinary",
+            caption: "Launch content — product photography built around the brand's own voice",
+          },
+          {
+            src: "/work/coffee-fellows/shot-07.webp",
+            alt: "Coffee Fellows dessert and latte with the line The Sweetest Escape",
+            caption: "In-store lifestyle content, post-launch",
+          },
+        ],
       },
       {
         type: "text",
@@ -66,7 +73,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         ],
       },
       {
-        type: "pair",
+        type: "grid",
         media: [
           {
             src: "/work/coffee-fellows/shot-03.webp",
@@ -81,7 +88,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         ],
       },
       {
-        type: "pair",
+        type: "grid",
         media: [
           {
             src: "/work/coffee-fellows/shot-05.webp",
@@ -98,14 +105,6 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       {
         type: "text",
         body: "We created a buzz and generated excitement among the target audience. This resulted in a successful opening, strong brand recognition, and a growing customer base.",
-      },
-      {
-        type: "figure",
-        media: {
-          src: "/work/coffee-fellows/shot-07.webp",
-          alt: "Coffee Fellows dessert and latte with the line The Sweetest Escape",
-          caption: "In-store lifestyle content, post-launch",
-        },
       },
     ],
     card: {
@@ -147,21 +146,13 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         },
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/pizza-hut-social/video-01.mp4",
-          type: "video",
-          alt: "Pizza Hut KSA social media video",
-          caption: "Campaign video content",
-        },
-      },
-      {
-        type: "pair",
+        type: "grid",
         media: [
           {
-            src: "/work/pizza-hut-social/shot-02.webp",
-            alt: "Pizza Hut KSA Thin & Crispy versus Pan crust comparison post",
-            caption: "A crust-preference post built for comments, not just likes",
+            src: "/work/pizza-hut-social/video-01.mp4",
+            type: "video",
+            alt: "Pizza Hut KSA social media video",
+            caption: "Campaign video content",
           },
           {
             src: "/work/pizza-hut-social/video-02.mp4",
@@ -170,6 +161,14 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
             caption: "Delivery-moment content",
           },
         ],
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/pizza-hut-social/shot-02.webp",
+          alt: "Pizza Hut KSA Thin & Crispy versus Pan crust comparison post",
+          caption: "A crust-preference post built for comments, not just likes",
+        },
       },
       {
         type: "text",
@@ -207,24 +206,23 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         body: "Kenz'up is a loyalty app in Morocco, giving users exclusive discounts, rewards, and personalized offers from partner businesses. An app like this lives or dies on activation and referral — a download that never gets opened again is worth nothing — so the content had to explain the reward mechanics clearly enough to actually get used.",
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/kenzup-social/shot-01.webp",
-          alt: "Kenz'up referral campaign — invite friends with your code and earn 25 points each",
-          caption: "Referral mechanics, made simple enough to act on immediately",
-        },
+        type: "grid",
+        media: [
+          {
+            src: "/work/kenzup-social/shot-01.webp",
+            alt: "Kenz'up referral campaign — invite friends with your code and earn 25 points each",
+            caption: "Referral mechanics, made simple enough to act on immediately",
+          },
+          {
+            src: "/work/kenzup-social/video-01.mp4",
+            type: "video",
+            alt: "Kenz'up app social media video",
+            caption: "App-feature video content",
+          },
+        ],
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/kenzup-social/video-01.mp4",
-          type: "video",
-          alt: "Kenz'up app social media video",
-          caption: "App-feature video content",
-        },
-      },
-      {
-        type: "pair",
+        type: "grid",
         media: [
           {
             src: "/work/kenzup-social/shot-02.webp",
@@ -241,6 +239,46 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       {
         type: "text",
         body: "The strategy paired targeted online advertising with partner-business promotions and always-on feature content. It grew active users on the platform, strengthened partner relationships, boosted customer loyalty, and lifted engagement with the app's core features.",
+      },
+      {
+        type: "grid",
+        media: [
+          {
+            src: "/work/kenzup-social/shot-04.webp",
+            alt: "Kenz'up 3rd anniversary event announcement — Tuesday 17 October, noon to 3pm",
+            caption: "Anniversary event announcement",
+          },
+          {
+            src: "/work/kenzup-social/shot-05.webp",
+            alt: "Kenz'up 3 years, 3 hours, triple cashback campaign",
+            caption: "Triple cashback campaign",
+          },
+          {
+            src: "/work/kenzup-social/shot-06.webp",
+            alt: "Kenz'up deals x3 cashback across all brands, shown on the app",
+            caption: "In-app deals feature",
+          },
+        ],
+      },
+      {
+        type: "grid",
+        media: [
+          {
+            src: "/work/kenzup-social/shot-07.webp",
+            alt: "Kenz'up Black Friday giveaway winners announcement, 1500 points each",
+            caption: "Giveaway winners announcement",
+          },
+          {
+            src: "/work/kenzup-social/shot-08.webp",
+            alt: "Kenz'up Black Friday giveaway — 3 winners, 1500 points",
+            caption: "Black Friday giveaway",
+          },
+          {
+            src: "/work/kenzup-social/shot-09.webp",
+            alt: "Kenz'up Black Friday giveaway entry steps — install the app, mention two friends, follow on Instagram",
+            caption: "Giveaway entry mechanics",
+          },
+        ],
       },
     ],
     card: {
@@ -272,14 +310,6 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       {
         type: "text",
         body: "An airline's social feed has to do two jobs at once: sell the next trip and stay relevant on every day nobody is flying. That meant a content calendar built in layers — inspirational travel content, policy and service features, destination campaigns, and time-boxed offers — each with its own visual language but one consistent brand voice.",
-      },
-      {
-        type: "figure",
-        media: {
-          src: "/work/nile-air-social/shot-01.webp",
-          alt: "Nile Air Share Your Dream Destination With Us campaign",
-          caption: "Always-on brand content, built for engagement, not just reach",
-        },
       },
       {
         type: "text",
@@ -354,13 +384,21 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         ],
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/nile-air-social/video-03.mp4",
-          type: "video",
-          alt: "Nile Air summer vacation campaign video",
-          caption: "Summer campaign — ancient wonders and sun-soaked beaches",
-        },
+        type: "grid",
+        media: [
+          {
+            src: "/work/nile-air-social/video-03.mp4",
+            type: "video",
+            alt: "Nile Air summer vacation campaign video",
+            caption: "Summer campaign — ancient wonders and sun-soaked beaches",
+          },
+          {
+            src: "/work/nile-air-social/video-04.mp4",
+            type: "video",
+            alt: "Nile Air Dreaming of Italy, UAE, or Turkey campaign video",
+            caption: "Dreaming of Italy, UAE, or Turkey — stylish cities, stunning views",
+          },
+        ],
       },
       {
         type: "text",
@@ -410,7 +448,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     story: [
       {
         type: "text",
-        body: "Art Master Africa is BIC's pan-continental search for the region's biggest undiscovered art talent — a campaign that had to work at two completely different scales: loud enough to stop traffic on a billboard, and quiet enough to hold up as a single Instagram square. The brief was one identity built to do both.",
+        body: "Art Master Africa is BIC's pan-continental search for the region's biggest undiscovered art talent — one identity built to work at billboard scale and on a single Instagram square alike.",
       },
       {
         type: "text",

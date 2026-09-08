@@ -88,6 +88,9 @@ export type PerformanceCaseStudy = {
     approach?: string;
     /** Full-width banner between the Results and whatever follows. */
     afterResults?: string;
+    /** Social proof grid (2 or 3 images, e.g. UGC/influencer content) shown
+        after the after-Results banner. */
+    socialProof?: string[];
     /** Background image for the Takeaway section. */
     outcomeBg?: string;
     /** Sits to the right of the Takeaway points. */
@@ -122,7 +125,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       parallax: true,
       challengeBanner: true,
       challenge: "/portfolio/everher-challenge.webp",
-      afterResults: "/portfolio/everher.webp",
+      socialProof: ["/portfolio/everher-social-01.webp", "/portfolio/everher-social-02.webp"],
     },
     heroHeadline: "From a Struggling Brand to a Sold-Out Season.",
     heroSub:

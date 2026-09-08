@@ -681,6 +681,31 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </section>
       ) : null}
 
+      {/* ══ Social proof — UGC/influencer content, each stacked on its own row ══ */}
+      {study.sectionMedia?.socialProof && study.sectionMedia.socialProof.length > 0 ? (
+        <section className="relative w-full" style={{ padding: "0 1.5rem 5rem" }}>
+          <div
+            className="relative mx-auto w-full max-w-6xl flex flex-col"
+            style={{ gap: "1.5rem" }}
+          >
+            {study.sectionMedia.socialProof.map((src, i) => (
+              <Reveal key={src} delay={0.05 + i * 0.05}>
+                <div
+                  className="relative overflow-hidden rounded-3xl w-full"
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {/* ══ The Outcome / Takeaway ══
           sectionMedia.outcomeBg paints a full-bleed background behind the
           copy where a study sets it (Allure); sectionMedia.outcome (a framed

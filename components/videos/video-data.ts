@@ -41,7 +41,7 @@ export type VideoProject = {
 export const VIDEO_PROJECTS: VideoProject[] = [
   {
     slug: "zenith-arabia-digital-replica",
-    client: "Zenith Arabia",
+    client: "Zenith Arabia - Virtual Replica",
     title: "Zenith Arabia — Digital Replica",
     subtitle: "A cinematic virtual replica built to demo AI-driven solutions.",
     description:
@@ -58,7 +58,7 @@ export const VIDEO_PROJECTS: VideoProject[] = [
   },
   {
     slug: "zenith-arabia-ai-banking",
-    client: "Zenith Arabia",
+    client: "Zenith Arabia - AI Banking",
     title: "Zenith Arabia — AI Banking",
     subtitle: "A corporate explainer for AI-powered banking solutions.",
     description:

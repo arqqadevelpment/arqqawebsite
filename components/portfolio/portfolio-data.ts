@@ -34,6 +34,10 @@ export type CaseStudy = {
   ctaImage?: string;
   /** Optional full-bleed background for the Client Voice testimonial section */
   testimonialImage?: string;
+  /** Extra campaign visuals shown side by side, right after Results. */
+  extraVisuals?: string[];
+  /** Full-width banner shown just above The Results section. */
+  resultsBanner?: string;
 
   challenge: string;
 
@@ -80,6 +84,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     challengeImage: "/portfolio/fawry-challenge.webp",
     ctaImage: "/portfolio/fawry-cta-bg.webp",
     testimonialImage: "/portfolio/fawry-testimonial.webp",
+    extraVisuals: ["/portfolio/fawry-extra-01.webp", "/portfolio/fawry-extra-02.webp"],
+    resultsBanner: "/portfolio/fawry-extra-banner.webp",
     challenge:
       "Fawry needed to transition from a payments infrastructure brand to a consumer-facing fintech app — in a market where digital financial literacy was still emerging. The goal: mass adoption. The constraint: every install had to be a real user, not a vanity metric.",
     approach: {

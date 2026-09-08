@@ -47,12 +47,19 @@ export const BRANDING_PROJECTS: ShowcaseProject[] = [
         body: "The identity was built around a blue-to-purple gradient system and a stylised 'K' mark, chosen to convey innovation and modernity without losing the credibility a bank still has to earn. Clean, youthful typography carried that same balance through every touchpoint.",
       },
       {
-        type: "figure",
-        media: {
-          src: "/work/klivvr/shot-08.webp",
-          alt: "Hand holding a white Klivvr credit card with an embossed gradient K mark",
-          caption: "The card, as the identity's most-touched object",
-        },
+        type: "grid",
+        media: [
+          {
+            src: "/work/klivvr/shot-11.webp",
+            alt: "Klivvr wordmark applied as office signage above a row of workstations",
+            caption: "The mark, applied to physical space",
+          },
+          {
+            src: "/work/klivvr/shot-08.webp",
+            alt: "Hand holding a white Klivvr credit card with an embossed gradient K mark",
+            caption: "The card, as the identity's most-touched object",
+          },
+        ],
       },
       {
         type: "figure",

@@ -735,6 +735,24 @@ export function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
         </div>
       </section>
 
+      {/* ══ Banner just above The Results ══ */}
+      {caseStudy.resultsBanner ? (
+        <section className="relative w-full" style={{ padding: "0 1.5rem 4rem" }}>
+          <Reveal>
+            <div
+              className="relative overflow-hidden rounded-3xl mx-auto w-full max-w-6xl"
+              style={{
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={caseStudy.resultsBanner} alt="" aria-hidden="true" className="block w-full h-auto" />
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
+
       {/* ══ 5 · The Results ══ */}
       <section className="relative w-full overflow-hidden" style={{ padding: "6rem 1.5rem" }}>
         <div
@@ -770,6 +788,38 @@ export function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
           </div>
         </div>
       </section>
+
+      {/* ══ 5.5 · Extra campaign visuals, side by side ══ */}
+      {caseStudy.extraVisuals && caseStudy.extraVisuals.length > 0 ? (
+        <section className="relative w-full" style={{ padding: "0 1.5rem 6rem" }}>
+          <div
+            className="relative max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2"
+            style={{ gap: "1.5rem" }}
+          >
+            {caseStudy.extraVisuals.map((src, i) => (
+              <Reveal key={src} delay={Math.min(i * 0.08, 0.24)}>
+                <div
+                  className="relative overflow-hidden rounded-3xl w-full h-full"
+                  style={{
+                    aspectRatio: "4 / 3",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* ══ 6 · Client Voice ══ */}
       <section className="relative w-full overflow-hidden" style={{ padding: "2rem 1.5rem 7rem" }}>
