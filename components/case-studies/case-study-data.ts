@@ -686,6 +686,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       challenge: "/portfolio/joviality-challenge.webp",
       approach: "/portfolio/joviality-approach.webp",
       outcomeBg: "/portfolio/joviality-takeaway-bg.webp",
+      socialProof: ["/portfolio/joviality-social-01.webp"],
     },
   },
 ];
