@@ -390,6 +390,92 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       image: "/services/work-nile-air-social.webp",
       accent: "orange",
     },
+    next: "bic",
+  },
+  {
+    slug: "bic",
+    client: "BIC",
+    title: "BIC — Art Master Africa",
+    category: "Social Media Production",
+    intro:
+      "A pan-African art talent competition, carried through OOH, street, and social — one visual system built to feel bigger than a single ad.",
+    heroImage: "/work/bic-social/hero.webp",
+    logo: "/logos/clients/bic.webp",
+    facts: [
+      { label: "Client", value: "BIC" },
+      { label: "Industry", value: "Consumer Goods — Stationery" },
+      { label: "Scope", value: "Campaign Creative, OOH, Social Media Production" },
+      { label: "Market", value: "Africa" },
+    ],
+    story: [
+      {
+        type: "text",
+        body: "Art Master Africa is BIC's pan-continental search for the region's biggest undiscovered art talent — a campaign that had to work at two completely different scales: loud enough to stop traffic on a billboard, and quiet enough to hold up as a single Instagram square. The brief was one identity built to do both.",
+      },
+      {
+        type: "text",
+        body: "The creative anchor was a single illustration — an ink portrait built entirely from African cultural icons, drawn as if it flowed straight out of a BIC pen. That one piece of art became the system's spine, reappearing across every format at every scale.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/bic-social/shot-03.webp",
+          alt: "BIC United Africa poster with an ink illustration of a woman built from African cultural icons, flowing from a BIC pen",
+          caption: "The campaign's anchor illustration — cultural icons drawn as if inked live from the pen",
+        },
+      },
+      {
+        type: "grid",
+        media: [
+          {
+            src: "/work/bic-social/shot-04.webp",
+            alt: "BIC United Africa poster placed outdoors among cactus plants",
+            caption: "Street placement — the art holding up outside the frame",
+          },
+          {
+            src: "/work/bic-social/shot-05.webp",
+            alt: "BIC Art Master Africa 2024 Stay Tuned poster on a graffiti wall",
+            caption: "Teaser phase — building anticipation ahead of launch",
+          },
+        ],
+      },
+      {
+        type: "text",
+        body: "At full scale, the same artwork carried a billboard on its own — no crop, no simplification, just the pen and the illustration doing the entire job of stopping a commute.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/bic-social/shot-02.webp",
+          alt: "BIC United Africa billboard campaign in an urban setting",
+          caption: "Out-of-home — the identical artwork scaled to billboard size",
+        },
+      },
+      {
+        type: "text",
+        body: "On social, the same system broke into a full content calendar: competition mechanics, submitted artwork, judge spotlights, and engagement games, all carrying the campaign's ink-and-icon visual language so the feed read as one continuous story rather than a string of separate posts.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/bic-social/shot-01.webp",
+          alt: "Grid of BIC Art Master Africa social media posts — competition mechanics, judge spotlights, participant artwork, and engagement games",
+          caption: "The social calendar — one visual language across every post type",
+        },
+      },
+      {
+        type: "text",
+        body: "The result: a single piece of art doing the work of an entire campaign, recognizable whether it was scrolled past in a feed or driven past on a highway.",
+      },
+    ],
+    card: {
+      tier: "Social Media",
+      market: "Africa",
+      summary:
+        "One illustration carried across OOH, street, and social for BIC's pan-African art talent competition.",
+      image: "/services/work-bic-social.webp",
+      accent: "blue",
+    },
     next: "coffee-fellows",
   },
 ];

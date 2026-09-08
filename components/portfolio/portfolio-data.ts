@@ -111,52 +111,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         "ARQQA treated every install like it had to earn its place. That discipline is the only reason we can say our growth is real.",
       role: "Head of Growth, Fawry",
     },
-    related: ["africa-music-initiative"],
-  },
-  {
-    slug: "africa-music-initiative",
-    client: "BIC Art Master Competition",
-    industry: "Entertainment",
-    market: "UAE / Africa",
-    services: ["Community Management", "Content", "Strategy & Consulting"],
-    accent: "orange",
-    heroLine: "52 Countries. Zero Unresolved Escalations.",
-    summary:
-      "A pan-continental submissions campaign run as customer-experience operations, not posting.",
-    metric: "52",
-    metricLabel: "Countries engaged",
-    image: "/portfolio/africa-music-initiative.webp",
-    logo: "/logos/clients/bic.webp",
-    challenge:
-      "Africa Music Initiative needed to run a submissions campaign across 52 countries with no existing listening infrastructure and no escalation path — a single mishandled complaint could have compromised the entire continent-wide launch.",
-    approach: {
-      body: "Community was run as a customer-experience channel with SLAs and an escalation ladder, not a content calendar.",
-      moves: [
-        "Listening setup configured across every relevant regional platform",
-        "Response framework with tone guidelines and SLA tiers by message type",
-        "Multi-language content calendar mapped to submission deadlines",
-        "Crisis protocol rehearsed before the campaign went live in a single market",
-      ],
-    },
-    execution: {
-      channels: ["Instagram", "Facebook", "WhatsApp community groups", "X"],
-      creative: "A multi-language content calendar sequenced against submission deadlines across all 52 markets.",
-      technology: "Social listening and sentiment tracking routed straight into a ticketing queue with tiered SLAs.",
-      timeline: "2-week rapid deployment, then a 6-month campaign run.",
-      team: "A community operations pod backed by regional-language moderators.",
-    },
-    results: [
-      { value: "52", label: "Countries engaged" },
-      { value: "50K", label: "Artist submissions" },
-      { value: "120K", label: "Campaign visits" },
-      { value: "0", label: "Unresolved escalations" },
-    ],
-    testimonial: {
-      quote:
-        "Fifty-two countries is fifty-two ways for a campaign to go wrong in public. ARQQA made sure none of them did.",
-      role: "Campaign Director, Africa Music Initiative",
-    },
-    related: ["fawry"],
+    related: [],
   },
 ];
 
