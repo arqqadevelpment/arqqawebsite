@@ -2068,79 +2068,128 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[10] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
-        <div className="relative max-w-5xl mx-auto">
-          <SectionHead
-            eyebrow="Who It's For"
-            title="One engine."
-            accentTail="Rules already written for yours."
-            body="The same core reasoning layer sits behind every deployment. What changes per sector is the rulebook — the compliance boundaries, the vocabulary, the systems it reads from. No market-specific rebuild."
-            center
-          />
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <SectionHead
+              eyebrow="Who It's For"
+              title="One engine."
+              accentTail="Rules already written for yours."
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
+            />
+            <Reveal>
+              <p
+                className="font-light"
+                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+              >
+                The same core reasoning layer sits behind every deployment. What changes per sector is the
+                rulebook — the compliance boundaries, the vocabulary, the systems it reads from. No
+                market-specific rebuild.
+              </p>
+            </Reveal>
+          </div>
 
-          <Reveal delay={0.15} className="mt-14 flex justify-center">
-            <div className="relative" style={{ width: "min(90vw, 30rem)", aspectRatio: "1 / 1" }}>
+          <Reveal delay={0.15} className="mt-6 flex justify-center">
+            <div className="relative" style={{ width: "min(85vw, 25rem)", aspectRatio: "1 / 1" }}>
+              {/* Soft ambient glow behind the whole diagram */}
+              <div
+                aria-hidden="true"
+                className="absolute pointer-events-none"
+                style={{
+                  inset: "-10%",
+                  background:
+                    "radial-gradient(55% 55% at 50% 50%, rgba(52,68,224,0.16) 0%, rgba(255,122,61,0.08) 55%, transparent 75%)",
+                  filter: "blur(4px)",
+                }}
+              />
+              {/* Dashed guide ring the nodes sit on */}
               <div
                 aria-hidden="true"
                 className="absolute rounded-full"
-                style={{ inset: "16%", border: "1px dashed rgba(255,255,255,0.14)" }}
+                style={{ inset: "15%", border: "1px dashed rgba(255,255,255,0.16)" }}
               />
+
               {/* Centre — the engine */}
               <div
-                className="absolute rounded-3xl flex flex-col items-center justify-center text-center p-4"
+                className="absolute rounded-full flex flex-col items-center justify-center text-center"
                 style={{
                   left: "50%",
                   top: "50%",
                   transform: "translate(-50%, -50%)",
-                  width: "40%",
-                  height: "40%",
-                  ...glass,
-                  boxShadow: "0 0 60px rgba(52,68,224,0.35), inset 0 1px 0 rgba(255,255,255,0.1)",
+                  width: "34%",
+                  height: "34%",
+                  background: "radial-gradient(65% 65% at 35% 30%, rgba(111,91,224,0.5) 0%, rgba(52,68,224,0.32) 45%, rgba(6,8,14,0.85) 100%)",
+                  border: "1px solid rgba(255,255,255,0.22)",
+                  boxShadow: "0 0 70px rgba(52,68,224,0.55), inset 0 1px 0 rgba(255,255,255,0.16)",
                 }}
               >
-                <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
-                  The ARQQA Engine
+                <p className="font-bold" style={{ fontSize: "clamp(0.8125rem, 1.6vw, 1rem)", color: "#ffffff" }}>
+                  ARQQA
                 </p>
-                <p className="font-light mt-1" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.5)" }}>
+                <p
+                  className="font-light mt-1 px-2"
+                  style={{ fontSize: "clamp(0.5625rem, 1vw, 0.6875rem)", lineHeight: 1.3, color: "rgba(255,255,255,0.7)" }}
+                >
                   Reasoning · Memory · Guardrails
                 </p>
               </div>
-              {/* Three surrounding agent nodes */}
-              {["Sales Agent", "Service Agent", "Moderation Agent"].map((label, i) => {
-                const angle = (-90 + i * (360 / 3)) * (Math.PI / 180);
+
+              {/* Surrounding agent nodes — numbered, on the ring */}
+              {[
+                { num: "01", label: "Sales Agent", tint: "rgba(90,162,255,0.4)" },
+                { num: "02", label: "Service Agent", tint: "rgba(111,91,224,0.4)" },
+                { num: "03", label: "Moderation Agent", tint: "rgba(255,122,61,0.4)" },
+              ].map((node, i, arr) => {
+                const angle = (-90 + i * (360 / arr.length)) * (Math.PI / 180);
                 const x = 50 + 42 * Math.cos(angle);
                 const y = 50 + 42 * Math.sin(angle);
                 return (
                   <div
-                    key={label}
-                    className="absolute flex items-center justify-center rounded-full font-medium text-center px-3"
+                    key={node.label}
+                    className="absolute flex flex-col items-center justify-center rounded-full text-center"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
                       transform: "translate(-50%, -50%)",
-                      width: "7.5rem",
-                      height: "7.5rem",
-                      fontSize: "0.75rem",
-                      color: "#ffffff",
-                      background: "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
-                      border: "1px solid rgba(255,255,255,0.2)",
+                      width: "28%",
+                      aspectRatio: "1 / 1",
+                      padding: "0.5rem",
+                      background: `radial-gradient(65% 65% at 35% 30%, ${node.tint} 0%, rgba(14,16,26,0.85) 65%)`,
+                      border: "1px solid rgba(255,255,255,0.22)",
+                      boxShadow: "0 12px 30px -14px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.14)",
                     }}
                   >
-                    {label}
+                    <span
+                      className="font-bold"
+                      style={{ fontSize: "clamp(1.125rem, 2.6vw, 1.5rem)", color: "#ffffff", lineHeight: 1 }}
+                    >
+                      {node.num}
+                    </span>
+                    <span
+                      className="font-medium mt-1"
+                      style={{
+                        fontSize: "clamp(0.5rem, 1vw, 0.625rem)",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.75)",
+                      }}
+                    >
+                      {node.label}
+                    </span>
                   </div>
                 );
               })}
             </div>
           </Reveal>
           <p
-            className="text-center font-light mt-8"
+            className="text-center font-light mt-5"
             style={{ fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}
           >
             Reading from your catalogue · calendar · payments · CRM
           </p>
           <p
-            className="text-center font-light mt-2"
+            className="text-center font-light mt-1.5"
             style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}
           >
             Industry rules pre-built — no market-specific rebuild.
@@ -2152,78 +2201,90 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[11] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
-        <div className="relative max-w-5xl mx-auto">
-          <SectionHead
-            eyebrow="Proof"
-            title="Same inbox."
-            accentTail="Different business."
-            body="The single number that changes everything downstream is how long a customer waits for a real reply. Everything else — conversion, repeat rate, cost per acquisition — moves behind it."
-            center
-          />
-
-          <Reveal delay={0.1} className="mt-12">
-            <div className="rounded-3xl p-7" style={glass}>
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <SectionHead
+              eyebrow="Proof"
+              title="Same inbox."
+              accentTail="Different business."
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
+            />
+            <Reveal>
               <p
-                className="font-light text-center"
-                style={{ fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}
+                className="font-light"
+                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
-                Median wait for a real reply · one measured account
+                The single number that changes everything downstream is how long a customer waits for a real
+                reply. Everything else — conversion, repeat rate, cost per acquisition — moves behind it.
               </p>
-              <div className="mt-8 flex flex-col gap-6 max-w-xl mx-auto">
-                <div>
-                  <div className="flex items-baseline justify-between mb-2">
-                    <span className="font-medium" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
-                      Before
-                    </span>
-                    <span className="font-bold" style={{ fontSize: "1.125rem", color: "rgba(255,255,255,0.7)" }}>
-                      1h 36m
-                    </span>
+            </Reveal>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <Reveal delay={0.1} className="mt-8">
+              <div className="rounded-3xl p-7" style={glass}>
+                <p
+                  className="font-light text-center"
+                  style={{ fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}
+                >
+                  Median wait for a real reply · one measured account
+                </p>
+                <div className="mt-8 flex flex-col gap-6 max-w-xl mx-auto">
+                  <div>
+                    <div className="flex items-baseline justify-between mb-2">
+                      <span className="font-medium" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
+                        Before
+                      </span>
+                      <span className="font-bold" style={{ fontSize: "1.125rem", color: "rgba(255,255,255,0.7)" }}>
+                        1h 36m
+                      </span>
+                    </div>
+                    <div style={{ height: "0.75rem", background: "rgba(255,255,255,0.08)", borderRadius: "999px" }}>
+                      <div style={{ height: "100%", width: "100%", background: "rgba(255,255,255,0.25)", borderRadius: "999px" }} />
+                    </div>
                   </div>
-                  <div style={{ height: "0.75rem", background: "rgba(255,255,255,0.08)", borderRadius: "999px" }}>
-                    <div style={{ height: "100%", width: "100%", background: "rgba(255,255,255,0.25)", borderRadius: "999px" }} />
+                  <div>
+                    <div className="flex items-baseline justify-between mb-2">
+                      <span className="font-medium" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
+                        With ARQQA
+                      </span>
+                      <span className="font-bold" style={{ fontSize: "1.125rem", color: "#ff9a5a" }}>
+                        13s
+                      </span>
+                    </div>
+                    <div style={{ height: "0.75rem", background: "rgba(255,255,255,0.08)", borderRadius: "999px" }}>
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "0.6%",
+                          minWidth: "0.75rem",
+                          background: "linear-gradient(90deg, #ff7a3d 0%, #ff9a5a 100%)",
+                          borderRadius: "999px",
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-baseline justify-between mb-2">
-                    <span className="font-medium" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
-                      With ARQQA
-                    </span>
-                    <span className="font-bold" style={{ fontSize: "1.125rem", color: "#ff9a5a" }}>
-                      13s
-                    </span>
-                  </div>
-                  <div style={{ height: "0.75rem", background: "rgba(255,255,255,0.08)", borderRadius: "999px" }}>
-                    <div
-                      style={{
-                        height: "100%",
-                        width: "0.6%",
-                        minWidth: "0.75rem",
-                        background: "linear-gradient(90deg, #ff7a3d 0%, #ff9a5a 100%)",
-                        borderRadius: "999px",
-                      }}
-                    />
-                  </div>
-                </div>
+                <p
+                  className="text-center font-light mt-5"
+                  style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)" }}
+                >
+                  — drawn to scale —
+                </p>
               </div>
-              <p
-                className="text-center font-light mt-5"
-                style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)" }}
-              >
-                — drawn to scale —
-              </p>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <StatRow
-            stats={[
-              { value: "240K+", label: "Interactions Handled" },
-              { value: "89%", label: "Closed With No Human" },
-              { value: "13s", label: "Median Reply Time" },
-              { value: "24/7", label: "Across 3 Markets" },
-            ]}
-          />
+            <StatRow
+              stats={[
+                { value: "240K+", label: "Interactions Handled" },
+                { value: "89%", label: "Closed With No Human" },
+                { value: "13s", label: "Median Reply Time" },
+                { value: "24/7", label: "Across 3 Markets" },
+              ]}
+            />
+          </div>
         </div>
       </section>
 
