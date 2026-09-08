@@ -137,21 +137,21 @@ export const VIDEO_PROJECTS: VideoProject[] = [
     gallery: [
       [
         {
-          src: "/work/video/fawry-pay-gallery/shot-01.webp",
-          alt: "Woman celebrating with shopping bags raised in a vintage Egyptian salon",
-          caption: "The final beat — out the door before the appointment's even over",
-        },
-      ],
-      [
-        {
           src: "/work/video/fawry-pay-gallery/shot-06.webp",
-          alt: "Two women mid-treatment, one checking her phone under a dryer",
-          caption: "Behind the scenes on set",
+          alt: "Storyboard sketch of a woman walking out with shopping bags",
+          caption: "Storyboard to final frame",
         },
         {
           src: "/work/video/fawry-pay-gallery/shot-08.webp",
           alt: "Final frame of a woman walking out of the salon with shopping bags, smiling",
           caption: "Storyboard to final frame",
+        },
+      ],
+      [
+        {
+          src: "/work/video/fawry-pay-gallery/shot-01.webp",
+          alt: "Woman celebrating with shopping bags raised, the full salon cast behind her",
+          caption: "The final beat — out the door before the appointment's even over",
         },
       ],
       [
