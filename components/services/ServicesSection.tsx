@@ -89,7 +89,7 @@ const SERVICES: Service[] = [
     body: "AI agents inside every inbox and comment section your customers already use. Sales, service, moderation and reporting — automated, on-brand, and live in a day.",
     cep: "When your team can't keep up with every conversation.",
     accent: "orange",
-    image: "/services/card-gradient-001.webp",
+    image: "/services/crm-automation-ai-solutions.png",
     href: "/autonomous",
   },
 ];

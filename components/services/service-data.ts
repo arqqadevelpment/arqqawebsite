@@ -738,8 +738,8 @@ export const SERVICES: ServiceDetail[] = [
     positioning:
       "Four AI agents inside every inbox and comment section your customers already use — sales, service, moderation and reporting, live in a day.",
     cep: "When your team can't keep up with every conversation.",
-    image: "/services/card-gradient-001.webp",
-    banner: "/services/go-to-market-cta.webp",
+    image: "/services/crm-automation-ai-solutions.png",
+    banner: "/services/crm-automation-ai-solutions.png",
     accent: "orange",
     summary:
       "AI agents inside every inbox and comment section your customers already use. Sales, service, moderation and reporting — automated, on-brand, and live in a day.",
