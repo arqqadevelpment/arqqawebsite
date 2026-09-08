@@ -204,6 +204,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       challengeBanner: true,
       challenge: "/portfolio/merova-challenge.webp",
       afterResults: "/portfolio/merova.webp",
+      socialProof: ["/portfolio/merova-social-01.webp", "/portfolio/merova-social-02.webp"],
     },
     heroHeadline: "Winning Winter — On Merova's Terms.",
     heroSub:
