@@ -2467,15 +2467,8 @@ export function AutonomousPageContent() {
             Send your last few thousand conversations and within a week you get what your customers ask, how
             many went unanswered, and what that costs a year. Free.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
-            <PrimaryCTA label="Start the Free Audit" href="/start#book-strategy-call" />
-            <a
-              href="mailto:info@arqqa.net"
-              className="font-medium"
-              style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.6)" }}
-            >
-              info@arqqa.net
-            </a>
+          <div className="mt-8 flex justify-center">
+            <PrimaryCTA label="Book your strategy session" href="/start#book-strategy-call" />
           </div>
         </Reveal>
       </section>
