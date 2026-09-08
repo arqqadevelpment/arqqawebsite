@@ -351,11 +351,11 @@ function Timeline({
   steps: { time: string; title: string; body: string; highlight?: boolean }[];
 }) {
   return (
-    <div className="flex flex-col" style={{ gap: "0.875rem" }}>
+    <div className="flex flex-col" style={{ gap: "0.625rem" }}>
       {steps.map((s, i) => (
         <Reveal key={s.time + s.title} delay={Math.min(i * 0.08, 0.3)}>
           <div
-            className="rounded-2xl p-5 flex gap-4"
+            className="rounded-2xl p-4 flex gap-3.5"
             style={{
               ...glass,
               border: s.highlight ? "1px solid rgba(255,138,90,0.5)" : glass.border,
@@ -373,12 +373,12 @@ function Timeline({
               {s.time}
             </span>
             <div>
-              <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+              <p className="font-bold" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
                 {s.title}
               </p>
               <p
-                className="font-light mt-1.5"
-                style={{ fontSize: "0.8125rem", lineHeight: 1.65, color: "rgba(255,255,255,0.55)" }}
+                className="font-light mt-1"
+                style={{ fontSize: "0.75rem", lineHeight: 1.55, color: "rgba(255,255,255,0.55)" }}
               >
                 {s.body}
               </p>
@@ -457,7 +457,10 @@ function HospitalChatMock() {
           </span>
         </div>
 
-        <div className="flex flex-col p-5" style={{ gap: "0.75rem", maxHeight: "24rem", overflowY: "auto" }}>
+        <div
+          className="flex flex-col p-5"
+          style={{ gap: "0.625rem", height: "19rem", overflow: "hidden", justifyContent: "flex-end" }}
+        >
           <div style={them}>
             My back has been hurting for three days
             <span style={stamp}>23:41</span>
@@ -1087,7 +1090,7 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[2] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
         <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-start">
           <div>
@@ -1097,7 +1100,7 @@ export function AutonomousPageContent() {
               accentTail="Booked and paid by 23:44."
               body="A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a real opening, holds the slot and takes the deposit — in the patient's own dialect."
             />
-            <div className="mt-8">
+            <div className="mt-6">
               <HospitalChatMock />
             </div>
           </div>
