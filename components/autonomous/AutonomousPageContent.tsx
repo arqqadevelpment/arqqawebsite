@@ -732,6 +732,68 @@ function BankChatMock() {
   );
 }
 
+const AIRLINE_THREAD: ChatBubble[] = [
+  { from: "them", time: "02:47", content: "Can I add 15kg baggage to my flight?" },
+  {
+    from: "me",
+    time: "02:47",
+    content: (
+      <>
+        Yes — MS777, Cairo → Dubai, 14 Aug. Pre-purchase is cheaper than at the airport.
+        <div
+          className="rounded-xl mt-2 p-3"
+          style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+            EGP 1,240
+          </p>
+          <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.5)" }}>
+            15kg extra · vs EGP 2,100 at the desk
+          </p>
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "02:48", content: "Go ahead" },
+  {
+    from: "me",
+    time: "02:48",
+    content: (
+      <div
+        className="rounded-full text-center font-bold"
+        style={{
+          padding: "0.5rem 1rem",
+          fontSize: "0.75rem",
+          background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
+          color: "#ffffff",
+        }}
+      >
+        Pay EGP 1,240 securely
+      </div>
+    ),
+  },
+  { from: "them", time: "02:49", content: "Paid" },
+  {
+    from: "me",
+    time: "02:49",
+    content:
+      "Added. Your allowance is now 38kg and the updated boarding pass is in this thread. Want me to check seat upgrades too?",
+  },
+];
+
+function AirlineChatMock() {
+  return (
+    <AnimatedChatCard
+      avatarLetter="T"
+      name="The Airline"
+      statusLine="Typically replies instantly"
+      inlineStatus
+      channelLabel="Messenger · Sales Agent"
+      thread={AIRLINE_THREAD}
+    />
+  );
+}
+
 function FeatureCard({
   glyph,
   title,
@@ -1274,7 +1336,13 @@ function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) 
           </p>
         </Reveal>
         <div className="mt-6">
-          {industry.key === "banking" ? <BankChatMock /> : <ChatSample {...industry.chat} />}
+          {industry.key === "banking" ? (
+            <BankChatMock />
+          ) : industry.key === "airlines" ? (
+            <AirlineChatMock />
+          ) : (
+            <ChatSample {...industry.chat} />
+          )}
         </div>
       </div>
     </div>
