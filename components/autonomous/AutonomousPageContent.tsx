@@ -470,10 +470,12 @@ const HOSPITAL_THREAD: ChatBubble[] = [
 /* ── Auto-replaying chat mock — plays the hospital thread one bubble at a
    time with a typing beat before each reply, then loops, the way the
    reference deck's chat animates in on repeat. ── */
-function HospitalChatMock() {
+/* ── Plays a chat thread's bubbles in on a loop: one at a time with a
+   typing beat before each reply, then a pause and restart. Shared by
+   every animated chat mock on the page. ── */
+function useAutoplayThread(total: number) {
   const [count, setCount] = useState(0);
   const [typing, setTyping] = useState(false);
-  const total = HOSPITAL_THREAD.length;
 
   useEffect(() => {
     let cancelled = false;
@@ -509,6 +511,29 @@ function HospitalChatMock() {
     };
   }, [total]);
 
+  return { count, typing };
+}
+
+function AnimatedChatCard({
+  avatarLetter,
+  name,
+  statusLine,
+  inlineStatus = false,
+  channelLabel,
+  thread,
+  height = "19rem",
+}: {
+  avatarLetter: string;
+  name: string;
+  statusLine: string;
+  inlineStatus?: boolean;
+  channelLabel?: string;
+  thread: ChatBubble[];
+  height?: string;
+}) {
+  const total = thread.length;
+  const { count, typing } = useAutoplayThread(total);
+
   const bubbleBase: React.CSSProperties = {
     borderRadius: "1rem",
     padding: "0.625rem 0.875rem",
@@ -540,11 +565,26 @@ function HospitalChatMock() {
     textAlign: "right",
   };
 
-  const nextFrom = count < total ? HOSPITAL_THREAD[count].from : "me";
+  const nextFrom = count < total ? thread[count].from : "me";
 
   return (
     <Reveal delay={0.15}>
       <div className="rounded-3xl overflow-hidden" style={glass}>
+        {channelLabel ? (
+          <div
+            className="px-6 font-light"
+            style={{
+              padding: "1.125rem 1.5rem",
+              fontSize: "0.75rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.4)",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            {channelLabel}
+          </div>
+        ) : null}
         <div
           className="flex items-center gap-3 px-5 py-4"
           style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
@@ -559,26 +599,34 @@ function HospitalChatMock() {
               color: "#ffffff",
             }}
           >
-            H
+            {avatarLetter}
           </span>
-          <div className="flex-1">
-            <p className="font-medium" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
-              The hospital
+          {inlineStatus ? (
+            <p style={{ fontSize: "0.9375rem" }}>
+              <span className="font-bold" style={{ color: "#ffffff" }}>
+                {name}
+              </span>{" "}
+              <span className="font-light" style={{ color: "rgba(255,255,255,0.45)" }}>
+                · {statusLine}
+              </span>
             </p>
-            <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.4)" }}>
-              online
-            </p>
-          </div>
-          <span aria-hidden="true" style={{ color: "rgba(255,255,255,0.3)", fontSize: "1rem" }}>
-            ⋯
-          </span>
+          ) : (
+            <div className="flex-1">
+              <p className="font-medium" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
+                {name}
+              </p>
+              <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.4)" }}>
+                {statusLine}
+              </p>
+            </div>
+          )}
         </div>
 
         <div
           className="flex flex-col p-5"
-          style={{ gap: "0.625rem", height: "19rem", overflow: "hidden", justifyContent: "flex-end" }}
+          style={{ gap: "0.625rem", height, overflow: "hidden", justifyContent: "flex-end" }}
         >
-          {HOSPITAL_THREAD.slice(0, count).map((b, i) => (
+          {thread.slice(0, count).map((b, i) => (
             <div key={i} style={b.from === "them" ? them : me}>
               {b.content}
               <span style={stamp}>{b.time}</span>
@@ -619,6 +667,68 @@ function HospitalChatMock() {
         }
       `}</style>
     </Reveal>
+  );
+}
+
+function HospitalChatMock() {
+  return (
+    <AnimatedChatCard avatarLetter="H" name="The hospital" statusLine="online" thread={HOSPITAL_THREAD} />
+  );
+}
+
+const BANK_THREAD: ChatBubble[] = [
+  { from: "them", time: "03:12", content: "I’ve lost my credit card abroad" },
+  {
+    from: "me",
+    time: "03:12",
+    content:
+      "I can lock it right now. Confirming it’s you first — I’ve sent a 6-digit code to the number on the account.",
+  },
+  { from: "them", time: "03:13", content: "482917" },
+  {
+    from: "me",
+    time: "03:13",
+    content: (
+      <>
+        Verified. Card ending 4417 is now locked. No transaction can be authorised on it.
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {["Order a replacement", "Review recent charges"].map((label) => (
+            <span
+              key={label}
+              className="rounded-full"
+              style={{
+                padding: "0.25rem 0.625rem",
+                fontSize: "0.6875rem",
+                border: "1px solid rgba(255,255,255,0.24)",
+                color: "rgba(255,255,255,0.75)",
+              }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "03:14", content: "There’s a charge I don’t recognise" },
+  {
+    from: "me",
+    time: "03:14",
+    content:
+      "That is a formal dispute, so I am passing you to a compliance officer rather than handling it myself. Reference DSP-88214 — they will call within the hour.",
+  },
+];
+
+function BankChatMock() {
+  return (
+    <AnimatedChatCard
+      avatarLetter="T"
+      name="The Bank"
+      statusLine="Typically replies instantly"
+      inlineStatus
+      channelLabel="Messenger · Service Agent"
+      thread={BANK_THREAD}
+    />
   );
 }
 
@@ -1164,7 +1274,7 @@ function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) 
           </p>
         </Reveal>
         <div className="mt-6">
-          <ChatSample {...industry.chat} />
+          {industry.key === "banking" ? <BankChatMock /> : <ChatSample {...industry.chat} />}
         </div>
       </div>
     </div>
