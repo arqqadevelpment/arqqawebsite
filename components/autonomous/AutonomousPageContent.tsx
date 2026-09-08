@@ -131,9 +131,58 @@ function SectionHead({
   );
 }
 
-function GradientNumber({ value, style }: { value: string; style?: React.CSSProperties }) {
+function GradientNumber({
+  value,
+  style,
+  animate = false,
+}: {
+  value: string;
+  style?: React.CSSProperties;
+  animate?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [display, setDisplay] = useState(() => {
+    if (!animate) return value;
+    const m = value.match(/^([0-9]*\.?[0-9]+)(.*)$/);
+    return m ? "0" + m[2] : value;
+  });
+
+  useEffect(() => {
+    if (!animate) return;
+    const match = value.match(/^([0-9]*\.?[0-9]+)(.*)$/);
+    if (!match) return;
+    const target = parseFloat(match[1]);
+    const suffix = match[2];
+    const decimals = match[1].includes(".") ? match[1].split(".")[1].length : 0;
+    const el = ref.current;
+    if (!el) return;
+    let started = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          const start = performance.now();
+          const duration = 1400;
+          function tick(now: number) {
+            const p = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setDisplay((target * eased).toFixed(decimals) + suffix);
+            if (p < 1) requestAnimationFrame(tick);
+            else setDisplay(match![1] + suffix);
+          }
+          requestAnimationFrame(tick);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value, animate]);
+
   return (
     <div
+      ref={ref}
       className="font-bold"
       style={{
         fontSize: "clamp(1.75rem, 3.6vw, 2.75rem)",
@@ -146,7 +195,7 @@ function GradientNumber({ value, style }: { value: string; style?: React.CSSProp
         ...style,
       }}
     >
-      {value}
+      {display}
     </div>
   );
 }
@@ -156,7 +205,7 @@ function StatRow({ stats }: { stats: { value: string; label: string }[] }) {
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-8 mt-10">
       {stats.map((s, i) => (
         <Reveal key={s.label} delay={Math.min(i * 0.08, 0.3)}>
-          <GradientNumber value={s.value} />
+          <GradientNumber value={s.value} animate />
           <p
             className="font-light mt-2"
             style={{
@@ -204,7 +253,9 @@ function PrimaryCTA({ label, href }: { label: string; href: string }) {
   );
 }
 
-/* ── 24-hour bar chart — inbound distribution, off-hours highlighted ── */
+/* ── 24-hour bar chart — inbound distribution, off-hours highlighted ──
+   Bars grow up from the baseline, staggered, the same way the source
+   deck's chart animates in (scaleY 0 → 1, ~26ms stagger per bar). */
 function HourlyChart({ note }: { note: string }) {
   // Roughly matches the source deck's shape: a daytime hump, a bigger
   // evening/overnight surge. Bars from 20:00–08:00 read as after-hours.
@@ -212,10 +263,29 @@ function HourlyChart({ note }: { note: string }) {
     18, 12, 9, 7, 6, 8, 14, 26, 38, 46, 52, 58, 61, 57, 50, 44, 48, 62, 78, 92, 88, 70, 46, 28,
   ];
   const max = Math.max(...bars);
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [grown, setGrown] = useState(false);
+
+  useEffect(() => {
+    const el = chartRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setGrown(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Reveal>
       <div className="rounded-3xl p-6 sm:p-7" style={glass}>
-        <div className="flex items-end gap-1 sm:gap-1.5" style={{ height: "9rem" }}>
+        <div ref={chartRef} className="flex items-end gap-1 sm:gap-1.5" style={{ height: "9rem" }}>
           {bars.map((v, i) => {
             const offHours = i >= 20 || i < 8;
             return (
@@ -224,6 +294,9 @@ function HourlyChart({ note }: { note: string }) {
                 className="flex-1 rounded-t-sm"
                 style={{
                   height: `${(v / max) * 100}%`,
+                  transformOrigin: "center bottom",
+                  transform: grown ? "scaleY(1)" : "scaleY(0)",
+                  transition: `transform 0.8s cubic-bezier(0.16,1,0.3,1) ${i * 26}ms`,
                   background: offHours
                     ? "linear-gradient(180deg, #ff7a3d 0%, #b6541f 100%)"
                     : "linear-gradient(180deg, #5aa2ff 0%, #2f6bff 100%)",
@@ -751,9 +824,6 @@ export function AutonomousPageContent() {
               Four AI agents inside every inbox and comment section your customers already use. WhatsApp,
               Instagram, Messenger, TikTok, email, web chat — one thread, whatever they arrive on. Live in a day.
             </p>
-            <div className="mt-9 flex justify-center">
-              <PrimaryCTA label="Start the Free Audit" href="/start#book-strategy-call" />
-            </div>
           </Reveal>
           <StatRow
             stats={[
