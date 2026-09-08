@@ -23,7 +23,7 @@ type Fact = {
 const FACTS: Fact[] = [
   {
     key: "years",
-    value: 13,
+    value: 14,
     suffix: "",
     label: "Years Operating",
     glow: "#4b3ff2",

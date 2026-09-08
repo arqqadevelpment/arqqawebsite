@@ -17,8 +17,9 @@ const QUICK_LINKS = [
   { label: "Contact Us", href: "/start" },
 ];
 
-/* Dial link uses the international form so it works from any country. */
-const PHONE = { display: "011 1011 5557", href: "tel:+201110115557" };
+/* WhatsApp click-to-chat rather than tel: — on iOS Safari, tel: can surface a
+   FaceTime prompt instead of the phone app, which this sidesteps entirely. */
+const PHONE = { display: "+2 011 1011 5557", href: "https://wa.me/201110115557" };
 
 /* Footer carries the HQ only — the full office list lives on /start. */
 const OFFICES = [
@@ -31,28 +32,28 @@ const OFFICES = [
 const SOCIALS = [
   {
     label: "Facebook",
-    href: "https://facebook.com/arqqa",
+    href: "https://www.facebook.com/arqqadigital",
     icon: (
       <path d="M13.5 8.5h2V5.8h-2.4c-1.9 0-3.1 1.3-3.1 3.2v1.7H8v2.6h2v6.9h2.8v-6.9h2.3l.4-2.6h-2.7V9.3c0-.5.3-.8.7-.8z" />
     ),
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/arqqa",
+    href: "https://www.instagram.com/arqqadigital/",
     icon: (
       <path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2zm0 5.9a2.3 2.3 0 1 1 0-4.6 2.3 2.3 0 0 1 0 4.6zM16.9 8.2a.85.85 0 1 1-1.7 0 .85.85 0 0 1 1.7 0zM12 5.4c-1.8 0-2 0-2.7.04-.7.03-1.2.15-1.6.31a3.2 3.2 0 0 0-1.9 1.9c-.16.4-.28.9-.31 1.6C5.4 10 5.4 10.2 5.4 12s0 2 .04 2.7c.03.7.15 1.2.31 1.6a3.2 3.2 0 0 0 1.9 1.9c.4.16.9.28 1.6.31.7.04.9.04 2.7.04s2 0 2.7-.04c.7-.03 1.2-.15 1.6-.31a3.2 3.2 0 0 0 1.9-1.9c.16-.4.28-.9.31-1.6.04-.7.04-.9.04-2.7s0-2-.04-2.7c-.03-.7-.15-1.2-.31-1.6a3.2 3.2 0 0 0-1.9-1.9c-.4-.16-.9-.28-1.6-.31C14 5.4 13.8 5.4 12 5.4zm0 1.2c1.8 0 2 0 2.7.04.6.03 1 .13 1.2.22.3.12.5.26.75.5.24.24.38.44.5.75.09.23.19.6.22 1.2.04.7.04.9.04 2.7s0 2-.04 2.7c-.03.6-.13 1-.22 1.2a2 2 0 0 1-.5.75c-.24.24-.44.38-.75.5-.23.09-.6.19-1.2.22-.7.04-.9.04-2.7.04s-2 0-2.7-.04c-.6-.03-1-.13-1.2-.22a2 2 0 0 1-.75-.5 2 2 0 0 1-.5-.75c-.09-.23-.19-.6-.22-1.2-.04-.7-.04-.9-.04-2.7s0-2 .04-2.7c.03-.6.13-1 .22-1.2.12-.3.26-.5.5-.75.24-.24.44-.38.75-.5.23-.09.6-.19 1.2-.22.7-.04.9-.04 2.7-.04z" />
     ),
   },
   {
-    label: "X",
-    href: "https://x.com/arqqa",
+    label: "Vimeo",
+    href: "https://vimeo.com/arqqadigital",
     icon: (
-      <path d="M15.9 6h2.2l-4.8 5.5L19 19h-4.4l-3.5-4.5L7.2 19H5l5.1-5.9L4.7 6h4.5l3.1 4.1L15.9 6zm-.8 11.7h1.2L8.6 7.2H7.3l7.8 10.5z" />
+      <path d="M22.4 7.15c-.1 2.2-1.64 5.2-4.62 9.02C14.7 20.16 12.24 22 10.24 22c-1.24 0-2.29-1.15-3.14-3.44-.57-2.1-1.15-4.2-1.72-6.3-.64-2.3-1.32-3.44-2.05-3.44-.16 0-.7.33-1.63.99l-.98-1.26C1.8 7.5 2.9 6.5 3.98 5.6c1.5-1.24 2.6-1.89 3.32-1.96 1.75-.17 2.83.99 3.23 3.5.44 2.7.74 4.38.9 5.02.5 2.24 1.05 3.35 1.65 3.35.47 0 1.16-.72 2.1-2.16.93-1.44 1.43-2.53 1.5-3.28.14-1.24-.36-1.87-1.5-1.87-.53 0-1.08.12-1.65.36 1.1-3.55 3.19-5.28 6.28-5.18 2.29.07 3.37 1.53 3.24 4.37z" />
     ),
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/arqqa",
+    href: "https://www.linkedin.com/company/digital-marketing-social-media-managment-egypt/mycompany/",
     icon: (
       <path d="M8.3 9.7H5.7V18h2.6V9.7zM7 8.6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.3 13.4c0-2.5-1.3-3.9-3.2-3.9-1.5 0-2.1.8-2.5 1.4V9.7h-2.6V18h2.6v-4.5c0-1.2.5-1.9 1.5-1.9s1.5.7 1.5 1.9V18h2.7v-4.6z" />
     ),
@@ -218,6 +219,8 @@ export function Footer() {
               </a>
               <a
                 href={PHONE.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-light"
                 style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.72)" }}
               >

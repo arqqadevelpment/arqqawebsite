@@ -7,10 +7,11 @@ const LINKS = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "The Catalyst System™", href: "/catalyst-system" },
-  { label: "Portfolio", href: "/work" },
+  { label: "Autonomous", href: "/autonomous" },
+  { label: "Work", href: "/work" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/start" },
+  { label: "Career", href: "/career" },
 ];
 
 function NavLink({

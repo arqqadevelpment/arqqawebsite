@@ -3,8 +3,66 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { CASE_STUDY_WASH, getRelated } from "./case-study-data";
 import type { PerformanceCaseStudy } from "./case-study-data";
+
+/* ── Parallax drift ──────────────────────────────────────────────────────
+   Tracks how far an element's centre sits from the viewport's centre (as a
+   fraction of viewport height, clamped to ±1) and hands back a small
+   translateY driven by that. The element itself is scaled up ~12% via
+   transform so the few percent of vertical travel this produces never
+   uncovers empty space at its edges — both call sites sit inside an
+   `overflow-hidden` ancestor that clips it regardless.
+
+   Runs on scroll/resize via rAF rather than an IntersectionObserver, since
+   the offset has to keep tracking continuously while the element is on
+   screen, not just fire once on entry. Disabled under prefers-reduced-motion,
+   where the element stays at its scaled resting position with no drift. */
+function useParallaxDrift(
+  ref: React.RefObject<HTMLElement | null>,
+  enabled: boolean,
+  strength = 10,
+  // Kept proportional to strength at each call site: enough oversize that the
+  // translateY this produces (~strength * scale, since the transform's scale
+  // wraps the translate) never runs past the buffer at the extremes.
+  scale = 1.12
+) {
+  const reduced = useReducedMotion();
+  const [y, setY] = useState(0);
+
+  useEffect(() => {
+    if (!enabled || reduced) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let raf = 0;
+    function update() {
+      raf = 0;
+      const rect = el!.getBoundingClientRect();
+      const centreOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const travel = Math.max(-1, Math.min(1, centreOffset / window.innerHeight));
+      setY(travel * strength);
+    }
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+    // `ref` is a stable object identity from useRef in the caller, not state,
+    // so it is intentionally left out of the dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, reduced, strength]);
+
+  return `scale(${scale}) translateY(${y}%)`;
+}
 
 /* ── Reveal-on-scroll ──
    threshold 0 with a bottom rootMargin: some blocks are taller than the
@@ -80,8 +138,88 @@ function SectionHead({
   );
 }
 
+/* Banner — a rounded panel running the width of the page's content column,
+   the same max-w-6xl the website case studies use for their hero artwork, so
+   the two page types sit at one scale. Height comes from the image's own ratio
+   (`h-auto`, no fixed height and no object-cover), so the whole frame shows
+   rather than a crop of it. */
+function SectionBanner({ src, className = "" }: { src: string; className?: string }) {
+  return (
+    <Reveal delay={0.12} className={className}>
+      <div
+        className="relative overflow-hidden rounded-3xl mx-auto w-full max-w-6xl"
+        style={{
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+        }}
+      >
+        {/* Decorative — the copy around it carries the meaning. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
+      </div>
+    </Reveal>
+  );
+}
+
+/* Framed image for the two-column sections — same treatment as the Challenge
+   artwork so the page reads as one set.
+
+   `stretch` drops the fixed 4:3 ratio and lets the frame take the height of the
+   taller column beside it. Used where copy sets the column height and a
+   ratio-locked image would leave dead space under it. The float is dropped in
+   that mode: a transform on a stretched item fights the grid's sizing. */
+function SectionImage({
+  src,
+  delay = 0.15,
+  stretch = false,
+}: {
+  src: string;
+  delay?: number;
+  stretch?: boolean;
+}) {
+  return (
+    <Reveal
+      delay={delay}
+      className={`flex justify-center lg:justify-end ${stretch ? "self-stretch h-full" : ""}`}
+    >
+      <div
+        className="relative rounded-3xl overflow-hidden"
+        style={{
+          width: stretch ? "100%" : "min(34rem, 100%)",
+          ...(stretch
+            ? { height: "100%", minHeight: "20rem" }
+            : { aspectRatio: "4 / 3", animation: "challengeImageFloat 6s ease-in-out 1.1s infinite" }),
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 24px 60px -24px rgba(20,60,200,0.45)",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+    </Reveal>
+  );
+}
+
 export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy }) {
   const related = getRelated(study.related);
+  const parallaxOn = !!study.sectionMedia?.parallax;
+  // The Challenge banner takes the section's own artwork when a study supplies
+  // it, and otherwise reuses the hub card's image (which is what Allure does).
+  const challengeBannerSrc =
+    study.sectionMedia?.challenge ?? study.card.image;
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  // 50% further travel than the default (10) — the header reads as the more
+  // dramatic of the two parallax spots, so it gets more range than Takeaway.
+  // Scale bumped in proportion (1.12 -> 1.18) so the extra travel still stays
+  // inside the oversized buffer at the extremes.
+  const heroTransform = useParallaxDrift(heroBgRef, parallaxOn, 15, 1.18);
+  const outcomeBgRef = useRef<HTMLImageElement>(null);
+  const outcomeTransform = useParallaxDrift(outcomeBgRef, parallaxOn);
 
   return (
     <div className="relative">
@@ -95,12 +233,17 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
             page's gradient backdrop; dissolving instead lets that backdrop
             carry straight through with no seam. */}
         <div
+          ref={heroBgRef}
           aria-hidden="true"
           className="absolute inset-0 cs-hero-fade"
           style={{
-            backgroundImage: "url(/services/case-study-hero-bg.webp)",
+            backgroundImage: `url(${
+              study.sectionMedia?.hero ?? "/services/case-study-hero-bg.webp"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            transform: parallaxOn ? heroTransform : undefined,
+            willChange: parallaxOn ? "transform" : undefined,
           }}
         />
         <div
@@ -228,51 +371,195 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </div>
       </header>
 
-      {/* ══ The Challenge ══ */}
+      {/* ══ The Challenge ══
+          Two columns where the study has artwork — copy left, image right,
+          matching the portfolio case studies. Falls back to the original
+          centred column for any study without one. */}
       <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
-        <div className="relative max-w-5xl mx-auto">
-          <SectionHead eyebrow="The Challenge" title="What was broken." center />
-          <Reveal delay={0.06} className="text-center">
-            <p
-              className="font-light mx-auto"
-              style={{
-                fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
-                lineHeight: 1.85,
-                color: "rgba(255,255,255,0.68)",
-                maxWidth: "46rem",
-              }}
-            >
-              {study.challenge}
-            </p>
-          </Reveal>
+        <div
+          className={`relative mx-auto ${
+            study.sectionMedia?.challengeBanner
+              ? "max-w-6xl"
+              : study.card.image
+                ? "max-w-6xl"
+                : "max-w-5xl"
+          }`}
+        >
+          {study.sectionMedia?.challengeBanner && challengeBannerSrc ? (
+            <>
+              <SectionHead eyebrow="The Challenge" title="What was broken." center />
+              <Reveal delay={0.06} className="text-center">
+                <p
+                  className="font-light mx-auto"
+                  style={{
+                    fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.68)",
+                    maxWidth: "46rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+              <SectionBanner src={challengeBannerSrc} className="mt-14" />
+            </>
+          ) : study.card.image ? (
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
+              <Reveal>
+                <Eyebrow className="mb-5">The Challenge</Eyebrow>
+                <h2
+                  className="font-bold"
+                  style={{
+                    fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                    lineHeight: 1.2,
+                    letterSpacing: "-0.02em",
+                    color: "#ffffff",
+                  }}
+                >
+                  What was broken.
+                </h2>
+                <p
+                  className="font-light mt-4"
+                  style={{
+                    fontSize: "1rem",
+                    lineHeight: 1.8,
+                    color: "rgba(255,255,255,0.62)",
+                    maxWidth: "34rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.15} className="flex justify-center lg:justify-end">
+                <div
+                  className="relative rounded-3xl overflow-hidden"
+                  style={{
+                    width: "min(34rem, 100%)",
+                    aspectRatio: "4 / 3",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "0 24px 60px -24px rgba(20,60,200,0.45)",
+                    animation: "challengeImageFloat 6s ease-in-out 1.1s infinite",
+                  }}
+                >
+                  {/* Decorative — the copy beside it carries the meaning. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={study.card.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          ) : (
+            <>
+              <SectionHead eyebrow="The Challenge" title="What was broken." center />
+              <Reveal delay={0.06} className="text-center">
+                <p
+                  className="font-light mx-auto"
+                  style={{
+                    fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.68)",
+                    maxWidth: "46rem",
+                  }}
+                >
+                  {study.challenge}
+                </p>
+              </Reveal>
+            </>
+          )}
         </div>
       </section>
 
       {/* ══ The Approach ══ */}
       <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
-          <SectionHead eyebrow="The Approach" title="What we did about it." center />
-          {study.approach.intro ? (
-            <Reveal delay={0.05} className="mb-10 text-center">
-              <p
-                className="font-light mx-auto"
-                style={{
-                  fontSize: "1rem",
-                  lineHeight: 1.8,
-                  color: "rgba(255,255,255,0.62)",
-                  maxWidth: "44rem",
-                }}
-              >
-                {study.approach.intro}
-              </p>
-            </Reveal>
-          ) : null}
+          {study.sectionMedia?.approach ? (
+            /* Two columns: heading, intro and the move cards all sit in the
+               left column, artwork in the right. Top-aligned so the heading
+               starts level with the artwork rather than floating in the middle
+               of the taller column. */
+            <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-start">
+              <div>
+                <SectionHead eyebrow="The Approach" title="What we did about it." />
+                {study.approach.intro ? (
+                  <Reveal delay={0.05} className="mb-10">
+                    <p
+                      className="font-light"
+                      style={{
+                        fontSize: "1rem",
+                        lineHeight: 1.8,
+                        color: "rgba(255,255,255,0.62)",
+                      }}
+                    >
+                      {study.approach.intro}
+                    </p>
+                  </Reveal>
+                ) : null}
 
-          {/* Cards sit in one row where they fit and wrap on narrower
-              viewports — auto-fit rather than a fixed column count, because
-              the number of moves varies from three to seven by case study.
-              A hairline connector runs from each badge to the next. */}
-          <div className={`cs-moves ${study.approach.oneRow ? "cs-moves-row" : "cs-moves-grid"}`}>
+                {/* Stacked one per row — the column is too narrow to sit three
+                    cards side by side without them turning into slivers.
+                    No number badge and tighter padding here: the column runs
+                    alongside the artwork, and the badge's own height was enough
+                    to push the stack well past the bottom of the image. */}
+                <div
+                  className="cs-moves cs-moves-grid"
+                  style={{ gridTemplateColumns: "1fr", gap: "0.875rem" }}
+                >
+                  {study.approach.moves.map((move, i) => (
+                    <Reveal key={move.title} delay={Math.min(i * 0.06, 0.3)}>
+                      <div className="cs-move relative rounded-2xl p-5 flex flex-col">
+                        <h3
+                          className="font-bold"
+                          style={{ fontSize: "1rem", lineHeight: 1.3, color: "#ffffff" }}
+                        >
+                          {move.title}
+                        </h3>
+                        <p
+                          className="font-light mt-2"
+                          style={{
+                            fontSize: "0.875rem",
+                            lineHeight: 1.65,
+                            color: "rgba(255,255,255,0.62)",
+                          }}
+                        >
+                          {move.body}
+                        </p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+
+              <SectionImage src={study.sectionMedia.approach} stretch />
+            </div>
+          ) : (
+            <>
+              <SectionHead eyebrow="The Approach" title="What we did about it." center />
+              {study.approach.intro ? (
+                <Reveal delay={0.05} className="mb-10 text-center">
+                  <p
+                    className="font-light mx-auto"
+                    style={{
+                      fontSize: "1rem",
+                      lineHeight: 1.8,
+                      color: "rgba(255,255,255,0.62)",
+                      maxWidth: "44rem",
+                    }}
+                  >
+                    {study.approach.intro}
+                  </p>
+                </Reveal>
+              ) : null}
+
+              {/* Cards sit in one row where they fit and wrap on narrower
+                  viewports — auto-fit rather than a fixed column count, because
+                  the number of moves varies from three to seven by case study.
+                  A hairline connector runs from each badge to the next. */}
+              <div className={`cs-moves ${study.approach.oneRow ? "cs-moves-row" : "cs-moves-grid"}`}>
             {study.approach.moves.map((move, i) => (
               <Reveal key={move.title} delay={Math.min(i * 0.06, 0.3)}>
                 <div className="cs-move relative rounded-2xl p-6 flex flex-col">
@@ -298,7 +585,9 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                 </div>
               </Reveal>
             ))}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -385,36 +674,98 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         </div>
       </section>
 
-      {/* ══ The Outcome / Takeaway ══ */}
+      {/* ══ Banner after the Results ══ */}
+      {study.sectionMedia?.afterResults ? (
+        <section className="relative w-full" style={{ padding: "1rem 1.5rem 5rem" }}>
+          <SectionBanner src={study.sectionMedia.afterResults} />
+        </section>
+      ) : null}
+
+      {/* ══ Social proof — UGC/influencer content, each stacked on its own row ══ */}
+      {study.sectionMedia?.socialProof && study.sectionMedia.socialProof.length > 0 ? (
+        <section className="relative w-full" style={{ padding: "0 1.5rem 5rem" }}>
+          <div
+            className="relative mx-auto w-full max-w-6xl flex flex-col"
+            style={{ gap: "1.5rem" }}
+          >
+            {study.sectionMedia.socialProof.map((src, i) => (
+              <Reveal key={src} delay={0.05 + i * 0.05}>
+                <div
+                  className="relative overflow-hidden rounded-3xl w-full"
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "0 32px 80px -32px rgba(20,60,200,0.45)",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt="" aria-hidden="true" className="block w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* ══ The Outcome / Takeaway ══
+          sectionMedia.outcomeBg paints a full-bleed background behind the
+          copy where a study sets it (Allure); sectionMedia.outcome (a framed
+          side-by-side image) is kept on the type for a future case study that
+          wants that layout instead, though nothing currently uses it. */}
       {study.outcome ? (
         <section className="relative w-full overflow-hidden" style={{ padding: "5rem 1.5rem 7rem" }}>
-          {/* Particle-vortex artwork, masked at both ends so it dissolves into
-              the sections above and below. */}
+          {study.sectionMedia?.outcomeBg ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                ref={outcomeBgRef}
+                src={study.sectionMedia.outcomeBg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  transform: parallaxOn ? outcomeTransform : undefined,
+                  willChange: parallaxOn ? "transform" : undefined,
+                }}
+              />
+              {/* Two washes rather than one flat scrim: a left-to-right gradient
+                  keeps the copy's own column legible while leaving the right
+                  side of the photo — where the second reflection sits — much
+                  closer to full strength, and a light top/bottom feather still
+                  blends the section into the page above and below it. */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(100deg, rgba(3,3,5,0.75) 0%, rgba(3,3,5,0.55) 30%, rgba(3,3,5,0.22) 60%, rgba(3,3,5,0.12) 100%)",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(3,3,5,0.55) 0%, transparent 16%, transparent 84%, rgba(3,3,5,0.6) 100%)",
+                }}
+              />
+            </>
+          ) : null}
           <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: "url(/services/case-study-outcome-bg.webp)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              maskImage:
-                "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 16%, black 40%, black 76%, rgba(0,0,0,0.35) 92%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 16%, black 40%, black 76%, rgba(0,0,0,0.35) 92%, transparent 100%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, transparent 0%, rgba(3,3,5,0.5) 20%, rgba(3,3,5,0.5) 78%, transparent 100%)",
-            }}
-          />
-          <div className="relative max-w-5xl mx-auto">
-            <SectionHead eyebrow={study.outcome.title} title="What it leaves behind." />
-            <div className="flex flex-col gap-3.5">
-              {study.outcome.points.map((point, i) => (
+            className={`relative mx-auto ${
+              study.sectionMedia?.outcome ? "max-w-6xl" : "max-w-5xl"
+            }`}
+          >
+            <div
+              className={
+                study.sectionMedia?.outcome
+                  ? "grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center"
+                  : ""
+              }
+            >
+              <div>
+                <SectionHead eyebrow={study.outcome.title} title="What it leaves behind." />
+                <div className="flex flex-col gap-3.5">
+                  {study.outcome.points.map((point, i) => (
                 <Reveal key={point} delay={Math.min(i * 0.05, 0.25)}>
                   <div className="flex items-start gap-3.5">
                     <span
@@ -435,14 +786,20 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
                         fontSize: "1rem",
                         lineHeight: 1.8,
                         color: "rgba(255,255,255,0.65)",
-                        maxWidth: "46rem",
+                        maxWidth: "32rem",
                       }}
                     >
                       {point}
                     </p>
                   </div>
                 </Reveal>
-              ))}
+                  ))}
+                </div>
+              </div>
+
+              {study.sectionMedia?.outcome ? (
+                <SectionImage src={study.sectionMedia.outcome} />
+              ) : null}
             </div>
           </div>
         </section>
@@ -622,6 +979,16 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
       </section>
 
       <style>{`
+        /* Slow drift on the Challenge artwork, same as the portfolio case
+           studies. Held still for anyone who asks for reduced motion. */
+        @keyframes challengeImageFloat {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-10px) scale(1.015); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="challengeImageFloat"] { animation: none !important; }
+        }
+
         /* Dissolves the hero artwork into the page backdrop instead of
            cutting it off on a hard edge. */
         .cs-hero-fade {

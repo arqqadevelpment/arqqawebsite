@@ -72,15 +72,9 @@ const SPHERE = "min(34vmin, 230px)";
 /** 1 / 0.445 — the video is this much wider than the sphere inside it. */
 const MEDIA_WIDTH = `calc(${SPHERE} * 2.247)`;
 
-/** The ring clears the sphere's edge by ~9% of its diameter on each side. */
-const RING_SIZE = `calc(${SPHERE} * 1.18)`;
-
-/** Counter scales with the sphere, with sane floors and ceilings. */
-const COUNTER_SIZE = "clamp(1.25rem, 3.4vmin, 1.9rem)";
-
-// Ring geometry in the SVG's own 120x120 user space.
-const RING_RADIUS = 54;
-const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+/** Counter scales with the sphere — larger now that it's the focal point
+    rather than sitting inside a ring, with sane floors and ceilings. */
+const COUNTER_SIZE = "clamp(2.75rem, 8vmin, 5rem)";
 
 /**
  * Progress from the images the first screen actually needs: 0-1, and 1 when
@@ -264,49 +258,7 @@ export function Preloader() {
         />
       )}
 
-      {/* Progress ring — orbits the sphere rather than sitting under it.
-
-          Concentric with the sphere and sized off the same token, so the two
-          stay locked together at every viewport. Rotated -90deg so the arc
-          starts at twelve o'clock and fills clockwise. */}
-      <svg
-        viewBox="0 0 120 120"
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          width: RING_SIZE,
-          height: RING_SIZE,
-          transform: `translate(-50%, -50%) rotate(-90deg) scale(${leaving ? 0.94 : 1})`,
-          transition: `transform ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
-          opacity: leaving ? 0 : 1,
-          overflow: "visible",
-        }}
-      >
-        <circle
-          cx="60"
-          cy="60"
-          r={RING_RADIUS}
-          fill="none"
-          stroke="rgba(255,255,255,0.16)"
-          strokeWidth="1.5"
-        />
-        <circle
-          cx="60"
-          cy="60"
-          r={RING_RADIUS}
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeDasharray={RING_CIRCUMFERENCE}
-          // Counts down from a full circumference to zero as percent climbs.
-          strokeDashoffset={RING_CIRCUMFERENCE * (1 - percent / 100)}
-          style={{ transition: "stroke-dashoffset 180ms linear" }}
-        />
-      </svg>
-
-      {/* The counter sits at the centre of the sphere, inside the ring. The
+      {/* The counter sits at the centre of the sphere. The
           middle of the sphere is the darkest, calmest part of the frame
           throughout the loop, so white type reads cleanly against it. */}
       <div
@@ -323,8 +275,15 @@ export function Preloader() {
           fontFamily: "var(--font-inter), system-ui, sans-serif",
           fontWeight: 700,
           letterSpacing: "-0.03em",
-          color: "#ffffff",
           lineHeight: 1,
+          // `screen` blend mode rather than solid white: the number lightens
+          // where it sits over the sphere's bright swirls and recedes where
+          // the frame is dark, so it reads as part of the animation instead
+          // of a flat overlay sitting on top of it. Reduced opacity softens
+          // it further, which is what makes it feel faded-in rather than
+          // punched through.
+          color: "rgba(255,255,255,0.72)",
+          mixBlendMode: "screen",
         }}
       >
         <span
@@ -332,13 +291,10 @@ export function Preloader() {
             fontSize: COUNTER_SIZE,
             // Tabular figures stop the number jittering as digits change.
             fontVariantNumeric: "tabular-nums",
-            // Holds the number legible over the brighter swirls that pass
-            // through the middle of the sphere as the loop plays.
-            textShadow: "0 2px 24px rgba(0,0,0,0.75)",
           }}
         >
           {percent}
-          <span style={{ fontSize: "0.45em", marginLeft: "0.12em", opacity: 0.55 }}>
+          <span style={{ fontSize: "0.4em", marginLeft: "0.1em", opacity: 0.7 }}>
             %
           </span>
         </span>

@@ -117,8 +117,20 @@ function Figure({
   );
 }
 
-export function ShowcaseTemplate({ project }: { project: ShowcaseProject }) {
-  const next = getShowcaseProject(project.next);
+export function ShowcaseTemplate({
+  project,
+  basePath = "/our-work",
+  nextProject,
+}: {
+  project: ShowcaseProject;
+  /** Route prefix for this project's own page and its "next project" link —
+      lets the same template serve /our-work and /social without a fork. */
+  basePath?: string;
+  /** Pre-resolved next project. Falls back to looking `project.next` up in
+      showcase-data's own list, which is all the /our-work pages need. */
+  nextProject?: ShowcaseProject;
+}) {
+  const next = nextProject ?? getShowcaseProject(project.next);
 
   /* The first visual on the page loads eagerly; the rest wait for scroll. */
   const firstVisualIndex = project.story.findIndex((b) => b.type !== "text");
@@ -283,6 +295,26 @@ export function ShowcaseTemplate({ project }: { project: ShowcaseProject }) {
               );
             }
 
+            if (block.type === "grid") {
+              const cols = Math.min(block.media.length, 3);
+              return (
+                <div
+                  key={block.media.map((m) => m.src).join("|")}
+                  className={`grid grid-cols-1 ${cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}
+                  style={{ gap: "clamp(1.25rem, 2.5vw, 2rem)" }}
+                >
+                  {block.media.map((media, j) => (
+                    <Reveal key={media.src} delay={0.05 + j * 0.05}>
+                      <Figure
+                        media={media}
+                        eager={i === firstVisualIndex && j === 0}
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              );
+            }
+
             /* pair — an authored grouping, but rendered stacked: each image
                gets the full content width so it can be read on its own
                rather than shrunk to half. The gap matches the surrounding
@@ -371,7 +403,7 @@ export function ShowcaseTemplate({ project }: { project: ShowcaseProject }) {
             </Link>
 
             {next ? (
-              <Link href={`/our-work/${next.slug}`} className="showcase-next group block mt-8">
+              <Link href={`${basePath}/${next.slug}`} className="showcase-next group block mt-8">
                 <div
                   style={{
                     color: "rgba(255,255,255,0.4)",

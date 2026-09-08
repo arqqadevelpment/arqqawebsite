@@ -66,11 +66,44 @@ export type PerformanceCaseStudy = {
   whatsNext?: string;
 
   /** How this case study shows up as a card on the /work hub. */
+  /** Extra section artwork. Every field is optional and each section keeps its
+      existing layout when the matching one is absent, so a case study without
+      these renders is unaffected. */
+  sectionMedia?: {
+    /** Replaces the shared grid artwork behind the hero. */
+    hero?: string;
+    /** Drifts the hero and Takeaway background images slightly slower than
+        the page scrolls, for a subtle depth effect. Opt-in per case study
+        rather than automatic whenever `hero`/`outcomeBg` is set, so adding a
+        custom image elsewhere doesn't silently turn motion on. */
+    parallax?: boolean;
+    /** Runs the Challenge as centred copy with a full-width banner beneath,
+        instead of the two-column layout. */
+    challengeBanner?: boolean;
+    /** Artwork for that banner. Falls back to the hub card's own image when
+        unset, which is what Allure uses; set it where the section wants its
+        own image without changing what the /work card shows. */
+    challenge?: string;
+    /** Sits to the right of the Approach intro. */
+    approach?: string;
+    /** Full-width banner between the Results and whatever follows. */
+    afterResults?: string;
+    /** Social proof grid (2 or 3 images, e.g. UGC/influencer content) shown
+        after the after-Results banner. */
+    socialProof?: string[];
+    /** Background image for the Takeaway section. */
+    outcomeBg?: string;
+    /** Sits to the right of the Takeaway points. */
+    outcome?: string;
+  };
+
   card: {
     /** Short sector label for the card's footer pill */
     sector: string;
     /** Card copy — one line, the result in plain terms */
     summary: string;
+    /** Revealed on hover behind the hub card */
+    image?: string;
   };
 
   /** Slugs of related case studies */
@@ -87,6 +120,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Full-Funnel Performance Marketing",
     logo: "/logos/clients/everher.webp",
     accent: "orange",
+    sectionMedia: {
+      hero: "/portfolio/everher-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/everher-challenge.webp",
+      socialProof: ["/portfolio/everher-social-01.webp", "/portfolio/everher-social-02.webp"],
+    },
     heroHeadline: "From a Struggling Brand to a Sold-Out Season.",
     heroSub:
       "A full-funnel transformation that took Everher from near-zero profitability to a consistently profitable, sold-out operation — without increasing spend.",
@@ -144,6 +184,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Beauty & Wellness",
       summary:
         "+105% ROAS and a complete sellout of stagnant stock — a full-funnel rebuild that raised return while cutting spend.",
+      image: "/portfolio/everher.webp",
     },
     related: ["merova", "perfect-body"],
   },
@@ -157,6 +198,14 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "E-Commerce Growth — Meta Performance Marketing",
     logo: "/logos/clients/merova.webp",
     accent: "violet",
+    sectionMedia: {
+      hero: "/portfolio/merova-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/merova-challenge.webp",
+      afterResults: "/portfolio/merova.webp",
+      socialProof: ["/portfolio/merova-social-01.webp", "/portfolio/merova-social-02.webp"],
+    },
     heroHeadline: "Winning Winter — On Merova's Terms.",
     heroSub:
       "A premium Egyptian fashion brand held its ground against heavy seasonal discounting from competitors — and grew instead of retreating.",
@@ -203,12 +252,11 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
       note: "These results were achieved against a backdrop of heavier competitor discounting and seasonal market saturation — validating the testing, tracking, and CRO investments made earlier in the engagement.",
     },
-    whatsNext:
-      "Continued scaling on the proven Meta foundation, expansion into Google Search & Shopping, a TikTok Ads launch, and broader channel diversification to reduce platform dependency.",
     card: {
       sector: "Fashion E-Commerce",
       summary:
         "Monthly sales nearly doubled and 3.5–4.0x ROAS held through peak season, without discounting on price.",
+      image: "/portfolio/merova.webp",
     },
     related: ["everher", "perfect-body"],
   },
@@ -222,6 +270,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Social Media Growth — Meta Ads Program",
     logo: "/logos/clients/ntra.webp",
     accent: "blue",
+    sectionMedia: {
+      hero: "/portfolio/ntra-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/ntra-challenge.webp",
+      afterResults: "/portfolio/ntra.webp",
+    },
     heroHeadline: "Scaling a National Regulator's Voice — 71.5% Follower Growth in Six Months.",
     heroSub:
       "Egypt's National Telecom Regulatory Authority needed to grow its digital voice for public-service messaging. ARQQA built an always-on, multi-objective Meta Ads program that nearly doubled its audience.",
@@ -264,6 +319,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Government & Public Sector",
       summary:
         "+71.5% follower growth and 7.37M engagements in six months, scaling a national regulator's public voice.",
+      image: "/portfolio/ntra.webp",
     },
     related: ["gts-holding", "zenith-arabia-ai"],
   },
@@ -286,15 +342,15 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       moves: [
         {
           title: "Multi-Platform Expansion",
-          body: "Launched dedicated lead-generation programs on Snapchat and TikTok alongside Meta, spreading acquisition risk and unlocking new, lower-cost audiences.",
+          body: "Lead-generation programs on Snapchat and TikTok alongside Meta — spreading risk, unlocking lower-cost audiences.",
         },
         {
           title: "Doctor & Offer Segmentation",
-          body: "Built individual campaigns per doctor and per seasonal offer, so budget and creative could be optimized independently rather than blended into one undifferentiated pool.",
+          body: "Individual campaigns per doctor and per seasonal offer, so budget and creative could be optimized independently.",
         },
         {
           title: "Full-Funnel, Video-First Testing",
-          body: "Ran video-view campaigns to build warm audience pools on TikTok and Snapchat, feeding cheaper, higher-intent traffic into the lead campaigns that followed.",
+          body: "Video-view campaigns built warm audience pools, feeding cheaper, higher-intent traffic into the lead campaigns.",
         },
       ],
     },
@@ -316,10 +372,19 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         "Two years of cross-platform data now guide where every new unit of budget works hardest, by doctor, offer, and channel.",
       ],
     },
+    sectionMedia: {
+      hero: "/portfolio/allure-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      approach: "/portfolio/allure-approach.webp",
+      outcomeBg: "/portfolio/allure-takeaway-bg.webp",
+    },
+
     card: {
       sector: "Healthcare",
       summary:
         "17,367+ leads across Meta, TikTok and Snapchat — single-channel dependency turned into a diversified engine.",
+      image: "/portfolio/allure-clinics.webp",
     },
     related: ["everher", "perfect-body"],
   },
@@ -383,8 +448,17 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Enterprise IT & Cybersecurity",
       summary:
         "1.89M impressions from a structured, always-on LinkedIn program built for CIO and CISO buying committees.",
+      image: "/portfolio/gts-holding.webp",
     },
     related: ["zenith-arabia-ai", "ntra"],
+    sectionMedia: {
+      hero: "/portfolio/gts-holding-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/gts-holding-challenge.webp",
+      approach: "/portfolio/gts-holding-approach.webp",
+      outcomeBg: "/portfolio/gts-holding-takeaway-bg.webp",
+    },
   },
 
   {
@@ -432,7 +506,6 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
     },
     results: {
-      projected: true,
       metrics: [
         { value: "1.60%", label: "Projected blended click-through rate across the all-segments campaign layer" },
         { value: "4", label: "Persona-specific campaign layers, each with its own budget, targeting, and lead projection" },
@@ -451,8 +524,16 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Financial Services & AI",
       summary:
         "A full-funnel ABM system across Google, LinkedIn, SEO and automation, built for KSA banking.",
+      image: "/portfolio/zenith-arabia-ai.webp",
     },
     related: ["gts-holding", "ntra"],
+    sectionMedia: {
+      hero: "/portfolio/zenith-arabia-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/zenith-arabia-challenge.webp",
+      outcomeBg: "/portfolio/zenith-arabia-takeaway-bg.webp",
+    },
   },
 
   {
@@ -464,6 +545,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     service: "Full-Funnel Performance Marketing — Meta",
     logo: "/logos/clients/perfect-body-white.webp",
     accent: "orange",
+    sectionMedia: {
+      hero: "/portfolio/perfect-body-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/perfect-body-challenge.webp",
+      afterResults: "/portfolio/perfect-body-results-banner.webp",
+    },
     heroHeadline: "A Year of Full-Funnel Performance — 4.07x Return on Every Dollar Spent.",
     heroSub:
       "A corset brand in Kuwait built a full-funnel Meta program that turned engaged shoppers into a sustained, scalable return across a full year of testing and optimization.",
@@ -507,8 +595,99 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       sector: "Fashion E-Commerce",
       summary:
         "4.07x average ROAS sustained across a full year and 76 campaigns of continuous testing.",
+      image: "/portfolio/perfect-body.webp",
     },
     related: ["merova", "everher"],
+  },
+
+  {
+    slug: "joviality",
+    client: "Joviality",
+    category: "Beauty & Personal Care · E-Commerce",
+    market: "Egypt",
+    flag: "🇪🇬",
+    service: "E-Commerce Growth — Meta · Google · TikTok",
+    logo: "/logos/clients/joviality.webp",
+    accent: "violet",
+    heroHeadline: "Scaling Paid Media 2× — Without Giving Up ROAS.",
+    heroSub:
+      "Joviality doubled down on growth across Meta, Google and TikTok — scaling media investment by more than 100% while improving sales efficiency and protecting return on ad spend.",
+    challenge:
+      "Joviality had reached a point familiar to growing e-commerce brands: as acquisition expanded, blended ROAS began to soften. From January 2023, a growing share of new-visitor and new-customer traffic began putting pressure on efficiency, while Google cost-per-conversion grew highly volatile, making it harder to scale spend with confidence. The challenge wasn't simply to spend more — it was to build an acquisition structure capable of absorbing significantly more budget without sacrificing performance.",
+    approach: {
+      intro:
+        "A staged rebuild across every channel, structured around the funnel instead of platform habit:",
+      moves: [
+        {
+          num: "01",
+          title: "Rebuilt the Google Architecture",
+          body: "Instead of relying on a single campaign structure, Google was rebuilt around a staged mix of Performance Max, Search, Shopping, Display and Video — separated by objective, including discovery, product focus, bundles, new acquisition and brand protection.",
+        },
+        {
+          num: "02",
+          title: "Turned TikTok Into a Real Acquisition Channel",
+          body: "TikTok moved beyond experimental spend and became a consistent third demand channel, scaling from a small test allocation into a meaningful part of the media mix and reducing dependency on Meta and Google alone.",
+        },
+        {
+          num: "03",
+          title: "Shifted Meta to Always-On Performance",
+          body: "Rather than relying on isolated campaign bursts, Meta moved toward an always-on structure ahead of the peak Black Friday period, creating a more stable acquisition engine and room to scale budget on performance rather than campaign timing.",
+        },
+        {
+          num: "04",
+          title: "Built the Budget Around the Funnel",
+          body: "Budget allocation was structured around customer intent instead of platform habit: 55% TOFU for new-customer acquisition and discovery, 25% MOFU for engaged visitors and consideration, and the remainder for checkout recovery and past-purchaser reactivation.",
+        },
+        {
+          num: "05",
+          title: "Let ROAS Decide the Creative Mix",
+          body: "Creative planning followed performance data rather than assumptions. Product-focused creative featuring a human element consistently produced stronger ROAS and received the largest share of the content mix, while underperforming lifestyle content was deliberately capped.",
+        },
+        {
+          num: "06",
+          title: "Scaled in Stages, Not All at Once",
+          body: "The Google restructure was rolled out progressively across multiple campaign stages — from Performance Max and Brand Search to Shopping, Search, Video, Display and Dynamic Remarketing — each introduced and evaluated before the next was added.",
+        },
+      ],
+    },
+    results: {
+      intro: "Program totals across the engagement period:",
+      metrics: [
+        { value: "+103%", label: "Paid media spend scaled — EGP 685.7K to EGP 1.39M" },
+        { value: "+114%", label: "Gross sales growth — EGP 2.84M to EGP 6.09M" },
+        { value: "4.38x", label: "Optimized blended ROAS, vs. 4.14x baseline" },
+        { value: "5.94x", label: "Peak single-month blended ROAS, August 2023" },
+        { value: "4.7x", label: "Google conversion volume growth — 153 to 726 conversions" },
+        { value: "−3.6%", label: "Blended Google cost-per-conversion, held while volume scaled" },
+      ],
+      note: "The key result wasn't simply that Joviality spent more. The account absorbed more than twice the media investment while sales grew even faster — with ROAS improving rather than collapsing under scale.",
+    },
+    outcome: {
+      title: "Why It Worked",
+      points: [
+        "Google's rebuilt architecture created room for significantly more conversion volume without sacrificing efficiency.",
+        "TikTok became a genuine acquisition channel instead of a test allocation.",
+        "Creative decisions followed actual ROAS-by-format performance, and budget allocation followed the customer funnel instead of historical platform habits.",
+      ],
+    },
+    whatsNext:
+      "With the new performance structure established, the next objective was carrying that momentum into peak season. Q4 planning targeted higher sales volume while maintaining disciplined ROAS ranges — including an October target of EGP 860K gross sales at 3.8–4.2x ROAS and a November target of EGP 1.2M at approximately 5.0x ROAS. The larger goal: turn a successful restructuring phase into a repeatable framework for sustained e-commerce growth.",
+    card: {
+      sector: "Beauty & Personal Care",
+      summary:
+        "Paid media spend scaled +103% with blended ROAS improving to 4.38x across Meta, Google and TikTok.",
+      image: "/portfolio/joviality.webp",
+    },
+    related: ["perfect-body", "everher"],
+    sectionMedia: {
+      hero: "/portfolio/joviality-hero.webp",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/portfolio/joviality-challenge.webp",
+      approach: "/portfolio/joviality-approach.webp",
+      outcomeBg: "/portfolio/joviality-takeaway-bg.webp",
+      socialProof: ["/portfolio/joviality-social-01.webp"],
+    },
   },
 ];
 

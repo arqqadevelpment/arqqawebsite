@@ -13,6 +13,7 @@ type CaseStudy = {
   metricLabel: string;
   story: string;
   glow: string;
+  href: string;
 };
 
 const CASES: CaseStudy[] = [
@@ -26,6 +27,7 @@ const CASES: CaseStudy[] = [
     story:
       "1M active users. First fintech app in MENA. 100K organic installs.",
     glow: "#5aa2ff",
+    href: "/work/fawry",
   },
   {
     key: "nileair",
@@ -37,6 +39,7 @@ const CASES: CaseStudy[] = [
     story:
       "83M SAR digital revenue on 350K SAR spend. Amadeus platform integration.",
     glow: "#ff7a3d",
+    href: "/social/nile-air",
   },
   {
     key: "kenzup",
@@ -48,6 +51,7 @@ const CASES: CaseStudy[] = [
     story:
       "Registration conversion lifted from 7% to 25%. ASO + performance launch.",
     glow: "#5aa2ff",
+    href: "/social/kenzup",
   },
   {
     key: "ami",
@@ -59,6 +63,7 @@ const CASES: CaseStudy[] = [
     story:
       "50,000 artist submissions. 120,000 visits. Pan-continental digital campaign.",
     glow: "#ff7a3d",
+    href: "/social/bic",
   },
 ];
 
@@ -96,7 +101,7 @@ function SlideLabel({ text }: { text: string }) {
 }
 
 function CaseCard({ cs, index }: { cs: CaseStudy; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -117,12 +122,12 @@ function CaseCard({ cs, index }: { cs: CaseStudy; index: number }) {
   }, []);
 
   return (
-    <div
+    <Link
       ref={ref}
+      href={cs.href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => setHovered((h) => !h)}
-      className="relative shrink-0 snap-center cursor-pointer rounded-3xl overflow-hidden"
+      className="relative shrink-0 snap-center cursor-pointer rounded-3xl overflow-hidden block"
       style={{
         width: "min(80vw, 21rem)",
         height: "24rem",
@@ -278,7 +283,7 @@ function CaseCard({ cs, index }: { cs: CaseStudy; index: number }) {
           Hover for the story →
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -460,7 +465,7 @@ export function ProofSection() {
             transition: "background 0.3s ease, border-color 0.3s ease",
           }}
         >
-          <SlideLabel text="View portfolio →" />
+          <SlideLabel text="View Work →" />
         </Link>
       </div>
     </section>

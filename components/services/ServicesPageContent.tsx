@@ -6,9 +6,66 @@ import { SERVICES } from "./service-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import Link from "next/link";
+import { whenGateOpen } from "@/lib/preloader";
 
 /* All copy lives in service-data.ts — the hub and every inner page share it */
 type Service = ServiceDetail;
+
+/* ── Chroma text reveal ───────────────────────────────────────────────────
+   One line of the hero headline. The line rises into view and a band of the
+   brand gradient sweeps across it left to right, settling back to white —
+   the text is painted by a gradient wider than itself, and the animation
+   moves that gradient rather than the text.
+
+   Each line runs on its own delay so the two arrive in sequence, and plays
+   once.
+
+   It waits on two things, not one. The heading has to be in view, and the
+   preloader has to have cleared — that overlay holds for five seconds on a
+   first load, and the hero sits under it the whole time, so keying off the
+   viewport alone ran the whole sweep behind the cover and left nothing to see.
+   `whenGateOpen` is the preloader's own signal for this. */
+function ChromaLine({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [inView, setInView] = useState(false);
+  const [uncovered, setUncovered] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => whenGateOpen(() => setUncovered(true)), []);
+
+  const visible = inView && uncovered;
+
+  return (
+    <span
+      ref={ref}
+      className={`svc-chroma ${visible ? "is-in" : ""}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </span>
+  );
+}
 
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
@@ -59,7 +116,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
   return (
     <div
       className="svc-stage relative shrink-0 mx-auto"
-      style={{ width: "min(56vw, 24rem)", height: "min(56vw, 24rem)" }}
+      style={{ width: "min(82vw, 24rem)", height: "min(82vw, 24rem)" }}
     >
       {/* Guide ring the nodes sit on */}
       <div
@@ -135,8 +192,10 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 aria-label={`${s.title} — jump to details`}
                 className="svc-node svc-upright flex flex-col items-center justify-center rounded-full cursor-pointer"
                 style={{
-                  width: "clamp(3.75rem, 9vw, 4.75rem)",
-                  height: "clamp(3.75rem, 9vw, 4.75rem)",
+                  width: "clamp(3.25rem, 16vw, 4.75rem)",
+                  height: "clamp(3.25rem, 16vw, 4.75rem)",
+                  padding: "0 0.2rem",
+                  overflow: "hidden",
                   /* Same white glass as the centre emblem — translucent, so
                      the artwork reads through instead of a dark disc */
                   background:
@@ -152,7 +211,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 <span
                   className="font-bold"
                   style={{
-                    fontSize: "0.8125rem",
+                    fontSize: "clamp(0.6875rem, 2.6vw, 0.8125rem)",
                     color: "#ffffff",
                     textShadow: "0 1px 10px rgba(0,0,0,0.55)",
                   }}
@@ -162,11 +221,16 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 <span
                   className="font-light mt-0.5"
                   style={{
-                    fontSize: "0.5rem",
-                    letterSpacing: "0.1em",
+                    fontSize: "clamp(0.4375rem, 1.8vw, 0.5rem)",
+                    lineHeight: 1.05,
+                    letterSpacing: "0.06em",
                     textTransform: "uppercase",
                     color: "rgba(255,255,255,0.8)",
                     textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                    textAlign: "center",
+                    whiteSpace: "normal",
+                    overflowWrap: "break-word",
+                    maxWidth: "88%",
                   }}
                 >
                   {s.short}
@@ -219,8 +283,52 @@ export function ServicesPageContent() {
           border-color: rgba(255,138,90,0.75);
           box-shadow: 0 0 26px rgba(255,90,43,0.45);
         }
+        /* Chroma text reveal — the line is painted by a gradient three times
+           its own width: white at both ends with the brand ramp banded in the
+           middle. Sliding that gradient sweeps colour across the words and
+           leaves them white. background-clip:text needs a transparent fill,
+           so the text has no colour of its own. */
+        .svc-chroma {
+          display: block;
+          background-image: linear-gradient(
+            100deg,
+            #ffffff 0%,
+            #ffffff 30%,
+            #3444e0 40%,
+            #6f5be0 50%,
+            #ff5a2b 60%,
+            #ffffff 70%,
+            #ffffff 100%
+          );
+          background-size: 300% 100%;
+          background-position: 100% 0;
+          background-repeat: no-repeat;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          opacity: 0;
+          transform: translateY(0.35em);
+          will-change: background-position, opacity, transform;
+        }
+        .svc-chroma.is-in {
+          animation: svcChromaReveal 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes svcChromaReveal {
+          0%   { opacity: 0; transform: translateY(0.35em); background-position: 100% 0; }
+          30%  { opacity: 1; transform: translateY(0); }
+          100% { opacity: 1; transform: translateY(0); background-position: 0% 0; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .svc-wheel, .svc-upright { animation: none; }
+          /* No sweep, no rise — the line is simply present, in plain white. */
+          .svc-chroma {
+            animation: none !important;
+            opacity: 1;
+            transform: none;
+            background-image: none;
+            color: #ffffff;
+          }
         }
       `}</style>
 
@@ -269,19 +377,8 @@ export function ServicesPageContent() {
                 textShadow: "0 2px 40px rgba(0,0,0,0.6)",
               }}
             >
-              Everything Connects.{" "}
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
-                }}
-              >
-                Nothing Operates in Isolation.
-              </span>
+              <ChromaLine>Everything Connects.</ChromaLine>
+              <ChromaLine delay={0.28}>Nothing Operates in Isolation.</ChromaLine>
             </h1>
             <p
               className="font-light mt-3 mx-auto max-w-2xl"
@@ -291,7 +388,7 @@ export function ServicesPageContent() {
                 color: "rgba(255,255,255,0.6)",
               }}
             >
-              Six integrated verticals. One unified system. Every service is
+              Seven integrated verticals. One unified system. Every service is
               engineered to compound the impact of every other.
             </p>
           </Reveal>
@@ -331,7 +428,7 @@ export function ServicesPageContent() {
                 color: "#ffffff",
               }}
             >
-              Six Verticals.{" "}
+              Seven Verticals.{" "}
               <span
                 style={{
                   backgroundImage:

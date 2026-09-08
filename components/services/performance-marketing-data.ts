@@ -39,6 +39,22 @@ export const BIG_NUMBERS: BigNumber[] = [
   { value: 7.3, display: "7.3M+", label: "Engagements Driven" },
 ];
 
+/**
+ * E-commerce performance, shown as its own mini-section beneath the general
+ * numbers above — ratios and growth percentages only, no currency, per the
+ * same data policy. Blended ROAS is averaged across Joviality, Perfect Body
+ * and Everher's optimized periods; the other three figures are Joviality's
+ * (Sep 2022 – Aug 2023 engagement), the only case study with a monthly
+ * breakdown detailed enough to report a peak month and a channel-level
+ * conversion count.
+ */
+export const ECOMMERCE_NUMBERS: BigNumber[] = [
+  { value: 4.38, display: "4.38x", label: "Average E-Commerce ROAS" },
+  { value: 114, display: "+114%", label: "Gross Sales Growth" },
+  { value: 5.94, display: "5.94x", label: "Peak Monthly ROAS" },
+  { value: 4.7, display: "4.7x", label: "Conversion Volume Growth" },
+];
+
 export const HERO = {
   headline: "We Don't Promise Results.",
   headlineAccent: "We've Already Delivered Them.",

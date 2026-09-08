@@ -11,6 +11,7 @@ import {
   TRANSPARENCY_WASH,
   CLIENTS,
   CLOSING,
+  ECOMMERCE_NUMBERS,
   FAQS,
   HERO,
   HIGHLIGHTS,
@@ -32,6 +33,7 @@ import type {
   WhyIcon,
 } from "./performance-marketing-data";
 import Image from "next/image";
+import { OfficesSection } from "@/components/contact/OfficesSection";
 
 /* ══════════════════════════════════════════════════════════════════════
    Shared primitives
@@ -219,18 +221,20 @@ function CountUp({
     if (!el) return;
 
     /* The finished string is the source of truth for formatting; the counter
-       only scales the numeric part, so suffixes like "M+" survive intact. */
-    const match = display.match(/^([\d.,]+)(.*)$/);
-    const suffix = match ? match[2] : "";
+       only scales the numeric part, so a leading sign ("+114%") or trailing
+       suffix ("M+", "x") survives intact. */
+    const match = display.match(/^([+-]?)([\d.,]+)(.*)$/);
+    const prefix = match ? match[1] : "";
+    const suffix = match ? match[3] : "";
     const decimals = String(value).includes(".") ? 1 : 0;
     const grouped = display.includes(",");
 
     const format = (n: number) => {
-      const fixed = n.toFixed(decimals);
+      const fixed = Math.abs(n).toFixed(decimals);
       const withGroups = grouped
         ? Number(fixed).toLocaleString("en-US")
         : fixed;
-      return withGroups + suffix;
+      return prefix + withGroups + suffix;
     };
 
     const run = () => {
@@ -1650,6 +1654,58 @@ export function PerformanceMarketingPageContent() {
         </div>
       </section>
 
+      {/* ══ E-commerce performance — a scoped subset of the numbers above,
+          not a second grand total. Small eyebrow keeps it read as "within"
+          rather than "in addition to". ══ */}
+      <section className="relative w-full" style={{ padding: "0 1.5rem 6rem" }}>
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal className="text-center mb-10">
+            <p
+              className="font-bold"
+              style={{
+                fontSize: "0.75rem",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+              }}
+            >
+              E-Commerce Performance
+            </p>
+          </Reveal>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 text-center">
+            {ECOMMERCE_NUMBERS.map((n, i) => (
+              <Reveal key={n.label} delay={Math.min(i * 0.12, 0.4)}>
+                <div
+                  className="font-bold"
+                  style={{
+                    fontSize: "clamp(2rem, 4.4vw, 3.25rem)",
+                    lineHeight: 1,
+                    letterSpacing: "-0.03em",
+                    backgroundImage:
+                      "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  <CountUp value={n.value} display={n.display} delay={i * 150} />
+                </div>
+                <p
+                  className="font-light mt-3"
+                  style={{
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.06em",
+                    color: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  {n.label}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ 2 · The problem ══ */}
       <section className="relative w-full" style={{ padding: "6rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
@@ -1950,8 +2006,13 @@ export function PerformanceMarketingPageContent() {
         </div>
       </section>
 
+      {/* ══ Offices — contact details, directly above the closing CTA ══ */}
+      <OfficesSection />
+
       {/* ══ 13 · Closing CTA ══ */}
-      <section className="relative w-full overflow-hidden" style={{ padding: "1rem 1.5rem 9rem" }}>
+      {/* Top padding carries the whole gap above the CTA: the offices section
+          before it ends tight at 2rem, so 1rem here left the two crowded. */}
+      <section className="relative w-full overflow-hidden" style={{ padding: "6rem 1.5rem 9rem" }}>
         {/* Horizon light-streak backdrop, masked so it dissolves at both edges.
             The long fade in from black at the top keeps the artwork from
             starting on a visible edge under the section above. */}

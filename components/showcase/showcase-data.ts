@@ -6,8 +6,11 @@
  *
  * The body of each page is an authored sequence of blocks rather than a text
  * block followed by an image dump, so reading and looking alternate down the
- * page. Three block types cover the rhythm: a paragraph, a single figure, and
- * a side-by-side pair. Order the array and the layout follows.
+ * page. Block types cover the rhythm: a paragraph, a single figure, a
+ * side-by-side pair (each image full-width, stacked — for two visuals that
+ * each deserve their own moment), and a grid (actually side by side, 2 or 3
+ * columns — for content that reads as a set). Order the array and the
+ * layout follows.
  */
 
 export type ShowcaseMedia = {
@@ -24,8 +27,12 @@ export type ShowcaseBlock =
   | { type: "text"; body: string }
   /** One figure at full container width */
   | { type: "figure"; media: ShowcaseMedia }
-  /** Two figures side by side, stacking on mobile */
-  | { type: "pair"; media: [ShowcaseMedia, ShowcaseMedia] };
+  /** Two figures stacked, each at full width — for visuals that each want
+      their own space rather than sharing a row */
+  | { type: "pair"; media: [ShowcaseMedia, ShowcaseMedia] }
+  /** 2 or 3 figures actually side by side, stacking to one column on
+      mobile — for content that reads as a set (e.g. a reel next to a reel) */
+  | { type: "grid"; media: ShowcaseMedia[] };
 
 export type ShowcaseProject = {
   /** URL slug — the page lives at /our-work/<slug> */
@@ -50,7 +57,7 @@ export type ShowcaseProject = {
   /** How this project shows up as a card on the /work hub. */
   card: {
     /** Build tier, used as the card's category label */
-    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive";
+    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media" | "Branding";
     market: string;
     summary: string;
     image: string;
@@ -458,6 +465,86 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
         "The public face of Egypt's national payments infrastructure — explaining systems millions use without knowing their name.",
       image: "/services/work-ebc.webp",
       accent: "blue",
+    },
+    next: "lifely-pets",
+  },
+  {
+    slug: "lifely-pets",
+    client: "Lifely Pets",
+    title: "Lifely Pets",
+    category: "Web Design & Development",
+    intro:
+      "An e-commerce storefront for a premium pet-food brand — built to sell dry food for dogs, puppies and cats to owners who think of them as family.",
+    heroImage: "/work/lifely-pets/hero.webp",
+    logo: "/logos/clients/lifely-pets.webp",
+    facts: [
+      { label: "Client", value: "Lifely Pets" },
+      { label: "Industry", value: "Pet Food & Nutrition" },
+      { label: "Scope", value: "UX/UI, Web Development, E-Commerce" },
+      { label: "Market", value: "Egypt" },
+    ],
+    story: [
+      {
+        type: "text",
+        body: "Lifely Pets makes premium dry food for dogs, puppies and cats, sold under the line \"for the house jewel\" — a brand built on treating pets as family rather than livestock. The site had to carry that warmth while doing the practical job of an e-commerce storefront: move people from browsing to checkout.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-01.webp",
+          alt: "Lifely Pets homepage — hero banner with cats and dogs beneath the Lifely Pets wordmark",
+          caption: "Homepage — the animals carry the brand, not the copy",
+        },
+      },
+      {
+        type: "text",
+        body: "Rather than open on a product grid, the homepage leads with the pets themselves — a lineup of cats, dogs and puppies standing in for the brand's whole range. A free-delivery banner and a persistent cart sit above the fold, keeping the commerce close at hand without competing with the hero.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-03.webp",
+          alt: "Lifely Pets careers page shown on a laptop, with a dog in glasses at a desk",
+          caption: "Careers — the brand's tone held even off the storefront",
+        },
+      },
+      {
+        type: "text",
+        body: "That same tone carries through to the site's secondary pages — a careers form styled around the brand's own mascot rather than dropped into a generic template. Shop, Blog, Contact, Careers and Where to Buy sit in one consistent header, giving the storefront, the content and the retail-locator function equal footing.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-04.webp",
+          alt: "Lifely Pets shop page header — Premium Quality Pet food, with product bags and pet portraits",
+          caption: "Shop — the same warmth carried into the storefront itself",
+        },
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-05.webp",
+          alt: "Lifely Pets Introducing Lifely section with an accordion for Our Vision, Why Lifely and Our Little Jewels",
+          caption: "Brand story, told as an accordion rather than a wall of text",
+        },
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/lifely-pets/shot-06.webp",
+          alt: "Lifely Pets FAQ section with a bow-tied cat and questions about shifting, storage, and delivery",
+          caption: "FAQs — practical answers, still styled to feel like the rest of the brand",
+        },
+      },
+    ],
+    liveUrl: "https://lifelypets.com",
+    card: {
+      tier: "E-Commerce",
+      market: "Egypt",
+      summary:
+        "A premium pet-food storefront built to sell dry food for dogs, puppies and cats to owners who treat them as family.",
+      image: "/services/work-lifely-pets.webp",
+      accent: "orange",
     },
     next: "sbs",
   },
