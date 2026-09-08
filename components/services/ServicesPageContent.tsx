@@ -613,7 +613,7 @@ function ServiceRow({ service, flash }: { service: Service; flash?: boolean }) {
   return (
     <Link
       id={`service-${service.num}`}
-      href={`/services/${service.slug}`}
+      href={service.slug === "autonomous" ? "/autonomous" : `/services/${service.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col sm:flex-row rounded-3xl overflow-hidden"

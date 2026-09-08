@@ -1644,11 +1644,18 @@ export function AutonomousPageContent() {
             backgroundImage: "url(/services/autonomous.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.55,
+            opacity: 0.3,
             maskImage:
               "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
             WebkitMaskImage:
               "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "rgba(3,3,5,0.55)",
           }}
         />
         <div
