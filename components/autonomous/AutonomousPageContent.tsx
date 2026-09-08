@@ -73,12 +73,14 @@ function SectionHead({
   accentTail,
   body,
   center = false,
+  titleSize,
 }: {
   eyebrow: string;
   title: string;
   accentTail?: string;
   body?: string;
   center?: boolean;
+  titleSize?: string;
 }) {
   return (
     <Reveal className={center ? "text-center" : ""}>
@@ -86,7 +88,7 @@ function SectionHead({
       <h2
         className="font-bold"
         style={{
-          fontSize: "clamp(1.75rem, 3.6vw, 2.75rem)",
+          fontSize: titleSize ?? "clamp(1.75rem, 3.6vw, 2.75rem)",
           lineHeight: 1.15,
           letterSpacing: "-0.02em",
           color: "#ffffff",
@@ -393,7 +395,120 @@ function Timeline({
 /* ── Phone-style chat mock — the hospital booking flow playing out in a
    WhatsApp-shaped thread, restyled in ARQQA's own dark-glass palette
    rather than borrowed WhatsApp green. ── */
+type ChatBubble = { from: "them" | "me"; time: string; content: React.ReactNode };
+
+const HOSPITAL_THREAD: ChatBubble[] = [
+  { from: "them", time: "23:41", content: "My back has been hurting for three days" },
+  {
+    from: "me",
+    time: "23:41",
+    content:
+      "I can’t advise on symptoms — that’s the doctor’s call. But I can get you to the right one tonight. Is it from an injury, or did it start on its own?",
+  },
+  { from: "them", time: "23:42", content: "On its own" },
+  {
+    from: "me",
+    time: "23:42",
+    content: (
+      <>
+        Orthopaedics, then. Nearest opening at the Maadi branch:
+        <div
+          className="rounded-xl mt-2 p-3"
+          style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          <p className="font-bold" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
+            Dr. Hany Sabry
+          </p>
+          <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.5)" }}>
+            Orthopaedics · Maadi · EGP 650 · 18 yrs
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {["Tonight 20:30", "Tomorrow 09:15", "Tomorrow 18:00"].map((slot) => (
+            <span
+              key={slot}
+              className="rounded-full"
+              style={{
+                padding: "0.25rem 0.625rem",
+                fontSize: "0.6875rem",
+                border: "1px solid rgba(255,255,255,0.24)",
+                color: "rgba(255,255,255,0.75)",
+              }}
+            >
+              {slot}
+            </span>
+          ))}
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "23:43", content: "Tomorrow 09:15" },
+  {
+    from: "me",
+    time: "23:43",
+    content: (
+      <>
+        Held for ten minutes — EGP 200 deposit now, EGP 450 at the clinic.
+        <div
+          className="rounded-full text-center mt-2 font-bold"
+          style={{
+            padding: "0.5rem 1rem",
+            fontSize: "0.75rem",
+            background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
+            color: "#ffffff",
+          }}
+        >
+          Pay the deposit securely
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "23:44", content: "Paid" },
+  { from: "me", time: "23:44", content: "Booked. Bring any previous X-rays — Maadi branch, third floor." },
+];
+
+/* ── Auto-replaying chat mock — plays the hospital thread one bubble at a
+   time with a typing beat before each reply, then loops, the way the
+   reference deck's chat animates in on repeat. ── */
 function HospitalChatMock() {
+  const [count, setCount] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const total = HOSPITAL_THREAD.length;
+
+  useEffect(() => {
+    let cancelled = false;
+    const timers: number[] = [];
+    const schedule = (fn: () => void, ms: number) => {
+      const id = window.setTimeout(() => {
+        if (!cancelled) fn();
+      }, ms);
+      timers.push(id);
+    };
+
+    function playFrom(i: number) {
+      if (i >= total) {
+        schedule(() => {
+          setCount(0);
+          setTyping(false);
+          playFrom(0);
+        }, 3400);
+        return;
+      }
+      setTyping(true);
+      schedule(() => {
+        setTyping(false);
+        setCount(i + 1);
+        schedule(() => playFrom(i + 1), 750);
+      }, i === 0 ? 500 : 800);
+    }
+
+    playFrom(0);
+    return () => {
+      cancelled = true;
+      timers.forEach((id) => window.clearTimeout(id));
+    };
+  }, [total]);
+
   const bubbleBase: React.CSSProperties = {
     borderRadius: "1rem",
     padding: "0.625rem 0.875rem",
@@ -424,6 +539,8 @@ function HospitalChatMock() {
     color: "rgba(255,255,255,0.35)",
     textAlign: "right",
   };
+
+  const nextFrom = count < total ? HOSPITAL_THREAD[count].from : "me";
 
   return (
     <Reveal delay={0.15}>
@@ -461,91 +578,38 @@ function HospitalChatMock() {
           className="flex flex-col p-5"
           style={{ gap: "0.625rem", height: "19rem", overflow: "hidden", justifyContent: "flex-end" }}
         >
-          <div style={them}>
-            My back has been hurting for three days
-            <span style={stamp}>23:41</span>
-          </div>
-          <div style={me}>
-            I can&apos;t advise on symptoms — that&apos;s the doctor&apos;s call. But I can get you to the right
-            one tonight. Is it from an injury, or did it start on its own?
-            <span style={stamp}>23:41</span>
-          </div>
-          <div style={them}>
-            On its own
-            <span style={stamp}>23:42</span>
-          </div>
-          <div style={{ ...me, maxWidth: "92%" }}>
-            Orthopaedics, then. Nearest opening at the Maadi branch:
-            <div
-              className="rounded-xl mt-2 p-3"
-              style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.1)" }}
-            >
-              <p className="font-bold" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
-                Dr. Hany Sabry
-              </p>
-              <p className="font-light" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.5)" }}>
-                Orthopaedics · Maadi · EGP 650 · 18 yrs
-              </p>
+          {HOSPITAL_THREAD.slice(0, count).map((b, i) => (
+            <div key={i} style={b.from === "them" ? them : me}>
+              {b.content}
+              <span style={stamp}>{b.time}</span>
             </div>
-            <div className="flex flex-wrap gap-1.5 mt-2">
-              {["Tonight 20:30", "Tomorrow 09:15", "Tomorrow 18:00"].map((slot) => (
+          ))}
+          {typing ? (
+            <div
+              className="flex items-center gap-1"
+              style={{
+                alignSelf: nextFrom === "them" ? "flex-start" : "flex-end",
+                padding: "0.5rem 0.75rem",
+                borderRadius: "1rem",
+                background: nextFrom === "them" ? "rgba(255,255,255,0.06)" : "rgba(111,91,224,0.28)",
+                border: nextFrom === "them" ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(111,91,224,0.4)",
+              }}
+              aria-hidden="true"
+            >
+              {[0, 1, 2].map((i) => (
                 <span
-                  key={slot}
+                  key={i}
                   className="rounded-full"
                   style={{
-                    padding: "0.25rem 0.625rem",
-                    fontSize: "0.6875rem",
-                    border: "1px solid rgba(255,255,255,0.24)",
-                    color: "rgba(255,255,255,0.75)",
+                    width: "0.375rem",
+                    height: "0.375rem",
+                    background: "rgba(255,255,255,0.5)",
+                    animation: `arqqaTypingDot 1.2s ease-in-out ${i * 0.15}s infinite`,
                   }}
-                >
-                  {slot}
-                </span>
+                />
               ))}
             </div>
-            <span style={stamp}>23:42</span>
-          </div>
-          <div style={them}>
-            Tomorrow 09:15
-            <span style={stamp}>23:43</span>
-          </div>
-          <div style={{ ...me, maxWidth: "92%" }}>
-            Held for ten minutes — EGP 200 deposit now, EGP 450 at the clinic.
-            <div
-              className="rounded-full text-center mt-2 font-bold"
-              style={{
-                padding: "0.5rem 1rem",
-                fontSize: "0.75rem",
-                background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
-                color: "#ffffff",
-              }}
-            >
-              Pay the deposit securely
-            </div>
-            <span style={stamp}>23:43</span>
-          </div>
-          <div style={them}>
-            Paid
-            <span style={stamp}>23:44</span>
-          </div>
-          <div style={me}>
-            Booked. Bring any previous X-rays — Maadi branch, third floor.
-            <span style={stamp}>23:44</span>
-          </div>
-          <div className="flex items-center gap-1" style={{ alignSelf: "flex-start", padding: "0.25rem 0.25rem" }} aria-hidden="true">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="rounded-full"
-                style={{
-                  width: "0.375rem",
-                  height: "0.375rem",
-                  background: "rgba(255,255,255,0.35)",
-                  animation: `arqqaTypingDot 1.2s ease-in-out ${i * 0.15}s infinite`,
-                }}
-              />
-            ))}
-          </div>
+          ) : null}
         </div>
       </div>
       <style>{`
@@ -1279,6 +1343,7 @@ export function AutonomousPageContent() {
               eyebrow="See It Work"
               title="23:41 on a Tuesday."
               accentTail="Booked and paid by 23:44."
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
             />
             <div className="mt-6">
               <HospitalChatMock />
