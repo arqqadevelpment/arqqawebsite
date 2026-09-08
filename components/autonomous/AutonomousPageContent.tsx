@@ -2355,15 +2355,25 @@ export function AutonomousPageContent() {
         style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
       >
         <div className="relative max-w-6xl mx-auto">
-          <SectionHead
-            eyebrow="What It Costs"
-            title="Less than one junior hire."
-            accentTail="Four of them, always on."
-            body="A receptionist covers one shift, one channel and one language. This covers all of them — priced by conversations, not headcount."
-            center
-          />
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <SectionHead
+              eyebrow="What It Costs"
+              title="Less than one junior hire."
+              accentTail="Four of them, always on."
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
+            />
+            <Reveal>
+              <p
+                className="font-light"
+                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+              >
+                A receptionist covers one shift, one channel and one language. This covers all of them — priced
+                by conversations, not headcount.
+              </p>
+            </Reveal>
+          </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12 items-stretch">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8 items-stretch">
             {PRICING_TIERS.map((tier, i) => (
               <Reveal key={tier.tier} delay={Math.min(i * 0.08, 0.3)} className="h-full">
                 <div
