@@ -114,6 +114,112 @@ export const BRANDING_PROJECTS: ShowcaseProject[] = [
       image: "/services/work-klivvr.webp",
       accent: "blue",
     },
+    next: "gts-branding",
+  },
+  {
+    slug: "gts-branding",
+    client: "GTS Holding",
+    title: "GTS Holding",
+    category: "Branding",
+    intro:
+      "A full identity system for an enterprise IT and cybersecurity partner, built to carry one line across every surface it touches: success, together.",
+    heroImage: "/work/gts-branding/hero.webp",
+    logo: "/logos/clients/gts.webp",
+    facts: [
+      { label: "Client", value: "GTS Holding" },
+      { label: "Industry", value: "Enterprise IT & Cybersecurity" },
+      { label: "Scope", value: "Brand Identity, Collateral, Digital, Social Templates" },
+      { label: "Market", value: "Egypt · Saudi Arabia · UAE" },
+    ],
+    story: [
+      {
+        type: "text",
+        body: "GTS Holding is a regional enterprise IT and cybersecurity partner selling into CIOs and CISOs — buyers who read polish as competence before they read a single case study. The identity had to carry that credibility everywhere the brand shows up: on the street, on a laptop, on a lanyard.",
+      },
+      {
+        type: "figure",
+        media: {
+          src: "/work/gts-branding/hero.webp",
+          alt: "GTS Holding out-of-home billboard campaign — One Vision, Cloud Support as a Service, Future Built Now",
+          caption: "Out-of-home — the identity built to hold up at billboard scale",
+        },
+      },
+      {
+        type: "text",
+        body: "A blue system paired with the mark's glass-arrow motif carried the brand's core promise — smart, 360° solutions — across every format, from paid social to the brand's own website, without the identity ever feeling like a different company depending on where you met it.",
+      },
+      {
+        type: "pair",
+        media: [
+          {
+            src: "/work/gts-branding/shot-01.webp",
+            alt: "Three GTS Holding social media post templates — 360° Smart Solutions, General Technology Experties, Hand in Hand Success Planned",
+            caption: "Social templates — three formats, one visual language",
+          },
+          {
+            src: "/work/gts-branding/shot-02.webp",
+            alt: "GTS Holding website homepage design — Success Starts With The Right Partner",
+            caption: "Digital — the identity applied to the brand's own site",
+          },
+        ],
+      },
+      {
+        type: "text",
+        body: "The system closed the loop on the physical side too: internal collateral and merchandise built off the same grid, gradient, and mark, so an employee's ID badge and a client's welcome-kit tote carry the same brand as the billboard on their commute.",
+      },
+      {
+        type: "grid",
+        media: [
+          {
+            src: "/work/gts-branding/shot-03.webp",
+            alt: "GTS Holding branded lanyard and employee ID badge",
+            caption: "Employee ID and lanyard",
+          },
+          {
+            src: "/work/gts-branding/shot-04.webp",
+            alt: "GTS Holding branded laptop sleeve",
+            caption: "Laptop sleeve",
+          },
+          {
+            src: "/work/gts-branding/shot-05.webp",
+            alt: "GTS Holding branded water bottles",
+            caption: "Water bottle",
+          },
+        ],
+      },
+      {
+        type: "grid",
+        media: [
+          {
+            src: "/work/gts-branding/shot-06.webp",
+            alt: "GTS Holding branded portable power bank with the line Success, Together",
+            caption: "Power bank",
+          },
+          {
+            src: "/work/gts-branding/shot-07.webp",
+            alt: "GTS Holding branded T-shirt with the G mark",
+            caption: "Apparel",
+          },
+          {
+            src: "/work/gts-branding/shot-08.webp",
+            alt: "GTS Holding branded tote bag with the line Success, Together",
+            caption: "Tote bag",
+          },
+        ],
+      },
+      {
+        type: "text",
+        body: "The result is a system built to move between registers without losing itself — billboard, browser tab, and badge lanyard, all reading as the same partner a CIO already trusts by the time the sales conversation starts.",
+      },
+    ],
+    card: {
+      tier: "Branding",
+      market: "Egypt · Saudi Arabia · UAE",
+      summary:
+        "A full identity system — OOH, digital, and merchandise — built to read as credible before the first sales call.",
+      image: "/services/work-gts-branding.webp",
+      accent: "blue",
+    },
     next: "fxd",
   },
   {
