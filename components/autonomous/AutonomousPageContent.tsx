@@ -480,12 +480,19 @@ const HOSPITAL_THREAD: ChatBubble[] = [
 /* ── Plays a chat thread's bubbles in on a loop: one at a time with a
    typing beat before each reply, then a pause and restart. Shared by
    every animated chat mock on the page. ── */
+/* Plays only once the card has actually scrolled into view — nothing
+   animates or ticks in the background before the user reaches it. */
 function useAutoplayThread(total: number) {
   const [count, setCount] = useState(0);
   const [typing, setTyping] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
     let cancelled = false;
+    let started = false;
     const timers: number[] = [];
     const schedule = (fn: () => void, ms: number) => {
       const id = window.setTimeout(() => {
@@ -511,14 +518,26 @@ function useAutoplayThread(total: number) {
       }, i === 0 ? 500 : 800);
     }
 
-    playFrom(0);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          playFrom(0);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(el);
+
     return () => {
       cancelled = true;
+      observer.disconnect();
       timers.forEach((id) => window.clearTimeout(id));
     };
   }, [total]);
 
-  return { count, typing };
+  return { count, typing, containerRef };
 }
 
 function AnimatedChatCard({
@@ -541,7 +560,7 @@ function AnimatedChatCard({
   preface?: React.ReactNode;
 }) {
   const total = thread.length;
-  const { count, typing } = useAutoplayThread(total);
+  const { count, typing, containerRef } = useAutoplayThread(total);
 
   const bubbleBase: React.CSSProperties = {
     borderRadius: "1rem",
@@ -578,7 +597,7 @@ function AnimatedChatCard({
 
   return (
     <Reveal delay={0.15}>
-      <div className="rounded-3xl overflow-hidden" style={glass}>
+      <div ref={containerRef} className="rounded-3xl overflow-hidden" style={glass}>
         {channelLabel ? (
           <div
             className="px-6 font-light"
@@ -2454,21 +2473,56 @@ export function AutonomousPageContent() {
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(55% 60% at 50% 100%, rgba(52,68,224,0.16) 0%, transparent 65%)",
+            backgroundImage: "url(/services/go-to-market-cta.webp)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            maskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 16%, black 38%, black 64%, rgba(0,0,0,0.45) 86%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 16%, black 38%, black 64%, rgba(0,0,0,0.45) 86%, transparent 100%)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(180deg, transparent 0%, rgba(3,3,5,0.4) 26%, rgba(3,3,5,0.4) 72%, transparent 100%)",
           }}
         />
         <Reveal className="relative max-w-3xl mx-auto text-center">
+          <div
+            className="rounded-3xl overflow-hidden"
+            style={{
+              padding: "clamp(2.25rem, 4.5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem)",
+              background: "linear-gradient(170deg, rgba(14,16,26,0.62) 0%, rgba(6,8,14,0.7) 100%)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 60px -30px rgba(0,0,0,0.8)",
+            }}
+          >
           <h2
             className="font-bold"
             style={{
-              fontSize: "clamp(1.625rem, 3.2vw, 2.25rem)",
+              fontSize: "clamp(1.375rem, 2.8vw, 1.875rem)",
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
               color: "#ffffff",
             }}
           >
-            Let us read your inbox before you decide anything.
+            Let us read{" "}
+            <span
+              style={{
+                backgroundImage: "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
+              }}
+            >
+              your inbox
+            </span>{" "}
+            before you decide anything.
           </h2>
           <p
             className="font-light mt-5"
@@ -2477,8 +2531,9 @@ export function AutonomousPageContent() {
             Send your last few thousand conversations and within a week you get what your customers ask, how
             many went unanswered, and what that costs a year. Free.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-9 flex justify-center">
             <PrimaryCTA label="Book your strategy session" href="/start#book-strategy-call" />
+          </div>
           </div>
         </Reveal>
       </section>
