@@ -37,6 +37,26 @@ const PHASES: Phase[] = [
   },
 ];
 
+/* ── Below this width, the diagram switches from hover-anchored side/top
+   cards to a single tap-to-open card centred above the whole stage. Matches
+   the point where the ring itself gets tight enough that per-point card
+   placement starts crowding the screen edges. */
+function useIsMobile(breakpointPx = 640) {
+  /* Starts false so the client's first render matches the server-rendered
+     HTML (desktop layout) — the real value is read after mount, same as any
+     window-dependent state. */
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpointPx}px)`);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from an external source (matchMedia), the documented exception to this rule
+    setIsMobile(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [breakpointPx]);
+  return isMobile;
+}
+
 /* ── Shared reveal-on-scroll wrapper (fade-in on mount, matches the rest of the site) ── */
 function Reveal({
   children,
@@ -111,11 +131,15 @@ function NumberedPoint({
   active,
   onEnter,
   onLeave,
+  onTap,
 }: {
   phase: Phase;
   active: boolean;
   onEnter: () => void;
   onLeave: () => void;
+  /** Tap/click toggle — the mobile interaction. Hover handlers above still
+      drive desktop, since touch devices never fire mouseenter/mouseleave. */
+  onTap: () => void;
 }) {
   return (
     <button
@@ -124,6 +148,7 @@ function NumberedPoint({
       onMouseLeave={onLeave}
       onFocus={onEnter}
       onBlur={onLeave}
+      onClick={onTap}
       aria-label={`${phase.num} — ${phase.title}`}
       className="relative flex items-center justify-center rounded-full cursor-pointer"
       style={{
@@ -187,8 +212,8 @@ function PhaseCard({
       style={{
         ...positionStyle,
         transform: visible ? baseTransform : `${baseTransform} ${hiddenOffset}`,
-        width: "17rem",
-        maxWidth: "70vw",
+        width: "18rem",
+        maxWidth: "88vw",
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
         transition: "opacity 0.3s cubic-bezier(0.22,1,0.36,1), transform 0.3s cubic-bezier(0.22,1,0.36,1)",
@@ -253,12 +278,18 @@ export function CatalystSection() {
   const [active, setActive] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isMobile = useIsMobile();
 
   function handleEnter(i: number) {
     setActive(i);
   }
   function handleLeave() {
     setActive(null);
+  }
+  /* Tap toggle for mobile: tapping the open point closes it, tapping another
+     switches — only one card is ever visible. */
+  function handleTap(i: number) {
+    setActive((current) => (current === i ? null : i));
   }
 
   // Lazy-load + lazy-play: this video is far below the fold, so don't let it
@@ -418,13 +449,26 @@ export function CatalystSection() {
                 <NumberedPoint
                   phase={phase}
                   active={active === i}
-                  onEnter={() => handleEnter(i)}
-                  onLeave={handleLeave}
+                  onEnter={isMobile ? () => {} : () => handleEnter(i)}
+                  onLeave={isMobile ? () => {} : handleLeave}
+                  onTap={() => handleTap(i)}
                 />
-                <PhaseCard phase={phase} placement={placement} visible={active === i} />
+                {/* Desktop: card anchored beside/above its own point.
+                    Mobile: skipped here — one shared card renders below,
+                    centred above the whole stage instead. */}
+                {!isMobile && (
+                  <PhaseCard phase={phase} placement={placement} visible={active === i} />
+                )}
               </div>
             );
           })}
+
+          {/* Mobile — single card, always above the central shape, never
+              beside it. Anchored to the stage itself so it stays centred
+              regardless of which point is active. */}
+          {isMobile && active !== null && (
+            <PhaseCard phase={PHASES[active]} placement="top" visible />
+          )}
         </div>
       </Reveal>
 

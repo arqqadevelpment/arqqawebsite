@@ -116,7 +116,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
   return (
     <div
       className="svc-stage relative shrink-0 mx-auto"
-      style={{ width: "min(56vw, 24rem)", height: "min(56vw, 24rem)" }}
+      style={{ width: "min(82vw, 24rem)", height: "min(82vw, 24rem)" }}
     >
       {/* Guide ring the nodes sit on */}
       <div
@@ -192,8 +192,10 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 aria-label={`${s.title} — jump to details`}
                 className="svc-node svc-upright flex flex-col items-center justify-center rounded-full cursor-pointer"
                 style={{
-                  width: "clamp(3.75rem, 9vw, 4.75rem)",
-                  height: "clamp(3.75rem, 9vw, 4.75rem)",
+                  width: "clamp(3.25rem, 16vw, 4.75rem)",
+                  height: "clamp(3.25rem, 16vw, 4.75rem)",
+                  padding: "0 0.2rem",
+                  overflow: "hidden",
                   /* Same white glass as the centre emblem — translucent, so
                      the artwork reads through instead of a dark disc */
                   background:
@@ -209,7 +211,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 <span
                   className="font-bold"
                   style={{
-                    fontSize: "0.8125rem",
+                    fontSize: "clamp(0.6875rem, 2.6vw, 0.8125rem)",
                     color: "#ffffff",
                     textShadow: "0 1px 10px rgba(0,0,0,0.55)",
                   }}
@@ -219,11 +221,16 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 <span
                   className="font-light mt-0.5"
                   style={{
-                    fontSize: "0.5rem",
-                    letterSpacing: "0.1em",
+                    fontSize: "clamp(0.4375rem, 1.8vw, 0.5rem)",
+                    lineHeight: 1.05,
+                    letterSpacing: "0.06em",
                     textTransform: "uppercase",
                     color: "rgba(255,255,255,0.8)",
                     textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                    textAlign: "center",
+                    whiteSpace: "normal",
+                    overflowWrap: "break-word",
+                    maxWidth: "88%",
                   }}
                 >
                   {s.short}
