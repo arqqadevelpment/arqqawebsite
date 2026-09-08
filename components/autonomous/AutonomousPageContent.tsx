@@ -680,10 +680,11 @@ function ChatSample({
     <Reveal delay={0.15}>
       <div className="rounded-3xl overflow-hidden" style={glass}>
         <div
-          className="px-5 py-3 font-light"
+          className="px-6 font-light"
           style={{
-            fontSize: "0.6875rem",
-            letterSpacing: "0.08em",
+            padding: "1.125rem 1.5rem",
+            fontSize: "0.75rem",
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
             color: "rgba(255,255,255,0.4)",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
@@ -691,36 +692,38 @@ function ChatSample({
         >
           {channel} · {agent}
         </div>
-        <div className="p-5">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="p-6">
+          <div className="flex items-center gap-3 mb-5">
             <span
-              className="inline-flex items-center justify-center rounded-full font-bold"
+              className="inline-flex items-center justify-center rounded-full font-bold shrink-0"
               style={{
-                width: "1.75rem",
-                height: "1.75rem",
+                width: "2.5rem",
+                height: "2.5rem",
                 background: "linear-gradient(160deg, #3444e0 0%, #6f5be0 100%)",
-                fontSize: "0.75rem",
+                fontSize: "1rem",
                 color: "#ffffff",
               }}
             >
               {name.charAt(0)}
             </span>
-            <span className="font-medium" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
-              {name}
-            </span>
-            <span className="font-light" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-              · Typically replies instantly
-            </span>
+            <p style={{ fontSize: "1rem" }}>
+              <span className="font-bold" style={{ color: "#ffffff" }}>
+                {name}
+              </span>{" "}
+              <span className="font-light" style={{ color: "rgba(255,255,255,0.45)" }}>
+                · Typically replies instantly
+              </span>
+            </p>
           </div>
           <div
-            className="rounded-2xl rounded-tl-sm px-4 py-3"
+            className="rounded-2xl px-5 py-4"
             style={{
-              background: "rgba(255,255,255,0.05)",
+              background: "rgba(255,255,255,0.045)",
               border: "1px solid rgba(255,255,255,0.1)",
-              maxWidth: "88%",
+              maxWidth: "92%",
             }}
           >
-            <p className="font-light" style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "rgba(255,255,255,0.85)" }}>
+            <p className="font-light" style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.82)" }}>
               {line}
             </p>
           </div>
@@ -1088,19 +1091,81 @@ function AutomationFlowTabs() {
   );
 }
 
+/* ── Compact feature card — icon beside the title rather than above it,
+   and a shorter card overall, used in the industry blocks where the
+   title column already carries the headline. ── */
+function CompactFeatureCard({
+  glyph,
+  title,
+  body,
+  index,
+}: {
+  glyph: string;
+  title: string;
+  body: string;
+  index: number;
+}) {
+  return (
+    <Reveal delay={Math.min(index * 0.06, 0.3)}>
+      <div className="rounded-2xl p-4 h-full" style={glass}>
+        <div className="flex items-center gap-2.5">
+          <span
+            className="inline-flex items-center justify-center rounded-xl shrink-0"
+            style={{
+              width: "2.25rem",
+              height: "2.25rem",
+              background: "linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%)",
+              border: "1px solid rgba(255,255,255,0.16)",
+              fontSize: "1rem",
+              color: "#9fc8ff",
+            }}
+            aria-hidden="true"
+          >
+            {glyph}
+          </span>
+          <p className="font-bold" style={{ fontSize: "0.8125rem", lineHeight: 1.3, color: "#ffffff" }}>
+            {title}
+          </p>
+        </div>
+        <p
+          className="font-light mt-2.5"
+          style={{ fontSize: "0.75rem", lineHeight: 1.55, color: "rgba(255,255,255,0.55)" }}
+        >
+          {body}
+        </p>
+      </div>
+    </Reveal>
+  );
+}
+
 function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) {
   return (
-    <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-start">
+    <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
       <div>
-        <SectionHead eyebrow={industry.eyebrow} title={industry.title} accentTail={industry.accent} body={industry.body} />
-        <div className="grid sm:grid-cols-2 gap-5 mt-10">
+        <SectionHead
+          eyebrow={industry.eyebrow}
+          title={industry.title}
+          accentTail={industry.accent}
+          titleSize="clamp(1.5rem, 2.8vw, 2.125rem)"
+        />
+        <div className="grid sm:grid-cols-2 gap-4 mt-8">
           {industry.features.map((f, i) => (
-            <FeatureCard key={f.title} glyph={f.glyph} title={f.title} body={f.body} index={i} />
+            <CompactFeatureCard key={f.title} glyph={f.glyph} title={f.title} body={f.body} index={i} />
           ))}
         </div>
       </div>
-      <div className="lg:sticky lg:top-28">
-        <ChatSample {...industry.chat} />
+      <div>
+        <Reveal>
+          <p
+            className="font-light"
+            style={{ fontSize: "1rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+          >
+            {industry.body}
+          </p>
+        </Reveal>
+        <div className="mt-6">
+          <ChatSample {...industry.chat} />
+        </div>
       </div>
     </div>
   );
