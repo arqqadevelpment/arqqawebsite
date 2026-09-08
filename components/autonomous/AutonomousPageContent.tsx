@@ -522,6 +522,7 @@ function AnimatedChatCard({
   channelLabel,
   thread,
   height = "19rem",
+  preface,
 }: {
   avatarLetter: string;
   name: string;
@@ -530,6 +531,7 @@ function AnimatedChatCard({
   channelLabel?: string;
   thread: ChatBubble[];
   height?: string;
+  preface?: React.ReactNode;
 }) {
   const total = thread.length;
   const { count, typing } = useAutoplayThread(total);
@@ -621,6 +623,8 @@ function AnimatedChatCard({
             </div>
           )}
         </div>
+
+        {preface ? <div className="px-5 pt-4">{preface}</div> : null}
 
         <div
           className="flex flex-col p-5"
@@ -790,6 +794,110 @@ function AirlineChatMock() {
       inlineStatus
       channelLabel="Messenger · Sales Agent"
       thread={AIRLINE_THREAD}
+    />
+  );
+}
+
+/* ── The public comment recap sits above the DM — static context, not
+   part of the animated thread, showing the exchange that opened it. ── */
+function EcommerceCommentPreface() {
+  const row: React.CSSProperties = { fontSize: "0.75rem", lineHeight: 1.5, color: "rgba(255,255,255,0.75)" };
+  const label: React.CSSProperties = {
+    fontSize: "0.6875rem",
+    color: "rgba(255,255,255,0.4)",
+    marginTop: "0.5rem",
+  };
+  return (
+    <div
+      className="rounded-xl p-3"
+      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}
+    >
+      <p style={label}>Comment on your Reel · 41,200 views</p>
+      <p style={{ ...row, marginTop: "0.375rem" }}>
+        <span className="font-bold" style={{ color: "#ffffff" }}>
+          nour.h
+        </span>{" "}
+        Price?? ♡ 3
+      </p>
+      <p style={label}>Replied publicly · 11 seconds later</p>
+      <p style={{ ...row, marginTop: "0.375rem" }}>
+        <span className="font-bold" style={{ color: "#ffffff" }}>
+          thebrand
+        </span>{" "}
+        EGP 1,450 — in stock in three sizes 💛 sending the link in DM
+      </p>
+      <p style={{ ...label, fontStyle: "italic" }}>nour.h opened the DM</p>
+    </div>
+  );
+}
+
+const ECOMMERCE_THREAD: ChatBubble[] = [
+  {
+    from: "me",
+    time: "01:59",
+    content: (
+      <>
+        The tan one you commented on — EGP 1,450, free delivery over EGP 1,000.
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {["S", "M", "L"].map((size) => (
+            <span
+              key={size}
+              className="rounded-full"
+              style={{
+                padding: "0.25rem 0.625rem",
+                fontSize: "0.6875rem",
+                border: "1px solid rgba(255,255,255,0.24)",
+                color: "rgba(255,255,255,0.75)",
+              }}
+            >
+              {size}
+            </span>
+          ))}
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "02:00", content: "M please" },
+  {
+    from: "me",
+    time: "02:00",
+    content: (
+      <>
+        Reserved for 30 minutes.
+        <div
+          className="rounded-full text-center mt-2 font-bold"
+          style={{
+            padding: "0.5rem 1rem",
+            fontSize: "0.75rem",
+            background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
+            color: "#ffffff",
+          }}
+        >
+          Complete checkout
+        </div>
+      </>
+    ),
+  },
+  { from: "them", time: "02:02", content: "Ordered" },
+  {
+    from: "me",
+    time: "02:02",
+    content:
+      "Order #48812 confirmed — delivery Thursday. The public comment stays answered so the next person sees the price too.",
+  },
+];
+
+function EcommerceChatMock() {
+  return (
+    <AnimatedChatCard
+      avatarLetter="T"
+      name="The Brand"
+      statusLine="Typically replies instantly"
+      inlineStatus
+      channelLabel="Instagram · Social Moderation Agent"
+      thread={ECOMMERCE_THREAD}
+      height="13rem"
+      preface={<EcommerceCommentPreface />}
     />
   );
 }
@@ -1340,6 +1448,8 @@ function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) 
             <BankChatMock />
           ) : industry.key === "airlines" ? (
             <AirlineChatMock />
+          ) : industry.key === "ecommerce" ? (
+            <EcommerceChatMock />
           ) : (
             <ChatSample {...industry.chat} />
           )}
@@ -1749,14 +1859,26 @@ export function AutonomousPageContent() {
         style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
       >
         <div className="relative max-w-6xl mx-auto">
-          <SectionHead
-            eyebrow="Governance"
-            title="Action when it's clear."
-            accentTail="Escalation when it's sensitive."
-            body="The value is not that the agent answers everything. It is that it knows precisely where its authority ends — and that boundary is written into the system, reviewed by you, and auditable after the fact."
-            center
-          />
-          <div className="grid lg:grid-cols-2 gap-8 mt-12">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <SectionHead
+              eyebrow="Governance"
+              title="Action when it's clear."
+              accentTail="Escalation when it's sensitive."
+              titleSize="clamp(1.5rem, 2.8vw, 2.125rem)"
+            />
+            <Reveal>
+              <p
+                className="font-light"
+                style={{ fontSize: "1rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+              >
+                The value is not that the agent answers everything. It is that it knows precisely where its
+                authority ends — and that boundary is written into the system, reviewed by you, and auditable
+                after the fact.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mt-10">
             <Reveal>
               <div className="rounded-3xl p-7 h-full" style={glass}>
                 <p
@@ -1787,32 +1909,30 @@ export function AutonomousPageContent() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.1}>
-              <div className="rounded-3xl p-7 h-full" style={glass}>
-                <p
-                  className="font-bold"
-                  style={{ fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#ff9a5a" }}
-                >
-                  Where It Holds Back — The Feed
-                </p>
-                <div className="flex flex-col gap-5 mt-6">
-                  {[
-                    { q: "“Is this authentic leather?”", a: "Answered publicly with the material specification within 90 seconds. Factual, verifiable, safe to automate." },
-                    { q: "“Price?”", a: "Answered publicly, then routed into a DM to complete checkout — the public thread stays clean." },
-                    { q: "“Scam page”", a: "Hidden pending human review and flagged to the Operations Manager. Never auto-argued — an accusation is escalated, not debated." },
-                  ].map((row) => (
-                    <div key={row.q}>
-                      <p className="font-bold" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
-                        {row.q}
-                      </p>
-                      <p className="font-light mt-1.5" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.6)" }}>
-                        {row.a}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+            <div className="flex flex-col gap-4">
+              <p
+                className="font-bold"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#ff9a5a" }}
+              >
+                Where It Holds Back — The Feed
+              </p>
+              {[
+                { q: "“Is this authentic leather?”", a: "Answered publicly with the material specification within 90 seconds. Factual, verifiable, safe to automate." },
+                { q: "“Price?”", a: "Answered publicly, then routed into a DM to complete checkout — the public thread stays clean." },
+                { q: "“Scam page”", a: "Hidden pending human review and flagged to the Operations Manager. Never auto-argued — an accusation is escalated, not debated." },
+              ].map((row, i) => (
+                <Reveal key={row.q} delay={Math.min(i * 0.08, 0.24)}>
+                  <div className="rounded-2xl p-5" style={glass}>
+                    <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+                      {row.q}
+                    </p>
+                    <p className="font-light mt-1.5" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.6)" }}>
+                      {row.a}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
