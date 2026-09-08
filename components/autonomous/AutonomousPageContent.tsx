@@ -204,7 +204,10 @@ function GradientNumber({
 
 function StatRow({ stats }: { stats: { value: string; label: string }[] }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-8 mt-10">
+    <div
+      className="grid gap-x-6 gap-y-6 mt-8"
+      style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(4rem, 1fr))` }}
+    >
       {stats.map((s, i) => (
         <Reveal key={s.label} delay={Math.min(i * 0.08, 0.3)}>
           <GradientNumber value={s.value} animate />
@@ -258,7 +261,7 @@ function PrimaryCTA({ label, href }: { label: string; href: string }) {
 /* ── 24-hour bar chart — inbound distribution, off-hours highlighted ──
    Bars grow up from the baseline, staggered, the same way the source
    deck's chart animates in (scaleY 0 → 1, ~26ms stagger per bar). */
-function HourlyChart({ note }: { note: string }) {
+function HourlyChart({ note, compact = false }: { note: string; compact?: boolean }) {
   // Roughly matches the source deck's shape: a daytime hump, a bigger
   // evening/overnight surge. Bars from 20:00–08:00 read as after-hours.
   const bars = [
@@ -286,8 +289,12 @@ function HourlyChart({ note }: { note: string }) {
 
   return (
     <Reveal>
-      <div className="rounded-3xl p-6 sm:p-7" style={glass}>
-        <div ref={chartRef} className="flex items-end gap-1 sm:gap-1.5" style={{ height: "9rem" }}>
+      <div className={compact ? "rounded-3xl p-5" : "rounded-3xl p-6 sm:p-7"} style={glass}>
+        <div
+          ref={chartRef}
+          className="flex items-end gap-1 sm:gap-1.5"
+          style={{ height: compact ? "5.5rem" : "9rem" }}
+        >
           {bars.map((v, i) => {
             const offHours = i >= 20 || i < 8;
             return (
@@ -309,7 +316,7 @@ function HourlyChart({ note }: { note: string }) {
           })}
         </div>
         <div
-          className="flex justify-between mt-3 font-light"
+          className="flex justify-between mt-2.5 font-light"
           style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.35)" }}
         >
           <span>00:00</span>
@@ -318,8 +325,8 @@ function HourlyChart({ note }: { note: string }) {
           <span>24:00</span>
         </div>
         <p
-          className="font-light mt-5"
-          style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}
+          className={compact ? "font-light mt-3" : "font-light mt-5"}
+          style={{ fontSize: compact ? "0.75rem" : "0.8125rem", lineHeight: 1.55, color: "rgba(255,255,255,0.55)" }}
         >
           {note}
         </p>
@@ -1856,7 +1863,7 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[8] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
         <div className="relative max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
@@ -1864,12 +1871,12 @@ export function AutonomousPageContent() {
               eyebrow="Governance"
               title="Action when it's clear."
               accentTail="Escalation when it's sensitive."
-              titleSize="clamp(1.5rem, 2.8vw, 2.125rem)"
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
             />
             <Reveal>
               <p
                 className="font-light"
-                style={{ fontSize: "1rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
                 The value is not that the agent answers everything. It is that it knows precisely where its
                 authority ends — and that boundary is written into the system, reviewed by you, and auditable
@@ -1878,16 +1885,16 @@ export function AutonomousPageContent() {
             </Reveal>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 mt-10">
+          <div className="grid lg:grid-cols-2 gap-8 mt-6">
             <Reveal>
-              <div className="rounded-3xl p-7 h-full" style={glass}>
+              <div className="rounded-3xl p-5 h-full" style={glass}>
                 <p
                   className="font-bold"
-                  style={{ fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#5aa2ff" }}
+                  style={{ fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#5aa2ff" }}
                 >
                   Where It Acts — Booking Flow
                 </p>
-                <div className="mt-6">
+                <div className="mt-4">
                   <Timeline
                     steps={[
                       { time: "23:41", title: "Patient describes pain", body: "The agent does not interpret the symptom — it establishes which specialty and which branch." },
@@ -1897,10 +1904,10 @@ export function AutonomousPageContent() {
                   />
                 </div>
                 <div
-                  className="rounded-2xl p-4 mt-6"
+                  className="rounded-2xl p-3.5 mt-4"
                   style={{ background: "rgba(90,162,255,0.08)", border: "1px solid rgba(90,162,255,0.22)" }}
                 >
-                  <p className="font-light" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.75)" }}>
+                  <p className="font-light" style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "rgba(255,255,255,0.75)" }}>
                     <span className="font-bold text-white">The rule — </span>
                     Medical diagnosis remains strictly with your doctors. The agent manages triage and calendar
                     booking, nothing beyond it.
@@ -1909,10 +1916,10 @@ export function AutonomousPageContent() {
               </div>
             </Reveal>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <p
                 className="font-bold"
-                style={{ fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#ff9a5a" }}
+                style={{ fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#ff9a5a" }}
               >
                 Where It Holds Back — The Feed
               </p>
@@ -1922,11 +1929,11 @@ export function AutonomousPageContent() {
                 { q: "“Scam page”", a: "Hidden pending human review and flagged to the Operations Manager. Never auto-argued — an accusation is escalated, not debated." },
               ].map((row, i) => (
                 <Reveal key={row.q} delay={Math.min(i * 0.08, 0.24)}>
-                  <div className="rounded-2xl p-5" style={glass}>
-                    <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+                  <div className="rounded-2xl p-4" style={glass}>
+                    <p className="font-bold" style={{ fontSize: "0.875rem", color: "#ffffff" }}>
                       {row.q}
                     </p>
-                    <p className="font-light mt-1.5" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.6)" }}>
+                    <p className="font-light mt-1" style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "rgba(255,255,255,0.6)" }}>
                       {row.a}
                     </p>
                   </div>
@@ -1941,16 +1948,26 @@ export function AutonomousPageContent() {
       <section
         ref={(el) => { slideRefs.current[9] = el; }}
         className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
+        style={{ ...slideStyle, padding: "6rem 1.5rem 1.5rem" }}
       >
         <div className="relative max-w-6xl mx-auto">
-          <SectionHead
-            eyebrow="The 09:00 Report"
-            title="You stop guessing"
-            accentTail="about your own business."
-            body="Every question your customers asked overnight becomes one picture: what they want, what they misunderstand, when they actually show up, and which posts create customers rather than applause."
-            center
-          />
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <SectionHead
+              eyebrow="The 09:00 Report"
+              title="You stop guessing"
+              accentTail="about your own business."
+              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
+            />
+            <Reveal>
+              <p
+                className="font-light"
+                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
+              >
+                Every question your customers asked overnight becomes one picture: what they want, what they
+                misunderstand, when they actually show up, and which posts create customers rather than applause.
+              </p>
+            </Reveal>
+          </div>
 
           <StatRow
             stats={[
@@ -1962,16 +1979,16 @@ export function AutonomousPageContent() {
             ]}
           />
 
-          <div className="grid lg:grid-cols-2 gap-8 mt-14">
+          <div className="grid lg:grid-cols-2 gap-6 mt-8">
             <Reveal>
-              <div className="rounded-3xl p-7 h-full" style={glass}>
-                <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+              <div className="rounded-2xl p-4 h-full" style={glass}>
+                <p className="font-bold" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
                   What They Actually Asked
                 </p>
-                <p className="font-light mt-1" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
+                <p className="font-light mt-0.5" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.4)" }}>
                   In their own words · this month
                 </p>
-                <div className="flex flex-col gap-3 mt-5">
+                <div className="flex flex-col gap-2 mt-3">
                   {[
                     ["Price, and the bundle price", 214],
                     ["Sizing and fit", 156],
@@ -1979,8 +1996,8 @@ export function AutonomousPageContent() {
                     ["Returns and exchanges", 62],
                     ["“Is it the original?”", 61],
                   ].map(([label, val]) => (
-                    <div key={label as string} className="flex items-center gap-3">
-                      <div className="flex-1" style={{ height: "0.5rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
+                    <div key={label as string} className="flex items-center gap-2">
+                      <div className="flex-1" style={{ height: "0.375rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
                         <div
                           style={{
                             height: "100%",
@@ -1990,10 +2007,10 @@ export function AutonomousPageContent() {
                           }}
                         />
                       </div>
-                      <span className="font-light shrink-0" style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.7)", width: "13rem" }}>
+                      <span className="font-light shrink-0" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.7)", width: "9.5rem" }}>
                         {label}
                       </span>
-                      <span className="font-bold shrink-0" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
+                      <span className="font-bold shrink-0" style={{ fontSize: "0.6875rem", color: "#ffffff" }}>
                         {val}
                       </span>
                     </div>
@@ -2002,104 +2019,45 @@ export function AutonomousPageContent() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.1}>
-              <div className="rounded-3xl p-7 h-full" style={glass}>
-                <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
+            <Reveal delay={0.08}>
+              <div className="rounded-2xl p-4 h-full" style={glass}>
+                <p className="font-bold" style={{ fontSize: "0.8125rem", color: "#ffffff" }}>
                   Customers, Not Applause
                 </p>
-                <p className="font-light mt-1" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
+                <p className="font-light mt-0.5" style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.4)" }}>
                   Same spend · two creatives
                 </p>
-                <div className="flex flex-col gap-5 mt-5">
+                <div className="flex flex-col gap-2.5 mt-3">
                   <div>
                     <div className="flex items-baseline justify-between">
-                      <span className="font-medium" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.65)" }}>
-                        Reel A — the brand film
+                      <span className="font-medium" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.65)" }}>
+                        Reel A — brand film
                       </span>
-                      <span className="font-bold" style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)" }}>
+                      <span className="font-bold" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.5)" }}>
                         1 sale
                       </span>
                     </div>
-                    <div className="mt-2" style={{ height: "0.5rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
+                    <div className="mt-1.5" style={{ height: "0.375rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
                       <div style={{ height: "100%", width: "3%", background: "rgba(255,255,255,0.3)", borderRadius: "999px" }} />
                     </div>
-                    <p className="font-light mt-1.5" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-                      41,200 views · 12 talked
-                    </p>
                   </div>
                   <div>
                     <div className="flex items-baseline justify-between">
-                      <span className="font-medium" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.85)" }}>
-                        Reel B — how it actually fits
+                      <span className="font-medium" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.85)" }}>
+                        Reel B — how it fits
                       </span>
-                      <span className="font-bold" style={{ fontSize: "0.9375rem", color: "#ff9a5a" }}>
+                      <span className="font-bold" style={{ fontSize: "0.75rem", color: "#ff9a5a" }}>
                         31 sales
                       </span>
                     </div>
-                    <div className="mt-2" style={{ height: "0.5rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
+                    <div className="mt-1.5" style={{ height: "0.375rem", background: "rgba(255,255,255,0.06)", borderRadius: "999px" }}>
                       <div style={{ height: "100%", width: "100%", background: "linear-gradient(90deg, #ff7a3d 0%, #ff9a5a 100%)", borderRadius: "999px" }} />
                     </div>
-                    <p className="font-light mt-1.5" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-                      6,400 views · 96 talked
-                    </p>
                   </div>
                 </div>
-                <p className="font-light mt-5" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}>
+                <p className="font-light mt-3" style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "rgba(255,255,255,0.55)" }}>
                   A sixth of the reach. Thirty-one times the sales. The agency reported Reel A.
                 </p>
-              </div>
-            </Reveal>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 mt-8">
-            <HourlyChart note="62% arrives after 20:00. Nobody is staffed then. The agents already are." />
-            <Reveal delay={0.1}>
-              <div className="rounded-3xl p-7 h-full" style={glass}>
-                <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
-                  The Moves That Matter This Week
-                </p>
-                <p className="font-light mt-1" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-                  Action feed
-                </p>
-                <div className="flex flex-col gap-4 mt-5">
-                  {[
-                    "Move the spend off Reel A and behind Reel B.",
-                    "Put the Alexandria delivery answer in the caption — it is costing 88 conversations a week.",
-                    "Restock bundle SKU-114 and staff the 20:00–22:00 window.",
-                  ].map((move, i) => (
-                    <div key={move} className="flex items-start gap-3">
-                      <span
-                        className="shrink-0 font-bold"
-                        style={{
-                          fontSize: "0.75rem",
-                          color: "#5aa2ff",
-                          border: "1px solid rgba(90,162,255,0.4)",
-                          borderRadius: "999px",
-                          width: "1.375rem",
-                          height: "1.375rem",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {i + 1}
-                      </span>
-                      <span className="font-light" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.65)" }}>
-                        {move}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div
-                  className="rounded-2xl p-4 mt-5"
-                  style={{ background: "rgba(255,122,61,0.08)", border: "1px solid rgba(255,122,61,0.22)" }}
-                >
-                  <p className="font-light" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.75)" }}>
-                    <span className="font-bold text-white">Anomaly · Tuesday 14:00 — </span>
-                    Delivery questions ×4. Nothing changed in the ad account — something changed at the courier.
-                    Flagged 19 hours before the first complaint email.
-                  </p>
-                </div>
               </div>
             </Reveal>
           </div>
