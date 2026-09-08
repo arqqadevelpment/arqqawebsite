@@ -13,13 +13,16 @@ type Service = {
   cep: string;
   accent: "blue" | "orange";
   image: string;
+  /** Overrides the default `/services/<slug>` link — for services that live
+      on their own dedicated route rather than the services hub template. */
+  href?: string;
 };
 
 const SERVICES: Service[] = [
   {
     num: "01",
     slug: "strategy-consulting",
-    title: "Strategy & Consulting",
+    title: "Marketing Strategy & Digital Assessment",
     body: "Paid discovery workshops. Go-to-market roadmaps. Growth audits. Competitive analysis. The strategic foundation where every engagement begins.",
     cep: "When your growth has stagnated.",
     accent: "blue",
@@ -28,7 +31,7 @@ const SERVICES: Service[] = [
   {
     num: "02",
     slug: "asset-building",
-    title: "Asset Building",
+    title: "Brand Strategy & Positioning",
     body: "Branding and identity systems. Website design and development. Company profiles. Visual identity rollout kits. Every asset a company needs to launch, reposition, or scale.",
     cep: "When nobody remembers your brand.",
     accent: "orange",
@@ -46,7 +49,7 @@ const SERVICES: Service[] = [
   {
     num: "04",
     slug: "technology",
-    title: "Technology",
+    title: "Web & App Development",
     body: "Website design & development. Mobile app design & development. UI/UX. CRM integration & automation. HubSpot, Shopify, Salla. Built for speed, conversion, and scale.",
     cep: "When your product doesn't convert.",
     accent: "orange",
@@ -55,7 +58,7 @@ const SERVICES: Service[] = [
   {
     num: "05",
     slug: "community-management",
-    title: "Social Media & Community Management",
+    title: "Social Media Management",
     body: "Moderation. Autonomous community management. Social listening. Crisis handling. Social CX automation. Protecting and growing your brand presence 24/7.",
     cep: "When your community is unmanaged.",
     accent: "blue",
@@ -73,11 +76,21 @@ const SERVICES: Service[] = [
   {
     num: "07",
     slug: "performance-marketing",
-    title: "Performance Marketing",
+    title: "Performance Marketing & App Growth",
     body: "Paid search, paid social, and programmatic. Full-funnel campaign architecture. Conversion tracking and attribution. Creative testing at volume. Spend tied to revenue, not impressions.",
     cep: "When you're spending more every month and learning less.",
     accent: "blue",
     image: "/services/performance.webp",
+  },
+  {
+    num: "08",
+    slug: "autonomous",
+    title: "CRM, Automation & AI Solutions",
+    body: "AI agents inside every inbox and comment section your customers already use. Sales, service, moderation and reporting — automated, on-brand, and live in a day.",
+    cep: "When your team can't keep up with every conversation.",
+    accent: "orange",
+    image: "/services/card-gradient-001.webp",
+    href: "/autonomous",
   },
 ];
 
@@ -139,7 +152,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       }}
     >
       <Link
-        href={`/services/${service.slug}`}
+        href={service.href ?? `/services/${service.slug}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative flex flex-col h-full rounded-3xl overflow-hidden"

@@ -79,7 +79,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     slug: "strategy-consulting",
     num: "01",
-    title: "Strategy & Consulting",
+    title: "Marketing Strategy & Digital Assessment",
     short: "Strategy",
     positioning:
       "Before a single pixel moves, the blueprint exists — a rigorous, paid discovery process that aligns objectives and eliminates assumptions.",
@@ -164,12 +164,12 @@ export const SERVICES: ServiceDetail[] = [
       ],
     },
     related: ["catalyst-system", "asset-building", "technology"],
-    playbook: "Strategy & Consulting",
+    playbook: "Marketing Strategy & Digital Assessment",
   },
   {
     slug: "asset-building",
     num: "02",
-    title: "Asset Building",
+    title: "Brand Strategy & Positioning",
     short: "Assets",
     positioning:
       "How you look is how you're remembered — the permanent visual and verbal infrastructure of your brand, built to compound in value the longer it's used.",
@@ -343,7 +343,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     slug: "technology",
     num: "04",
-    title: "Technology",
+    title: "Web & App Development",
     short: "Tech",
     positioning:
       "If the technology doesn't convert, the marketing doesn't matter — the infrastructure your marketing runs on, integrated by design.",
@@ -443,7 +443,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     slug: "community-management",
     num: "05",
-    title: "Social Media & Community Management",
+    title: "Social Media Management",
     short: "Community",
     positioning:
       "Your brand is what people say when you're not in the room — we own that conversation, 24 hours a day.",
@@ -643,7 +643,7 @@ export const SERVICES: ServiceDetail[] = [
   {
     slug: "performance-marketing",
     num: "07",
-    title: "Performance Marketing",
+    title: "Performance Marketing & App Growth",
     short: "Performance",
     positioning:
       "Media is not a budget line. It is the fastest instrument you own for turning demand into revenue — when someone is actually accountable for the number.",
@@ -728,7 +728,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
     },
     related: ["catalyst-system", "strategy-consulting", "community-management"],
-    playbook: "Performance Marketing",
+    playbook: "Performance Marketing & App Growth",
   },
 ];
 
