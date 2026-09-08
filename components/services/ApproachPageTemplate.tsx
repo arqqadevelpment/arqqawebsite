@@ -382,6 +382,34 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
         </div>
       </section>
 
+      {/* ══ 4.5 · Our Projects — real client work for this step ══ */}
+      {page.projects && page.projects.length > 0 ? (
+        <section className="relative w-full" style={{ padding: "3rem 1.5rem 5rem" }}>
+          <div className="relative max-w-5xl mx-auto">
+            <Reveal className="mb-10">
+              <h2
+                className="font-bold text-left"
+                style={{
+                  fontSize: "clamp(1.625rem, 3.1vw, 2.4rem)",
+                  lineHeight: 1.18,
+                  letterSpacing: "-0.02em",
+                  color: "#ffffff",
+                }}
+              >
+                Our Projects
+              </h2>
+            </Reveal>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {page.projects.map((p, i) => (
+                <Reveal key={p.client} delay={Math.min(i * 0.08, 0.24)}>
+                  <ProjectMiniCard item={p} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {/* ══ 5 · Related Services ══ */}
       <section className="relative w-full" style={{ padding: "3rem 1.5rem 5rem" }}>
         <div className="relative max-w-5xl mx-auto">
@@ -516,6 +544,78 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
         </div>
       </section>
     </>
+  );
+}
+
+/* Project proof card — image-led, 3-up above Related Services. Opens the
+   project's own inner page (a Branding/Social/Video/Showcase project). */
+function ProjectMiniCard({
+  item,
+}: {
+  item: { client: string; summary: string; image: string; href: string };
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Link
+      href={item.href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col h-full rounded-3xl overflow-hidden"
+      style={{
+        minHeight: "16rem",
+        border: hovered ? "1px solid rgba(255,138,90,0.5)" : "1px solid rgba(255,255,255,0.11)",
+        boxShadow: hovered
+          ? "0 -14px 40px -18px rgba(255,122,61,0.3), 0 24px 50px -22px rgba(47,107,255,0.28), inset 0 1px 0 rgba(255,175,130,0.2)"
+          : "inset 0 1px 0 rgba(255,255,255,0.05)",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+        transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${item.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          transform: hovered ? "scale(1.06)" : "scale(1)",
+          transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(0deg, rgba(3,3,5,0.92) 0%, rgba(3,3,5,0.5) 45%, rgba(3,3,5,0.18) 100%)",
+        }}
+      />
+      <div className="relative mt-auto p-6">
+        <p className="font-bold" style={{ fontSize: "1.0625rem", color: "#ffffff" }}>
+          {item.client}
+        </p>
+        <span
+          className="inline-flex items-center gap-2 font-medium mt-4"
+          style={{
+            fontSize: "0.8125rem",
+            color: hovered ? "#ffffff" : "rgba(255,255,255,0.6)",
+            transition: "color 0.35s ease",
+          }}
+        >
+          Explore the project
+          <span
+            aria-hidden="true"
+            style={{
+              color: "#ff9a5a",
+              transform: hovered ? "translateX(4px)" : "translateX(0)",
+              transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            →
+          </span>
+        </span>
+      </div>
+    </Link>
   );
 }
 

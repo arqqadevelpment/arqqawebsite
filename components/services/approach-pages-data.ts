@@ -50,6 +50,10 @@ export type ApproachPage = {
 
   related: { label: string; description: string; href: string }[];
 
+  /** Real client work for this specific step, shown as image cards above
+      Related Services — proof, not just a services cross-link. */
+  projects?: { client: string; summary: string; image: string; href: string }[];
+
   cta: {
     primary: { label: string; href: string };
     secondary: { label: string; href: string };
@@ -388,6 +392,26 @@ export const APPROACH_PAGES: ApproachPage[] = [
       note: "Tooling: Figma, Adobe Illustrator, Adobe InDesign. Timeline: 6–8 weeks from brief sign-off.",
       image: "/services/asset-building-approach-included.webp",
     },
+    projects: [
+      {
+        client: "Klivvr",
+        summary: "A full identity system for a digital bank, built to read as innovative and trustworthy at once.",
+        image: "/services/work-klivvr.webp",
+        href: "/branding/klivvr",
+      },
+      {
+        client: "GTS Holding",
+        summary: "A full identity system — OOH, digital, and merchandise — built to read as credible before the first sales call.",
+        image: "/services/work-gts-branding.webp",
+        href: "/branding/gts-branding",
+      },
+      {
+        client: "FXD Technologies",
+        summary: "A full rebrand — mark, collateral, and social system — built to position FXD as the future shapers.",
+        image: "/services/work-fxd.webp",
+        href: "/branding/fxd",
+      },
+    ],
     related: [
       {
         label: "Visual Identity Rollout Kits",
