@@ -3,29 +3,41 @@ import { createClient } from "@/lib/supabase/server";
 type PageRow = { path: string; parent_path: string | null; title: string; page_type: string; custom_path: string | null };
 
 /**
- * Renders per-page JSON-LD: a BreadcrumbList built from the page's position
- * in the Pages tree (walked via parent_path — no manual entry needed), plus
- * an Article schema for article-type pages using the author/published date
- * set on that page's SEO tab. Organization/WebSite schema is injected once,
- * site-wide, in the root layout — this only adds what's specific to one page.
+ * Renders per-page JSON-LD:
+ *  - BreadcrumbList, built from the page's position in the Pages tree
+ *    (walked via parent_path — no manual entry needed)
+ *  - A type-specific schema chosen from the page's page_type (Article for
+ *    insights, JobPosting for careers, Service for service pages,
+ *    CreativeWork for portfolio/case-study/social/video pages) — using only
+ *    fields already collected elsewhere in the dashboard, never invented
+ *  - Any custom schema blocks an admin added on this page's SEO tab
+ *
+ * Organization/WebSite schema is injected once, site-wide, in the root
+ * layout — this only adds what's specific to one page.
  */
 export async function PageSchema({ path }: { path: string }) {
   const supabase = await createClient();
 
-  const [{ data: page }, { data: seo }, { data: settings }] = await Promise.all([
+  const [{ data: page }, { data: seo }, { data: settings }, { data: customSchemas }] = await Promise.all([
     supabase.from("pages").select("path, parent_path, title, page_type, custom_path").eq("path", path).maybeSingle<PageRow>(),
     supabase
       .from("seo_meta")
-      .select("article_author, article_published_at, seo_title, og_image")
+      .select("article_author, article_published_at, seo_title, meta_description, og_image")
       .eq("page_path", path)
       .maybeSingle(),
-    supabase.from("site_settings").select("site_url").single(),
+    supabase
+      .from("site_settings")
+      .select("site_url, org_name, org_street, org_city, org_region, org_postal_code, org_country")
+      .single(),
+    supabase.from("page_schemas").select("id, schema_json").eq("page_path", path),
   ]);
 
   if (!page) return null;
 
   const siteUrl = settings?.site_url ?? "https://arqqa.net";
   const effectivePath = page.custom_path || page.path;
+  const title = seo?.seo_title || page.title;
+  const description = seo?.meta_description || undefined;
 
   // Walk parent_path up to the root to build the breadcrumb chain.
   const crumbs: { name: string; path: string }[] = [{ name: page.title, path: effectivePath }];
@@ -58,19 +70,69 @@ export async function PageSchema({ path }: { path: string }) {
         }
       : null;
 
-  const articleSchema =
-    page.page_type === "article"
-      ? {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: seo?.seo_title || page.title,
-          ...(seo?.og_image ? { image: seo.og_image } : {}),
-          ...(seo?.article_published_at ? { datePublished: seo.article_published_at } : {}),
-          author: { "@type": "Person", name: seo?.article_author || "ARQQA" },
-          publisher: { "@id": `${siteUrl}/#organization` },
-          mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}${effectivePath}` },
-        }
-      : null;
+  const mainEntityId = { "@id": `${siteUrl}${effectivePath}` };
+  const publisher = { "@id": `${siteUrl}/#organization` };
+
+  const hasAddress = settings?.org_street || settings?.org_city || settings?.org_country;
+  const orgAddress = hasAddress
+    ? {
+        "@type": "PostalAddress",
+        ...(settings?.org_street ? { streetAddress: settings.org_street } : {}),
+        ...(settings?.org_city ? { addressLocality: settings.org_city } : {}),
+        ...(settings?.org_region ? { addressRegion: settings.org_region } : {}),
+        ...(settings?.org_postal_code ? { postalCode: settings.org_postal_code } : {}),
+        ...(settings?.org_country ? { addressCountry: settings.org_country } : {}),
+      }
+    : undefined;
+
+  let typeSchema: Record<string, unknown> | null = null;
+
+  if (page.page_type === "article") {
+    typeSchema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      ...(description ? { description } : {}),
+      ...(seo?.og_image ? { image: seo.og_image } : {}),
+      ...(seo?.article_published_at ? { datePublished: seo.article_published_at } : {}),
+      author: { "@type": "Person", name: seo?.article_author || settings?.org_name || "ARQQA" },
+      publisher,
+      mainEntityOfPage: { "@type": "WebPage", ...mainEntityId },
+    };
+  } else if (page.page_type === "job") {
+    typeSchema = {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      title,
+      ...(description ? { description } : { description: title }),
+      hiringOrganization: {
+        "@type": "Organization",
+        name: settings?.org_name || "ARQQA",
+        sameAs: siteUrl,
+      },
+      ...(orgAddress ? { jobLocation: { "@type": "Place", address: orgAddress } } : {}),
+    };
+  } else if (page.page_type === "service" || page.page_type === "service-approach") {
+    typeSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: title,
+      ...(description ? { description } : {}),
+      provider: { "@type": "Organization", ...publisher },
+      areaServed: settings?.org_country || undefined,
+      url: `${siteUrl}${effectivePath}`,
+    };
+  } else if (["case-study", "branding", "social", "video", "industry"].includes(page.page_type)) {
+    typeSchema = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      name: title,
+      ...(description ? { description } : {}),
+      ...(seo?.og_image ? { image: seo.og_image } : {}),
+      creator: { "@type": "Organization", ...publisher },
+      url: `${siteUrl}${effectivePath}`,
+    };
+  }
 
   return (
     <>
@@ -81,13 +143,21 @@ export async function PageSchema({ path }: { path: string }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       )}
-      {articleSchema && (
+      {typeSchema && (
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(typeSchema) }}
         />
       )}
+      {(customSchemas ?? []).map((row) => (
+        <script
+          key={row.id}
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(row.schema_json) }}
+        />
+      ))}
     </>
   );
 }

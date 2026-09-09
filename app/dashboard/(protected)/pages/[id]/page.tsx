@@ -3,6 +3,19 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SeoForm } from "./SeoForm";
 import { UrlForm } from "./UrlForm";
+import { SchemaManager } from "./SchemaManager";
+
+const AUTO_SCHEMA_LABEL: Record<string, string> = {
+  article: "Article",
+  job: "JobPosting",
+  service: "Service",
+  "service-approach": "Service",
+  "case-study": "CreativeWork",
+  branding: "CreativeWork",
+  social: "CreativeWork",
+  video: "CreativeWork",
+  industry: "CreativeWork",
+};
 
 export default async function PageDetail({
   params,
@@ -34,6 +47,12 @@ export default async function PageDetail({
     .single();
 
   const siteUrl = settings?.site_url ?? "https://arqqa.net";
+
+  const { data: customSchemas } = await supabase
+    .from("page_schemas")
+    .select("id, label, schema_json")
+    .eq("page_path", page.path)
+    .order("created_at");
 
   return (
     <div>
@@ -114,6 +133,24 @@ export default async function PageDetail({
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #262626",
+          borderRadius: 10,
+          padding: 20,
+          background: "#111111",
+          marginTop: 24,
+          maxWidth: 460,
+        }}
+      >
+        <h2 style={{ fontSize: 14, color: "#a3a3a3", marginBottom: 6 }}>Schema</h2>
+        <p style={{ color: "#525252", fontSize: 11.5, marginBottom: 14 }}>
+          BreadcrumbList{AUTO_SCHEMA_LABEL[page.page_type] ? ` and ${AUTO_SCHEMA_LABEL[page.page_type]}` : ""} are
+          already added automatically. Add any extra schema block here.
+        </p>
+        <SchemaManager pagePath={page.path} initial={customSchemas ?? []} />
       </div>
     </div>
   );
