@@ -12,7 +12,7 @@ Phases 1, 2, 5, 6 and 7 follow the original closely. **Phases 3 and 4 are rebuil
 site's actual content shape** rather than the original's generic page-builder model — the table
 below says why in one line, and Phase 3 explains it properly.
 
-**Do the phases in order.** Each depends on the previous.ssdsadasdas
+**Do the phases in order.** Each depends on the previous.ssdsadasdashh
 
 ## What's different from the original guide (and why)
 
