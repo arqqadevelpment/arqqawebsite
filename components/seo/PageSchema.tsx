@@ -2,6 +2,13 @@ import { createClient } from "@/lib/supabase/server";
 
 type PageRow = { path: string; parent_path: string | null; title: string; page_type: string; custom_path: string | null };
 
+/** Schema image/url fields must be absolute — resolve a relative "/foo.webp" against the site URL. */
+function toAbsoluteUrl(url: string | null | undefined, siteUrl: string): string | undefined {
+  if (!url) return undefined;
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${siteUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+}
+
 /**
  * Renders per-page JSON-LD:
  *  - BreadcrumbList, built from the page's position in the Pages tree
@@ -27,7 +34,7 @@ export async function PageSchema({ path }: { path: string }) {
       .maybeSingle(),
     supabase
       .from("site_settings")
-      .select("site_url, org_name, org_street, org_city, org_region, org_postal_code, org_country")
+      .select("site_url, org_name, org_logo_url, default_share_image, org_street, org_city, org_region, org_postal_code, org_country")
       .single(),
     supabase.from("page_schemas").select("id, schema_json").eq("page_path", path),
   ]);
@@ -72,6 +79,15 @@ export async function PageSchema({ path }: { path: string }) {
 
   const mainEntityId = { "@id": `${siteUrl}${effectivePath}` };
   const publisher = { "@id": `${siteUrl}/#organization` };
+  const pageUrl = `${siteUrl}${effectivePath}`;
+  // Always resolve to an absolute URL, falling back through the page's own
+  // image, the site-wide default share image, then the org logo — so
+  // `image` is essentially never missing (Google flags it as a warning
+  // when absent, even though it's technically optional).
+  const fallbackImage =
+    toAbsoluteUrl(seo?.og_image, siteUrl) ||
+    toAbsoluteUrl(settings?.default_share_image, siteUrl) ||
+    toAbsoluteUrl(settings?.org_logo_url, siteUrl);
 
   const hasAddress = settings?.org_street || settings?.org_city || settings?.org_country;
   const orgAddress = hasAddress
@@ -92,8 +108,9 @@ export async function PageSchema({ path }: { path: string }) {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
+      url: pageUrl,
       ...(description ? { description } : {}),
-      ...(seo?.og_image ? { image: seo.og_image } : {}),
+      ...(fallbackImage ? { image: fallbackImage } : {}),
       ...(seo?.article_published_at ? { datePublished: seo.article_published_at } : {}),
       author: { "@type": "Person", name: seo?.article_author || settings?.org_name || "ARQQA" },
       publisher,
@@ -128,9 +145,9 @@ export async function PageSchema({ path }: { path: string }) {
       "@type": "CreativeWork",
       name: title,
       ...(description ? { description } : {}),
-      ...(seo?.og_image ? { image: seo.og_image } : {}),
+      ...(fallbackImage ? { image: fallbackImage } : {}),
       creator: { "@type": "Organization", ...publisher },
-      url: `${siteUrl}${effectivePath}`,
+      url: pageUrl,
     };
   }
 

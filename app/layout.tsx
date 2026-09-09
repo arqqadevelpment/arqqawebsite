@@ -51,6 +51,13 @@ export default async function RootLayout({
 
   const hasAddress = settings?.org_street || settings?.org_city || settings?.org_country;
 
+  // schema.org's `logo`/`image` want an absolute URL — resolve a relative "/foo.webp".
+  const absoluteLogo = settings?.org_logo_url
+    ? /^https?:\/\//i.test(settings.org_logo_url)
+      ? settings.org_logo_url
+      : `${siteUrl}${settings.org_logo_url.startsWith("/") ? "" : "/"}${settings.org_logo_url}`
+    : undefined;
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -59,7 +66,7 @@ export default async function RootLayout({
     url: siteUrl,
     ...(settings?.org_name_ar ? { alternateName: settings.org_name_ar } : {}),
     ...(settings?.org_legal_name ? { legalName: settings.org_legal_name } : {}),
-    ...(settings?.org_logo_url ? { logo: settings.org_logo_url } : {}),
+    ...(absoluteLogo ? { logo: absoluteLogo } : {}),
     ...(settings?.org_phone ? { telephone: settings.org_phone } : {}),
     ...(settings?.org_email ? { email: settings.org_email } : {}),
     ...(hasAddress
