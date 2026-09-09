@@ -189,7 +189,7 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
               <button
                 type="button"
                 onClick={() => onSelect(i)}
-                aria-label={`${s.title} — jump to details`}
+                aria-label={`${s.title}: jump to details`}
                 className="svc-node svc-upright flex flex-col items-center justify-center rounded-full cursor-pointer"
                 style={{
                   width: "clamp(3.25rem, 16vw, 4.75rem)",
@@ -388,7 +388,7 @@ export function ServicesPageContent() {
                 color: "rgba(255,255,255,0.6)",
               }}
             >
-              Seven integrated verticals. One unified system. Every service is
+              Eight integrated verticals. One unified system. Every service is
               engineered to compound the impact of every other.
             </p>
           </Reveal>
@@ -428,7 +428,7 @@ export function ServicesPageContent() {
                 color: "#ffffff",
               }}
             >
-              Seven Verticals.{" "}
+              Eight Verticals.{" "}
               <span
                 style={{
                   backgroundImage:
@@ -613,7 +613,7 @@ function ServiceRow({ service, flash }: { service: Service; flash?: boolean }) {
   return (
     <Link
       id={`service-${service.num}`}
-      href={`/services/${service.slug}`}
+      href={service.slug === "autonomous" ? "/autonomous" : `/services/${service.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col sm:flex-row rounded-3xl overflow-hidden"

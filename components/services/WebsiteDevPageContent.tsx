@@ -241,7 +241,7 @@ const PAIN_POINTS = [
   },
   {
     pain: "“I’m losing leads because my site doesn’t convert.”",
-    solution: "Every page we design is built for conversion — from the first headline to the final CTA.",
+    solution: "Every page we design is built for conversion, from the first headline to the final CTA.",
   },
   {
     pain: "“I’ve been burned by agencies that over-promise and under-deliver.”",
@@ -275,7 +275,7 @@ const TIERS: Tier[] = [
     body: "A premium corporate presence built for trust, authority, and lead generation. Clean architecture. Fast load times. SEO-ready from day one. Designed for businesses that need their website to work as hard as their sales team.",
     items: [
       "Custom UI/UX design (Figma → development)",
-      "Responsive design — mobile, tablet, desktop",
+      "Responsive design: mobile, tablet, desktop",
       "Up to 15 pages (Home, About, Services, Contact, etc.)",
       "CMS integration (WordPress or headless)",
       "On-page SEO setup (meta tags, schema, sitemap)",
@@ -339,7 +339,7 @@ const TIERS: Tier[] = [
     num: "04",
     name: "Advanced Interactive / Animation Website",
     forWhom: "Brands, agencies, and innovators who want an Awwwards-level digital experience.",
-    body: "This is not a website. It's a digital experience. Custom WebGL, GSAP, Three.js, Lottie, and scroll-driven storytelling. For brands that want their website to be a competitive weapon — the kind that makes your industry stop and take notice.",
+    body: "This is not a website. It's a digital experience. Custom WebGL, GSAP, Three.js, Lottie, and scroll-driven storytelling. For brands that want their website to be a competitive weapon: the kind that makes your industry stop and take notice.",
     items: [
       "Bespoke creative direction and art direction",
       "Custom interaction design and motion choreography",
@@ -353,7 +353,7 @@ const TIERS: Tier[] = [
       "Awwwards / FWA submission-ready",
       "90-day post-launch support + iteration sprints",
     ],
-    bestFor: "Brands and leaders who understand that their website is their most visible asset — and want it to be unforgettable.",
+    bestFor: "Brands and leaders who understand that their website is their most visible asset, and want it to be unforgettable.",
     cta: "Get an Interactive Website Quote",
   },
 ];
@@ -456,7 +456,7 @@ const TRUSTED_BY: { name: string; logo?: string; scale?: number }[] = [
 
 const TESTIMONIALS = [
   {
-    quote: "ARQQA didn't just redesign our site — they rebuilt how prospects experience our brand from the first click.",
+    quote: "ARQQA didn't just redesign our site. They rebuilt how prospects experience our brand from the first click.",
     role: "Corporate website client, Egypt",
   },
   {
@@ -477,8 +477,8 @@ const REGIONS: {
   offices: { label?: string; lines: string[]; phone: string; tel: string }[];
 }[] = [
   {
-    market: "Egypt — Cairo HQ",
-    body: "Our home base. 13 years of building websites for Egyptian businesses — from startups to enterprises. Local payment integrations (Fawry, Paymob, ValU).",
+    market: "Egypt, Cairo HQ",
+    body: "Our home base. 13 years of building websites for Egyptian businesses, from startups to enterprises. Local payment integrations (Fawry, Paymob, ValU).",
     offices: [
       {
         lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"],
@@ -488,29 +488,29 @@ const REGIONS: {
     ],
   },
   {
-    market: "Saudi Arabia — Riyadh",
+    market: "Saudi Arabia, Riyadh",
     body: "Vision 2030-aligned digital presence. Arabic-first design. Salla and Shopify expertise. STC Pay, Tamara, Tabby integrations.",
     offices: [
       {
-        lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"],
+        lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz, Riyadh 12627"],
         phone: "+966 54 110 2224",
         tel: "+966541102224",
       },
     ],
   },
   {
-    market: "UAE — Abu Dhabi / Dubai",
+    market: "UAE, Abu Dhabi / Dubai",
     body: "Premium corporate and interactive websites for GCC enterprises. Multi-language (AR/EN). Regional hosting for speed.",
     offices: [
       {
         label: "Abu Dhabi",
-        lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"],
+        lines: ["3 Al Razqi Street, AlDannah", "Floor 8, Office 801"],
         phone: "+971 50 726 6877",
         tel: "+971507266877",
       },
       {
         label: "Dubai",
-        lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"],
+        lines: ["West Burry Tower 1, Business Bay", "Floor 21st, Office 2106"],
         phone: "+971 50 726 6877",
         tel: "+971507266877",
       },
@@ -525,7 +525,7 @@ const FAQS = [
   },
   {
     q: "Do you design for mobile?",
-    a: "Every website we build is mobile-first. 70%+ of MENA web traffic is mobile — we design and test for mobile before desktop.",
+    a: "Every website we build is mobile-first. 70%+ of MENA web traffic is mobile, so we design and test for mobile before desktop.",
   },
   {
     q: "Can you build an Arabic (RTL) website?",
@@ -1542,7 +1542,7 @@ function LeadForm() {
     return (
       <div className="rounded-3xl p-10 text-center" style={glass}>
         <p className="font-bold" style={{ fontSize: "1.25rem", color: "#ffffff" }}>
-          Thanks — we&apos;ve got it.
+          Thanks, we&apos;ve got it.
         </p>
         <p className="font-light mt-3" style={{ fontSize: "0.9375rem", lineHeight: 1.7, color: "rgba(255,255,255,0.6)" }}>
           A senior strategist will reach out within 24 hours with a tailored recommendation and timeline.
@@ -1673,7 +1673,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
 
           <Reveal delay={1.4} className="flex flex-col items-center">
             <p className="font-light mt-6 max-w-2xl" style={{ fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(255,255,255,0.62)" }}>
-              ARQQA designs and builds high-performance websites for businesses across Egypt, Saudi Arabia, and the UAE. From corporate platforms to advanced interactive experiences — engineered for speed, conversion, and scale.
+              ARQQA designs and builds high-performance websites for businesses across Egypt, Saudi Arabia, and the UAE. From corporate platforms to advanced interactive experiences, engineered for speed, conversion, and scale.
             </p>
 
             <div className="mt-8">
@@ -1709,7 +1709,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
             eyebrow="THE PROBLEM"
             title="Your Website Is Costing You Customers."
             accentTail="Every Single Day."
-            body="You already know something is wrong. Visitors land and leave. Your site looks outdated. It doesn't work on mobile. Your competitors are outranking you. You've hired freelancers or cheap agencies before — the result was always the same: delays, excuses, and a website you're embarrassed to share."
+            body="You already know something is wrong. Visitors land and leave. Your site looks outdated. It doesn't work on mobile. Your competitors are outranking you. You've hired freelancers or cheap agencies before, and the result was always the same: delays, excuses, and a website you're embarrassed to share."
           />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {PAIN_POINTS.map((item, i) => (

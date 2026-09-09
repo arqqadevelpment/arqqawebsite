@@ -5,7 +5,7 @@ import { AboutContent } from "@/components/about/AboutContent";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/about", {
-    title: "About — ARQQA",
+    title: "About | ARQQA",
     description: "Founded in Cairo, forged under pressure. ARQQA is a MarTech Growth System: 13 years, 4 markets, 50+ specialists, one integrated engine.",
   });
 }

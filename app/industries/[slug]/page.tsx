@@ -17,10 +17,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const industry = getIndustry(slug);
-  if (!industry) return { title: "Industry — ARQQA" };
+  if (!industry) return { title: "Industry | ARQQA" };
 
   return getPageSeo(`/industries/${slug}`, {
-    title: `${industry.name} — ARQQA`,
+    title: `${industry.name} | ARQQA`,
     description: industry.heroHeadline,
   });
 }

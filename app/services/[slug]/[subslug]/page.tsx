@@ -18,10 +18,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, subslug } = await params;
   const page = getApproachPage(slug, subslug);
-  if (!page) return { title: "Service — ARQQA" };
+  if (!page) return { title: "Service | ARQQA" };
 
   return getPageSeo(`/services/${slug}/${subslug}`, {
-    title: `${page.title} — ARQQA`,
+    title: `${page.title} | ARQQA`,
     description: page.intro,
   });
 }

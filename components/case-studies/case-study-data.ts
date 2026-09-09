@@ -129,7 +129,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     },
     heroHeadline: "From a Struggling Brand to a Sold-Out Season.",
     heroSub:
-      "A full-funnel transformation that took Everher from near-zero profitability to a consistently profitable, sold-out operation — without increasing spend.",
+      "A full-funnel transformation that took Everher from near-zero profitability to a consistently profitable, sold-out operation, without increasing spend.",
     challenge:
       "Everher entered the year with a fragmented paid social presence. Campaign structure was weak, brand positioning didn't match the product (a luxury aesthetic applied to an everyday wellness item), content relevance was low, and inventory sat stagnant despite heavy ad activity. The brand was burning budget with no sustainable growth path.",
     approach: {
@@ -177,13 +177,13 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         { value: "+105%", label: "Increase in ROAS" },
         { value: "-54%", label: "Reduction in ad spend, with revenue maintained" },
         { value: "+272%", label: "Peak conversion rate uplift" },
-        { value: "100%", label: "Inventory sold out — complete sellout of previously stagnant stock" },
+        { value: "100%", label: "Inventory sold out, complete sellout of previously stagnant stock" },
       ],
     },
     card: {
       sector: "Beauty & Wellness",
       summary:
-        "+105% ROAS and a complete sellout of stagnant stock — a full-funnel rebuild that raised return while cutting spend.",
+        "+105% ROAS and a complete sellout of stagnant stock, a full-funnel rebuild that raised return while cutting spend.",
       image: "/portfolio/everher.webp",
     },
     related: ["merova", "perfect-body"],
@@ -195,7 +195,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Women's Fashion & Outfits",
     market: "Egypt",
     flag: "🇪🇬",
-    service: "E-Commerce Growth — Meta Performance Marketing",
+    service: "E-Commerce Growth, Meta Performance Marketing",
     logo: "/logos/clients/merova.webp",
     accent: "violet",
     sectionMedia: {
@@ -206,16 +206,16 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       afterResults: "/portfolio/merova.webp",
       socialProof: ["/portfolio/merova-social-01.webp", "/portfolio/merova-social-02.webp"],
     },
-    heroHeadline: "Winning Winter — On Merova's Terms.",
+    heroHeadline: "Winning Winter, On Merova's Terms.",
     heroSub:
-      "A premium Egyptian fashion brand held its ground against heavy seasonal discounting from competitors — and grew instead of retreating.",
+      "A premium Egyptian fashion brand held its ground against heavy seasonal discounting from competitors, and grew instead of retreating.",
     challenge:
       "Merova positions itself as a premium, Turkish-inspired fashion destination in the Egyptian market. Every winter, competitors flood the market with cheaper, high-volume collections that pressure both acquisition cost and perceived value. The objective: protect performance and maintain premium pricing without competing on discount depth alone.",
     approach: {
       moves: [
         {
           title: "Structured Testing Framework",
-          body: "Every growth lever — platforms, campaign levels, product categories, individual SKUs, and creative angles — was isolated and tested before a single unit of budget was scaled.",
+          body: "Every growth lever, platforms, campaign levels, product categories, individual SKUs, and creative angles, was isolated and tested before a single unit of budget was scaled.",
         },
         {
           title: "Evidence-Based Scaling",
@@ -223,7 +223,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         },
         {
           title: "Retention Strategy",
-          body: "As acquisition matured, focus expanded to customer lifetime value — building repeat-purchase behavior so the brand wasn't solely reliant on new-customer acquisition to absorb seasonal competitive pressure.",
+          body: "As acquisition matured, focus expanded to customer lifetime value, building repeat-purchase behavior so the brand wasn't solely reliant on new-customer acquisition to absorb seasonal competitive pressure.",
         },
         {
           title: "Infrastructure Rebuild",
@@ -231,15 +231,15 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         },
         {
           title: "Conversion Rate Optimization",
-          body: "With accurate tracking in place, focus turned to the on-site experience — streamlined navigation, product presentation, and checkout flow, closing the gap between traffic and completed purchases.",
+          body: "With accurate tracking in place, focus turned to the on-site experience, streamlined navigation, product presentation, and checkout flow, closing the gap between traffic and completed purchases.",
         },
         {
           title: "Offer Engineering",
-          body: "Rather than defaulting to blanket discounts, offer mechanics were treated as a testable growth lever — bundle incentives and volume rewards were tested against a discount baseline, each measured on incremental margin impact, not just redemption volume.",
+          body: "Rather than defaulting to blanket discounts, offer mechanics were treated as a testable growth lever, bundle incentives and volume rewards were tested against a discount baseline, each measured on incremental margin impact, not just redemption volume.",
         },
         {
           title: "Brand Expansion",
-          body: "A first-time mega-influencer collaboration introduced the brand to a significantly larger, more diverse audience — compounding trust and feeding both acquisition and retention.",
+          body: "A first-time mega-influencer collaboration introduced the brand to a significantly larger, more diverse audience, compounding trust and feeding both acquisition and retention.",
         },
       ],
     },
@@ -248,9 +248,9 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       metrics: [
         { value: "~2x", label: "Monthly sales nearly doubled versus the brand's prior winter maximum" },
         { value: "3.5–4.0x", label: "Average ROAS sustained through the winter season" },
-        { value: "Premium", label: "Pricing maintained throughout — no discount-depth compromise" },
+        { value: "Premium", label: "Pricing maintained throughout, no discount-depth compromise" },
       ],
-      note: "These results were achieved against a backdrop of heavier competitor discounting and seasonal market saturation — validating the testing, tracking, and CRO investments made earlier in the engagement.",
+      note: "These results were achieved against a backdrop of heavier competitor discounting and seasonal market saturation, validating the testing, tracking, and CRO investments made earlier in the engagement.",
     },
     card: {
       sector: "Fashion E-Commerce",
@@ -267,7 +267,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Government & Public Sector",
     market: "Egypt",
     flag: "🇪🇬",
-    service: "Social Media Growth — Meta Ads Program",
+    service: "Social Media Growth, Meta Ads Program",
     logo: "/logos/clients/ntra.webp",
     accent: "blue",
     sectionMedia: {
@@ -277,11 +277,11 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       challenge: "/portfolio/ntra-challenge.webp",
       afterResults: "/portfolio/ntra.webp",
     },
-    heroHeadline: "Scaling a National Regulator's Voice — 71.5% Follower Growth in Six Months.",
+    heroHeadline: "Scaling a National Regulator's Voice, 71.5% Follower Growth in Six Months.",
     heroSub:
       "Egypt's National Telecom Regulatory Authority needed to grow its digital voice for public-service messaging. ARQQA built an always-on, multi-objective Meta Ads program that nearly doubled its audience.",
     challenge:
-      "NTRA is Egypt's official telecommunications regulator — protecting consumers, licensing operators, and communicating public policy directly to citizens. The brand had a large but under-engaged Facebook and Instagram audience, with limited reach for awareness campaigns and citizen-facing programs, including child-safety initiatives.",
+      "NTRA is Egypt's official telecommunications regulator, protecting consumers, licensing operators, and communicating public policy directly to citizens. The brand had a large but under-engaged Facebook and Instagram audience, with limited reach for awareness campaigns and citizen-facing programs, including child-safety initiatives.",
     approach: {
       intro:
         "Rather than a single campaign, ARQQA ran a continuous portfolio across five months, each objective tuned and iterated as performance data came in:",
@@ -305,15 +305,15 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
     },
     results: {
-      intro: "Before and after — six months of sustained program activity:",
+      intro: "Before and after, six months of sustained program activity:",
       metrics: [
-        { value: "+71.5%", label: "Growth in total Facebook Page audience — from roughly 606K to over 1.03M followers" },
-        { value: "7.37M", label: "Total Page engagements — reactions, comments, shares, saves, and clicks" },
+        { value: "+71.5%", label: "Growth in total Facebook Page audience, from roughly 606K to over 1.03M followers" },
+        { value: "7.37M", label: "Total Page engagements, reactions, comments, shares, saves, and clicks" },
         { value: "34.6M", label: "Impressions delivered across the program" },
         { value: "376,927", label: "New Facebook likes generated" },
         { value: "9,775", label: "New Instagram follows generated" },
       ],
-      note: "The engagement layer was especially efficient: one single-day post-engagement campaign delivered over 300,000 results at a fraction of a cent per result — the clearest signal in the program for where budget worked hardest.",
+      note: "The engagement layer was especially efficient: one single-day post-engagement campaign delivered over 300,000 results at a fraction of a cent per result, the clearest signal in the program for where budget worked hardest.",
     },
     card: {
       sector: "Government & Public Sector",
@@ -330,19 +330,19 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Healthcare",
     market: "Saudi Arabia",
     flag: "🇸🇦",
-    service: "Paid Social — Lead Generation (Meta, TikTok, Snapchat)",
+    service: "Paid Social, Lead Generation (Meta, TikTok, Snapchat)",
     logo: "/logos/clients/allure.webp",
     accent: "teal",
     heroHeadline: "Two Years. Three Platforms. One Repeatable Lead Engine.",
     heroSub:
       "A healthcare brand's paid social program grew from single-channel dependency into a diversified, always-on acquisition system across Meta, TikTok, and Snapchat.",
     challenge:
-      "Before scaling with ARQQA, Allure Clinics faced two compounding problems. Lead flow was inconsistent across clinics and doctors, with heavy reliance on a single channel leaving the account exposed. Acquisition costs fluctuated widely between doctors and offers, with budget concentrated in a single, increasingly saturated auction — and no cross-platform benchmark to guide where spend worked hardest.",
+      "Before scaling with ARQQA, Allure Clinics faced two compounding problems. Lead flow was inconsistent across clinics and doctors, with heavy reliance on a single channel leaving the account exposed. Acquisition costs fluctuated widely between doctors and offers, with budget concentrated in a single, increasingly saturated auction, and no cross-platform benchmark to guide where spend worked hardest.",
     approach: {
       moves: [
         {
           title: "Multi-Platform Expansion",
-          body: "Lead-generation programs on Snapchat and TikTok alongside Meta — spreading risk, unlocking lower-cost audiences.",
+          body: "Lead-generation programs on Snapchat and TikTok alongside Meta, spreading risk, unlocking lower-cost audiences.",
         },
         {
           title: "Doctor & Offer Segmentation",
@@ -366,7 +366,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     outcome: {
       title: "The Takeaway",
       points: [
-        "Diversified lead flow — no longer dependent on a single platform, with Meta, TikTok, and Snapchat each contributing a reliable share of leads.",
+        "Diversified lead flow, no longer dependent on a single platform, with Meta, TikTok, and Snapchat each contributing a reliable share of leads.",
         "Scaled from a handful of campaigns to 300+ active campaigns across platforms while improving cost efficiency.",
         "Doctor-level and offer-level segmentation is now a proven, reusable framework for every new launch.",
         "Two years of cross-platform data now guide where every new unit of budget works hardest, by doctor, offer, and channel.",
@@ -383,7 +383,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     card: {
       sector: "Healthcare",
       summary:
-        "17,367+ leads across Meta, TikTok and Snapchat — single-channel dependency turned into a diversified engine.",
+        "17,367+ leads across Meta, TikTok and Snapchat, single-channel dependency turned into a diversified engine.",
       image: "/portfolio/allure-clinics.webp",
     },
     related: ["everher", "perfect-body"],
@@ -395,21 +395,21 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Enterprise IT & Cybersecurity",
     market: "Egypt · Saudi Arabia · UAE",
     flag: "🇪🇬",
-    service: "LinkedIn — Structured B2B Social Program",
+    service: "LinkedIn, Structured B2B Social Program",
     logo: "/logos/clients/gts.webp",
     accent: "blue",
     heroHeadline: "From Occasional Brand Moments to a Structured, Always-On Channel.",
     heroSub:
       "A regional enterprise IT and cybersecurity leader turned an inconsistent LinkedIn presence into a disciplined, multi-objective program reaching the CIOs and CISOs who make up its buying audience.",
     challenge:
-      "GTS Holding is a regional enterprise IT and cybersecurity partner operating across Egypt, Saudi Arabia, and the UAE. LinkedIn is the primary channel for reaching the CIOs, CISOs, and IT directors who make up its buying audience — but the presence consisted of single-flight brand moments (an award announcement, an event activation) rather than a sustained program.",
+      "GTS Holding is a regional enterprise IT and cybersecurity partner operating across Egypt, Saudi Arabia, and the UAE. LinkedIn is the primary channel for reaching the CIOs, CISOs, and IT directors who make up its buying audience, but the presence consisted of single-flight brand moments (an award announcement, an event activation) rather than a sustained program.",
     approach: {
       intro:
         "ARQQA evolved the program from occasional flights into a structured, always-on mix of four objectives running side by side on disciplined daily budgets:",
       moves: [
         {
           title: "Brand Awareness",
-          body: "A major industry-event activation and a partner-award announcement — flagship moments that built reach ahead of a dedicated lead-generation push.",
+          body: "A major industry-event activation and a partner-award announcement, flagship moments that built reach ahead of a dedicated lead-generation push.",
         },
         {
           title: "Engagement",
@@ -434,7 +434,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         { value: "0.50%", label: "Blended click-through rate across all objectives" },
         { value: "30.6%", label: "Video view-through rate" },
       ],
-      note: "Three lead-generation flights were run and compared against each other. The sustained daily-budget flight delivered the strongest form-completion rate and the largest volume of leads — the clearest signal identified for scaling going forward.",
+      note: "Three lead-generation flights were run and compared against each other. The sustained daily-budget flight delivered the strongest form-completion rate and the largest volume of leads, the clearest signal identified for scaling going forward.",
     },
     outcome: {
       title: "The Outcome",
@@ -467,7 +467,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Financial Services · AI · Data Science",
     market: "Saudi Arabia",
     flag: "🇸🇦",
-    service: "Account-Based Marketing — Full Acquisition System",
+    service: "Account-Based Marketing, Full Acquisition System",
     logo: "/logos/clients/Zenith-Arabia-AI.webp",
     logoScale: 2.2,
     accent: "amber",
@@ -475,7 +475,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     heroSub:
       "A sophisticated AI and data science offer, translated into a structured, measurable acquisition system for one of the most stakeholder-heavy buying committees in the region: KSA financial services.",
     challenge:
-      "Zenith Arabia AI needed to communicate complex, technical AI use cases to senior banking leaders spanning technology, data, operations, risk, compliance, customer experience, and digital transformation — a market where buying decisions are inherently complex and stakeholder-heavy. The mandate: make sophisticated AI solutions understandable, build credibility, segment messaging by banking use case and persona, and convert qualified attention into measurable leads.",
+      "Zenith Arabia AI needed to communicate complex, technical AI use cases to senior banking leaders spanning technology, data, operations, risk, compliance, customer experience, and digital transformation, a market where buying decisions are inherently complex and stakeholder-heavy. The mandate: make sophisticated AI solutions understandable, build credibility, segment messaging by banking use case and persona, and convert qualified attention into measurable leads.",
     approach: {
       oneRow: true,
       intro:
@@ -483,21 +483,21 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       moves: [
         {
           num: "01",
-          title: "Phase 1 — Attention to Owned Assets",
+          title: "Phase 1, Attention to Owned Assets",
           body: "Target accounts introduced to Zenith Arabia AI through paid advertising, LinkedIn, Google campaigns, SEO, social content, email outreach, and dedicated landing pages.",
         },
         {
           num: "02",
-          title: "Phase 2 — Lead Generation & Nurturing",
+          title: "Phase 2, Lead Generation & Nurturing",
           body: "Once prospects engage, the system moves them into a direct relationship through gated content, demo requests, email nurture sequences, webinars, product education, and CRM/marketing automation.",
         },
         {
           title: "Persona Segmentation",
-          body: "Messaging segmented across four persona clusters — Customer Intelligence, Risk & Compliance, Operational Efficiency, and Advanced Analytics — each mapped to specific banking use cases: customer lifetime value, KYC and credit scoring, fraud detection, generative AI for banking, and more.",
+          body: "Messaging segmented across four persona clusters, Customer Intelligence, Risk & Compliance, Operational Efficiency, and Advanced Analytics, each mapped to specific banking use cases: customer lifetime value, KYC and credit scoring, fraud detection, generative AI for banking, and more.",
         },
         {
           title: "Media & ABM Plan",
-          body: "The full media plan spans Google Display Network, Performance Max, Google Search, and LinkedIn traffic, lead, and video-view campaigns — combined with Apollo-based account identification, contact enrichment, and personalized outreach sequences.",
+          body: "The full media plan spans Google Display Network, Performance Max, Google Search, and LinkedIn traffic, lead, and video-view campaigns, combined with Apollo-based account identification, contact enrichment, and personalized outreach sequences.",
         },
         {
           title: "Operating Scope",
@@ -542,7 +542,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Fashion E-Commerce",
     market: "Kuwait",
     flag: "🇰🇼",
-    service: "Full-Funnel Performance Marketing — Meta",
+    service: "Full-Funnel Performance Marketing, Meta",
     logo: "/logos/clients/perfect-body-white.webp",
     accent: "orange",
     sectionMedia: {
@@ -552,11 +552,11 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       challenge: "/portfolio/perfect-body-challenge.webp",
       afterResults: "/portfolio/perfect-body-results-banner.webp",
     },
-    heroHeadline: "A Year of Full-Funnel Performance — 4.07x Return on Every Dollar Spent.",
+    heroHeadline: "A Year of Full-Funnel Performance, 4.07x Return on Every Dollar Spent.",
     heroSub:
       "A corset brand in Kuwait built a full-funnel Meta program that turned engaged shoppers into a sustained, scalable return across a full year of testing and optimization.",
     challenge:
-      "Perfect Body needed a Meta performance program that could scale efficiently across a full calendar year — not just a single successful campaign, but a repeatable system spanning awareness, traffic, engagement, and retargeting.",
+      "Perfect Body needed a Meta performance program that could scale efficiently across a full calendar year, not just a single successful campaign, but a repeatable system spanning awareness, traffic, engagement, and retargeting.",
     approach: {
       intro: "A layered, full-funnel strategy tested and scaled across four stages:",
       moves: [
@@ -589,7 +589,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         { value: "2.7%", label: "View-to-purchase conversion rate across the full year" },
         { value: "78%", label: "Of shoppers who added to cart went on to initiate checkout" },
       ],
-      note: "The retargeting layer alone closed at a 3.13x ROAS, turning engaged shoppers into paying customers efficiently — validating the full-funnel approach across 76 campaigns and a full year of testing, scaling, and optimization on Meta.",
+      note: "The retargeting layer alone closed at a 3.13x ROAS, turning engaged shoppers into paying customers efficiently, validating the full-funnel approach across 76 campaigns and a full year of testing, scaling, and optimization on Meta.",
     },
     card: {
       sector: "Fashion E-Commerce",
@@ -606,14 +606,14 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
     category: "Beauty & Personal Care · E-Commerce",
     market: "Egypt",
     flag: "🇪🇬",
-    service: "E-Commerce Growth — Meta · Google · TikTok",
+    service: "E-Commerce Growth, Meta · Google · TikTok",
     logo: "/logos/clients/joviality.webp",
     accent: "violet",
-    heroHeadline: "Scaling Paid Media 2× — Without Giving Up ROAS.",
+    heroHeadline: "Scaling Paid Media 2×, Without Giving Up ROAS.",
     heroSub:
-      "Joviality doubled down on growth across Meta, Google and TikTok — scaling media investment by more than 100% while improving sales efficiency and protecting return on ad spend.",
+      "Joviality doubled down on growth across Meta, Google and TikTok, scaling media investment by more than 100% while improving sales efficiency and protecting return on ad spend.",
     challenge:
-      "Joviality had reached a point familiar to growing e-commerce brands: as acquisition expanded, blended ROAS began to soften. From January 2023, a growing share of new-visitor and new-customer traffic began putting pressure on efficiency, while Google cost-per-conversion grew highly volatile, making it harder to scale spend with confidence. The challenge wasn't simply to spend more — it was to build an acquisition structure capable of absorbing significantly more budget without sacrificing performance.",
+      "Joviality had reached a point familiar to growing e-commerce brands: as acquisition expanded, blended ROAS began to soften. From January 2023, a growing share of new-visitor and new-customer traffic began putting pressure on efficiency, while Google cost-per-conversion grew highly volatile, making it harder to scale spend with confidence. The challenge wasn't simply to spend more: it was to build an acquisition structure capable of absorbing significantly more budget without sacrificing performance.",
     approach: {
       intro:
         "A staged rebuild across every channel, structured around the funnel instead of platform habit:",
@@ -621,7 +621,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         {
           num: "01",
           title: "Rebuilt the Google Architecture",
-          body: "Instead of relying on a single campaign structure, Google was rebuilt around a staged mix of Performance Max, Search, Shopping, Display and Video — separated by objective, including discovery, product focus, bundles, new acquisition and brand protection.",
+          body: "Instead of relying on a single campaign structure, Google was rebuilt around a staged mix of Performance Max, Search, Shopping, Display and Video, separated by objective, including discovery, product focus, bundles, new acquisition and brand protection.",
         },
         {
           num: "02",
@@ -646,21 +646,21 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
         {
           num: "06",
           title: "Scaled in Stages, Not All at Once",
-          body: "The Google restructure was rolled out progressively across multiple campaign stages — from Performance Max and Brand Search to Shopping, Search, Video, Display and Dynamic Remarketing — each introduced and evaluated before the next was added.",
+          body: "The Google restructure was rolled out progressively across multiple campaign stages, from Performance Max and Brand Search to Shopping, Search, Video, Display and Dynamic Remarketing, each introduced and evaluated before the next was added.",
         },
       ],
     },
     results: {
       intro: "Program totals across the engagement period:",
       metrics: [
-        { value: "+103%", label: "Paid media spend scaled — EGP 685.7K to EGP 1.39M" },
-        { value: "+114%", label: "Gross sales growth — EGP 2.84M to EGP 6.09M" },
+        { value: "+103%", label: "Paid media spend scaled, EGP 685.7K to EGP 1.39M" },
+        { value: "+114%", label: "Gross sales growth, EGP 2.84M to EGP 6.09M" },
         { value: "4.38x", label: "Optimized blended ROAS, vs. 4.14x baseline" },
         { value: "5.94x", label: "Peak single-month blended ROAS, August 2023" },
-        { value: "4.7x", label: "Google conversion volume growth — 153 to 726 conversions" },
+        { value: "4.7x", label: "Google conversion volume growth, 153 to 726 conversions" },
         { value: "−3.6%", label: "Blended Google cost-per-conversion, held while volume scaled" },
       ],
-      note: "The key result wasn't simply that Joviality spent more. The account absorbed more than twice the media investment while sales grew even faster — with ROAS improving rather than collapsing under scale.",
+      note: "The key result wasn't simply that Joviality spent more. The account absorbed more than twice the media investment while sales grew even faster, with ROAS improving rather than collapsing under scale.",
     },
     outcome: {
       title: "Why It Worked",
@@ -671,7 +671,7 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       ],
     },
     whatsNext:
-      "With the new performance structure established, the next objective was carrying that momentum into peak season. Q4 planning targeted higher sales volume while maintaining disciplined ROAS ranges — including an October target of EGP 860K gross sales at 3.8–4.2x ROAS and a November target of EGP 1.2M at approximately 5.0x ROAS. The larger goal: turn a successful restructuring phase into a repeatable framework for sustained e-commerce growth.",
+      "With the new performance structure established, the next objective was carrying that momentum into peak season. Q4 planning targeted higher sales volume while maintaining disciplined ROAS ranges, including an October target of EGP 860K gross sales at 3.8–4.2x ROAS and a November target of EGP 1.2M at approximately 5.0x ROAS. The larger goal: turn a successful restructuring phase into a repeatable framework for sustained e-commerce growth.",
     card: {
       sector: "Beauty & Personal Care",
       summary:

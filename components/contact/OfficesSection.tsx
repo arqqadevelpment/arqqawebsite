@@ -28,19 +28,19 @@ type Office = {
 const OFFICES: Office[] = [
   {
     label: "Abu Dhabi Office",
-    lines: ["3 Al Razqi Street — AlDannah", "Floor 8 — Office 801"],
+    lines: ["3 Al Razqi Street, AlDannah", "Floor 8, Office 801"],
     phone: "+971 50 726 6877",
     tel: "+971507266877",
   },
   {
     label: "Dubai Office",
-    lines: ["West Burry Tower 1, Business Bay", "Floor 21st — Office 2106"],
+    lines: ["West Burry Tower 1, Business Bay", "Floor 21st, Office 2106"],
     phone: "+971 50 726 6877",
     tel: "+971507266877",
   },
   {
     label: "Riyadh Office",
-    lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz — Riyadh 12627"],
+    lines: ["AL FARAZDAQ, Golden Offices Building", "AL Malaz, Riyadh 12627"],
     phone: "+966 54 110 2224",
     tel: "+966541102224",
   },

@@ -34,7 +34,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     story: [
       {
         type: "text",
-        body: "Coffee Fellows is a German coffee-shop brand entering Egypt for the first time — a launch with no local audience or brand memory to draw on. The mandate was to build both from nothing: introduce the menu, establish a visual identity on social, and turn a new storefront into a place people already wanted to visit before it opened.",
+        body: "Coffee Fellows is a German coffee-shop brand entering Egypt for the first time, a launch with no local audience or brand memory to draw on. The mandate was to build both from nothing: introduce the menu, establish a visual identity on social, and turn a new storefront into a place people already wanted to visit before it opened.",
       },
       {
         type: "grid",
@@ -42,7 +42,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
           {
             src: "/work/coffee-fellows/shot-01.webp",
             alt: "Coffee Fellows branded drink and dessert shot with the tagline Make Today Extraordinary",
-            caption: "Launch content — product photography built around the brand's own voice",
+            caption: "Launch content, product photography built around the brand's own voice",
           },
           {
             src: "/work/coffee-fellows/shot-07.webp",
@@ -77,7 +77,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         media: [
           {
             src: "/work/coffee-fellows/shot-03.webp",
-            alt: "Coffee Fellows fresh juice lineup — Sunny Medium, Berry Mix Smoothie, Granny Medium",
+            alt: "Coffee Fellows fresh juice lineup, Sunny Medium, Berry Mix Smoothie, Granny Medium",
             caption: "Menu features, shot to match the brand's flat lay style",
           },
           {
@@ -123,7 +123,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     title: "Pizza Hut KSA",
     category: "Social Media Production",
     intro:
-      "Campaign-led social content for one of Saudi Arabia's biggest pizza chains — built to keep an already-known brand feeling worth talking about.",
+      "Campaign-led social content for one of Saudi Arabia's biggest pizza chains, built to keep an already-known brand feeling worth talking about.",
     heroImage: "/work/pizza-hut-social/hero.webp",
     logo: "/logos/clients/pizza-hut.webp",
     facts: [
@@ -135,14 +135,14 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     story: [
       {
         type: "text",
-        body: "Pizza Hut KSA already had the market presence — the challenge was keeping a household name feeling current on social, where attention resets every scroll. That meant a steady output of product-led content and campaign concepts strong enough to earn engagement on their own, not just brand-awareness filler.",
+        body: "Pizza Hut KSA already had the market presence, the challenge was keeping a household name feeling current on social, where attention resets every scroll. That meant a steady output of product-led content and campaign concepts strong enough to earn engagement on their own, not just brand-awareness filler.",
       },
       {
         type: "figure",
         media: {
           src: "/work/pizza-hut-social/shot-01.webp",
           alt: "Pizza Hut KSA meter-long pizza campaign with three dipping sauces",
-          caption: "Meter Pizza — a size-led campaign built to be shared",
+          caption: "Meter Pizza, a size-led campaign built to be shared",
         },
       },
       {
@@ -203,14 +203,14 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     story: [
       {
         type: "text",
-        body: "Kenz'up is a loyalty app in Morocco, giving users exclusive discounts, rewards, and personalized offers from partner businesses. An app like this lives or dies on activation and referral — a download that never gets opened again is worth nothing — so the content had to explain the reward mechanics clearly enough to actually get used.",
+        body: "Kenz'up is a loyalty app in Morocco, giving users exclusive discounts, rewards, and personalized offers from partner businesses. An app like this lives or dies on activation and referral, a download that never gets opened again is worth nothing, so the content had to explain the reward mechanics clearly enough to actually get used.",
       },
       {
         type: "grid",
         media: [
           {
             src: "/work/kenzup-social/shot-01.webp",
-            alt: "Kenz'up referral campaign — invite friends with your code and earn 25 points each",
+            alt: "Kenz'up referral campaign, invite friends with your code and earn 25 points each",
             caption: "Referral mechanics, made simple enough to act on immediately",
           },
           {
@@ -231,7 +231,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
           },
           {
             src: "/work/kenzup-social/shot-03.webp",
-            alt: "Kenz'up app feature post — what makes Kenz'up your app",
+            alt: "Kenz'up app feature post, what makes Kenz'up your app",
             caption: "Feature spotlights run alongside the campaign content",
           },
         ],
@@ -245,7 +245,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         media: [
           {
             src: "/work/kenzup-social/shot-04.webp",
-            alt: "Kenz'up 3rd anniversary event announcement — Tuesday 17 October, noon to 3pm",
+            alt: "Kenz'up 3rd anniversary event announcement, Tuesday 17 October, noon to 3pm",
             caption: "Anniversary event announcement",
           },
           {
@@ -270,12 +270,12 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
           },
           {
             src: "/work/kenzup-social/shot-08.webp",
-            alt: "Kenz'up Black Friday giveaway — 3 winners, 1500 points",
+            alt: "Kenz'up Black Friday giveaway, 3 winners, 1500 points",
             caption: "Black Friday giveaway",
           },
           {
             src: "/work/kenzup-social/shot-09.webp",
-            alt: "Kenz'up Black Friday giveaway entry steps — install the app, mention two friends, follow on Instagram",
+            alt: "Kenz'up Black Friday giveaway entry steps, install the app, mention two friends, follow on Instagram",
             caption: "Giveaway entry mechanics",
           },
         ],
@@ -297,7 +297,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     title: "Nile Air",
     category: "Social Media Production",
     intro:
-      "Always-on content for a national carrier — destination campaigns, seasonal offers, and the day-to-day posts that keep an airline's feed worth following between bookings.",
+      "Always-on content for a national carrier, destination campaigns, seasonal offers, and the day-to-day posts that keep an airline's feed worth following between bookings.",
     heroImage: "/work/nile-air-social/hero.webp",
     logo: "/logos/clients/nile-air.webp",
     facts: [
@@ -309,30 +309,30 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     story: [
       {
         type: "text",
-        body: "An airline's social feed has to do two jobs at once: sell the next trip and stay relevant on every day nobody is flying. That meant a content calendar built in layers — inspirational travel content, policy and service features, destination campaigns, and time-boxed offers — each with its own visual language but one consistent brand voice.",
+        body: "An airline's social feed has to do two jobs at once: sell the next trip and stay relevant on every day nobody is flying. That meant a content calendar built in layers, inspirational travel content, policy and service features, destination campaigns, and time-boxed offers, each with its own visual language but one consistent brand voice.",
       },
       {
         type: "text",
-        body: "Service features carried the practical side of the brand — policies explained as reassurance rather than fine print, aimed at the travelers who actually search for them before they book.",
+        body: "Service features carried the practical side of the brand, policies explained as reassurance rather than fine print, aimed at the travelers who actually search for them before they book.",
       },
       {
         type: "grid",
         media: [
           {
             src: "/work/nile-air-social/shot-02.webp",
-            alt: "Nile Air pet-friendly flights — Pets Welcome on Board",
+            alt: "Nile Air pet-friendly flights, Pets Welcome on Board",
             caption: "Pet-friendly travel, made visible as a real feature",
           },
           {
             src: "/work/nile-air-social/shot-03.webp",
-            alt: "Nile Air pregnancy travel safety guidelines — Travel Safely With Care",
+            alt: "Nile Air pregnancy travel safety guidelines, Travel Safely With Care",
             caption: "Safety guidance framed around the traveler, not the policy",
           },
         ],
       },
       {
         type: "text",
-        body: "Destination campaigns did the heaviest lifting — one visual system carrying Cairo, Luxor, and Aswan as a single Eid travel push, each city given its own frame while staying instantly recognizable as one Nile Air campaign.",
+        body: "Destination campaigns did the heaviest lifting, one visual system carrying Cairo, Luxor, and Aswan as a single Eid travel push, each city given its own frame while staying instantly recognizable as one Nile Air campaign.",
       },
       {
         type: "grid",
@@ -356,7 +356,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       },
       {
         type: "text",
-        body: "National holidays and short-haul video carried the same calendar — greeting content timed to the day, and a summer campaign built to move beyond the still frame.",
+        body: "National holidays and short-haul video carried the same calendar, greeting content timed to the day, and a summer campaign built to move beyond the still frame.",
       },
       {
         type: "grid",
@@ -382,26 +382,26 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
             src: "/work/nile-air-social/video-03.mp4",
             type: "video",
             alt: "Nile Air summer vacation campaign video",
-            caption: "Summer campaign — ancient wonders and sun-soaked beaches",
+            caption: "Summer campaign, ancient wonders and sun-soaked beaches",
           },
           {
             src: "/work/nile-air-social/video-04.mp4",
             type: "video",
             alt: "Nile Air Dreaming of Italy, UAE, or Turkey campaign video",
-            caption: "Dreaming of Italy, UAE, or Turkey — stylish cities, stunning views",
+            caption: "Dreaming of Italy, UAE, or Turkey, stylish cities, stunning views",
           },
         ],
       },
       {
         type: "text",
-        body: "Offer content closed the loop — time-boxed promotions styled to stop the scroll on their own, driving bookings directly off the calendar's highest-attention days.",
+        body: "Offer content closed the loop, time-boxed promotions styled to stop the scroll on their own, driving bookings directly off the calendar's highest-attention days.",
       },
       {
         type: "grid",
         media: [
           {
             src: "/work/nile-air-social/shot-08.webp",
-            alt: "Nile Air Golden Friday Offer — 25% off",
+            alt: "Nile Air Golden Friday Offer, 25% off",
             caption: "Golden Friday Offer",
           },
           {
@@ -425,33 +425,33 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
   {
     slug: "bic",
     client: "BIC",
-    title: "BIC — Art Master Africa",
+    title: "BIC, Art Master Africa",
     category: "Social Media Production",
     intro:
-      "A pan-African art talent competition, carried through OOH, street, and social — one visual system built to feel bigger than a single ad.",
+      "A pan-African art talent competition, carried through OOH, street, and social, one visual system built to feel bigger than a single ad.",
     heroImage: "/work/bic-social/hero.webp",
     logo: "/logos/clients/bic.webp",
     facts: [
       { label: "Client", value: "BIC" },
-      { label: "Industry", value: "Consumer Goods — Stationery" },
+      { label: "Industry", value: "Consumer Goods, Stationery" },
       { label: "Scope", value: "Campaign Creative, OOH, Social Media Production" },
       { label: "Market", value: "Africa" },
     ],
     story: [
       {
         type: "text",
-        body: "Art Master Africa is BIC's pan-continental search for the region's biggest undiscovered art talent — one identity built to work at billboard scale and on a single Instagram square alike.",
+        body: "Art Master Africa is BIC's pan-continental search for the region's biggest undiscovered art talent, one identity built to work at billboard scale and on a single Instagram square alike.",
       },
       {
         type: "text",
-        body: "The creative anchor was a single illustration — an ink portrait built entirely from African cultural icons, drawn as if it flowed straight out of a BIC pen. That one piece of art became the system's spine, reappearing across every format at every scale.",
+        body: "The creative anchor was a single illustration, an ink portrait built entirely from African cultural icons, drawn as if it flowed straight out of a BIC pen. That one piece of art became the system's spine, reappearing across every format at every scale.",
       },
       {
         type: "figure",
         media: {
           src: "/work/bic-social/shot-03.webp",
           alt: "BIC United Africa poster with an ink illustration of a woman built from African cultural icons, flowing from a BIC pen",
-          caption: "The campaign's anchor illustration — cultural icons drawn as if inked live from the pen",
+          caption: "The campaign's anchor illustration, cultural icons drawn as if inked live from the pen",
         },
       },
       {
@@ -460,25 +460,25 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
           {
             src: "/work/bic-social/shot-04.webp",
             alt: "BIC United Africa poster placed outdoors among cactus plants",
-            caption: "Street placement — the art holding up outside the frame",
+            caption: "Street placement, the art holding up outside the frame",
           },
           {
             src: "/work/bic-social/shot-05.webp",
             alt: "BIC Art Master Africa 2024 Stay Tuned poster on a graffiti wall",
-            caption: "Teaser phase — building anticipation ahead of launch",
+            caption: "Teaser phase, building anticipation ahead of launch",
           },
         ],
       },
       {
         type: "text",
-        body: "At full scale, the same artwork carried a billboard on its own — no crop, no simplification, just the pen and the illustration doing the entire job of stopping a commute.",
+        body: "At full scale, the same artwork carried a billboard on its own, no crop, no simplification, just the pen and the illustration doing the entire job of stopping a commute.",
       },
       {
         type: "figure",
         media: {
           src: "/work/bic-social/shot-02.webp",
           alt: "BIC United Africa billboard campaign in an urban setting",
-          caption: "Out-of-home — the identical artwork scaled to billboard size",
+          caption: "Out-of-home, the identical artwork scaled to billboard size",
         },
       },
       {
@@ -489,8 +489,8 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         type: "figure",
         media: {
           src: "/work/bic-social/shot-01.webp",
-          alt: "Grid of BIC Art Master Africa social media posts — competition mechanics, judge spotlights, participant artwork, and engagement games",
-          caption: "The social calendar — one visual language across every post type",
+          alt: "Grid of BIC Art Master Africa social media posts, competition mechanics, judge spotlights, participant artwork, and engagement games",
+          caption: "The social calendar, one visual language across every post type",
         },
       },
       {

@@ -909,7 +909,7 @@ export function PortfolioPageContent() {
           </div>
           {total === 0 && (
             <p className="text-center font-light mt-16" style={{ color: "rgba(255,255,255,0.45)" }}>
-              No case studies in this category yet — check back soon.
+              No case studies in this category yet. Check back soon.
             </p>
           )}
         </div>

@@ -410,7 +410,7 @@ const HOSPITAL_THREAD: ChatBubble[] = [
     from: "me",
     time: "23:41",
     content:
-      "I can’t advise on symptoms — that’s the doctor’s call. But I can get you to the right one tonight. Is it from an injury, or did it start on its own?",
+      "I can’t advise on symptoms, that’s the doctor’s call. But I can get you to the right one tonight. Is it from an injury, or did it start on its own?",
   },
   { from: "them", time: "23:42", content: "On its own" },
   {
@@ -455,7 +455,7 @@ const HOSPITAL_THREAD: ChatBubble[] = [
     time: "23:43",
     content: (
       <>
-        Held for ten minutes — EGP 200 deposit now, EGP 450 at the clinic.
+        Held for ten minutes: EGP 200 deposit now, EGP 450 at the clinic.
         <div
           className="rounded-full text-center mt-2 font-bold"
           style={{
@@ -471,7 +471,7 @@ const HOSPITAL_THREAD: ChatBubble[] = [
     ),
   },
   { from: "them", time: "23:44", content: "Paid" },
-  { from: "me", time: "23:44", content: "Booked. Bring any previous X-rays — Maadi branch, third floor." },
+  { from: "me", time: "23:44", content: "Booked. Bring any previous X-rays, Maadi branch, third floor." },
 ];
 
 /* ── Auto-replaying chat mock — plays the hospital thread one bubble at a
@@ -712,7 +712,7 @@ const BANK_THREAD: ChatBubble[] = [
     from: "me",
     time: "03:12",
     content:
-      "I can lock it right now. Confirming it’s you first — I’ve sent a 6-digit code to the number on the account.",
+      "I can lock it right now. Confirming it’s you first: I’ve sent a 6-digit code to the number on the account.",
   },
   { from: "them", time: "03:13", content: "482917" },
   {
@@ -745,7 +745,7 @@ const BANK_THREAD: ChatBubble[] = [
     from: "me",
     time: "03:14",
     content:
-      "That is a formal dispute, so I am passing you to a compliance officer rather than handling it myself. Reference DSP-88214 — they will call within the hour.",
+      "That is a formal dispute, so I am passing you to a compliance officer rather than handling it myself. Reference DSP-88214: they will call within the hour.",
   },
 ];
 
@@ -769,7 +769,7 @@ const AIRLINE_THREAD: ChatBubble[] = [
     time: "02:47",
     content: (
       <>
-        Yes — MS777, Cairo → Dubai, 14 Aug. Pre-purchase is cheaper than at the airport.
+        Yes, MS777, Cairo → Dubai, 14 Aug. Pre-purchase is cheaper than at the airport.
         <div
           className="rounded-xl mt-2 p-3"
           style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.1)" }}
@@ -850,7 +850,7 @@ function EcommerceCommentPreface() {
         <span className="font-bold" style={{ color: "#ffffff" }}>
           thebrand
         </span>{" "}
-        EGP 1,450 — in stock in three sizes 💛 sending the link in DM
+        EGP 1,450, in stock in three sizes 💛 sending the link in DM
       </p>
       <p style={{ ...label, fontStyle: "italic" }}>nour.h opened the DM</p>
     </div>
@@ -863,7 +863,7 @@ const ECOMMERCE_THREAD: ChatBubble[] = [
     time: "01:59",
     content: (
       <>
-        The tan one you commented on — EGP 1,450, free delivery over EGP 1,000.
+        The tan one you commented on: EGP 1,450, free delivery over EGP 1,000.
         <div className="flex flex-wrap gap-1.5 mt-2">
           {["S", "M", "L"].map((size) => (
             <span
@@ -909,7 +909,7 @@ const ECOMMERCE_THREAD: ChatBubble[] = [
     from: "me",
     time: "02:02",
     content:
-      "Order #48812 confirmed — delivery Thursday. The public comment stays answered so the next person sees the price too.",
+      "Order #48812 confirmed, delivery Thursday. The public comment stays answered so the next person sees the price too.",
   },
 ];
 
@@ -1119,7 +1119,7 @@ const INDUSTRIES: {
       {
         glyph: "◷",
         title: "24/7 service automation",
-        body: "Account queries, branch locators and card blocks handled through OTP verification — without a call-centre queue at any hour.",
+        body: "Account queries, branch locators and card blocks handled through OTP verification, without a call-centre queue at any hour.",
       },
       {
         glyph: "✓",
@@ -1159,7 +1159,7 @@ const INDUSTRIES: {
       {
         glyph: "◎",
         title: "Flight status & rebooking",
-        body: "Answers “is MS777 on time?” and handles rebooking or gate changes in local dialect — inside Messenger, no app download.",
+        body: "Answers “is MS777 on time?” and handles rebooking or gate changes in local dialect, inside Messenger, no app download.",
       },
       {
         glyph: "◇",
@@ -1176,7 +1176,7 @@ const INDUSTRIES: {
       channel: "Messenger",
       agent: "Sales Agent",
       name: "The Airline",
-      line: "MS777 is on time, boarding at 21:40. Want a window seat and 10kg extra baggage for the trip? That's 640 EGP total — I can add it to your booking now.",
+      line: "MS777 is on time, boarding at 21:40. Want a window seat and 10kg extra baggage for the trip? That's 640 EGP total. I can add it to your booking now.",
     },
   },
   {
@@ -1199,7 +1199,7 @@ const INDUSTRIES: {
       {
         glyph: "◷",
         title: "Order tracking, unattended",
-        body: "Connects to fulfilment APIs for delivery status, address changes and returns — answered at 2 AM without a support ticket.",
+        body: "Connects to fulfilment APIs for delivery status, address changes and returns, answered at 2 AM without a support ticket.",
       },
       {
         glyph: "▦",
@@ -1211,7 +1211,7 @@ const INDUSTRIES: {
       channel: "Instagram",
       agent: "Social Moderation Agent",
       name: "The Brand",
-      line: "It's true leather, available in M and L right now — I've sent you a link to check out in one tap. 10% off if you order in the next hour ✨",
+      line: "It's true leather, available in M and L right now. I've sent you a link to check out in one tap. 10% off if you order in the next hour ✨",
     },
   },
 ];
@@ -1240,7 +1240,7 @@ const AUTOMATION_FLOWS: { key: string; label: string; steps: FlowStep[] }[] = [
       {
         num: "02",
         label: "The Agent Acts",
-        text: "Verifies identity with a secure OTP and locks the card on the spot — in the same thread, no call-centre queue.",
+        text: "Verifies identity with a secure OTP and locks the card on the spot, in the same thread, no call-centre queue.",
         chips: ["Service Agent"],
       },
       {
@@ -1264,13 +1264,13 @@ const AUTOMATION_FLOWS: { key: string; label: string; steps: FlowStep[] }[] = [
       {
         num: "02",
         label: "The Agent Acts",
-        text: "Prices it against live fare rules and takes payment in chat — no app, no airport desk.",
+        text: "Prices it against live fare rules and takes payment in chat, no app, no airport desk.",
         chips: ["Sales Agent"],
       },
       {
         num: "03",
         label: "What It Changes",
-        text: "Captures the revenue at the moment of intent — nothing left for the morning queue.",
+        text: "Captures the revenue at the moment of intent, nothing left for the morning queue.",
         cta: "Payment and confirmation in the same thread",
       },
     ],
@@ -1282,7 +1282,7 @@ const AUTOMATION_FLOWS: { key: string; label: string; steps: FlowStep[] }[] = [
       {
         num: "01",
         label: "The Need",
-        text: "“How much?” — a comment under an Instagram Reel.",
+        text: "“How much?”, a comment under an Instagram Reel.",
         chips: ["01:58", "Instagram · Facebook"],
       },
       {
@@ -1519,9 +1519,9 @@ const PRICING_TIERS = [
 
 const DEPLOYMENT_STEPS = [
   { when: "Day 0 · 30 min", title: "We read your inbox", body: "What customers actually ask, what was missed, and what that silence cost you last year." },
-  { when: "Day 1 · Morning", title: "We set it up", body: "Your prices, calendar, branches and brand voice — and, just as important, what it must never say." },
+  { when: "Day 1 · Morning", title: "We set it up", body: "Your prices, calendar, branches and brand voice, and just as important, what it must never say." },
   { when: "Day 1 · Afternoon", title: "You approve it", body: "You watch it handle real conversations and sign off before a single customer sees it." },
-  { when: "Every morning", title: "The 09:00 report", body: "What came in, what closed, what needs a human — in your inbox before your first meeting." },
+  { when: "Every morning", title: "The 09:00 report", body: "What came in, what closed, what needs a human, in your inbox before your first meeting." },
 ];
 
 const SLIDE_COUNT = 15;
@@ -1641,6 +1641,27 @@ export function AutonomousPageContent() {
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
+            backgroundImage: "url(/services/autonomous.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.3,
+            maskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 14%, black 40%, black 72%, transparent 100%)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "rgba(3,3,5,0.55)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
             background:
               "radial-gradient(60% 55% at 20% 0%, rgba(52,68,224,0.16) 0%, transparent 60%), radial-gradient(55% 50% at 100% 20%, rgba(255,90,43,0.12) 0%, transparent 60%)",
           }}
@@ -1657,7 +1678,7 @@ export function AutonomousPageContent() {
                 color: "#ffffff",
               }}
             >
-              A team that sells, serves and moderates at 3 AM —{" "}
+              A team that sells, serves and moderates at 3 AM,{" "}
               <span
                 style={{
                   backgroundImage: "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
@@ -1674,7 +1695,7 @@ export function AutonomousPageContent() {
               style={{ fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "40rem" }}
             >
               Four AI agents inside every inbox and comment section your customers already use. WhatsApp,
-              Instagram, Messenger, TikTok, email, web chat — one thread, whatever they arrive on. Live in a day.
+              Instagram, Messenger, TikTok, email, web chat: one thread, whatever they arrive on. Live in a day.
             </p>
           </Reveal>
           <StatRow
@@ -1699,7 +1720,7 @@ export function AutonomousPageContent() {
             eyebrow="The Problem"
             title="Your customers are awake."
             accentTail="Your business isn't."
-            body="Each bar is one hour of inbound. The orange hours are conversations that arrived when nobody was at the desk — every one of them a customer who asked, waited, and went somewhere else."
+            body="Each bar is one hour of inbound. The orange hours are conversations that arrived when nobody was at the desk: every one of them a customer who asked, waited, and went somewhere else."
           />
           <HourlyChart note="53% of inbound arrives while the office is shut." />
         </div>
@@ -1735,7 +1756,7 @@ export function AutonomousPageContent() {
                 style={{ fontSize: "1rem", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
                 A hospital with nine branches. No one on shift. The agent triages, finds a real consultant with a
-                real opening, holds the slot and takes the deposit — in the patient&apos;s own dialect.
+                real opening, holds the slot and takes the deposit, in the patient&apos;s own dialect.
               </p>
             </Reveal>
             <div className="mt-6">
@@ -1744,12 +1765,12 @@ export function AutonomousPageContent() {
                   {
                     time: "23:42",
                     title: "Triaged, never diagnosed",
-                    body: "Medical judgement stays with your doctors — enforced in the system, not left to the model's discretion.",
+                    body: "Medical judgement stays with your doctors: enforced in the system, not left to the model's discretion.",
                   },
                   {
                     time: "23:42",
                     title: "A real consultant, a real opening",
-                    body: "Specialty, branch, price and slots that actually exist in your calendar — read live, never invented.",
+                    body: "Specialty, branch, price and slots that actually exist in your calendar: read live, never invented.",
                   },
                   {
                     time: "23:44",
@@ -1780,7 +1801,7 @@ export function AutonomousPageContent() {
             eyebrow="What You Get"
             title="Not a chatbot."
             accentTail="Four hires."
-            body="Four specialised agents working as one operational team — reporting to each other, escalating to your people, and answering to you every morning at nine."
+            body="Four specialised agents working as one operational team: reporting to each other, escalating to your people, and answering to you every morning at nine."
             center
           />
 
@@ -1828,7 +1849,7 @@ export function AutonomousPageContent() {
               index={2}
               glyph="●"
               title="Service Agent"
-              body="Holds the customer. Order tracking, modifications, complaints — resolved at 2 AM, in local dialect, without a ticket queue."
+              body="Holds the customer. Order tracking, modifications, complaints: resolved at 2 AM, in local dialect, without a ticket queue."
             />
             <FeatureCard
               index={3}
@@ -1857,7 +1878,7 @@ export function AutonomousPageContent() {
             eyebrow="High-Impact Automation"
             title="The same question at 3 AM."
             accentTail="Three different businesses."
-            body="Every sector has a moment where a customer needs an answer and nobody is there to give it. Pick a sector — the flow is the same, only the rulebook changes."
+            body="Every sector has a moment where a customer needs an answer and nobody is there to give it. Pick a sector: the flow is the same, only the rulebook changes."
             center
           />
           <AutomationFlowTabs />
@@ -1898,7 +1919,7 @@ export function AutonomousPageContent() {
                 style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
                 The value is not that the agent answers everything. It is that it knows precisely where its
-                authority ends — and that boundary is written into the system, reviewed by you, and auditable
+                authority ends, and that boundary is written into the system, reviewed by you, and auditable
                 after the fact.
               </p>
             </Reveal>
@@ -1911,12 +1932,12 @@ export function AutonomousPageContent() {
                   className="font-bold"
                   style={{ fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#5aa2ff" }}
                 >
-                  Where It Acts — Booking Flow
+                  Where It Acts: Booking Flow
                 </p>
                 <div className="mt-4">
                   <Timeline
                     steps={[
-                      { time: "23:41", title: "Patient describes pain", body: "The agent does not interpret the symptom — it establishes which specialty and which branch." },
+                      { time: "23:41", title: "Patient describes pain", body: "The agent does not interpret the symptom, it establishes which specialty and which branch." },
                       { time: "23:42", title: "Presents real availability", body: "The branch and the consultation price, read live from your calendar." },
                       { time: "23:44", title: "Deposit collected", body: "Slot held, confirmation sent. No human touched the conversation." },
                     ]}
@@ -1927,7 +1948,7 @@ export function AutonomousPageContent() {
                   style={{ background: "rgba(90,162,255,0.08)", border: "1px solid rgba(90,162,255,0.22)" }}
                 >
                   <p className="font-light" style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "rgba(255,255,255,0.75)" }}>
-                    <span className="font-bold text-white">The rule — </span>
+                    <span className="font-bold text-white">The rule: </span>
                     Medical diagnosis remains strictly with your doctors. The agent manages triage and calendar
                     booking, nothing beyond it.
                   </p>
@@ -1940,12 +1961,12 @@ export function AutonomousPageContent() {
                 className="font-bold"
                 style={{ fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#ff9a5a" }}
               >
-                Where It Holds Back — The Feed
+                Where It Holds Back: The Feed
               </p>
               {[
                 { q: "“Is this authentic leather?”", a: "Answered publicly with the material specification within 90 seconds. Factual, verifiable, safe to automate." },
-                { q: "“Price?”", a: "Answered publicly, then routed into a DM to complete checkout — the public thread stays clean." },
-                { q: "“Scam page”", a: "Hidden pending human review and flagged to the Operations Manager. Never auto-argued — an accusation is escalated, not debated." },
+                { q: "“Price?”", a: "Answered publicly, then routed into a DM to complete checkout: the public thread stays clean." },
+                { q: "“Scam page”", a: "Hidden pending human review and flagged to the Operations Manager. Never auto-argued: an accusation is escalated, not debated." },
               ].map((row, i) => (
                 <Reveal key={row.q} delay={Math.min(i * 0.08, 0.24)}>
                   <div className="rounded-2xl p-4" style={glass}>
@@ -2050,7 +2071,7 @@ export function AutonomousPageContent() {
                   <div>
                     <div className="flex items-baseline justify-between">
                       <span className="font-medium" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.65)" }}>
-                        Reel A — brand film
+                        Reel A: brand film
                       </span>
                       <span className="font-bold" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.5)" }}>
                         1 sale
@@ -2063,7 +2084,7 @@ export function AutonomousPageContent() {
                   <div>
                     <div className="flex items-baseline justify-between">
                       <span className="font-medium" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.85)" }}>
-                        Reel B — how it fits
+                        Reel B: how it fits
                       </span>
                       <span className="font-bold" style={{ fontSize: "0.75rem", color: "#ff9a5a" }}>
                         31 sales
@@ -2103,7 +2124,7 @@ export function AutonomousPageContent() {
                 style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
                 The same core reasoning layer sits behind every deployment. What changes per sector is the
-                rulebook — the compliance boundaries, the vocabulary, the systems it reads from. No
+                rulebook: the compliance boundaries, the vocabulary, the systems it reads from. No
                 market-specific rebuild.
               </p>
             </Reveal>
@@ -2211,7 +2232,7 @@ export function AutonomousPageContent() {
             className="text-center font-light mt-1.5"
             style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}
           >
-            Industry rules pre-built — no market-specific rebuild.
+            Industry rules pre-built, no market-specific rebuild.
           </p>
         </div>
       </section>
@@ -2236,7 +2257,7 @@ export function AutonomousPageContent() {
                 style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
                 The single number that changes everything downstream is how long a customer waits for a real
-                reply. Everything else — conversion, repeat rate, cost per acquisition — moves behind it.
+                reply. Everything else (conversion, repeat rate, cost per acquisition) moves behind it.
               </p>
             </Reveal>
           </div>
@@ -2290,7 +2311,7 @@ export function AutonomousPageContent() {
                   className="text-center font-light mt-5"
                   style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)" }}
                 >
-                  — drawn to scale —
+                  (drawn to scale)
                 </p>
               </div>
             </Reveal>
@@ -2386,7 +2407,7 @@ export function AutonomousPageContent() {
                 className="font-light"
                 style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
               >
-                A receptionist covers one shift, one channel and one language. This covers all of them — priced
+                A receptionist covers one shift, one channel and one language. This covers all of them, priced
                 by conversations, not headcount.
               </p>
             </Reveal>
@@ -2455,7 +2476,7 @@ export function AutonomousPageContent() {
 
           <Reveal delay={0.2} className="max-w-2xl mx-auto text-center mt-8">
             <p className="font-light" style={{ fontSize: "0.75rem", lineHeight: 1.7, color: "rgba(255,255,255,0.4)" }}>
-              Service fee only. Platform costs — WhatsApp Business API, model usage, automation — are passed
+              Service fee only. Platform costs (WhatsApp Business API, model usage, automation) are passed
               through at cost, itemised monthly. No markup. No set-up fee. Cancel monthly. Annual commitment
               carries a 15% discount. Prices in EGP, reviewed quarterly.
             </p>

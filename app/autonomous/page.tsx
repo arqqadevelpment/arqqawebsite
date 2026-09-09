@@ -5,7 +5,7 @@ import { AutonomousPageContent } from "@/components/autonomous/AutonomousPageCon
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/autonomous", {
-    title: "Autonomous — ARQQA",
+    title: "Autonomous | ARQQA",
     description: "Four AI agents inside every inbox and comment section your customers already use. Live in a day.",
   });
 }

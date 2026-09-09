@@ -51,7 +51,7 @@ export type ApproachPage = {
   related: { label: string; description: string; href: string }[];
 
   /** Real client work for this specific step, shown as image cards above
-      Related Services — proof, not just a services cross-link. */
+      Related Services, proof, not just a services cross-link. */
   projects?: { client: string; summary: string; image: string; href: string }[];
 
   cta: {
@@ -68,14 +68,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Go-to-Market Strategy",
     tagline: "You Don't Have a Launch Problem. You Have a Strategy Problem.",
     intro:
-      "A new product, a new market, a new positioning — they all require the same thing before execution begins: a single, aligned plan that tells every team exactly what to do and why. ARQQA's Go-to-Market Strategy service translates business objectives into a sequenced growth roadmap with measurable milestones.",
+      "A new product, a new market, a new positioning, they all require the same thing before execution begins: a single, aligned plan that tells every team exactly what to do and why. ARQQA's Go-to-Market Strategy service translates business objectives into a sequenced growth roadmap with measurable milestones.",
     cep: "When you're about to launch but the brief is still being argued over.",
     accent: "blue",
     image: "/services/go-to-market-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Most go-to-market failures aren't execution failures. They're alignment failures.",
-      body: "Teams move in different directions. Creative builds for the wrong audience. Media buys on the wrong channels. The brand launches — and nothing moves. A go-to-market strategy isn't a presentation. It's a decision-making framework that every team operates from on day one.",
+      body: "Teams move in different directions. Creative builds for the wrong audience. Media buys on the wrong channels. The brand launches, and nothing moves. A go-to-market strategy isn't a presentation. It's a decision-making framework that every team operates from on day one.",
     },
     approach: {
       heading: "From market map to growth blueprint.",
@@ -148,7 +148,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Most brands are sitting on hidden performance gaps they've never quantified.",
-      body: "Inefficient media buying. Disconnected creative and media teams. Reporting that measures activity, not outcomes. Most brands operating in the MENA market have never quantified where these gaps actually sit. The Growth Audit surfaces all of it — with precision, not opinion.",
+      body: "Inefficient media buying. Disconnected creative and media teams. Reporting that measures activity, not outcomes. Most brands operating in the MENA market have never quantified where these gaps actually sit. The Growth Audit surfaces all of it, with precision, not opinion.",
     },
     approach: {
       heading: "The 7-dimension diagnostic framework.",
@@ -206,14 +206,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Competitive Analysis",
     tagline: "Know Exactly What You're Up Against. And Where They're Weak.",
     intro:
-      "Competitive Analysis at ARQQA is not a slide with competitor logos and a feature checklist. It's an intelligence operation. Messaging deconstruction. Media spend estimation. Positioning gap identification. The output is not a report — it's a competitive advantage.",
+      "Competitive Analysis at ARQQA is not a slide with competitor logos and a feature checklist. It's an intelligence operation. Messaging deconstruction. Media spend estimation. Positioning gap identification. The output is not a report, it's a competitive advantage.",
     cep: "When you're losing market share and you don't know to whom or why.",
     accent: "blue",
     image: "/services/go-to-market-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Most brands make competitive decisions based on noise, not intelligence.",
-      body: "A competitor's Instagram feed. A few Google ads. A redesigned website. That's surface-level, not intelligence. Real competitive analysis examines the architecture beneath — how they're positioned, where they're investing, what audiences they're targeting, and crucially, where they've left the door open.",
+      body: "A competitor's Instagram feed. A few Google ads. A redesigned website. That's surface-level, not intelligence. Real competitive analysis examines the architecture beneath, how they're positioned, where they're investing, what audiences they're targeting, and crucially, where they've left the door open.",
     },
     approach: {
       heading: "From competitive universe to opportunity matrix.",
@@ -278,28 +278,28 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Paid Discovery Workshops",
     tagline: "Clarity Has a Price. It's Worth Every Dirham.",
     intro:
-      "The Paid Discovery Workshop is a structured half-day or full-day working session with ARQQA's senior strategists. By the end, your team leaves with a single, agreed growth direction — documented, assigned, and ready to execute. No more six-week onboarding. No more briefing decks that never become strategy.",
+      "The Paid Discovery Workshop is a structured half-day or full-day working session with ARQQA's senior strategists. By the end, your team leaves with a single, agreed growth direction, documented, assigned, and ready to execute. No more six-week onboarding. No more briefing decks that never become strategy.",
     cep: "When alignment meetings have stopped producing alignment.",
     accent: "orange",
     image: "/services/go-to-market-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "\"Free discovery\" is a misnomer.",
-      body: "The real cost of an unpaid, informal briefing process is borne in misaligned execution — creative built on assumptions, campaigns launched without consensus, retainer months lost to scope correction. The ARQQA Discovery Workshop front-loads alignment with rigor. Paid because it's structured. Valuable because it's structured.",
+      body: "The real cost of an unpaid, informal briefing process is borne in misaligned execution, creative built on assumptions, campaigns launched without consensus, retainer months lost to scope correction. The ARQQA Discovery Workshop front-loads alignment with rigor. Paid because it's structured. Valuable because it's structured.",
     },
     approach: {
       heading: "Three phases. One agreed direction.",
       steps: [
         {
-          title: "Pre-Workshop — Data & Brief Collection",
+          title: "Pre-Workshop, Data & Brief Collection",
           body: "Two weeks before the session, we send a structured pre-brief questionnaire. We analyze current performance data, review existing brand assets, and audit the competitive context. We arrive prepared.",
         },
         {
-          title: "The Workshop — Structured Strategic Alignment",
+          title: "The Workshop, Structured Strategic Alignment",
           body: "Three to four hours. A facilitated agenda covering: business objectives → growth challenges → audience definition → channel priorities → success metrics. Every decision is documented in real time in a shared workspace. Disagreements are surfaced and resolved, not buried.",
         },
         {
-          title: "Post-Workshop — The Strategic Output Package",
+          title: "Post-Workshop, The Strategic Output Package",
           body: "Within five business days: a completed strategy brief, a prioritized challenge list, an agreed KPI framework, and a recommended 90-day roadmap. The foundation for every team to start executing from.",
         },
       ],
@@ -346,21 +346,21 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Brand Identity & Design",
     tagline: "A Brand Is a System. Not a Logo.",
     intro:
-      "ARQQA's Brand Identity & Design service builds the complete visual and verbal foundation of your brand — from logo architecture and color systems to typography, tone of voice, and usage guidelines. The output is a brand that performs consistently across every channel, every market, and every team member who deploys it.",
+      "ARQQA's Brand Identity & Design service builds the complete visual and verbal foundation of your brand, from logo architecture and color systems to typography, tone of voice, and usage guidelines. The output is a brand that performs consistently across every channel, every market, and every team member who deploys it.",
     cep: "When your brand looks different on every platform and nobody knows why.",
     accent: "orange",
     image: "/services/asset-building-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Brand inconsistency is a tax on your marketing budget.",
-      body: "Every campaign that launches without a coherent identity spends twice — once to reach the audience, and again to remind them who you are. ARQQA builds brands as systems: documented, scalable, and deployable without constant creative supervision.",
+      body: "Every campaign that launches without a coherent identity spends twice, once to reach the audience, and again to remind them who you are. ARQQA builds brands as systems: documented, scalable, and deployable without constant creative supervision.",
     },
     approach: {
       heading: "From meaning to master guidelines.",
       steps: [
         {
           title: "Brand Discovery",
-          body: "Workshops to extract positioning, values, personality, and competitive differentiation. This is the strategic foundation that all visual decisions derive from — not aesthetics first, but meaning first.",
+          body: "Workshops to extract positioning, values, personality, and competitive differentiation. This is the strategic foundation that all visual decisions derive from, not aesthetics first, but meaning first.",
         },
         {
           title: "Visual Identity Development",
@@ -401,13 +401,13 @@ export const APPROACH_PAGES: ApproachPage[] = [
       },
       {
         client: "GTS Holding",
-        summary: "A full identity system — OOH, digital, and merchandise — built to read as credible before the first sales call.",
+        summary: "A full identity system, OOH, digital, and merchandise, built to read as credible before the first sales call.",
         image: "/services/work-gts-branding.webp",
         href: "/branding/gts-branding",
       },
       {
         client: "FXD Technologies",
-        summary: "A full rebrand — mark, collateral, and social system — built to position FXD as the future shapers.",
+        summary: "A full rebrand, mark, collateral, and social system, built to position FXD as the future shapers.",
         image: "/services/work-fxd.webp",
         href: "/branding/fxd",
       },
@@ -441,8 +441,8 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Company Profiles & Collateral",
     tagline: "Every Touchpoint Is a Brand Impression. Make It Count.",
     intro:
-      "From corporate profiles and pitch decks to capability statements and credential documents — ARQQA designs and writes the collateral that represents your business in every high-stakes communication. Designed for impact. Written for decision-makers.",
-    cep: "When your pitch deck looks like it was built in a hurry — because it was.",
+      "From corporate profiles and pitch decks to capability statements and credential documents, ARQQA designs and writes the collateral that represents your business in every high-stakes communication. Designed for impact. Written for decision-makers.",
+    cep: "When your pitch deck looks like it was built in a hurry, because it was.",
     accent: "blue",
     image: "/services/asset-building-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
@@ -509,14 +509,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Visual Identity Rollout Kits",
     tagline: "A Brand That Exists Only in a Guidelines PDF Is Not a Brand.",
     intro:
-      "The Visual Identity Rollout Kit is the deployment layer of your brand. Everything your team needs to activate the identity consistently across every digital and physical channel — built, sized, and production-ready from day one.",
+      "The Visual Identity Rollout Kit is the deployment layer of your brand. Everything your team needs to activate the identity consistently across every digital and physical channel, built, sized, and production-ready from day one.",
     cep: "When your brand exists on paper but looks inconsistent everywhere else.",
     accent: "orange",
     image: "/services/asset-building-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Brand guidelines without rollout kits are instructions without tools.",
-      body: "Teams default to improvisation. Agencies recreate assets from scratch. Consistency erodes. The Rollout Kit eliminates that gap by delivering every template, asset, and sized variant your team will actually need — pre-built and ready to deploy.",
+      body: "Teams default to improvisation. Agencies recreate assets from scratch. Consistency erodes. The Rollout Kit eliminates that gap by delivering every template, asset, and sized variant your team will actually need, pre-built and ready to deploy.",
     },
     approach: {
       heading: "From channel audit to activation guide.",
@@ -527,7 +527,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Template Production",
-          body: "Every template is built in the tool your team uses — Canva, Figma, Adobe, PowerPoint. Locked brand elements. Editable content zones. Size variants for every platform specification.",
+          body: "Every template is built in the tool your team uses, Canva, Figma, Adobe, PowerPoint. Locked brand elements. Editable content zones. Size variants for every platform specification.",
         },
         {
           title: "Brand Activation Guide",
@@ -537,7 +537,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
     included: {
       items: [
-        "Social media template suite (Instagram, LinkedIn, Facebook, TikTok, X — feed, story, cover)",
+        "Social media template suite (Instagram, LinkedIn, Facebook, TikTok, X, feed, story, cover)",
         "Digital advertising templates (all standard IAB sizes + Meta/Google native sizes)",
         "Email template (header, footer, body blocks)",
         "Presentation master template (PowerPoint and Keynote)",
@@ -584,7 +584,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Most agency-built websites optimize for impression, not performance.",
-      body: "Slow load times. Unclear CTAs. No consideration of the buyer's journey. ARQQA approaches every website as a business tool first and a design artifact second. The aesthetic serves the objective — always.",
+      body: "Slow load times. Unclear CTAs. No consideration of the buyer's journey. ARQQA approaches every website as a business tool first and a design artifact second. The aesthetic serves the objective, always.",
     },
     approach: {
       heading: "From information architecture to a live, performant build.",
@@ -653,14 +653,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Mobile App Design & Development",
     tagline: "An App Nobody Uses Is Infrastructure Nobody Needed.",
     intro:
-      "ARQQA designs and builds mobile applications that users return to. Not just download. Our practice combines deep UX research, conversion-optimized onboarding design, and performance-engineered development — built for iOS and Android with the MENA user's behavior, language, and digital context in mind.",
+      "ARQQA designs and builds mobile applications that users return to. Not just download. Our practice combines deep UX research, conversion-optimized onboarding design, and performance-engineered development, built for iOS and Android with the MENA user's behavior, language, and digital context in mind.",
     cep: "When your app installs aren't becoming active users.",
     accent: "orange",
     image: "/services/technology-website-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "App abandonment is a design and onboarding problem, not a marketing problem.",
-      body: "Most apps lose 77% of their daily active users within three days of install. The failure point is almost always the onboarding experience — too many steps, too little clarity, too much friction before the first value moment. We eliminate that friction before launch.",
+      body: "Most apps lose 77% of their daily active users within three days of install. The failure point is almost always the onboarding experience, too many steps, too little clarity, too much friction before the first value moment. We eliminate that friction before launch.",
     },
     approach: {
       heading: "From user research to a shipped, staged release.",
@@ -691,7 +691,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         "Wireframes and interactive prototype",
         "Full UI design system (iOS and Android)",
         "Development (React Native or native)",
-        "App Store Optimization (ASO) — metadata, screenshots, preview video",
+        "App Store Optimization (ASO), metadata, screenshots, preview video",
         "App Store and Google Play submission",
         "Post-launch monitoring and crash reporting setup",
       ],
@@ -730,14 +730,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "UI/UX Design",
     tagline: "Good Design Is Invisible. Bad Design Is Expensive.",
     intro:
-      "ARQQA's UI/UX Design practice exists independently of development — for brands that need a product or experience designed, validated, and handed off to an internal or third-party development team. Research-driven. Evidence-based. Designed for real users, not hypothetical ones.",
+      "ARQQA's UI/UX Design practice exists independently of development, for brands that need a product or experience designed, validated, and handed off to an internal or third-party development team. Research-driven. Evidence-based. Designed for real users, not hypothetical ones.",
     cep: "When your product works technically but users can't figure it out.",
     accent: "blue",
     image: "/services/technology-website-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Usability failures cost more than redesigns.",
-      body: "Every percentage point of drop-off in a conversion funnel, every support ticket generated by a confusing interface, every user who abandons onboarding — all of these have a measurable cost. UX design is not a polish step. It's a revenue protection strategy.",
+      body: "Every percentage point of drop-off in a conversion funnel, every support ticket generated by a confusing interface, every user who abandons onboarding, all of these have a measurable cost. UX design is not a polish step. It's a revenue protection strategy.",
     },
     approach: {
       heading: "From evidence to a development-ready design system.",
@@ -803,7 +803,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "CRM Integration & Automation",
     tagline: "A Lead That Isn't Followed Up in Four Hours Is a Lead That's Gone.",
     intro:
-      "ARQQA's CRM practice connects your marketing stack, sales pipeline, and customer data into one automated, accountable system. We implement, integrate, and automate HubSpot, Salesforce, or custom CRM solutions — so that every lead captured is tracked, scored, nurtured, and handed to sales at exactly the right moment.",
+      "ARQQA's CRM practice connects your marketing stack, sales pipeline, and customer data into one automated, accountable system. We implement, integrate, and automate HubSpot, Salesforce, or custom CRM solutions, so that every lead captured is tracked, scored, nurtured, and handed to sales at exactly the right moment.",
     cep: "When leads fall through the cracks between marketing and sales.",
     accent: "orange",
     image: "/services/technology-website-hero.webp",
@@ -821,7 +821,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Platform Implementation",
-          body: "HubSpot is our primary platform — we are certified HubSpot partners. We also work with Salesforce, Zoho, and custom solutions. Implementation includes deal pipeline setup, contact properties, lead scoring models, and user permission architecture.",
+          body: "HubSpot is our primary platform: we are certified HubSpot partners. We also work with Salesforce, Zoho, and custom solutions. Implementation includes deal pipeline setup, contact properties, lead scoring models, and user permission architecture.",
         },
         {
           title: "Integration",
@@ -877,7 +877,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "E-commerce",
     tagline: "Traffic Without Conversion Architecture Is Just an Audience.",
     intro:
-      "ARQQA builds e-commerce experiences that sell. From Shopify and Salla store builds to full conversion funnel optimization — every element of the store is designed to reduce friction, increase average order value, and build repeat purchase behavior. For the MENA market, by a team that has operated in it for 13 years.",
+      "ARQQA builds e-commerce experiences that sell. From Shopify and Salla store builds to full conversion funnel optimization, every element of the store is designed to reduce friction, increase average order value, and build repeat purchase behavior. For the MENA market, by a team that has operated in it for 13 years.",
     cep: "When your store gets visitors but not orders.",
     accent: "blue",
     image: "/services/technology-website-hero.webp",
@@ -950,7 +950,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Community Moderation",
     tagline: "Every Unanswered Comment Is a Missed Opportunity.",
     intro:
-      "ARQQA provides dedicated, brand-trained community moderation across all your social platforms — Arabic and English, 7 days a week. We respond, engage, escalate, and report with the consistency and tone that protect and grow your brand reputation.",
+      "ARQQA provides dedicated, brand-trained community moderation across all your social platforms, Arabic and English, 7 days a week. We respond, engage, escalate, and report with the consistency and tone that protect and grow your brand reputation.",
     cep: "When your comments section is active and your brand is invisible in it.",
     accent: "blue",
     image: "/services/community-approach-hero.webp",
@@ -972,7 +972,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Escalation Protocol",
-          body: "Not everything is moderated — some comments require human judgment at senior level, PR involvement, or legal review. Our escalation protocol ensures the right eyes see the right content within defined SLAs.",
+          body: "Not everything is moderated, some comments require human judgment at senior level, PR involvement, or legal review. Our escalation protocol ensures the right eyes see the right content within defined SLAs.",
         },
       ],
     },
@@ -1018,14 +1018,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Social Listening",
     tagline: "The Most Important Conversations About Your Brand Happen Without Tagging You.",
     intro:
-      "Social listening is the practice of monitoring brand mentions, competitor activity, industry conversations, and sentiment signals across the entire digital landscape — not just your owned channels. ARQQA's social listening service delivers weekly intelligence reports that inform content, product, and communications strategy.",
+      "Social listening is the practice of monitoring brand mentions, competitor activity, industry conversations, and sentiment signals across the entire digital landscape, not just your owned channels. ARQQA's social listening service delivers weekly intelligence reports that inform content, product, and communications strategy.",
     cep: "When you have no visibility on what the market is saying about your brand.",
     accent: "orange",
     image: "/services/community-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Most brands monitor their own mentions. Almost none monitor the rest.",
-      body: "Fewer track untagged brand mentions. Almost none systematically monitor competitor sentiment, category conversations, or emerging customer language — the intelligence that actually informs strategy. Social listening converts the noise of the internet into actionable strategic signals.",
+      body: "Fewer track untagged brand mentions. Almost none systematically monitor competitor sentiment, category conversations, or emerging customer language, the intelligence that actually informs strategy. Social listening converts the noise of the internet into actionable strategic signals.",
     },
     approach: {
       heading: "From listening architecture to strategic signal.",
@@ -1040,7 +1040,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Signal-to-Strategy Conversion",
-          body: "The real value of social listening is not the data — it's what you do with it. ARQQA translates listening signals into content recommendations, communications adjustments, and strategic opportunities.",
+          body: "The real value of social listening is not the data, it's what you do with it. ARQQA translates listening signals into content recommendations, communications adjustments, and strategic opportunities.",
         },
       ],
     },
@@ -1099,19 +1099,19 @@ export const APPROACH_PAGES: ApproachPage[] = [
       heading: "From playbook to narrative rebuilding.",
       steps: [
         {
-          title: "Pre-Crisis — Playbook Development",
+          title: "Pre-Crisis, Playbook Development",
           body: "We work with your team to map crisis scenarios, define severity levels, assign ownership, and write approved response templates. When a crisis occurs, the playbook is already signed off. No 3am approval chains.",
         },
         {
-          title: "Detection — Real-Time Monitoring",
-          body: "Integrated with our social listening infrastructure, ARQQA monitors for crisis signals — sentiment spikes, volume anomalies, influencer mentions, media pickup — and alerts the crisis team before the situation escalates.",
+          title: "Detection, Real-Time Monitoring",
+          body: "Integrated with our social listening infrastructure, ARQQA monitors for crisis signals, sentiment spikes, volume anomalies, influencer mentions, media pickup, and alerts the crisis team before the situation escalates.",
         },
         {
-          title: "Response — Rapid, Coordinated Action",
+          title: "Response, Rapid, Coordinated Action",
           body: "Crisis lead takes ownership within 30 minutes of tier-1 alert. Statement drafted, stakeholders briefed, response across all channels coordinated. Every action is logged in real time.",
         },
         {
-          title: "Recovery — Narrative Rebuilding",
+          title: "Recovery, Narrative Rebuilding",
           body: "Post-crisis: sentiment monitoring, community re-engagement, earned media analysis, and a crisis debrief report with lessons and playbook updates.",
         },
       ],
@@ -1153,7 +1153,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Social CX Automation",
     tagline: "The Best Community Manager Is One That Works at 3am.",
     intro:
-      "Social CX Automation uses intelligent workflows and chatbot technology to handle high-volume, repeatable customer interactions across your social channels — instantly, accurately, and at scale. ARQQA designs, builds, and maintains automation systems that handle the routine so your human team can focus on the complex.",
+      "Social CX Automation uses intelligent workflows and chatbot technology to handle high-volume, repeatable customer interactions across your social channels, instantly, accurately, and at scale. ARQQA designs, builds, and maintains automation systems that handle the routine so your human team can focus on the complex.",
     cep: "When your inbox volume has outgrown your team's capacity.",
     accent: "orange",
     image: "/services/community-approach-hero.webp",
@@ -1167,7 +1167,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       steps: [
         {
           title: "Interaction Mapping",
-          body: "We audit your current social inbox to identify the top 20 interaction types by volume. These become the automation candidates — high-volume, rule-based interactions where automation adds speed without reducing quality.",
+          body: "We audit your current social inbox to identify the top 20 interaction types by volume. These become the automation candidates, high-volume, rule-based interactions where automation adds speed without reducing quality.",
         },
         {
           title: "Flow Design & Copywriting",
@@ -1232,7 +1232,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "The average Reel loses 60% of its audience in the first three seconds.",
-      body: "Short-form video has the highest organic reach of any content format in 2026. It also has the highest abandonment rate. ARQQA produces short-form content with a hooks-first production philosophy — the first frame earns the second, the second earns the third. Nothing decorative. Nothing slow.",
+      body: "Short-form video has the highest organic reach of any content format in 2026. It also has the highest abandonment rate. ARQQA produces short-form content with a hooks-first production philosophy, the first frame earns the second, the second earns the third. Nothing decorative. Nothing slow.",
     },
     approach: {
       heading: "From written brief to paid amplification.",
@@ -1243,7 +1243,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Production",
-          body: "Shot vertical-first. Natural lighting preferred. Authentic environments over studio sets for organic content. Brand-consistent without being stiff. Pacing designed for the platform's algorithm behavior — fast cuts for TikTok, slightly longer for Instagram.",
+          body: "Shot vertical-first. Natural lighting preferred. Authentic environments over studio sets for organic content. Brand-consistent without being stiff. Pacing designed for the platform's algorithm behavior, fast cuts for TikTok, slightly longer for Instagram.",
         },
         {
           title: "Post-Production",
@@ -1297,7 +1297,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Brand Films & Commercials",
     tagline: "The Brands People Remember Have Told a Story Worth Remembering.",
     intro:
-      "ARQQA produces brand films and commercial content for digital distribution — long-form narratives that build emotional equity and brand memory. From 60-second brand manifestos to 3-minute documentary-style films, every production is rooted in strategic narrative design and executed at commercial standard.",
+      "ARQQA produces brand films and commercial content for digital distribution, long-form narratives that build emotional equity and brand memory. From 60-second brand manifestos to 3-minute documentary-style films, every production is rooted in strategic narrative design and executed at commercial standard.",
     cep: "When your brand needs to communicate something that can't fit in a Reel.",
     accent: "blue",
     image: "/services/video-approach-hero.webp",
@@ -1378,14 +1378,14 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Consumers who watch a product video are 80% more likely to purchase.",
-      body: "Yet most product videos are either too long, too technical, too sales-forward, or all three. ARQQA produces product videos structured around the buyer's question — not the brand's feature list.",
+      body: "Yet most product videos are either too long, too technical, too sales-forward, or all three. ARQQA produces product videos structured around the buyer's question, not the brand's feature list.",
     },
     approach: {
       heading: "From objection to conversion, by design.",
       steps: [
         {
           title: "Objection Mapping",
-          body: "We start by mapping the top five purchase objections for your product or service. The video script is structured to address each one — transparently, not defensively.",
+          body: "We start by mapping the top five purchase objections for your product or service. The video script is structured to address each one, transparently, not defensively.",
         },
         {
           title: "Format Selection",
@@ -1440,20 +1440,20 @@ export const APPROACH_PAGES: ApproachPage[] = [
     tagline: "The Most Persuasive Voice Is Never the Brand's.",
     intro:
       "ARQQA produces testimonial and case study videos that let your best clients do your selling. Structured narrative. Professional production. Real outcomes, on camera. The most credible proof point any B2B or B2C brand can publish.",
-    cep: "When prospects trust your clients' words more than your own — and you don't have them on camera yet.",
+    cep: "When prospects trust your clients' words more than your own, and you don't have them on camera yet.",
     accent: "blue",
     image: "/services/video-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
     problem: {
       heading: "Written testimonials are skeptically received. Video testimonials are believed.",
-      body: "A client who speaks directly to camera — with specific outcomes, specific timelines, and genuine conviction — closes deals that no campaign copy can. Most brands know this and still don't have a single video testimonial. We make the process easy enough that there's no longer a reason not to.",
+      body: "A client who speaks directly to camera, with specific outcomes, specific timelines, and genuine conviction, closes deals that no campaign copy can. Most brands know this and still don't have a single video testimonial. We make the process easy enough that there's no longer a reason not to.",
     },
     approach: {
       heading: "From conversation guide to story-led edit.",
       steps: [
         {
           title: "Pre-Interview Preparation",
-          body: "We brief the client thoroughly before the shoot. Not a script — a conversation guide. The questions that surface the most compelling proof points. We coach on delivery without creating artificiality.",
+          body: "We brief the client thoroughly before the shoot. Not a script, a conversation guide. The questions that surface the most compelling proof points. We coach on delivery without creating artificiality.",
         },
         {
           title: "Interview & B-Roll Production",
@@ -1507,7 +1507,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Motion Graphics & Animation",
     tagline: "Some Ideas Can Only Be Understood in Motion.",
     intro:
-      "ARQQA's Motion Graphics & Animation practice produces animated content for brands that need to communicate complex ideas, abstract services, or data-driven stories in a format audiences can absorb in under two minutes. From logo animations and infographic videos to full explainer productions — motion that earns attention and drives understanding.",
+      "ARQQA's Motion Graphics & Animation practice produces animated content for brands that need to communicate complex ideas, abstract services, or data-driven stories in a format audiences can absorb in under two minutes. From logo animations and infographic videos to full explainer productions, motion that earns attention and drives understanding.",
     cep: "When the product is too complex to show and too important to explain badly.",
     accent: "orange",
     image: "/services/video-approach-hero.webp",
@@ -1575,7 +1575,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     title: "Content Creator Direction & Scripting",
     tagline: "Creators Have the Audience. We Give Them the Strategy.",
     intro:
-      "ARQQA's Content Creator Direction & Scripting service bridges the gap between brand objectives and creator authenticity. We brief, script, and direct content creator collaborations so that the creator's audience gets content they love — and the brand gets outcomes it can measure.",
+      "ARQQA's Content Creator Direction & Scripting service bridges the gap between brand objectives and creator authenticity. We brief, script, and direct content creator collaborations so that the creator's audience gets content they love, and the brand gets outcomes it can measure.",
     cep: "When your influencer campaigns produce content, not results.",
     accent: "blue",
     image: "/services/video-approach-hero.webp",
@@ -1589,7 +1589,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       steps: [
         {
           title: "Creator Strategy",
-          body: "We define the creator tier, category, audience profile, and content style that matches the campaign objective — before any creator is approached. Creator selection is a strategic decision, not a follower-count decision.",
+          body: "We define the creator tier, category, audience profile, and content style that matches the campaign objective, before any creator is approached. Creator selection is a strategic decision, not a follower-count decision.",
         },
         {
           title: "Brief Development",
@@ -1597,11 +1597,11 @@ export const APPROACH_PAGES: ApproachPage[] = [
         },
         {
           title: "Script & Storyboard",
-          body: "For creators who prefer a scripted format — product demos, tutorials, reviews — we write the script in the creator's voice. Every word approved by both brand and creator before shoot.",
+          body: "For creators who prefer a scripted format, product demos, tutorials, reviews, we write the script in the creator's voice. Every word approved by both brand and creator before shoot.",
         },
         {
           title: "Direction & Review",
-          body: "ARQQA provides remote or on-set direction. Creative review of content before publication — ensuring brand compliance without stripping creator authenticity.",
+          body: "ARQQA provides remote or on-set direction. Creative review of content before publication, ensuring brand compliance without stripping creator authenticity.",
         },
       ],
     },

@@ -5,7 +5,7 @@ import { CatalystSystemPageContent } from "@/components/catalyst-system/Catalyst
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/catalyst-system", {
-    title: "The Catalyst System™ — ARQQA",
+    title: "The Catalyst System™ | ARQQA",
     description: "One partner. One strategy. Infinite growth. The Catalyst System™ is ARQQA's proprietary engine that guarantees synergy between social media, performance campaigns, and digital operations.",
   });
 }

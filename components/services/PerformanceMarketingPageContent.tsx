@@ -1222,7 +1222,7 @@ function TransparencyStory() {
                 className="lg:max-w-[38%]"
                 style={{ willChange: "transform" }}
               >
-                <Eyebrow className="mb-6">{`0${i + 1} — In real time`}</Eyebrow>
+                <Eyebrow className="mb-6">{`0${i + 1}: In real time`}</Eyebrow>
                 <h3
                   className="font-bold"
                   style={{
@@ -1392,7 +1392,7 @@ function AuditForm() {
         }}
       >
         <p className="font-bold" style={{ fontSize: "1.25rem", color: "#ffffff" }}>
-          Thank you — your audit request is in.
+          Thank you. Your audit request is in.
         </p>
         <p
           className="font-light mt-3 mx-auto"

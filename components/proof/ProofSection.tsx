@@ -21,7 +21,7 @@ const CASES: CaseStudy[] = [
     key: "fawry",
     client: "Fawry",
     logo: "/logos/clients/fawry.webp",
-    market: "Egypt — Fintech",
+    market: "Egypt, Fintech",
     metric: "6M",
     metricLabel: "App Installs",
     story:
@@ -33,7 +33,7 @@ const CASES: CaseStudy[] = [
     key: "nileair",
     client: "Nile Air",
     logo: "/logos/clients/nile-air.webp",
-    market: "KSA — Airlines",
+    market: "KSA, Airlines",
     metric: "237x",
     metricLabel: "ROAS",
     story:
@@ -45,7 +45,7 @@ const CASES: CaseStudy[] = [
     key: "kenzup",
     client: "Kenz'Up",
     logo: "/logos/clients/kenzup.webp",
-    market: "Morocco — App Growth",
+    market: "Morocco, App Growth",
     metric: "5M+",
     metricLabel: "App Installs",
     story:

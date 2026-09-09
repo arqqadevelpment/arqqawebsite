@@ -5,8 +5,8 @@ import { IndustriesPageContent } from "@/components/industries/IndustriesPageCon
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/industries", {
-    title: "Industries — ARQQA",
-    description: "Proven operational models across five high-growth sectors in the MENA region — fintech, airlines, technology, retail, and telco.",
+    title: "Industries | ARQQA",
+    description: "Proven operational models across five high-growth sectors in the MENA region: fintech, airlines, technology, retail, and telco.",
   });
 }
 

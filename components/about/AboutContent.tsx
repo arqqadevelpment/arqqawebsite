@@ -20,7 +20,7 @@ const MILESTONES = [
 const BELIEFS = [
   {
     title: "Trust is Built Through Systems",
-    body: "Not promises. Not decks. Process, transparency, and performance — repeated.",
+    body: "Not promises. Not decks. Process, transparency, and performance, repeated.",
     accent: "blue" as const,
     /* Shield + check — trust */
     icon: (
@@ -645,7 +645,7 @@ export function AboutContent() {
               Founded in Cairo during one of the most volatile periods in the
               region&apos;s history, ARQQA didn&apos;t have the luxury of
               stability. We had to build it. Every framework, every process,
-              every system we use today was forged under pressure — not in a
+              every system we use today was forged under pressure, not in a
               boardroom, but in a market that punishes inconsistency.
             </p>
             <p
@@ -752,7 +752,7 @@ export function AboutContent() {
               }}
             >
               Four convictions shape every engagement we take on. They are not
-              taglines — they are the operating rules that decide how we build,
+              taglines: they are the operating rules that decide how we build,
               staff, and measure the work.
             </p>
           </Reveal>
@@ -1005,8 +1005,8 @@ export function AboutContent() {
               }}
             >
               Specialists who see the whole machine, not just their station. If
-              you want to build systems that outlast campaigns — and work
-              alongside people who measure themselves on outcomes — there&apos;s
+              you want to build systems that outlast campaigns and work
+              alongside people who measure themselves on outcomes, there&apos;s
               a seat here.
             </p>
           </Reveal>

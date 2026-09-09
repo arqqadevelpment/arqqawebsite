@@ -17,10 +17,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
-  if (!article) return { title: "Insights — ARQQA" };
+  if (!article) return { title: "Insights | ARQQA" };
 
   return getPageSeo(`/insights/${slug}`, {
-    title: `${article.title} — ARQQA`,
+    title: `${article.title} | ARQQA`,
     description: article.excerpt,
   });
 }

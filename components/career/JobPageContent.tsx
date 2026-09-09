@@ -128,7 +128,7 @@ export function JobPageContent({ job }: { job: Job }) {
   ).slice(0, 3);
 
   const applyHref = `mailto:info@arqqa.net?subject=${encodeURIComponent(
-    `Application — ${job.title}`
+    `Application: ${job.title}`
   )}`;
 
   return (

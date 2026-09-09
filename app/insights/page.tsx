@@ -5,7 +5,7 @@ import { InsightsPageContent } from "@/components/insights/InsightsPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/insights", {
-    title: "Insights — ARQQA",
+    title: "Insights | ARQQA",
     description: "Frameworks, case breakdowns, and contrarian insights from 13 years of building growth systems across MENA.",
   });
 }

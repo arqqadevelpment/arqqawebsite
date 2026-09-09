@@ -18,18 +18,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
-  if (!service) return { title: "Service — ARQQA" };
+  if (!service) return { title: "Service | ARQQA" };
 
   if (slug === "catalyst-system") {
     return {
-      title: "The Catalyst System™ — ARQQA",
+      title: "The Catalyst System™ | ARQQA",
       description:
         "One partner. One strategy. Infinite growth. The Catalyst System™ is ARQQA's proprietary engine that guarantees synergy between social media, performance campaigns, and digital operations.",
     };
   }
 
   return getPageSeo(`/services/${slug}`, {
-    title: `${service.title} — ARQQA`,
+    title: `${service.title} | ARQQA`,
     description: service.positioning,
   });
 }

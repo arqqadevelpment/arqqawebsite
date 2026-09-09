@@ -5,7 +5,7 @@ import { ContactPageContent } from "@/components/contact/ContactPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/start", {
-    title: "Start — ARQQA",
+    title: "Start | ARQQA",
     description: "Two ways to start with ARQQA. Book a strategy call if you're ready to move, or download the Growth System Audit if you're still exploring.",
   });
 }

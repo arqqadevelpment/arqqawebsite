@@ -25,7 +25,7 @@ const TESTIMONIALS: { quote: string; name: string; role: string; avatar?: string
   },
   {
     quote:
-      "They operate like an internal growth department — not a vendor waiting for briefs.",
+      "They operate like an internal growth department, not a vendor waiting for briefs.",
     name: "Client Name",
     role: "Title, Company",
   },

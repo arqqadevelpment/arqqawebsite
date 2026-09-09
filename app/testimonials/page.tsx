@@ -5,8 +5,8 @@ import { TestimonialsPageContent } from "@/components/testimonials/TestimonialsP
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/testimonials", {
-    title: "Testimonials — ARQQA",
-    description: "What clients say about working inside one accountable growth system — 13 years, four MENA markets, 100+ brands.",
+    title: "Testimonials | ARQQA",
+    description: "What clients say about working inside one accountable growth system: 13 years, four MENA markets, 100+ brands.",
   });
 }
 

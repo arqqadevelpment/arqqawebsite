@@ -17,10 +17,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const job = getJob(slug);
-  if (!job) return { title: "Apply — Careers at ARQQA" };
+  if (!job) return { title: "Apply | Careers at ARQQA" };
 
   return getPageSeo(`/career/${slug}/apply`, {
-    title: `Apply — ${job.title} — Careers at ARQQA`,
+    title: `Apply | ${job.title} | Careers at ARQQA`,
     description: `Apply for the ${job.title} role at ARQQA.`,
   });
 }

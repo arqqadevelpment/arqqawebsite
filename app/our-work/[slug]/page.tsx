@@ -20,10 +20,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = getShowcaseProject(slug);
-  if (!project) return { title: "Our Work — ARQQA" };
+  if (!project) return { title: "Our Work | ARQQA" };
 
   return getPageSeo(`/our-work/${slug}`, {
-    title: `${project.title} — ARQQA`,
+    title: `${project.title} | ARQQA`,
     description: project.intro,
   });
 }

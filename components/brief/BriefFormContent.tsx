@@ -288,7 +288,7 @@ export function BriefFormContent() {
     return (
       <section className="relative w-full" style={{ padding: "11rem 1.5rem 8rem" }}>
         <div className="relative max-w-2xl mx-auto text-center">
-          <Eyebrow className="mb-6">Got it — you&apos;re in</Eyebrow>
+          <Eyebrow className="mb-6">Got it, you&apos;re in</Eyebrow>
           <h1
             className="font-bold"
             style={{
@@ -304,7 +304,7 @@ export function BriefFormContent() {
             className="font-light mt-6 mx-auto"
             style={{ fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(255,255,255,0.55)", maxWidth: "32rem" }}
           >
-            A person here reads it — not a queue. Expect a reply within one
+            A person here reads it, not a queue. Expect a reply within one
             working day, and we&apos;ll have looked at your site before we send it.
           </p>
           <div className="mt-10 flex justify-center">
@@ -531,7 +531,7 @@ export function BriefFormContent() {
           <div>
             <Field
               label="In your own words"
-              hint="You can skip this — but it's the part we actually read first."
+              hint="You can skip this, but it's the part we actually read first."
             >
               <textarea
                 value={data.problem}

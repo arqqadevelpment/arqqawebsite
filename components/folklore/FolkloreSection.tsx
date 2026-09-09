@@ -28,7 +28,7 @@ const MYTHS: Myth[] = [
   {
     key: "performance",
     folklore: "“Performance marketing is the priority.”",
-    fact: "The 60/40 Rule — 60% brand-building, 40% activation. Short-termism kills long-term growth.",
+    fact: "The 60/40 Rule: 60% brand-building, 40% activation. Short-termism kills long-term growth.",
   },
 ];
 

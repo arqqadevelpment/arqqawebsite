@@ -68,7 +68,7 @@ export const DIAL_CODES = [
 ];
 
 export const STEPS = [
-  { eyebrow: "Who you are", title: "Who are we talking to?", sub: "This is all we need to keep your place — the rest can wait." },
+  { eyebrow: "Who you are", title: "Who are we talking to?", sub: "This is all we need to keep your place, the rest can wait." },
   { eyebrow: "The business", title: "What kind of business is it?", sub: "Ranges are fine. We're not auditing you." },
   { eyebrow: "The problem", title: "What isn't working right now?", sub: "The most useful thing on this page. Write it the way you'd say it out loud." },
   { eyebrow: "How we reach you", title: "How should we come back to you?", sub: "Last step." },

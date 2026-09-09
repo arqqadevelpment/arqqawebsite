@@ -38,7 +38,7 @@ const PHASES: {
     num: "03",
     title: "Visual Production",
     image: "/catalyst-phase-03.webp",
-    body: "Content meets craft. Creative design, motion graphics, Reels production, photography direction. The joint sign-off protocol ensures creative and media teams approve every asset together — zero internal friction.",
+    body: "Content meets craft. Creative design, motion graphics, Reels production, photography direction. The joint sign-off protocol ensures creative and media teams approve every asset together, with zero internal friction.",
     deliverables:
       "Creative assets (static, motion, video), brand-consistent visual guidelines, production schedule.",
   },
@@ -54,7 +54,7 @@ const PHASES: {
     num: "05",
     title: "Intelligence & Reporting",
     image: "/catalyst-phase-05.webp",
-    body: "Performance isn't a monthly PDF. It's a live system. Unified dashboards, shared KPIs, monthly retention surveys, strategic advisory sessions. You're not left guessing — you're steering.",
+    body: "Performance isn't a monthly PDF. It's a live system. Unified dashboards, shared KPIs, monthly retention surveys, strategic advisory sessions. You're not left guessing: you're steering.",
     deliverables:
       "Live performance dashboard, monthly strategic review, client satisfaction survey, optimization recommendations.",
   },
@@ -156,7 +156,7 @@ const VALUE_SHIFT = [
         />
       </>
     ),
-    body: "Every creative asset is pre-validated by performance media standards through a joint sign-off protocol — eliminating wasted production budgets on non-converting content.",
+    body: "Every creative asset is pre-validated by performance media standards through a joint sign-off protocol, eliminating wasted production budgets on non-converting content.",
   },
   {
     title: "True Velocity via Automated Workflows",
@@ -577,7 +577,7 @@ function ValueShiftStory() {
                 className="lg:max-w-[38%]"
                 style={{ willChange: "transform" }}
               >
-                <Eyebrow className="mb-6">{`0${i + 1} — Core value`}</Eyebrow>
+                <Eyebrow className="mb-6">{`0${i + 1} · Core value`}</Eyebrow>
                 <h3
                   className="font-bold"
                   style={{
@@ -895,7 +895,7 @@ function PhasesRail() {
             className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center pointer-events-none"
             style={{ zIndex: 200, willChange: "transform, opacity" }}
           >
-            <Eyebrow>The 5 Phases — Deep Dive</Eyebrow>
+            <Eyebrow>The 5 Phases · Deep Dive</Eyebrow>
             <h2
               className="font-bold mt-6"
               style={{

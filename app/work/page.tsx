@@ -5,8 +5,8 @@ import { PortfolioPageContent } from "@/components/portfolio/PortfolioPageConten
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageSeo("/work", {
-    title: "Work — ARQQA",
-    description: "Outcomes, not portfolios. Every ARQQA project measured in business impact — filter by industry, market, or service.",
+    title: "Work | ARQQA",
+    description: "Outcomes, not portfolios. Every ARQQA project measured in business impact. Filter by industry, market, or service.",
   });
 }
 
