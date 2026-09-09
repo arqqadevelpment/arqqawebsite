@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { submitForm } from "@/lib/forms/submitForm";
 
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
@@ -230,25 +231,33 @@ export function ContactPageContent() {
                   ) : (
                     <form
                       className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4"
-                      onSubmit={(e) => {
+                      onSubmit={async (e) => {
                         e.preventDefault();
+                        const form = e.currentTarget;
+                        const data = Object.fromEntries(new FormData(form).entries());
                         setCallSubmitted(true);
+                        try {
+                          await submitForm("contact", data);
+                        } catch {
+                          // The confirmation already shows — a failed background
+                          // submit just means this lead won't appear in the dashboard.
+                        }
                       }}
                     >
                       <Field label="Name">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
+                        <input required name="name" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
                       </Field>
                       <Field label="Company">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Company name" />
+                        <input required name="company" type="text" className="arqqa-field" style={fieldStyle} placeholder="Company name" />
                       </Field>
                       <Field label="Role">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Your role" />
+                        <input required name="role" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your role" />
                       </Field>
                       <Field label="Industry">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Fintech" />
+                        <input required name="industry" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Fintech" />
                       </Field>
                       <Field label="Budget Range">
-                        <select required className="arqqa-field" style={fieldStyle} defaultValue="">
+                        <select required name="budget" className="arqqa-field" style={fieldStyle} defaultValue="">
                           <option value="" disabled>
                             Select a range
                           </option>
@@ -259,12 +268,13 @@ export function ContactPageContent() {
                         </select>
                       </Field>
                       <Field label="Preferred Time">
-                        <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Weekday mornings" />
+                        <input required name="preferredTime" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Weekday mornings" />
                       </Field>
                       <div className="sm:col-span-2">
                         <Field label="Biggest Growth Challenge">
                           <textarea
                             required
+                            name="challenge"
                             rows={3}
                             className="arqqa-field"
                             style={{ ...fieldStyle, resize: "vertical" }}

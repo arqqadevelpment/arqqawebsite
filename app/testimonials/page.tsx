@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { PageShell } from "@/components/layout/PageShell";
 import { TestimonialsPageContent } from "@/components/testimonials/TestimonialsPageContent";
 
-export const metadata: Metadata = {
-  title: "Testimonials — ARQQA",
-  description:
-    "What clients say about working inside one accountable growth system — 13 years, four MENA markets, 100+ brands.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSeo("/testimonials", {
+    title: "Testimonials — ARQQA",
+    description: "What clients say about working inside one accountable growth system — 13 years, four MENA markets, 100+ brands.",
+  });
+}
 
 export default function TestimonialsPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { ServicePageTemplate } from "@/components/services/ServicePageTemplate";
@@ -27,10 +28,10 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return getPageSeo(`/services/${slug}`, {
     title: `${service.title} — ARQQA`,
     description: service.positioning,
-  };
+  });
 }
 
 export default async function ServiceDetailPage({

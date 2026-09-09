@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { ArticleTemplate } from "@/components/insights/ArticleTemplate";
@@ -18,10 +19,10 @@ export async function generateMetadata({
   const article = getArticle(slug);
   if (!article) return { title: "Insights — ARQQA" };
 
-  return {
+  return getPageSeo(`/insights/${slug}`, {
     title: `${article.title} — ARQQA`,
     description: article.excerpt,
-  };
+  });
 }
 
 export default async function ArticlePage({

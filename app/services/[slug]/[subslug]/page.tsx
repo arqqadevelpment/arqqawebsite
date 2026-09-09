@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { ApproachPageTemplate } from "@/components/services/ApproachPageTemplate";
@@ -19,10 +20,10 @@ export async function generateMetadata({
   const page = getApproachPage(slug, subslug);
   if (!page) return { title: "Service — ARQQA" };
 
-  return {
+  return getPageSeo(`/services/${slug}/${subslug}`, {
     title: `${page.title} — ARQQA`,
     description: page.intro,
-  };
+  });
 }
 
 export default async function ApproachSubPage({

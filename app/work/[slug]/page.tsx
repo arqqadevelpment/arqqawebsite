@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { CaseStudyTemplate } from "@/components/portfolio/CaseStudyTemplate";
@@ -18,10 +19,10 @@ export async function generateMetadata({
   const caseStudy = getCaseStudy(slug);
   if (!caseStudy) return { title: "Case Study — ARQQA" };
 
-  return {
+  return getPageSeo(`/work/${slug}`, {
     title: `${caseStudy.client} — ARQQA`,
     description: caseStudy.heroLine,
-  };
+  });
 }
 
 export default async function CaseStudyPage({

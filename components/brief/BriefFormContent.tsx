@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { submitForm } from "@/lib/forms/submitForm";
 import {
   BUDGET_RANGES,
   CONTACT_METHODS,
@@ -273,9 +274,12 @@ export function BriefFormContent() {
   }
 
   function submit() {
-    // No backend wired yet — the brief is held in localStorage only.
     setDone(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    submitForm("brief", data).catch(() => {
+      // The confirmation already shows — a failed background submit just
+      // means this brief won't appear in the dashboard.
+    });
   }
 
   const current = STEPS[step];

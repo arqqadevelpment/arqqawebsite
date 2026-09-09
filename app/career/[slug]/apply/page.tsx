@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { JobApplyPageContent } from "@/components/career/JobApplyPageContent";
@@ -18,10 +19,10 @@ export async function generateMetadata({
   const job = getJob(slug);
   if (!job) return { title: "Apply — Careers at ARQQA" };
 
-  return {
+  return getPageSeo(`/career/${slug}/apply`, {
     title: `Apply — ${job.title} — Careers at ARQQA`,
     description: `Apply for the ${job.title} role at ARQQA.`,
-  };
+  });
 }
 
 export default async function JobApplyPage({
