@@ -35,11 +35,48 @@ async function getRedirects(): Promise<Map<string, CachedRedirect>> {
   return map;
 }
 
+// Pages with a dashboard-set custom_path: the custom_path is the page's new
+// public URL, aliased via rewrite() to the real underlying route — the old
+// path itself is handled by a normal row in the `redirects` table (inserted
+// when the custom_path is saved), not here.
+let aliasCache: Map<string, string> | null = null;
+let aliasCacheAt = 0;
+const ALIAS_CACHE_MS = 60_000;
+
+async function getPageAliases(): Promise<Map<string, string>> {
+  const now = Date.now();
+  if (aliasCache && now - aliasCacheAt < ALIAS_CACHE_MS) {
+    return aliasCache;
+  }
+
+  const supabase = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
+
+  const { data } = await supabase.from("pages").select("path, custom_path").not("custom_path", "is", null);
+
+  const map = new Map<string, string>();
+  for (const row of data ?? []) {
+    if (row.custom_path) map.set(row.custom_path, row.path);
+  }
+
+  aliasCache = map;
+  aliasCacheAt = now;
+  return map;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isDashboardOrLogin = pathname === "/login" || pathname.startsWith("/dashboard");
 
   if (!isDashboardOrLogin) {
+    const aliases = await getPageAliases();
+    const realPath = aliases.get(pathname);
+    if (realPath) {
+      return NextResponse.rewrite(new URL(realPath, request.url));
+    }
+
     const redirects = await getRedirects();
     const match = redirects.get(pathname);
     if (match) {

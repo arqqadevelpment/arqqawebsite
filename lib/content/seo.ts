@@ -23,6 +23,13 @@ export type SeoFallback = {
   image?: string;
 };
 
+/** Resolves a page's current public path — its dashboard-set custom_path if one exists, else the original path. */
+export async function getEffectivePath(path: string): Promise<string> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("pages").select("custom_path").eq("path", path).maybeSingle();
+  return data?.custom_path || path;
+}
+
 /**
  * Resolves the effective SEO fields for a path: per-page `seo_meta`
  * overrides layered on top of the page's own hardcoded `fallback` (its
@@ -37,7 +44,7 @@ export type SeoFallback = {
 export async function getPageSeo(path: string, fallback: SeoFallback): Promise<Metadata> {
   const supabase = await createClient();
 
-  const [{ data: seo }, { data: settings }] = await Promise.all([
+  const [{ data: seo }, { data: settings }, { data: pageRow }] = await Promise.all([
     supabase
       .from("seo_meta")
       .select(
@@ -46,12 +53,14 @@ export async function getPageSeo(path: string, fallback: SeoFallback): Promise<M
       .eq("page_path", path)
       .maybeSingle<SeoMetaRow>(),
     supabase.from("site_settings").select("site_url, org_name").single<SiteSettingsRow>(),
+    supabase.from("pages").select("custom_path").eq("path", path).maybeSingle(),
   ]);
 
   const siteUrl = settings?.site_url ?? "https://arqqa.net";
+  const effectivePath = pageRow?.custom_path || path;
   const title = seo?.seo_title || fallback.title;
   const description = seo?.meta_description || fallback.description;
-  const canonical = seo?.canonical_url || `${siteUrl}${path === "/" ? "" : path}`;
+  const canonical = seo?.canonical_url || `${siteUrl}${effectivePath === "/" ? "" : effectivePath}`;
   const ogImage = seo?.og_image || fallback.image;
   const robots =
     seo?.robots_directive === "noindex,nofollow"

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
+import { getFormFields } from "@/lib/forms/getFormFields";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { PerformanceMarketingPageContent } from "@/components/services/PerformanceMarketingPageContent";
 import { FAQS } from "@/components/services/performance-marketing-data";
 
@@ -25,14 +27,17 @@ const faqSchema = {
   })),
 };
 
-export default function PerformanceMarketingPage() {
+export default async function PerformanceMarketingPage() {
+  const fields = await getFormFields("performance-lead");
+
   return (
     <PageShell>
+      <PageSchema path={"/services/performance-marketing"} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <PerformanceMarketingPageContent />
+      <PerformanceMarketingPageContent fields={fields} />
     </PageShell>
   );
 }

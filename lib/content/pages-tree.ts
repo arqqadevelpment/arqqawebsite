@@ -6,10 +6,12 @@ export type PageRow = {
   parent_path: string | null;
   title: string;
   page_type: string;
+  custom_path?: string | null;
 };
 
 export type PageTreeNode = {
   path: string;
+  customPath: string | null;
   title: string;
   page_type: string;
   /** Real page rows have an id; synthetic grouping folders (e.g. "/case-studies",
@@ -33,6 +35,7 @@ export function buildPagesTree(rows: PageRow[]): PageTreeNode[] {
   for (const row of rows) {
     nodes.set(row.path, {
       path: row.path,
+      customPath: row.custom_path ?? null,
       title: row.title,
       page_type: row.page_type,
       id: row.id,
@@ -47,6 +50,7 @@ export function buildPagesTree(rows: PageRow[]): PageTreeNode[] {
     if (row.parent_path && !nodes.has(row.parent_path)) {
       nodes.set(row.parent_path, {
         path: row.parent_path,
+        customPath: null,
         title: prettifySegment(row.parent_path),
         page_type: "folder",
         id: null,
@@ -79,7 +83,7 @@ export async function getPagesTree(): Promise<PageTreeNode[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("pages")
-    .select("id, path, parent_path, title, page_type")
+    .select("id, path, custom_path, parent_path, title, page_type")
     .order("path");
 
   if (error) throw new Error(`Failed to load pages: ${error.message}`);

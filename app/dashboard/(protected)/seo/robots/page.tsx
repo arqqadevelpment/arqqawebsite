@@ -12,11 +12,6 @@ export default async function RobotsPage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: 20, marginBottom: 4 }}>Robots &amp; Sitemap</h1>
-      <p style={{ color: "#a3a3a3", fontSize: 13, marginBottom: 20 }}>
-        Crawl rules and the auto-generated sitemap — both served live, no redeploy needed.
-      </p>
-
       <div style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 560 }}>
         <div style={{ border: "1px solid #262626", borderRadius: 10, padding: 20, background: "#111111" }}>
           <h2 style={{ fontSize: 14, marginBottom: 14 }}>robots.txt</h2>

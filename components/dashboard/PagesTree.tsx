@@ -39,42 +39,21 @@ function TreeNode({ node, depth }: { node: PageTreeNode; depth: number }) {
 
   const indent = depth * 20;
 
-  const content = (
+  const badges = (
     <>
-      <span
-        className="flex items-center justify-center shrink-0 text-[10px] text-neutral-500 transition-transform"
-        style={{
-          width: 16,
-          transform: hasChildren && open ? "rotate(90deg)" : "rotate(0deg)",
-          visibility: hasChildren ? "visible" : "hidden",
-        }}
-      >
-        ▸
-      </span>
-
-      <span
-        className="shrink-0 rounded-full"
-        style={{ width: 6, height: 6, background: meta.color }}
-      />
-
-      <span
-        className={
-          node.id
-            ? "flex-1 truncate text-[13.5px] text-neutral-100"
-            : "flex-1 truncate text-[13.5px] font-semibold text-neutral-300"
-        }
-      >
-        {node.title}
-      </span>
-
       {hasChildren && (
         <span className="shrink-0 text-[11px] text-neutral-600">{countPages(node)}</span>
       )}
-
       <span className="hidden shrink-0 font-mono text-[11px] text-neutral-600 sm:inline">
-        {node.path}
+        {node.customPath ? (
+          <>
+            <span style={{ textDecoration: "line-through", opacity: 0.5 }}>{node.path}</span>{" "}
+            <span style={{ color: "#4ade80" }}>{node.customPath}</span>
+          </>
+        ) : (
+          node.path
+        )}
       </span>
-
       <span
         className="shrink-0 rounded-full border px-2 py-[1px] text-[10.5px]"
         style={{ borderColor: "#262626", color: meta.color }}
@@ -84,8 +63,9 @@ function TreeNode({ node, depth }: { node: PageTreeNode; depth: number }) {
     </>
   );
 
-  const rowClass =
-    "group flex w-full items-center gap-2.5 rounded-md px-2 py-[7px] text-left transition-colors hover:bg-white/[0.06]";
+  const dot = (
+    <span className="shrink-0 rounded-full" style={{ width: 6, height: 6, background: meta.color }} />
+  );
 
   return (
     <div className="relative">
@@ -97,24 +77,42 @@ function TreeNode({ node, depth }: { node: PageTreeNode; depth: number }) {
         />
       )}
 
-      {hasChildren ? (
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className={rowClass}
-          style={{ paddingLeft: 8 + indent }}
-        >
-          {content}
-        </button>
-      ) : node.id ? (
-        <Link href={`/dashboard/pages/${node.id}`} className={rowClass} style={{ paddingLeft: 8 + indent }}>
-          {content}
-        </Link>
-      ) : (
-        <div className={rowClass} style={{ paddingLeft: 8 + indent }}>
-          {content}
-        </div>
-      )}
+      <div
+        className="group flex w-full items-center gap-2.5 rounded-md py-[7px] pr-3 transition-colors hover:bg-white/[0.06]"
+        style={{ paddingLeft: 8 + indent }}
+      >
+        {hasChildren ? (
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Collapse" : "Expand"}
+            className="flex shrink-0 items-center justify-center text-[10px] text-neutral-500 transition-transform"
+            style={{ width: 16, transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
+          >
+            ▸
+          </button>
+        ) : (
+          <span style={{ width: 16 }} className="shrink-0" />
+        )}
+
+        {node.id ? (
+          <Link href={`/dashboard/pages/${node.id}`} className="flex flex-1 items-center gap-2.5 min-w-0">
+            {dot}
+            <span className="flex-1 truncate text-[13.5px] text-neutral-100">{node.title}</span>
+            {badges}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={() => hasChildren && setOpen((v) => !v)}
+            className="flex flex-1 items-center gap-2.5 min-w-0 text-left"
+          >
+            {dot}
+            <span className="flex-1 truncate text-[13.5px] font-semibold text-neutral-300">{node.title}</span>
+            {badges}
+          </button>
+        )}
+      </div>
 
       {hasChildren && open && (
         <div>

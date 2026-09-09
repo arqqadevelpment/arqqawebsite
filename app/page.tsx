@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { FactsSection } from "@/components/facts/FactsSection";
 import { FolkloreSection } from "@/components/folklore/FolkloreSection";
@@ -41,6 +42,7 @@ export default function Home() {
       above={<HeroSection />}
       seam
     >
+      <PageSchema path="/" />
       <FactsSection />
       <CatalystSection />
       <ServicesSection />

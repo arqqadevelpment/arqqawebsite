@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ShowcaseTemplate } from "@/components/showcase/ShowcaseTemplate";
 import { SOCIAL_PROJECTS, getSocialProject } from "@/components/social/social-data";
 
@@ -38,6 +39,7 @@ export default async function SocialProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/social/${slug}`} />
       <ShowcaseTemplate project={project} basePath="/social" nextProject={next} />
     </PageShell>
   );

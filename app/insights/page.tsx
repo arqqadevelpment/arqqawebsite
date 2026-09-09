@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { InsightsPageContent } from "@/components/insights/InsightsPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function InsightsPage() {
   return (
     <PageShell>
+      <PageSchema path={"/insights"} />
       <InsightsPageContent />
     </PageShell>
   );

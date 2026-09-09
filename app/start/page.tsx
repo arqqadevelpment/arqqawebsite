@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
+import { getFormFields } from "@/lib/forms/getFormFields";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -10,10 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function StartPage() {
+export default async function StartPage() {
+  const fields = await getFormFields("contact");
+
   return (
     <PageShell>
-      <ContactPageContent />
+      <PageSchema path={"/start"} />
+      <ContactPageContent fields={fields} />
     </PageShell>
   );
 }

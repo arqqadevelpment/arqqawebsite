@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { VideoPageContent } from "@/components/videos/VideoPageContent";
 import { VIDEO_PROJECTS, getVideoProject } from "@/components/videos/video-data";
 
@@ -36,6 +37,7 @@ export default async function VideoProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/videos/${slug}`} />
       <VideoPageContent project={project} />
     </PageShell>
   );

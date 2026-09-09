@@ -11,11 +11,6 @@ export default async function RedirectsPage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: 20, marginBottom: 4 }}>Redirects</h1>
-      <p style={{ color: "#a3a3a3", fontSize: 13, marginBottom: 20 }}>
-        301/302 redirects, applied on every request via middleware — no redeploy needed. Changes take effect within 60 seconds.
-      </p>
-
       <div
         style={{
           border: "1px solid #262626",

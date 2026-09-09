@@ -6,6 +6,8 @@ import type { ApproachPage } from "./approach-pages-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { submitForm } from "@/lib/forms/submitForm";
+import type { FormFieldMap } from "@/lib/forms/getFormFields";
 
 /* ══════════════════════════════════════════════════════════════════════
    Shared primitives
@@ -1528,14 +1530,24 @@ const labelStyle: React.CSSProperties = {
   color: "rgba(255,255,255,0.55)",
 };
 
-function LeadForm() {
+function LeadForm({ fields = {} }: { fields?: FormFieldMap }) {
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  const hasConfig = Object.keys(fields).length > 0;
+  const isVisible = (key: string) => !hasConfig || key in fields;
+  const isRequired = (key: string, fallback = true) => fields[key]?.required ?? fallback;
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // NOTE: no backend is wired up yet — this is a UI-only confirmation.
-    // Real submissions need HubSpot form/API wiring with the account's own credentials.
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     setSubmitted(true);
+    try {
+      await submitForm("website-dev-lead", data);
+    } catch {
+      // The confirmation already shows — a failed background submit just
+      // means this lead won't appear in the dashboard.
+    }
   }
 
   if (submitted) {
@@ -1554,62 +1566,78 @@ function LeadForm() {
   return (
     <form onSubmit={handleSubmit} className="rounded-3xl p-8" style={glass}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label style={labelStyle}>Full Name *</label>
-          <input required type="text" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Company Name *</label>
-          <input required type="text" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Email Address *</label>
-          <input required type="email" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Phone Number *</label>
-          <input required type="tel" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Country *</label>
-          <select required style={inputStyle} defaultValue="">
-            <option value="" disabled>
-              Select a country
-            </option>
-            <option>Egypt</option>
-            <option>Saudi Arabia</option>
-            <option>UAE</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div>
-          <label style={labelStyle}>What type of website do you need? *</label>
-          <select required style={inputStyle} defaultValue="">
-            <option value="" disabled>
-              Select a type
-            </option>
-            <option>Corporate</option>
-            <option>E-Commerce</option>
-            <option>Shopify</option>
-            <option>Interactive</option>
-            <option>Not Sure</option>
-          </select>
-        </div>
-        <div>
-          <label style={labelStyle}>Estimated Budget Range</label>
-          <select style={inputStyle} defaultValue="">
-            <option value="">Select a range</option>
-            <option>Under $5K</option>
-            <option>$5K–$15K</option>
-            <option>$15K–$50K</option>
-            <option>$50K+</option>
-            <option>Not Sure</option>
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label style={labelStyle}>Tell us about your project</label>
-          <textarea rows={3} style={{ ...inputStyle, resize: "vertical" }} />
-        </div>
+        {isVisible("fullName") && (
+          <div>
+            <label style={labelStyle}>Full Name *</label>
+            <input required={isRequired("fullName")} name="fullName" type="text" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("companyName") && (
+          <div>
+            <label style={labelStyle}>Company Name *</label>
+            <input required={isRequired("companyName")} name="companyName" type="text" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("email") && (
+          <div>
+            <label style={labelStyle}>Email Address *</label>
+            <input required={isRequired("email")} name="email" type="email" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("phone") && (
+          <div>
+            <label style={labelStyle}>Phone Number *</label>
+            <input required={isRequired("phone")} name="phone" type="tel" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("country") && (
+          <div>
+            <label style={labelStyle}>Country *</label>
+            <select required={isRequired("country")} name="country" style={inputStyle} defaultValue="">
+              <option value="" disabled>
+                Select a country
+              </option>
+              <option>Egypt</option>
+              <option>Saudi Arabia</option>
+              <option>UAE</option>
+              <option>Other</option>
+            </select>
+          </div>
+        )}
+        {isVisible("websiteType") && (
+          <div>
+            <label style={labelStyle}>What type of website do you need? *</label>
+            <select required={isRequired("websiteType")} name="websiteType" style={inputStyle} defaultValue="">
+              <option value="" disabled>
+                Select a type
+              </option>
+              <option>Corporate</option>
+              <option>E-Commerce</option>
+              <option>Shopify</option>
+              <option>Interactive</option>
+              <option>Not Sure</option>
+            </select>
+          </div>
+        )}
+        {isVisible("budget") && (
+          <div>
+            <label style={labelStyle}>Estimated Budget Range</label>
+            <select required={isRequired("budget", false)} name="budget" style={inputStyle} defaultValue="">
+              <option value="">Select a range</option>
+              <option>Under $5K</option>
+              <option>$5K–$15K</option>
+              <option>$15K–$50K</option>
+              <option>$50K+</option>
+              <option>Not Sure</option>
+            </select>
+          </div>
+        )}
+        {isVisible("message") && (
+          <div className="sm:col-span-2">
+            <label style={labelStyle}>Tell us about your project</label>
+            <textarea required={isRequired("message", false)} name="message" rows={3} style={{ ...inputStyle, resize: "vertical" }} />
+          </div>
+        )}
       </div>
       <div className="mt-7 flex justify-center">
         <button type="submit" className="relative inline-flex rounded-2xl" style={{ padding: "1px", background: "linear-gradient(120deg, #ff7a3d 0%, #b6541f 22%, rgba(255,255,255,0.14) 50%, #2f6bff 82%, #5aa2ff 100%)", boxShadow: "0 -10px 32px -6px rgba(255,122,61,0.35), 0 10px 32px -10px rgba(47,107,255,0.3)" }}>
@@ -1632,7 +1660,7 @@ function LeadForm() {
    Page
    ══════════════════════════════════════════════════════════════════════ */
 
-export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
+export function WebsiteDevPageContent({ page, fields = {} }: { page: ApproachPage; fields?: FormFieldMap }) {
   const accentGlow = "rgba(60,125,255,";
   const [activeTier, setActiveTier] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -2096,7 +2124,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
             </p>
           </Reveal>
           <Reveal delay={0.15} className="mt-12">
-            <LeadForm />
+            <LeadForm fields={fields} />
           </Reveal>
         </div>
       </section>

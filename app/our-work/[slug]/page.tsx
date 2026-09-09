@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ShowcaseTemplate } from "@/components/showcase/ShowcaseTemplate";
 import {
   SHOWCASE_PROJECTS,
@@ -39,6 +40,7 @@ export default async function ShowcaseProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/our-work/${slug}`} />
       <ShowcaseTemplate project={project} />
     </PageShell>
   );

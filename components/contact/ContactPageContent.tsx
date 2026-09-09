@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { submitForm } from "@/lib/forms/submitForm";
+import type { FormFieldMap } from "@/lib/forms/getFormFields";
 
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
@@ -114,8 +115,14 @@ function SuccessNote({ title, body }: { title: string; body: string }) {
   );
 }
 
-export function ContactPageContent() {
+export function ContactPageContent({ fields = {} }: { fields?: FormFieldMap }) {
   const [callSubmitted, setCallSubmitted] = useState(false);
+
+  // If the fields config failed to load (empty map), fail open and show the
+  // form exactly as it always has — never silently blank it out.
+  const hasConfig = Object.keys(fields).length > 0;
+  const isVisible = (key: string) => !hasConfig || key in fields;
+  const isRequired = (key: string, fallback = true) => fields[key]?.required ?? fallback;
 
   return (
     <>
@@ -244,44 +251,58 @@ export function ContactPageContent() {
                         }
                       }}
                     >
-                      <Field label="Name">
-                        <input required name="name" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
-                      </Field>
-                      <Field label="Company">
-                        <input required name="company" type="text" className="arqqa-field" style={fieldStyle} placeholder="Company name" />
-                      </Field>
-                      <Field label="Role">
-                        <input required name="role" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your role" />
-                      </Field>
-                      <Field label="Industry">
-                        <input required name="industry" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Fintech" />
-                      </Field>
-                      <Field label="Budget Range">
-                        <select required name="budget" className="arqqa-field" style={fieldStyle} defaultValue="">
-                          <option value="" disabled>
-                            Select a range
-                          </option>
-                          <option>Under $10K / month</option>
-                          <option>$10K – $25K / month</option>
-                          <option>$25K – $50K / month</option>
-                          <option>$50K+ / month</option>
-                        </select>
-                      </Field>
-                      <Field label="Preferred Time">
-                        <input required name="preferredTime" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Weekday mornings" />
-                      </Field>
-                      <div className="sm:col-span-2">
-                        <Field label="Biggest Growth Challenge">
-                          <textarea
-                            required
-                            name="challenge"
-                            rows={3}
-                            className="arqqa-field"
-                            style={{ ...fieldStyle, resize: "vertical" }}
-                            placeholder="What's the growth problem you're trying to solve?"
-                          />
+                      {isVisible("name") && (
+                        <Field label="Name">
+                          <input required={isRequired("name")} name="name" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
                         </Field>
-                      </div>
+                      )}
+                      {isVisible("company") && (
+                        <Field label="Company">
+                          <input required={isRequired("company")} name="company" type="text" className="arqqa-field" style={fieldStyle} placeholder="Company name" />
+                        </Field>
+                      )}
+                      {isVisible("role") && (
+                        <Field label="Role">
+                          <input required={isRequired("role")} name="role" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your role" />
+                        </Field>
+                      )}
+                      {isVisible("industry") && (
+                        <Field label="Industry">
+                          <input required={isRequired("industry")} name="industry" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Fintech" />
+                        </Field>
+                      )}
+                      {isVisible("budget") && (
+                        <Field label="Budget Range">
+                          <select required={isRequired("budget")} name="budget" className="arqqa-field" style={fieldStyle} defaultValue="">
+                            <option value="" disabled>
+                              Select a range
+                            </option>
+                            <option>Under $10K / month</option>
+                            <option>$10K – $25K / month</option>
+                            <option>$25K – $50K / month</option>
+                            <option>$50K+ / month</option>
+                          </select>
+                        </Field>
+                      )}
+                      {isVisible("preferredTime") && (
+                        <Field label="Preferred Time">
+                          <input required={isRequired("preferredTime")} name="preferredTime" type="text" className="arqqa-field" style={fieldStyle} placeholder="e.g. Weekday mornings" />
+                        </Field>
+                      )}
+                      {isVisible("challenge") && (
+                        <div className="sm:col-span-2">
+                          <Field label="Biggest Growth Challenge">
+                            <textarea
+                              required={isRequired("challenge")}
+                              name="challenge"
+                              rows={3}
+                              className="arqqa-field"
+                              style={{ ...fieldStyle, resize: "vertical" }}
+                              placeholder="What's the growth problem you're trying to solve?"
+                            />
+                          </Field>
+                        </div>
+                      )}
                       <div className="sm:col-span-2 mt-2">
                         {/* Same two-layer gradient-border treatment as the
                             site's PrimaryCTA — a 1px gradient ring around a

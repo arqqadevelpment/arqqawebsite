@@ -5,6 +5,7 @@ import type { Article } from "./insights-data";
 import { getRelatedArticles } from "./insights-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Link from "next/link";
+import { submitForm } from "@/lib/forms/submitForm";
 
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
@@ -372,9 +373,18 @@ export function ArticleTemplate({ article }: { article: Article }) {
             </p>
             <form
               className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7 max-w-md mx-auto"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = Object.fromEntries(new FormData(form).entries());
+                submitForm("newsletter", data).catch(() => {
+                  // Fails silently — no confirmation UI exists here to update either way.
+                });
+                form.reset();
+              }}
             >
               <input
+                name="email"
                 type="email"
                 required
                 placeholder="you@company.com"

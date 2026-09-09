@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { AutonomousPageContent } from "@/components/autonomous/AutonomousPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function AutonomousPage() {
   return (
     <PageShell>
+      <PageSchema path={"/autonomous"} />
       <AutonomousPageContent />
     </PageShell>
   );

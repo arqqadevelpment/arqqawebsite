@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { CaseStudyTemplate } from "@/components/portfolio/CaseStudyTemplate";
 import { CASE_STUDIES, getCaseStudy } from "@/components/portfolio/portfolio-data";
 
@@ -36,6 +37,7 @@ export default async function CaseStudyPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/work/${slug}`} />
       <CaseStudyTemplate caseStudy={caseStudy} />
     </PageShell>
   );

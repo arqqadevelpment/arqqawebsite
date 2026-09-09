@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ArticleTemplate } from "@/components/insights/ArticleTemplate";
 import { ARTICLES, getArticle } from "@/components/insights/insights-data";
 
@@ -36,6 +37,7 @@ export default async function ArticlePage({
 
   return (
     <PageShell>
+      <PageSchema path={`/insights/${slug}`} />
       <ArticleTemplate article={article} />
     </PageShell>
   );

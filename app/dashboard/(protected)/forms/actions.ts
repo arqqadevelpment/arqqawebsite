@@ -13,5 +13,5 @@ export async function updateFormConfig(formKey: string, formData: FormData) {
     .update({ notify_email: notifyEmail, email_enabled: emailEnabled })
     .eq("form_key", formKey);
 
-  revalidatePath("/dashboard/forms");
+  revalidatePath(`/dashboard/forms/${formKey}/submissions`);
 }

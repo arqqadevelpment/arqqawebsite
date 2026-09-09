@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { saveSiteSettings } from "../actions";
+import { saveSiteSettings } from "../../actions";
 
 const inputStyle: React.CSSProperties = {
   width: "100%",

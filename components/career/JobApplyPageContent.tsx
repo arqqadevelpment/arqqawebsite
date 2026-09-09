@@ -14,6 +14,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Job } from "./career-data";
+import { submitForm } from "@/lib/forms/submitForm";
+import type { FormFieldMap } from "@/lib/forms/getFormFields";
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 const glass: React.CSSProperties = {
   background: "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
@@ -104,8 +115,12 @@ function SuccessNote({ jobTitle }: { jobTitle: string }) {
   );
 }
 
-export function JobApplyPageContent({ job }: { job: Job }) {
+export function JobApplyPageContent({ job, fields = {} }: { job: Job; fields?: FormFieldMap }) {
   const [submitted, setSubmitted] = useState(false);
+
+  const hasConfig = Object.keys(fields).length > 0;
+  const isVisible = (key: string) => !hasConfig || key in fields;
+  const isRequired = (key: string, fallback = true) => fields[key]?.required ?? fallback;
 
   return (
     <>
@@ -168,38 +183,64 @@ export function JobApplyPageContent({ job }: { job: Job }) {
             ) : (
               <form
                 className="flex flex-col gap-5"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
+                  const form = e.currentTarget;
+                  const data = Object.fromEntries(new FormData(form).entries()) as Record<string, unknown>;
+                  const cvInput = form.elements.namedItem("cv") as HTMLInputElement | null;
+                  const cvFile = cvInput?.files?.[0];
+                  if (cvFile) {
+                    data.cv = await fileToBase64(cvFile);
+                    data.cvFileName = cvFile.name;
+                  }
                   setSubmitted(true);
+                  try {
+                    await submitForm("career-apply", data);
+                  } catch {
+                    // The confirmation already shows — a failed background
+                    // submit just means this application won't appear in the dashboard.
+                  }
                 }}
               >
-                <Field label="Full Name">
-                  <input required type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
-                </Field>
-                <Field label="Email">
-                  <input required type="email" className="arqqa-field" style={fieldStyle} placeholder="you@example.com" />
-                </Field>
-                <Field label="Phone">
-                  <input required type="tel" className="arqqa-field" style={fieldStyle} placeholder="+20 1XX XXX XXXX" />
-                </Field>
-                <Field label="Cover Letter">
-                  <textarea
-                    required
-                    rows={5}
-                    className="arqqa-field"
-                    style={{ ...fieldStyle, resize: "vertical" }}
-                    placeholder="Tell us why you're a fit for this role."
-                  />
-                </Field>
-                <Field label="Upload CV/Resume" hint="Allowed type(s): pdf, doc, docx">
-                  <input
-                    required
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    className="arqqa-field arqqa-file"
-                    style={{ ...fieldStyle, padding: "0.5rem 0.5rem" }}
-                  />
-                </Field>
+                {isVisible("fullName") && (
+                  <Field label="Full Name">
+                    <input required={isRequired("fullName")} name="fullName" type="text" className="arqqa-field" style={fieldStyle} placeholder="Your full name" />
+                  </Field>
+                )}
+                {isVisible("email") && (
+                  <Field label="Email">
+                    <input required={isRequired("email")} name="email" type="email" className="arqqa-field" style={fieldStyle} placeholder="you@example.com" />
+                  </Field>
+                )}
+                {isVisible("phone") && (
+                  <Field label="Phone">
+                    <input required={isRequired("phone")} name="phone" type="tel" className="arqqa-field" style={fieldStyle} placeholder="+20 1XX XXX XXXX" />
+                  </Field>
+                )}
+                {isVisible("coverLetter") && (
+                  <Field label="Cover Letter">
+                    <textarea
+                      required={isRequired("coverLetter")}
+                      name="coverLetter"
+                      rows={5}
+                      className="arqqa-field"
+                      style={{ ...fieldStyle, resize: "vertical" }}
+                      placeholder="Tell us why you're a fit for this role."
+                    />
+                  </Field>
+                )}
+                {isVisible("cv") && (
+                  <Field label="Upload CV/Resume" hint="Allowed type(s): pdf, doc, docx">
+                    <input
+                      required={isRequired("cv")}
+                      name="cv"
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      className="arqqa-field arqqa-file"
+                      style={{ ...fieldStyle, padding: "0.5rem 0.5rem" }}
+                    />
+                  </Field>
+                )}
 
                 <button
                   type="submit"

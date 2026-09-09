@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
+import { getFormFields } from "@/lib/forms/getFormFields";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { JobApplyPageContent } from "@/components/career/JobApplyPageContent";
 import { JOBS, getJob } from "@/components/career/career-data";
 
@@ -34,9 +36,12 @@ export default async function JobApplyPage({
   const job = getJob(slug);
   if (!job) notFound();
 
+  const fields = await getFormFields("career-apply");
+
   return (
     <PageShell>
-      <JobApplyPageContent job={job} />
+      <PageSchema path={`/career/${slug}/apply`} />
+      <JobApplyPageContent job={job} fields={fields} />
     </PageShell>
   );
 }

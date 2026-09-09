@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ShowcaseTemplate } from "@/components/showcase/ShowcaseTemplate";
 import { BRANDING_PROJECTS, getBrandingProject } from "@/components/branding/branding-data";
 
@@ -38,6 +39,7 @@ export default async function BrandingProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/branding/${slug}`} />
       <ShowcaseTemplate project={project} basePath="/branding" nextProject={next} />
     </PageShell>
   );

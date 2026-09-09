@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SeoForm } from "./SeoForm";
+import { UrlForm } from "./UrlForm";
 
 export default async function PageDetail({
   params,
@@ -13,7 +14,7 @@ export default async function PageDetail({
 
   const { data: page } = await supabase
     .from("pages")
-    .select("id, path, title, page_type, updated_at")
+    .select("id, path, custom_path, title, page_type, updated_at")
     .eq("id", id)
     .single();
 
@@ -41,7 +42,7 @@ export default async function PageDetail({
       </Link>
 
       <h1 style={{ fontSize: 20, margin: "12px 0 4px" }}>{page.title}</h1>
-      <p style={{ color: "#737373", fontSize: 13, marginBottom: 24 }}>{page.path}</p>
+      <p style={{ color: "#737373", fontSize: 13, marginBottom: 24 }}>{page.custom_path || page.path}</p>
 
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start" }}>
         <div
@@ -70,12 +71,24 @@ export default async function PageDetail({
             <h2 style={{ fontSize: 12, color: "#a3a3a3", marginBottom: 10 }}>Overview</h2>
             <dl style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "6px 14px", fontSize: 12.5 }}>
               <dt style={{ color: "#737373" }}>Path</dt>
-              <dd>{page.path}</dd>
+              <dd>{page.custom_path || page.path}</dd>
               <dt style={{ color: "#737373" }}>Type</dt>
               <dd>{page.page_type}</dd>
               <dt style={{ color: "#737373" }}>Last updated</dt>
               <dd>{new Date(page.updated_at).toLocaleString()}</dd>
             </dl>
+          </div>
+
+          <div
+            style={{
+              border: "1px solid #262626",
+              borderRadius: 10,
+              padding: 16,
+              background: "#111111",
+            }}
+          >
+            <h2 style={{ fontSize: 12, color: "#a3a3a3", marginBottom: 10 }}>URL</h2>
+            <UrlForm pageId={page.id} originalPath={page.path} customPath={page.custom_path} siteUrl={siteUrl} />
           </div>
 
           <div
@@ -93,7 +106,7 @@ export default async function PageDetail({
               </div>
               <div style={{ color: "#006621", fontSize: 13, marginBottom: 3 }}>
                 {siteUrl}
-                {page.path === "/" ? "" : page.path}
+                {(page.custom_path || page.path) === "/" ? "" : page.custom_path || page.path}
               </div>
               <div style={{ color: "#545454", fontSize: 13, lineHeight: 1.4 }}>
                 {seo?.meta_description || "No description set — falls back to the site default."}
