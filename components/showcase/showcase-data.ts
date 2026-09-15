@@ -36,7 +36,11 @@ export type ShowcaseBlock =
   /** A row of headline metrics, e.g. "The Results". Numeric runs inside
       `value` (including ones embedded mid-string, like "7% → 25%") count up
       from zero the first time the block scrolls into view. */
-  | { type: "stats"; heading?: string; items: { value: string; label: string }[] };
+  | { type: "stats"; heading?: string; items: { value: string; label: string }[] }
+  /** A centered section opener — eyebrow pill, bold headline, optional
+      paragraph. For case-study-style beats ("The Challenge", "The Approach")
+      inside an otherwise narrative project page. */
+  | { type: "sectionIntro"; eyebrow: string; heading: string; body?: string };
 
 export type ShowcaseProject = {
   /** URL slug — the page lives at /our-work/<slug> */

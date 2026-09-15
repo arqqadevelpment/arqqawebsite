@@ -450,6 +450,38 @@ export function ShowcaseTemplate({
               );
             }
 
+            if (block.type === "sectionIntro") {
+              return (
+                <Reveal key={`si-${i}`} className="text-center">
+                  <Eyebrow>{block.eyebrow}</Eyebrow>
+                  <h2
+                    className="font-bold mt-5"
+                    style={{
+                      fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.02em",
+                      color: "#ffffff",
+                    }}
+                  >
+                    {block.heading}
+                  </h2>
+                  {block.body ? (
+                    <p
+                      className="mt-6 mx-auto"
+                      style={{
+                        maxWidth: "42rem",
+                        color: "rgba(255,255,255,0.72)",
+                        fontSize: "clamp(1.05rem, 1.35vw, 1.18rem)",
+                        lineHeight: 1.75,
+                      }}
+                    >
+                      {block.body}
+                    </p>
+                  ) : null}
+                </Reveal>
+              );
+            }
+
             if (block.type === "figure") {
               return (
                 <Reveal key={block.media.src} delay={0.05}>

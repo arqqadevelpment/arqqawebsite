@@ -258,7 +258,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block font-light mt-1"
-                    style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}
+                    style={{ fontSize: "0.875rem", color: "#9fc8ff" }}
                   >
                     {office.phone}
                   </a>

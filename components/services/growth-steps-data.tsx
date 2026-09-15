@@ -70,7 +70,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "brand-strategy",
         title: "Brand Strategy",
         cep: "When your brand doesn’t know what it stands for.",
-        body: "We define what your brand stands for, who it's for, and why it wins — before a single asset gets designed. Without a documented strategy, every designer and media buyer ends up guessing at the brand's voice, and guesses don't compound.",
+        body: "We define what your brand stands for, who it's for, and why it wins, before a single asset gets designed. Without a documented strategy, every designer and media buyer ends up guessing at the brand's voice, and guesses don't compound.",
         bullets: [
           "Positioning definition and territory mapping",
           "Audience and persona research, grounded in real behavior",
@@ -78,7 +78,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Brand narrative that makes the strategy memorable",
         ],
         proof:
-          "The same foundation that repositioned Merova into a ‘Turkish-inspired destination brand’ — language now anchoring every campaign the brand runs.",
+          "The same foundation that repositioned Merova into a ‘Turkish-inspired destination brand,’ language now anchoring every campaign the brand runs.",
       },
       {
         slug: "marketing-strategy",
@@ -92,13 +92,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "A quarterly roadmap that sequences initiatives, not a free-for-all",
         ],
         proof:
-          "The same funnel-logic approach that let Joviality scale spend +103% while gross sales grew +114% — growth outpacing spend because the plan came first.",
+          "The same funnel-logic approach that let Joviality scale spend +103% while gross sales grew +114%, growth outpacing spend because the plan came first.",
       },
       {
         slug: "go-to-market-strategy",
         title: "Go-to-Market (GTM) Strategy",
         cep: "When you're launching something new and can't afford to get it wrong.",
-        body: "We build the launch sequence — audience, message, channel, and timing — for products, markets, or brands entering somewhere new. Launches fail more often from sequencing mistakes than from bad products.",
+        body: "We build the launch sequence (audience, message, channel, and timing) for products, markets, or brands entering somewhere new. Launches fail more often from sequencing mistakes than from bad products.",
         bullets: [
           "Market and readiness assessment before budget commits",
           "Phased launch sequencing: awareness before conversion",
@@ -106,27 +106,27 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Post-launch measurement and pivot triggers",
         ],
         proof:
-          "The same phased logic behind Zenith Arabia AI’s KSA banking market entry — a setup phase, a traffic-learning window, then lead activation once signal was in.",
+          "The same phased logic behind Zenith Arabia AI’s KSA banking market entry: a setup phase, a traffic-learning window, then lead activation once signal was in.",
       },
       {
         slug: "growth-strategy",
         title: "Growth Strategy",
         cep: "When your growth has stagnated.",
-        body: "A structured audit of your funnel, channels, and data — identifying exactly where growth is leaking before we recommend a single fix. Diagnosis comes before spend, not after.",
+        body: "A structured audit of your funnel, channels, and data, identifying exactly where growth is leaking before we recommend a single fix. Diagnosis comes before spend, not after.",
         bullets: [
           "Full-funnel diagnosis: where prospects drop off, and why",
-          "Channel performance audit — underperforming vs. untested",
+          "Channel performance audit: underperforming vs. untested",
           "The 2–3 highest-leverage growth opportunities, ranked",
           "A specific, sequenced 90-day plan",
         ],
         proof:
-          "The same diagnostic discipline that uncovered Merova’s tracking gap — a data problem masking true campaign efficiency until it was found.",
+          "The same diagnostic discipline that uncovered Merova’s tracking gap, a data problem masking true campaign efficiency until it was found.",
       },
       {
         slug: "marketing-audit-assessment",
         title: "Marketing Audit & Assessment",
         cep: "When you don't know if your current marketing is actually working.",
-        body: "An unbiased, evidence-based review of your current marketing — campaigns, tracking, content, spend — with specific findings, not vague impressions.",
+        body: "An unbiased, evidence-based review of your current marketing (campaigns, tracking, content, spend) with specific findings, not vague impressions.",
         bullets: [
           "Line-by-line campaign and channel review",
           "Tracking and attribution accuracy check",
@@ -134,13 +134,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "A prioritized, actionable findings report",
         ],
         proof:
-          "The same audit discipline that caught Merova’s WordPress setup inflating conversion numbers — the catalyst for a full infrastructure rebuild.",
+          "The same audit discipline that caught Merova’s WordPress setup inflating conversion numbers, the catalyst for a full infrastructure rebuild.",
       },
       {
         slug: "market-research-competitive-analysis",
         title: "Market Research & Competitive Analysis",
         cep: "When you're deciding without knowing what the market looks like.",
-        body: "Structured research into your audience, competitors, and category — so strategy is built on evidence, not assumption.",
+        body: "Structured research into your audience, competitors, and category, so strategy is built on evidence, not assumption.",
         bullets: [
           "Competitive landscape mapping",
           "Primary or secondary audience research",
@@ -148,7 +148,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Specific, defensible opportunity-gap identification",
         ],
         proof:
-          "The same research discipline behind Merova’s premium positioning — identifying Egyptian shoppers wanted Turkish-inspired fashion without traveling for it.",
+          "The same research discipline behind Merova’s premium positioning: identifying that Egyptian shoppers wanted Turkish-inspired fashion without traveling for it.",
       },
       {
         slug: "digital-transformation-advisory",
@@ -162,7 +162,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "A migration roadmap that doesn't break what's working",
         ],
         proof:
-          "The exact advisory work that moved Merova off a data-inflating WordPress setup onto Shopify — restoring accurate attribution.",
+          "The exact advisory work that moved Merova off a data-inflating WordPress setup onto Shopify, restoring accurate attribution.",
       },
     ],
   },
@@ -181,14 +181,14 @@ export const GROWTH_STEPS: GrowthStep[] = [
     heroImage: "/_Assets-Building2.png",
     heroHeadline: "The Assets That Everything Else Gets Built On.",
     heroSub:
-      "Design, development, and brand infrastructure — the tangible things your strategy needs in order to actually launch.",
+      "Design, development, and brand infrastructure: the tangible things your strategy needs in order to actually launch.",
     ctaPrimaryLabel: "Book an Assets Consultation",
     subServices: [
       {
         slug: "ui-ux-design",
         title: "UI/UX Design",
         cep: "When your product doesn't convert.",
-        body: "User interface and experience design built around how people actually behave, not how a mockup looks in isolation. A beautiful interface that confuses users at checkout isn't good design — it's decoration.",
+        body: "User interface and experience design built around how people actually behave, not how a mockup looks in isolation. A beautiful interface that confuses users at checkout isn't good design, it's decoration.",
         bullets: [
           "User research and journey mapping",
           "Wireframing and information architecture before style",
@@ -196,13 +196,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Usability validation against real behavior",
         ],
         proof:
-          "The same CRO discipline that took Everher’s peak conversion rate from 0.94% to 3.5% — a +272% uplift from fixing the journey, not just the visuals.",
+          "The same CRO discipline that took Everher’s peak conversion rate from 0.94% to 3.5%, a +272% uplift from fixing the journey, not just the visuals.",
       },
       {
         slug: "web-app-development",
         title: "Web & App Development",
         cep: "When your website or app can't support your growth.",
-        body: "Website and mobile app development engineered for speed, conversion, and the infrastructure your growth actually needs — every campaign you run either converts on this or wastes on it.",
+        body: "Website and mobile app development engineered for speed, conversion, and the infrastructure your growth actually needs: every campaign you run either converts on this or wastes on it.",
         bullets: [
           "Technical architecture built for your scale, not a template",
           "CRM, payment, and analytics integration from day one",
@@ -210,13 +210,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Cross-device QA before a single visitor arrives",
         ],
         proof:
-          "The same infrastructure discipline that moved Merova onto a platform capable of accurate attribution — the foundation a full-funnel strategy needed.",
+          "The same infrastructure discipline that moved Merova onto a platform capable of accurate attribution, the foundation a full-funnel strategy needed.",
       },
       {
         slug: "company-profile",
         title: "Company Profile",
         cep: "When you don't have a credible document to send a serious prospect.",
-        body: "A professionally designed company profile that communicates who you are and why you're credible — built for the moments you can't be in the room to explain it yourself.",
+        body: "A professionally designed company profile that communicates who you are and why you're credible, built for the moments you can't be in the room to explain it yourself.",
         bullets: [
           "Content strategy built for fastest credibility",
           "Full visual design applying your brand system",
@@ -224,13 +224,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Print-ready and digital delivery from one source",
         ],
         proof:
-          "Built on the same proof-forward structure as ARQQA’s own case study library — leading with outcomes, not adjectives.",
+          "Built on the same proof-forward structure as ARQQA’s own case study library, leading with outcomes, not adjectives.",
       },
       {
         slug: "brand-identity-guidelines",
         title: "Brand Identity & Guidelines",
         cep: "When nobody remembers your brand.",
-        body: "Visual identity systems and the guidelines that keep every future asset — built by anyone, anywhere — unmistakably yours. A logo isn't a brand identity; a documented system is.",
+        body: "Visual identity systems and the guidelines that keep every future asset, built by anyone, anywhere, unmistakably yours. A logo isn't a brand identity; a documented system is.",
         bullets: [
           "Logo, color system, and typography design",
           "A guidelines document that keeps consistency without you in every review",
@@ -244,7 +244,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "brand-photography-video-library",
         title: "Brand Photography & Video Library",
         cep: "When you're relying on stock imagery that looks like everyone else's.",
-        body: "A library of original brand photography and video, shot once and reusable across every future campaign, page, and platform — a one-time investment that pays back repeatedly.",
+        body: "A library of original brand photography and video, shot once and reusable across every future campaign, page, and platform: a one-time investment that pays back repeatedly.",
         bullets: [
           "Shot-list planning tied to actual future use cases",
           "Professional production directed to brand guidelines",
@@ -252,7 +252,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "An organized, tagged asset library on delivery",
         ],
         proof:
-          "Built on the same production discipline behind the Content Factory phase of every ARQQA content program — platform-native, never generic.",
+          "Built on the same production discipline behind the Content Factory phase of every ARQQA content program: platform-native, never generic.",
       },
       {
         slug: "digital-platforms-setup",
@@ -266,7 +266,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Team training so the setup actually gets used",
         ],
         proof:
-          "This is the exact gap that inflated Merova’s conversion numbers for months — proof that setup quality, not platform choice, is usually the real constraint.",
+          "This is the exact gap that inflated Merova’s conversion numbers for months, proof that setup quality, not platform choice, is usually the real constraint.",
       },
     ],
   },
@@ -290,7 +290,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
     heroImage: "/Creative-Content-&-Social-Media-Management.png",
     heroHeadline: "Content That's Planned, Produced, and Managed as One System.",
     heroSub:
-      "Strategy, production, and day-to-day management working together — not three disconnected teams producing in isolation.",
+      "Strategy, production, and day-to-day management working together, not three disconnected teams producing in isolation.",
     ctaPrimaryLabel: "Book a Content & Social Consultation",
     ctaSecondaryLabel: "Download the Content & Social Overview",
     subServices: [
@@ -298,7 +298,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "content-strategy-planning",
         title: "Content Strategy & Planning",
         cep: "When your content has no plan behind it.",
-        body: "A documented content plan connecting every post, video, and article to a specific objective — not a calendar filled on instinct.",
+        body: "A documented content plan connecting every post, video, and article to a specific objective, not a calendar filled on instinct.",
         bullets: [
           "3–5 content pillars tied to brand and business goals",
           "Funnel-mapped content: awareness vs. consideration vs. conversion",
@@ -312,7 +312,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "social-media-management",
         title: "Social Media Management",
         cep: "When your social presence is inconsistent or unmanaged.",
-        body: "Day-to-day management of your social channels — publishing, response, platform-specific optimization — handled continuously. An always-on presence compounds; a sporadic one restarts from zero.",
+        body: "Day-to-day management of your social channels (publishing, response, platform-specific optimization) handled continuously. An always-on presence compounds; a sporadic one restarts from zero.",
         bullets: [
           "Day-to-day ownership across every active platform",
           "Publishing on the schedule the strategy calls for",
@@ -326,7 +326,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "creative-content-production",
         title: "Creative Content Production",
         cep: "When your content doesn't connect.",
-        body: "Design, motion, and video production for every piece your strategy calls for — built for the platform it's going to live on, not repurposed after the fact.",
+        body: "Design, motion, and video production for every piece your strategy calls for, built for the platform it's going to live on, not repurposed after the fact.",
         bullets: [
           "Format-native production per platform",
           "Consistent creative direction tied to brand guidelines",
@@ -340,7 +340,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "copywriting-visual-content",
         title: "Copywriting & Visual Content",
         cep: "When your words don't match the quality of your visuals.",
-        body: "Copy for every touchpoint — captions, ad copy, website content — written with strategic purpose, not filled in as an afterthought.",
+        body: "Copy for every touchpoint (captions, ad copy, website content) written with strategic purpose, not filled in as an afterthought.",
         bullets: [
           "Consistent brand voice across every piece",
           "Platform-specific copywriting, not one-size-fits-all",
@@ -354,7 +354,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "campaign-content-creative-development",
         title: "Campaign Content & Creative Development",
         cep: "When your campaigns need a big creative moment, not just daily content.",
-        body: "Dedicated creative development for major campaigns, launches, and seasonal moments — built with more depth than day-to-day content.",
+        body: "Dedicated creative development for major campaigns, launches, and seasonal moments, built with more depth than day-to-day content.",
         bullets: [
           "A dedicated campaign creative brief and strategy",
           "Multiple concept directions before one is produced",
@@ -368,7 +368,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "community-management-engagement",
         title: "Community Management & Engagement",
         cep: "When your community is unmanaged.",
-        body: "Ongoing moderation, response, and engagement across your social channels — protecting and building your brand presence in real time. An unanswered comment is visible to everyone.",
+        body: "Ongoing moderation, response, and engagement across your social channels, protecting and building your brand presence in real time. An unanswered comment is visible to everyone.",
         bullets: [
           "Clear response protocol for tone and timing",
           "Proactive engagement, not just reactive replies",
@@ -376,13 +376,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Ongoing sentiment monitoring, not just volume",
         ],
         proof:
-          "Part of the same always-on discipline behind NTRA’s 7.37M engagements — a public-sector brand where response quality carries real weight.",
+          "Part of the same always-on discipline behind NTRA’s 7.37M engagements, a public-sector brand where response quality carries real weight.",
       },
       {
         slug: "influencer-creator-content",
         title: "Influencer & Creator Content",
         cep: "When paid media alone isn't reaching new audiences.",
-        body: "Influencer and creator partnerships that extend your reach into audiences paid media hasn't touched — selected for fit, not follower count alone.",
+        body: "Influencer and creator partnerships that extend your reach into audiences paid media hasn't touched, selected for fit, not follower count alone.",
         bullets: [
           "Partner vetting for authentic audience alignment",
           "Content direction that preserves creator authenticity",
@@ -390,13 +390,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Performance tracking beyond just posting confirmation",
         ],
         proof:
-          "The same logic behind Everher’s influencer and PR strategy — partnerships that accelerated sales velocity as part of a broader transformation.",
+          "The same logic behind Everher’s influencer and PR strategy: partnerships that accelerated sales velocity as part of a broader transformation.",
       },
       {
         slug: "content-performance-optimization",
         title: "Content Performance Optimization",
         cep: "When you're producing content but not learning from it.",
-        body: "Ongoing analysis of what content performs and why — feeding directly back into what gets planned and produced next, not just measuring output.",
+        body: "Ongoing analysis of what content performs and why, feeding directly back into what gets planned and produced next, not just measuring output.",
         bullets: [
           "Regular performance analysis by format, topic, platform",
           "Pattern identification, separating signal from flukes",
@@ -404,7 +404,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Clear, actionable findings for the content team",
         ],
         proof:
-          "The exact discipline behind Joviality’s creative rebalancing — mix decisions set from same-month-prior-year performance data, not assumption.",
+          "The exact discipline behind Joviality’s creative rebalancing: mix decisions set from same-month-prior-year performance data, not assumption.",
       },
     ],
   },
@@ -429,7 +429,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
     heroImage: "/Performance-Marketing.png",
     heroHeadline: "Where the Strategy, Assets, and Content Get Put to Work.",
     heroSub:
-      "Paid media, conversion optimization, and continuous testing — the step where everything built so far starts generating measurable return.",
+      "Paid media, conversion optimization, and continuous testing: the step where everything built so far starts generating measurable return.",
     ctaPrimaryLabel: "Book a Performance Marketing Consultation",
     ctaSecondaryLabel: "See the Full Performance Marketing Landing Page",
     subServices: [
@@ -437,7 +437,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
         slug: "paid-media-strategy-management",
         title: "Paid Media Strategy & Management",
         cep: "When your ROI is bleeding.",
-        body: "Full paid media strategy and hands-on management across Google, Meta, TikTok, Snapchat, and LinkedIn — built and run as one coordinated system, not isolated platform bets.",
+        body: "Full paid media strategy and hands-on management across Google, Meta, TikTok, Snapchat, and LinkedIn, built and run as one coordinated system, not isolated platform bets.",
         bullets: [
           "Channel strategy fit to your specific funnel",
           "Campaign structure built for scalable, clean attribution",
@@ -445,13 +445,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Cross-channel budget coordination",
         ],
         proof:
-          "The same always-on structure that let Joviality scale spend +103% while ROAS improved +5.7% — growth without paying more per result.",
+          "The same always-on structure that let Joviality scale spend +103% while ROAS improved +5.7%, growth without paying more per result.",
       },
       {
         slug: "digital-media-buying-optimization",
         title: "Digital Media Buying & Optimization",
         cep: "When you're spending more but not getting more.",
-        body: "Hands-on, day-to-day media buying and optimization — bid strategy, audience refinement, and budget reallocation based on live performance, not a launch-and-leave setup.",
+        body: "Hands-on, day-to-day media buying and optimization: bid strategy, audience refinement, and budget reallocation based on live performance, not a launch-and-leave setup.",
         bullets: [
           "Bid strategy management matched to objectives",
           "Continuous audience refinement based on real conversion",
@@ -459,13 +459,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Creative rotation ahead of fatigue",
         ],
         proof:
-          "The same buying discipline behind Joviality’s 12-stage Google restructure — conversion volume grew 4.7x while cost-per-conversion held flat.",
+          "The same buying discipline behind Joviality’s 12-stage Google restructure: conversion volume grew 4.7x while cost-per-conversion held flat.",
       },
       {
         slug: "conversion-funnel-optimization",
         title: "Conversion & Funnel Optimization",
         cep: "When traffic isn't turning into customers.",
-        body: "Systematic optimization of your funnel — landing pages, checkout, forms — closing the gap between a click and a completed action with evidence, not guesswork.",
+        body: "Systematic optimization of your funnel (landing pages, checkout, forms) closing the gap between a click and a completed action with evidence, not guesswork.",
         bullets: [
           "Behavioral analysis: heatmaps, session recordings, analytics",
           "Hypothesis-driven testing, not a redesign for its own sake",
@@ -473,13 +473,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Iterative rollout of proven winners",
         ],
         proof:
-          "The exact discipline behind Everher’s +272% peak conversion uplift — data-driven optimization, not a guess at what ‘looks better.’",
+          "The exact discipline behind Everher’s +272% peak conversion uplift: data-driven optimization, not a guess at what ‘looks better.’",
       },
       {
         slug: "app-growth-user-acquisition",
         title: "App Growth & User Acquisition",
         cep: "When app installs aren't turning into active users.",
-        body: "Full-funnel app growth strategy — acquisition, activation, retention — built to grow users who actually stay, not just install counts.",
+        body: "Full-funnel app growth strategy (acquisition, activation, retention) built to grow users who actually stay, not just install counts.",
         bullets: [
           "Paid acquisition where your real audience actually is",
           "Activation funnel design so new users reach core value fast",
@@ -487,13 +487,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Full post-install event tracking and attribution",
         ],
         proof:
-          "The same full-funnel discipline behind Fawry’s 6M+ installs and 1M monthly active users — mass adoption where every install had to be real.",
+          "The same full-funnel discipline behind Fawry’s 6M+ installs and 1M monthly active users, mass adoption where every install had to be real.",
       },
       {
         slug: "app-store-optimization-aso",
         title: "App Store Optimization (ASO)",
         cep: "When your app isn't found organically.",
-        body: "App Store and Google Play optimization — metadata, screenshots, review strategy — built to capture organic install intent so paid acquisition isn't doing all the work.",
+        body: "App Store and Google Play optimization (metadata, screenshots, review strategy) built to capture organic install intent so paid acquisition isn't doing all the work.",
         bullets: [
           "Keyword and metadata optimization matched to search behavior",
           "A/B tested screenshots and preview videos",
@@ -501,13 +501,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Continuous iteration as algorithms and listings shift",
         ],
         proof:
-          "Part of the same system behind Fawry’s 100,000 organic installs generated through ASO alone — discovery with no paid click required.",
+          "Part of the same system behind Fawry’s 100,000 organic installs generated through ASO alone, discovery with no paid click required.",
       },
       {
         slug: "continuous-testing-optimization",
         title: "Continuous Testing & Optimization",
         cep: "When you've scaled spend before and just burned more budget faster.",
-        body: "An ongoing testing discipline across creative, audience, and offer — so every scaling decision is backed by evidence. Scaling on assumption burns budget; scaling on validated winners compounds it.",
+        body: "An ongoing testing discipline across creative, audience, and offer, so every scaling decision is backed by evidence. Scaling on assumption burns budget; scaling on validated winners compounds it.",
         bullets: [
           "Every growth lever isolated and tested individually",
           "Statistical validation before a result is trusted",
@@ -515,13 +515,13 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Testing never fully stops as conditions shift",
         ],
         proof:
-          "The exact discipline that let Merova hold ground through its most competitive season — every lever tested before a unit of budget scaled.",
+          "The exact discipline that let Merova hold ground through its most competitive season: every lever tested before a unit of budget scaled.",
       },
       {
         slug: "performance-analytics-tracking-attribution",
         title: "Performance Analytics & Tracking / Attribution",
         cep: "When you can't tell what's actually driving results.",
-        body: "Tracking infrastructure setup and ongoing attribution reporting — the foundation every other service on this page depends on to prove what's actually working. Inaccurate data doesn't just distort reporting; it puts every scaling decision at risk.",
+        body: "Tracking infrastructure setup and ongoing attribution reporting: the foundation every other service on this page depends on to prove what's actually working. Inaccurate data doesn't just distort reporting; it puts every scaling decision at risk.",
         bullets: [
           "Pixel and conversion event setup done correctly the first time",
           "Attribution modeling beyond a last-click default",
@@ -529,7 +529,7 @@ export const GROWTH_STEPS: GrowthStep[] = [
           "Ongoing accuracy audits to catch tracking drift early",
         ],
         proof:
-          "This is the exact issue that inflated Merova’s conversion numbers for months — a structural tracking gap masking efficiency until a full rebuild restored it.",
+          "This is the exact issue that inflated Merova’s conversion numbers for months, a structural tracking gap masking efficiency until a full rebuild restored it.",
       },
     ],
   },

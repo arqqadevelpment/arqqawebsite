@@ -17,6 +17,14 @@ const MILESTONES = [
   { year: "2026", text: "50+ team. 4 markets. Rebranded from agency to MarTech Growth System." },
 ];
 
+const LEADERSHIP = [
+  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael.png" },
+  { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-saad.png" },
+  { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman.png" },
+  { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna.png" },
+  { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar.png" },
+];
+
 const BELIEFS = [
   {
     title: "Trust is Built Through Systems",
@@ -254,6 +262,87 @@ function BeliefCard({ belief }: { belief: (typeof BELIEFS)[0] }) {
       >
         {belief.body}
       </p>
+    </div>
+  );
+}
+
+/* Leadership headshot card — same glass surface and hover lift as
+   BeliefCard. Name and title live in an overlay that fades in on
+   hover/focus, so the photo grid reads clean until someone looks closer. */
+function LeadershipCard({ member }: { member: (typeof LEADERSHIP)[0] }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      tabIndex={0}
+      className="relative rounded-3xl overflow-hidden"
+      style={{
+        width: "clamp(7.5rem, 17vw, 12rem)",
+        background:
+          "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        border: hovered
+          ? "1px solid rgba(255,138,90,0.55)"
+          : "1px solid rgba(255,255,255,0.12)",
+        boxShadow: hovered
+          ? "0 -14px 40px -18px rgba(255,122,61,0.35), 0 24px 50px -22px rgba(47,107,255,0.3), inset 0 1px 0 rgba(255,175,130,0.25)"
+          : "inset 0 1px 0 rgba(255,255,255,0.06)",
+        transform: hovered ? "translateY(-5px)" : "translateY(0)",
+        transition:
+          "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
+      }}
+    >
+      <div className="relative w-full" style={{ aspectRatio: "3 / 4" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={member.image}
+          alt={member.name}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: hovered ? "saturate(1.05)" : "saturate(0.96)",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+            transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease",
+          }}
+        />
+        {/* Name + title overlay — hidden until hover/focus */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-end text-center"
+          style={{
+            padding: "1.25rem 1rem",
+            background: "linear-gradient(180deg, transparent 35%, rgba(6,7,12,0.92) 100%)",
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.35s ease",
+          }}
+        >
+          <h3
+            className="font-bold"
+            style={{
+              fontSize: "1rem",
+              lineHeight: 1.3,
+              letterSpacing: "-0.01em",
+              color: "#ffffff",
+            }}
+          >
+            {member.name}
+          </h3>
+          <p
+            className="font-light mt-1"
+            style={{
+              fontSize: "0.75rem",
+              letterSpacing: "0.02em",
+              color: "#9fc8ff",
+            }}
+          >
+            {member.title}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -676,6 +765,37 @@ export function AboutContent() {
 
       {/* ══ Flowing wave timeline — the journey, drawn by scroll ══ */}
       <WaveTimeline />
+
+      {/* ══ Leadership — the people behind the system ══ */}
+      <section
+        className="relative w-full overflow-hidden"
+        style={{ padding: "6rem 1.5rem 7rem" }}
+      >
+        <div className="relative max-w-6xl mx-auto">
+          <Reveal className="text-center mb-14">
+            <Eyebrow className="mb-5">LEADERSHIP</Eyebrow>
+            <h2
+              className="font-bold"
+              style={{
+                fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+                lineHeight: 1.2,
+                letterSpacing: "-0.02em",
+                color: "#ffffff",
+              }}
+            >
+              The People Behind the System.
+            </h2>
+          </Reveal>
+
+          <div className="flex flex-wrap justify-center gap-5">
+            {LEADERSHIP.map((member, i) => (
+              <Reveal key={member.name} delay={Math.min(i * 0.08, 0.32)}>
+                <LeadershipCard member={member} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ══ Section 2 — Philosophy ══ */}
       <section

@@ -190,20 +190,21 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     client: "Kenz'up",
     title: "Kenz'up",
     category: "Social Media Production",
-    intro:
-      "Content and creative for a loyalty-rewards app in Morocco, built to turn app-store downloads into an active, referring user base.",
+    intro: "5M+ Installs. 3.5x Registration Conversion. New Market Entry.",
     heroImage: "/work/kenzup-social/hero.webp",
     logo: "/logos/clients/kenzup.webp",
     facts: [
       { label: "Client", value: "Kenz'up" },
-      { label: "Industry", value: "Loyalty & Rewards" },
-      { label: "Scope", value: "Social Media Production, Content Marketing" },
+      { label: "Industry", value: "App / E-commerce" },
+      { label: "Services", value: "ASO, Performance Marketing" },
       { label: "Market", value: "Morocco" },
     ],
     story: [
       {
-        type: "text",
-        body: "Kenz'up is a loyalty app in Morocco, giving users exclusive discounts, rewards, and personalized offers from partner businesses. An app like this lives or dies on activation and referral, a download that never gets opened again is worth nothing, so the content had to explain the reward mechanics clearly enough to actually get used.",
+        type: "sectionIntro",
+        eyebrow: "The Challenge",
+        heading: "What was broken.",
+        body: "Kenz'Up was launching into Morocco, a market with different digital behaviors, language considerations, and competitive dynamics. The app needed mass installs that actually converted to registered users, not just downloads.",
       },
       {
         type: "grid",
@@ -235,6 +236,12 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
             caption: "Feature spotlights run alongside the campaign content",
           },
         ],
+      },
+      {
+        type: "sectionIntro",
+        eyebrow: "The Approach",
+        heading: "What we did about it.",
+        body: "ASO was the foundation: localized metadata, A/B tested screenshots, review velocity management. Performance marketing was layered on top with geo-targeted campaigns optimized for post-install events. The funnel was re-engineered to reduce registration friction from 7 steps to 3.",
       },
       {
         type: "stats",
@@ -304,24 +311,21 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
     client: "Nile Air",
     title: "Nile Air",
     category: "Social Media Production",
-    intro:
-      "Always-on content for a national carrier, destination campaigns, seasonal offers, and the day-to-day posts that keep an airline's feed worth following between bookings.",
+    intro: "83M SAR Revenue. 350K SAR Spend. Amadeus Integration.",
     heroImage: "/work/nile-air-social/hero.webp",
     logo: "/logos/clients/nile-air.webp",
     facts: [
       { label: "Client", value: "Nile Air" },
-      { label: "Industry", value: "Airlines & Travel" },
-      { label: "Scope", value: "Photography, Video, Social Media Management" },
-      { label: "Market", value: "Egypt · Saudi Arabia" },
+      { label: "Industry", value: "Airlines" },
+      { label: "Services", value: "Performance Marketing, Technology Integration" },
+      { label: "Market", value: "Saudi Arabia" },
     ],
     story: [
       {
-        type: "text",
-        body: "An airline's social feed has to do two jobs at once: sell the next trip and stay relevant on every day nobody is flying. That meant a content calendar built in layers, inspirational travel content, policy and service features, destination campaigns, and time-boxed offers, each with its own visual language but one consistent brand voice.",
-      },
-      {
-        type: "text",
-        body: "Service features carried the practical side of the brand, policies explained as reassurance rather than fine print, aimed at the travelers who actually search for them before they book.",
+        type: "sectionIntro",
+        eyebrow: "The Challenge",
+        heading: "What was broken.",
+        body: "Nile Air needed to build a direct digital booking channel in Saudi Arabia, a market dominated by OTAs and traditional travel agents. The technical barrier: integrating advertising platforms with the Amadeus reservation system for real-time attribution.",
       },
       {
         type: "grid",
@@ -336,6 +340,21 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
             alt: "Nile Air pregnancy travel safety guidelines, Travel Safely With Care",
             caption: "Safety guidance framed around the traveler, not the policy",
           },
+        ],
+      },
+      {
+        type: "sectionIntro",
+        eyebrow: "The Approach",
+        heading: "What we did about it.",
+        body: "We engineered a performance-first approach with a technical backbone. Amadeus was integrated directly with advertising platforms for end-to-end attribution, from ad click to boarding pass. Campaigns were structured around route-level profitability, not just CPA. Budget allocation shifted dynamically based on seat availability and pricing.",
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "83M SAR", label: "Digital revenue generated" },
+          { value: "350K SAR", label: "Total ad spend" },
+          { value: "237x", label: "Return on ad spend" },
+          { value: "First", label: "Amadeus-advertising platform integration in the region" },
         ],
       },
       {
@@ -360,15 +379,6 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
             alt: "Nile Air Aswan destination post with Nubian architecture",
             caption: "Aswan",
           },
-        ],
-      },
-      {
-        type: "stats",
-        items: [
-          { value: "83M SAR", label: "Digital revenue generated" },
-          { value: "350K SAR", label: "Total ad spend" },
-          { value: "237x", label: "Return on ad spend" },
-          { value: "First", label: "Amadeus-advertising platform integration in the region" },
         ],
       },
       {
