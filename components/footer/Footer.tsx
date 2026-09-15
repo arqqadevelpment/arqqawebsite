@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const TOP_SERVICES = [
   { label: "The Catalyst System™", href: "/catalyst-system" },
-  { label: "Web Design & Development", href: "/services/technology/website" },
-  { label: "Performance Marketing", href: "/services/performance-marketing" },
+  { label: "Web Design & Development", href: "/services/web-app-development/website" },
+  { label: "Performance Marketing", href: "/services/performance-marketing-app-growth" },
 ];
 
 const QUICK_LINKS = [
@@ -17,15 +17,34 @@ const QUICK_LINKS = [
   { label: "Contact Us", href: "/start" },
 ];
 
-/* WhatsApp click-to-chat rather than tel: — on iOS Safari, tel: can surface a
-   FaceTime prompt instead of the phone app, which this sidesteps entirely. */
-const PHONE = { display: "+2 011 1011 5557", href: "https://wa.me/201110115557" };
-
-/* Footer carries the HQ only — the full office list lives on /start. */
+/* Same four offices as OfficesSection (components/contact/OfficesSection.tsx)
+   and /start — kept as a separate literal here since the footer's 2-column
+   layout and this component's own styling don't share a shape with that
+   section's cards. Move an office or change a number in both places. */
 const OFFICES = [
   {
     label: "Cairo",
     lines: ["12 Amin Anis, Ard El Golf", "Heliopolis, Cairo, Egypt"],
+    phone: "+2 011 1011 5557",
+    tel: "+201110115557",
+  },
+  {
+    label: "Abu Dhabi",
+    lines: ["3 Al Razqi Street, AlDannah", "Floor 8, Office 801"],
+    phone: "+971 50 726 6877",
+    tel: "+971507266877",
+  },
+  {
+    label: "Dubai",
+    lines: ["West Burry Tower 1, Business Bay Floor 21st, Office 2106"],
+    phone: "+971 50 726 6877",
+    tel: "+971507266877",
+  },
+  {
+    label: "Riyadh",
+    lines: ["AL FARAZDAQ, Golden Offices Building AL Malaz, Riyadh 12627"],
+    phone: "+966 54 110 2224",
+    tel: "+966541102224",
   },
 ];
 
@@ -166,26 +185,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* ── Four-column information grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_0.85fr_1.05fr] gap-y-12 gap-x-10 lg:gap-x-16 mt-20">
-          {/* 1 — Who we are */}
-          <div>
-            <ColumnHeading>ARQQA</ColumnHeading>
-            <p
-              className="font-light mt-5"
-              style={{
-                fontSize: "0.9375rem",
-                lineHeight: 1.85,
-                color: "rgba(255,255,255,0.55)",
-              }}
-            >
-              A MarTech growth system, not an agency. One accountable engine
-              for strategy, creative, media, and technology across four MENA
-              markets.
-            </p>
-          </div>
-
-          {/* 2 — Top services */}
+        {/* ── Three-column information grid — Contact runs wider since it
+             now hosts all four offices as a 2-column sub-grid. ── */}
+        {/* From lg, all three tracks shrink to their own content width and
+            `justify-between` spreads them across the full row instead — a
+            fixed gap plus a 1fr Contact track left it hugging the left edge
+            with dead space to its right, since Contact's own content (the
+            office grid) is capped narrower than that track. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[auto_auto_auto] lg:justify-between gap-y-12 gap-x-10 mt-20">
+          {/* 1 — Top services */}
           <div>
             <ColumnHeading>Top Services</ColumnHeading>
             <nav className="mt-4">
@@ -195,7 +203,7 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* 3 — Quick links */}
+          {/* 2 — Quick links */}
           <div>
             <ColumnHeading>Quick Links</ColumnHeading>
             <nav className="mt-4">
@@ -205,30 +213,15 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* 4 — How to reach us */}
-          <div>
+          {/* 3 — How to reach us */}
+          <div className="sm:col-span-2 lg:col-span-1">
             <ColumnHeading>Contact</ColumnHeading>
 
-            <div className="mt-5 flex flex-col gap-1">
-              <a
-                href="mailto:info@arqqa.net"
-                className="font-light"
-                style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.72)" }}
-              >
-                info@arqqa.net
-              </a>
-              <a
-                href={PHONE.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-light"
-                style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.72)" }}
-              >
-                {PHONE.display}
-              </a>
-            </div>
-
-            <div className="mt-6 flex flex-col gap-4">
+            {/* Capped to content width rather than the full remaining grid
+                track — that track is wide on large screens, and an even
+                50/50 split of it would space the two short address columns
+                much further apart than the text itself needs. */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-6 mt-5 max-w-md">
               {OFFICES.map((office) => (
                 <div key={office.label}>
                   <p
@@ -257,6 +250,18 @@ export function Footer() {
                       </span>
                     ))}
                   </p>
+                  {/* Opens the number in WhatsApp rather than dialing — tel:
+                      can surface a FaceTime prompt instead of the phone app
+                      on iOS Safari, which this sidesteps entirely. */}
+                  <a
+                    href={`https://wa.me/${office.tel.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block font-light mt-1"
+                    style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}
+                  >
+                    {office.phone}
+                  </a>
                 </div>
               ))}
             </div>

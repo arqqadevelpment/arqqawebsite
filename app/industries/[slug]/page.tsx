@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { IndustryPageTemplate } from "@/components/industries/IndustryPageTemplate";
 import { INDUSTRIES, getIndustry } from "@/components/industries/industries-data";
 
@@ -18,10 +20,10 @@ export async function generateMetadata({
   const industry = getIndustry(slug);
   if (!industry) return { title: "Industry | ARQQA" };
 
-  return {
+  return getPageSeo(`/industries/${slug}`, {
     title: `${industry.name} | ARQQA`,
     description: industry.heroHeadline,
-  };
+  });
 }
 
 export default async function IndustryPage({
@@ -35,6 +37,7 @@ export default async function IndustryPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/industries/${slug}`} />
       <IndustryPageTemplate industry={industry} />
     </PageShell>
   );

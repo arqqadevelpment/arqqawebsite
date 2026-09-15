@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { submitForm } from "@/lib/forms/submitForm";
+import type { FormFieldMap } from "@/lib/forms/getFormFields";
 import {
   BIG_NUMBERS,
   BREAKDOWN,
@@ -88,18 +90,22 @@ function SectionHead({
   accentTail,
   body,
   align = "center",
+  // The page's h1 sits on a section heading rather than the hero, so one
+  // caller needs h1 while the rest stay h2. Styling is identical either way.
+  as: Heading = "h2",
 }: {
   eyebrow: string;
   title: string;
   accentTail?: string;
   body?: string;
   align?: "center" | "left";
+  as?: "h1" | "h2";
 }) {
   const centred = align === "center";
   return (
     <Reveal className={`${centred ? "text-center" : ""} mb-12`}>
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2
+      <Heading
         className="font-bold mt-5"
         style={{
           fontSize: "clamp(1.625rem, 3.3vw, 2.5rem)",
@@ -123,7 +129,7 @@ function SectionHead({
             {accentTail}
           </span>
         ) : null}
-      </h2>
+      </Heading>
       {body ? (
         <p
           className={`font-light mt-5 ${centred ? "mx-auto" : ""}`}
@@ -1347,9 +1353,13 @@ function FaqItem({
 /* ── Lead form ──
    No backend is wired here, so the form validates and confirms locally.
    Hidden UTM fields are populated from the query string for attribution. */
-function AuditForm() {
+function AuditForm({ fields = {} }: { fields?: FormFieldMap }) {
   const [sent, setSent] = useState(false);
   const [utm, setUtm] = useState({ campaign: "", keyword: "", adgroup: "" });
+
+  const hasConfig = Object.keys(fields).length > 0;
+  const isVisible = (key: string) => !hasConfig || key in fields;
+  const isRequired = (key: string, fallback = true) => fields[key]?.required ?? fallback;
 
   /* Deferred to the next frame: reading the query string is synchronous, but
      setting state directly in an effect body triggers a cascading render. */
@@ -1407,9 +1417,17 @@ function AuditForm() {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        const form = e.currentTarget;
+        const data = Object.fromEntries(new FormData(form).entries());
         setSent(true);
+        try {
+          await submitForm("performance-lead", data);
+        } catch {
+          // The confirmation already shows — a failed background submit just
+          // means this lead won't appear in the dashboard.
+        }
       }}
       className="rounded-3xl p-8 sm:p-10"
       style={{
@@ -1422,44 +1440,58 @@ function AuditForm() {
       <input type="hidden" name="utm_content" value={utm.adgroup} readOnly />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label style={labelStyle} htmlFor="pm-name">Full Name *</label>
-          <input id="pm-name" name="name" required style={field} />
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="pm-company">Company Name *</label>
-          <input id="pm-company" name="company" required style={field} />
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="pm-email">Email Address *</label>
-          <input id="pm-email" name="email" type="email" required style={field} />
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="pm-phone">Phone Number *</label>
-          <input id="pm-phone" name="phone" type="tel" required style={field} />
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="pm-industry">Industry *</label>
-          <select id="pm-industry" name="industry" required defaultValue="" style={field}>
-            <option value="" disabled>Select an industry</option>
-            {LEAD_FORM.industryOptions.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="pm-spend">Current Monthly Ad Spend</label>
-          <select id="pm-spend" name="spend" defaultValue="" style={field}>
-            <option value="" disabled>Select a range</option>
-            {LEAD_FORM.spendOptions.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label style={labelStyle} htmlFor="pm-challenge">Biggest Challenge Right Now</label>
-          <textarea id="pm-challenge" name="challenge" rows={4} style={{ ...field, resize: "vertical" }} />
-        </div>
+        {isVisible("name") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-name">Full Name *</label>
+            <input id="pm-name" name="name" required={isRequired("name")} style={field} />
+          </div>
+        )}
+        {isVisible("company") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-company">Company Name *</label>
+            <input id="pm-company" name="company" required={isRequired("company")} style={field} />
+          </div>
+        )}
+        {isVisible("email") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-email">Email Address *</label>
+            <input id="pm-email" name="email" type="email" required={isRequired("email")} style={field} />
+          </div>
+        )}
+        {isVisible("phone") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-phone">Phone Number *</label>
+            <input id="pm-phone" name="phone" type="tel" required={isRequired("phone")} style={field} />
+          </div>
+        )}
+        {isVisible("industry") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-industry">Industry *</label>
+            <select id="pm-industry" name="industry" required={isRequired("industry")} defaultValue="" style={field}>
+              <option value="" disabled>Select an industry</option>
+              {LEAD_FORM.industryOptions.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {isVisible("spend") && (
+          <div>
+            <label style={labelStyle} htmlFor="pm-spend">Current Monthly Ad Spend</label>
+            <select id="pm-spend" name="spend" required={isRequired("spend", false)} defaultValue="" style={field}>
+              <option value="" disabled>Select a range</option>
+              {LEAD_FORM.spendOptions.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {isVisible("challenge") && (
+          <div className="sm:col-span-2">
+            <label style={labelStyle} htmlFor="pm-challenge">Biggest Challenge Right Now</label>
+            <textarea id="pm-challenge" name="challenge" required={isRequired("challenge", false)} rows={4} style={{ ...field, resize: "vertical" }} />
+          </div>
+        )}
       </div>
 
       <button
@@ -1508,7 +1540,7 @@ function AuditForm() {
    Page
    ══════════════════════════════════════════════════════════════════════ */
 
-export function PerformanceMarketingPageContent() {
+export function PerformanceMarketingPageContent({ fields = {} }: { fields?: FormFieldMap }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeCap, setActiveCap] = useState(0);
 
@@ -1563,7 +1595,7 @@ export function PerformanceMarketingPageContent() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1
+            <h2
               className="font-bold mt-6"
               style={{
                 fontSize: "clamp(2.1rem, 5.4vw, 4rem)",
@@ -1586,7 +1618,7 @@ export function PerformanceMarketingPageContent() {
               >
                 {HERO.headlineAccent}
               </span>
-            </h1>
+            </h2>
           </Reveal>
 
           <Reveal delay={0.14} className="flex flex-col items-center">
@@ -1710,6 +1742,7 @@ export function PerformanceMarketingPageContent() {
       <section className="relative w-full" style={{ padding: "6rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
           <SectionHead
+            as="h1"
             eyebrow="The Problem"
             title={PROBLEM.heading}
             accentTail={PROBLEM.headingAccent}
@@ -1984,7 +2017,7 @@ export function PerformanceMarketingPageContent() {
             body={LEAD_FORM.body}
           />
           <Reveal delay={0.1}>
-            <AuditForm />
+            <AuditForm fields={fields} />
           </Reveal>
         </div>
       </section>

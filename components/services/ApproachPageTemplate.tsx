@@ -91,6 +91,13 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
   const isOrange = page.accent === "orange";
   const accentGlow = isOrange ? "rgba(255,110,50," : "rgba(60,125,255,";
 
+  // Which element carries the h1. Pages that opt in hand it to the problem
+  // heading so it can hold the search term; every other page is unchanged.
+  const HeroHeading = page.problemCarriesH1 ? "h2" : "h1";
+  const ProblemHeading = page.problemCarriesH1 ? "h1" : "h2";
+  const problemEyebrow =
+    page.problem.eyebrow === undefined ? "THE PROBLEM WE SOLVE" : page.problem.eyebrow;
+
   return (
     <>
       {/* ══ 1 · Hero ══ */}
@@ -160,7 +167,7 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
               <span aria-hidden="true">←</span> {page.parentTitle}
             </Link>
 
-            <h1
+            <HeroHeading
               className="font-bold mt-6 max-w-3xl"
               style={{
                 fontSize: "clamp(1.875rem, 4.2vw, 3rem)",
@@ -171,7 +178,7 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
               }}
             >
               {page.tagline}
-            </h1>
+            </HeroHeading>
 
             <p
               className="font-light mt-6 max-w-2xl"
@@ -213,8 +220,14 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
       <section className="relative w-full" style={{ padding: "3rem 1.5rem" }}>
         <div className="relative max-w-3xl mx-auto text-center">
           <Reveal>
-            <Eyebrow className="mb-5">THE PROBLEM WE SOLVE</Eyebrow>
-            <h2
+            {problemEyebrow !== null && (
+              // A page-specific label is a full sentence, far past what fits
+              // on one line; the shared one is short and must not break.
+              <Eyebrow className="mb-5" wrap={typeof page.problem.eyebrow === "string"}>
+                {problemEyebrow}
+              </Eyebrow>
+            )}
+            <ProblemHeading
               className="font-bold"
               style={{
                 fontSize: "clamp(1.375rem, 2.6vw, 1.875rem)",
@@ -224,7 +237,7 @@ export function ApproachPageTemplate({ page }: { page: ApproachPage }) {
               }}
             >
               {page.problem.heading}
-            </h2>
+            </ProblemHeading>
             <p
               className="font-light mt-5"
               style={{ fontSize: "1rem", lineHeight: 1.85, color: "rgba(255,255,255,0.6)" }}

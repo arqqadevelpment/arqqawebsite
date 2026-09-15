@@ -270,7 +270,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
         >
           <Reveal>
             <Link
-              href="/services/performance-marketing"
+              href="/services/performance-marketing-app-growth"
               className="cs-back inline-flex items-center gap-2 mb-8"
               style={{
                 fontSize: "0.6875rem",
@@ -947,7 +947,7 @@ export function CaseStudyPageContent({ study }: { study: PerformanceCaseStudy })
             </h2>
             <div className="mt-8 inline-flex">
               <Link
-                href="/services/performance-marketing#audit-form"
+                href="/services/performance-marketing-app-growth#audit-form"
                 className="cs-cta relative inline-flex rounded-2xl"
                 style={{
                   padding: "1px",

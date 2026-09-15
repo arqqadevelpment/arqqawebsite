@@ -1,0 +1,136 @@
+# ARQQA Digital
+
+> ARQQA is a full-service digital marketing agency headquartered in Cairo, Egypt, serving brands across the MENA region since 2011. Founded by Wael Saad (former Head of Creative at Yahoo North Africa & Middle East, 2009–2013), ARQQA has evolved from a social media agency into an integrated operational marketing platform. The agency is a certified Google Premier Partner and has generated 20M+ app installs and achieved 61% gross margin efficiency for partners. Primary markets: Egypt, Saudi Arabia (KSA), UAE, and the broader MENA region. Industries served: Fintech, Banking, Real Estate, Aviation, Retail, Telco, Healthcare, E-commerce, Education, and Hospitality.
+
+## Core Pages
+
+- [Homepage](https://arqqa.net/): Full-service digital marketing agency overview; intro to services, featured clients, and contact CTA.
+- [About ARQQA](https://arqqa.net/about): Agency history (founded 2011), founding story, core values (Transparency, Loyalty, Agility, Knowledge, Commitment, Retention), key client achievements, and service overview.
+- [Services](https://arqqa.net/services): Master services page listing every offering across the agency's six service lines.
+- [Our Work / Portfolio](https://arqqa.net/works): Case studies and project portfolio showcasing client results across industries.
+- [Industries](https://arqqa.net/industries): Sector-specific practices — Fintech & Banking, Airlines & Travel, Retail & E-commerce, Technology & SaaS, and Telco & Enterprise.
+- [The Catalyst System™](https://arqqa.net/catalyst-system): ARQQA's proprietary operating framework for running marketing as a business function.
+- [Autonomous](https://arqqa.net/autonomous): AI-driven and automated marketing operations.
+- [Testimonials](https://arqqa.net/testimonials): Client feedback and references.
+- [Career](https://arqqa.net/career): Open roles and internship opportunities at ARQQA.
+- [Insights](https://arqqa.net/insights): Articles on digital marketing, SEO, performance marketing, social media, AI in marketing, and industry insights.
+- [Contact Us](https://arqqa.net/contact): Contact form, office address (12 Amin Anis, Ard El Golf, Heliopolis, Cairo, Egypt), and WhatsApp chat.
+- [Get Started](https://arqqa.net/get-started): Project intake form for new client inquiries.
+
+## Services — Strategy & Consulting
+
+- [Marketing Strategy & Digital Assessment](https://arqqa.net/services/strategy-consulting): Strategic marketing consultation; audit, planning, and roadmap development for brands entering or scaling in MENA markets.
+- [Growth Audit](https://arqqa.net/services/strategy-consulting/growth-audit): Diagnostic review of the full funnel to locate where growth is leaking.
+- [Go-to-Market Strategy](https://arqqa.net/services/strategy-consulting/go-to-market): Channel mix, audience mapping, KPIs, and launch frameworks tailored to the MENA region.
+- [Competitive Analysis](https://arqqa.net/services/strategy-consulting/competitive-analysis): Category and competitor benchmarking to position the brand.
+- [Paid Discovery Workshops](https://arqqa.net/services/strategy-consulting/discovery-workshops): Structured working sessions that produce a costed roadmap.
+
+## Services — Performance Marketing
+
+- [Performance Marketing](https://arqqa.net/services/performance-marketing): Meta Ads, Google Ads, TikTok Ads, programmatic buying; campaign management focused on ROAS, CPM, and CPA optimization. Notable result: Nile Air ROAS of 237.
+
+## Services — Social Media Management
+
+- [Social Media Management](https://arqqa.net/services/community-management): Platform strategy, content operations, and day-to-day community management.
+- [Community Moderation](https://arqqa.net/services/community-management/moderation): Managed moderation across social channels.
+- [Social CX Automation](https://arqqa.net/services/community-management/cx-automation): Automated customer-experience flows on social platforms.
+- [Social Listening](https://arqqa.net/services/community-management/listening): Monitoring conversation, sentiment, and share of voice.
+- [Crisis Handling](https://arqqa.net/services/community-management/crisis): Escalation playbooks and response management.
+
+## Services — Technology
+
+- [Web & App Development](https://arqqa.net/services/technology): Web and mobile product development, SEO-optimized and mobile-responsive.
+- [Website Design & Development](https://arqqa.net/services/technology/website): WordPress, Magento, Shopify, and custom web development. Typical delivery: 4–12 weeks.
+- [UI/UX Design](https://arqqa.net/services/technology/ux-design): User interface design, UX research, wireframing, and prototyping.
+- [Mobile App Design & Development](https://arqqa.net/services/technology/mobile-apps): Native and cross-platform mobile app design and development.
+- [E-commerce](https://arqqa.net/services/technology/ecommerce): Storefront builds and online retail growth across MENA.
+- [CRM Integration & Automation](https://arqqa.net/services/technology/crm): CRM setup, integration, and marketing automation.
+
+## Services — Video Production
+
+- [Social Media Video Production](https://arqqa.net/services/video-production): Full-cycle video production including scripting, shooting, editing, and post-production.
+- [Brand Films & Commercials](https://arqqa.net/services/video-production/brand-films): Brand films and commercial production.
+- [Motion Graphics & Animation](https://arqqa.net/services/video-production/motion-graphics): 2D/3D motion design, animated explainers, and branded animations.
+- [Reels & Short-Form Content](https://arqqa.net/services/video-production/reels): Short-form social video built for reach.
+- [Product & Service Videos](https://arqqa.net/services/video-production/product-videos): Product demonstration and service explainer videos.
+- [Testimonial & Case Study Videos](https://arqqa.net/services/video-production/testimonials): Filmed client testimonials and case study films.
+- [Content Creator Direction & Scripting](https://arqqa.net/services/video-production/scripting): Creator direction, scripting, and art direction.
+
+## Services — Branding
+
+- [Brand Strategy & Positioning](https://arqqa.net/services/asset-building): Brand strategy and positioning for clients in Egypt, UAE, and Saudi Arabia.
+- [Brand Identity & Design](https://arqqa.net/services/asset-building/branding): Brand identity design, logo development, brand guidelines, and rebranding projects.
+- [Visual Identity Rollout Kits](https://arqqa.net/services/asset-building/visual-identity): Applying a visual identity across every brand touchpoint.
+- [Company Profiles & Collateral](https://arqqa.net/services/asset-building/company-profiles): Company profiles and sales collateral.
+
+## Services — CRM, Automation & AI
+
+- [CRM, Automation & AI Solutions](https://arqqa.net/services/autonomous): AI-powered automation and CRM systems for marketing and sales operations.
+
+## Insights — Selected Articles
+
+### AI & Emerging Tech
+- [What is llms.txt? The New Standard for AI-Friendly Websites](https://arqqa.net/insights/ai/what-is-llms-txt-the-new-standard-for-ai-friendly-websites): Guide for marketers and website owners on how to structure websites for AI model consumption. (March 2026)
+- [ChatGPT vs Google AI Overviews: How to Fix AI Mistakes Using Real Data](https://arqqa.net/insights/ai/chatgpt-vs-google-ai-overviews-how-to-fix-ai-mistakes-using-real-data): Explains discrepancies between AI tools and real search data, with correction strategies. (January 2026)
+- [AI with ARQQA Agency: Smart Software Solutions for Businesses](https://arqqa.net/insights/ai/ai-with-arqqa-agency-how-we-design-smart-software-solutions-for-businesses): Overview of ARQQA's AI-powered software development capabilities. (August 2025)
+
+### SEO
+- [SEO and PPC Ads Agency for Growth in Egypt](https://arqqa.net/insights/seo/seo-and-ppc-ads-agency-for-growth-in-egypt): Integrated SEO and paid search strategy framework for Egypt-based businesses. (January 2026)
+- [SEO-Ready Website: Strategies to Implement from Day 1](https://arqqa.net/insights/uncategorized/seo-ready-website-strategies-to-implement-from-day-1): Technical and on-page SEO checklist for new websites. (November 2025)
+
+### Social Media & Digital Strategy
+- [Chronobiology of the Digital Day: A 24-Hour Behavioral Lifecycle](https://arqqa.net/insights/social-media-management/chronobiology-of-the-digital-day-a-24-hour-behavioral-lifecycle): MENA-specific audience behavior analysis structured around a "Triple Peak" daily engagement model aligned with prayer times and Ramadan patterns. (February 2026)
+- [Top Digital Marketing Strategies for 2026](https://arqqa.net/insights/social-media-management/top-digital-marketing-strategies-for-2026): AI personalization, immersive experiences, omnichannel integration, and data-driven marketing trends. (January 2026)
+
+### Performance Marketing & Google Ads
+- [Google Ads Management Agency in Egypt](https://arqqa.net/insights/seo/google-ads-management-agency-in-egypt): How ARQQA manages Google Ads campaigns for Egyptian businesses. (September 2024)
+- [How Can Google Ads with ARQQA Digital Agency Boost Your Business Growth?](https://arqqa.net/insights/social-media-management/how-can-google-ads-with-arqqa-digital-agency-boost-your-business-growth): Practical guide on using Google Ads for growth in Egypt and MENA. (October 2025)
+- [ARQQA: Google Premier Partner Egypt](https://arqqa.net/insights/news/arqqa-google-premier-partner-egypt): Details on ARQQA's Google Premier Partner status and what it means for clients. (August 2024)
+
+### App Marketing
+- [Proven App Marketing Strategies from ARQQA Agency](https://arqqa.net/insights/programming/amplify-your-apps-reach-proven-app-marketing-strategies-from-arqqa-agency): App store optimization, social campaigns, and analytics-driven user acquisition strategies. (February 2025)
+- [Achieve Exceptional App Growth with ARQQA – Egypt's Top App Growth Agency](https://arqqa.net/insights/programming/achieve-exceptional-app-growth-arqqa-egypt-top-agency): Full-funnel app growth methodology. (December 2024)
+
+### Social Media Marketing
+- [Unlock the Power of Social Media Marketing with ARQQA](https://arqqa.net/insights/social-media-management/social-media-marketing-with-a-top-agency-in-egypt): Comprehensive overview of ARQQA's social media management offering in Egypt. (July 2024)
+- [Elevate Your Brand's Digital Presence with ARQQA's Integrated Marketing Solutions](https://arqqa.net/insights/social-media-management/elevate-your-brand-digital-presence-with-arqqa-integrated-marketing-solutions): Holistic digital marketing framework connecting web, social, content, ads, and analytics.
+
+## Insights Categories
+
+All articles live under `https://arqqa.net/insights/<category>/<slug>`. Categories in use:
+Social Media Management (21 articles), Web Design (10), Programming (8), AI (7), SEO (6),
+E-commerce (4), Uncategorized (3), Saudi Arabia (3), News (3), Brand Development (2).
+The full index is at [Insights](https://arqqa.net/insights).
+
+## Case Studies
+
+- [Fawry](https://arqqa.net/work/fawry), [NTRA](https://arqqa.net/case-studies/ntra), [GTS Holding](https://arqqa.net/case-studies/gts-holding), [Zenith Arabia AI](https://arqqa.net/case-studies/zenith-arabia-ai), [Allure Clinics](https://arqqa.net/case-studies/allure-clinics), [Joviality](https://arqqa.net/case-studies/joviality), [Merova](https://arqqa.net/case-studies/merova), [Everher](https://arqqa.net/case-studies/everher), [Perfect Body](https://arqqa.net/case-studies/perfect-body)
+- [ACT](https://arqqa.net/our-work/act), [Egyptian Banks Company](https://arqqa.net/our-work/ebc), [Lifely Pets](https://arqqa.net/our-work/lifely-pets), [Superior Business Solutions](https://arqqa.net/our-work/sbs)
+- Social media work: [Nile Air](https://arqqa.net/social/nile-air), [Pizza Hut KSA](https://arqqa.net/social/pizza-hut), [Kenz'up](https://arqqa.net/social/kenzup), [Coffee Fellows](https://arqqa.net/social/coffee-fellows), [BIC, Art Master Africa](https://arqqa.net/social/bic)
+- Branding work: [Klivvr](https://arqqa.net/branding/klivvr), [GTS Holding](https://arqqa.net/branding/gts-branding), [FXD Technologies](https://arqqa.net/branding/fxd)
+
+## Key Clients (Notable)
+
+- **Fintech & Banking**: Fawry (6M app installs), Paymob, Klivvr, ADIB, Alex Bank, Mashreq
+- **Technology & Telco**: e& (Etisalat), Bespin Global, Barq Systems
+- **Aviation & Retail**: Nile Air (ROAS 237), Air Cairo, ADNOC, Othaim
+
+## Contact & Social
+
+- **Address**: 12 Amin Anis, Ard El Golf, Heliopolis, Cairo, Egypt
+- **Email**: info@arqqa.net | Careers: join@arqqa.net
+- **WhatsApp**: +201110115557
+- **Facebook**: https://www.facebook.com/arqqadigital
+- **Instagram**: https://www.instagram.com/arqqadigital/
+- **LinkedIn**: https://www.linkedin.com/company/digital-marketing-social-media-managment-egypt/
+- **X (Twitter)**: https://x.com/arqqadigital
+- **Behance**: https://www.behance.net/arqqa1
+- **Vimeo**: https://vimeo.com/arqqadigital
+
+## Complete Sitemap
+
+- Full sitemap: https://arqqa.net/sitemap.xml
+
+---
+
+*Last updated: 2026-09-10*

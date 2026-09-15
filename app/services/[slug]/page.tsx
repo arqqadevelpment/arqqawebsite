@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ServicePageTemplate } from "@/components/services/ServicePageTemplate";
 import { CatalystSystemPageContent } from "@/components/catalyst-system/CatalystSystemPageContent";
 import { SERVICES, getService } from "@/components/services/service-data";
@@ -27,10 +29,10 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return getPageSeo(`/services/${slug}`, {
     title: `${service.title} | ARQQA`,
     description: service.positioning,
-  };
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -44,6 +46,7 @@ export default async function ServiceDetailPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/services/${slug}`} />
       {slug === "catalyst-system" ? (
         <CatalystSystemPageContent />
       ) : (

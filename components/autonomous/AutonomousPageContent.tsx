@@ -1485,38 +1485,6 @@ function IndustryBlock({ industry }: { industry: (typeof INDUSTRIES)[number] }) 
   );
 }
 
-const PRICING_TIERS = [
-  {
-    tier: "Starter",
-    price: "14,900",
-    note: "One brand, one channel. For testing before committing.",
-    items: ["One agent", "WhatsApp or Instagram", "Up to 3,000 conversations"],
-    featured: false,
-  },
-  {
-    tier: "Growth",
-    badge: "Most chosen",
-    price: "39,900",
-    note: "All four agents across your main channels, in your customers' language.",
-    items: ["Sales · Service · Moderation · Ops", "Up to three channels", "Up to 15,000 conversations"],
-    featured: true,
-  },
-  {
-    tier: "Business",
-    price: "99,900",
-    note: "Multi-branch and multi-channel, with a named account manager and an SLA.",
-    items: ["Every channel, every branch", "Up to 60,000 conversations", "Dedicated manager · monthly review"],
-    featured: false,
-  },
-  {
-    tier: "Enterprise",
-    price: "From 250,000",
-    note: "Bespoke agents across departments, for regulated and compliance-heavy sectors.",
-    items: ["Sovereign & single-tenant deployment", "Custom compliance boundaries", "Volume priced per conversation"],
-    featured: false,
-  },
-];
-
 const DEPLOYMENT_STEPS = [
   { when: "Day 0 · 30 min", title: "We read your inbox", body: "What customers actually ask, what was missed, and what that silence cost you last year." },
   { when: "Day 1 · Morning", title: "We set it up", body: "Your prices, calendar, branches and brand voice, and just as important, what it must never say." },
@@ -1524,7 +1492,7 @@ const DEPLOYMENT_STEPS = [
   { when: "Every morning", title: "The 09:00 report", body: "What came in, what closed, what needs a human, in your inbox before your first meeting." },
 ];
 
-const SLIDE_COUNT = 15;
+const SLIDE_COUNT = 14;
 
 /* ── Vertical slide-progress rail — up/down chevrons + dot nav, like the source deck ── */
 function SlideRail({
@@ -2388,105 +2356,9 @@ export function AutonomousPageContent() {
         </div>
       </section>
 
-      {/* ══ 14 · Pricing ══ */}
-      <section
-        ref={(el) => { slideRefs.current[13] = el; }}
-        className={slideClass}
-        style={{ ...slideStyle, padding: "6.5rem 1.5rem 2rem" }}
-      >
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
-            <SectionHead
-              eyebrow="What It Costs"
-              title="Less than one junior hire."
-              accentTail="Four of them, always on."
-              titleSize="clamp(1.375rem, 2.4vw, 1.875rem)"
-            />
-            <Reveal>
-              <p
-                className="font-light"
-                style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(255,255,255,0.6)", maxWidth: "34rem" }}
-              >
-                A receptionist covers one shift, one channel and one language. This covers all of them, priced
-                by conversations, not headcount.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8 items-stretch">
-            {PRICING_TIERS.map((tier, i) => (
-              <Reveal key={tier.tier} delay={Math.min(i * 0.08, 0.3)} className="h-full">
-                <div
-                  className="relative rounded-3xl p-6 h-full flex flex-col"
-                  style={{
-                    ...glass,
-                    border: tier.featured ? "1px solid rgba(255,138,90,0.5)" : glass.border,
-                    boxShadow: tier.featured
-                      ? "0 -14px 40px -18px rgba(255,122,61,0.3), 0 24px 50px -22px rgba(47,107,255,0.28)"
-                      : glass.boxShadow,
-                  }}
-                >
-                  {tier.badge ? (
-                    <span
-                      className="absolute inline-flex items-center rounded-full font-bold"
-                      style={{
-                        top: "-0.75rem",
-                        left: "1.5rem",
-                        padding: "0.3rem 0.75rem",
-                        fontSize: "0.625rem",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "#ffffff",
-                        background: "linear-gradient(120deg, #ff7a3d 0%, #2f6bff 100%)",
-                      }}
-                    >
-                      {tier.badge}
-                    </span>
-                  ) : null}
-                  <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
-                    {tier.tier}
-                  </p>
-                  <div className="mt-3 flex items-baseline gap-1.5">
-                    <span className="font-bold" style={{ fontSize: "1.5rem", color: "#ffffff", letterSpacing: "-0.02em" }}>
-                      {tier.price}
-                    </span>
-                    <span className="font-light" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.5)" }}>
-                      EGP / mo
-                    </span>
-                  </div>
-                  <p className="font-light mt-3" style={{ fontSize: "0.8125rem", lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}>
-                    {tier.note}
-                  </p>
-                  <div className="flex flex-col gap-2.5 mt-5 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                    {tier.items.map((item) => (
-                      <div key={item} className="flex items-start gap-2">
-                        <span aria-hidden="true" style={{ color: "#5aa2ff", fontSize: "0.75rem", marginTop: "0.2rem" }}>
-                          ✓
-                        </span>
-                        <span className="font-light" style={{ fontSize: "0.8125rem", lineHeight: 1.5, color: "rgba(255,255,255,0.65)" }}>
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.2} className="max-w-2xl mx-auto text-center mt-8">
-            <p className="font-light" style={{ fontSize: "0.75rem", lineHeight: 1.7, color: "rgba(255,255,255,0.4)" }}>
-              Service fee only. Platform costs (WhatsApp Business API, model usage, automation) are passed
-              through at cost, itemised monthly. No markup. No set-up fee. Cancel monthly. Annual commitment
-              carries a 15% discount. Prices in EGP, reviewed quarterly.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ══ Closing CTA ══ */}
       <section
-        ref={(el) => { slideRefs.current[14] = el; }}
+        ref={(el) => { slideRefs.current[13] = el; }}
         className={`${slideClass} overflow-hidden`}
         style={{ ...slideStyle, padding: "2rem 1.5rem" }}
       >

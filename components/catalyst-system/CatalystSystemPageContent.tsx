@@ -10,18 +10,22 @@ import { OfficesSection } from "@/components/contact/OfficesSection";
 
 /* `image` is optional per phase. When set, the card switches to a split
    layout: copy stays in the left column, artwork shows at full strength on
-   the right instead of sitting under the usual dark veil. */
+   the right instead of sitting under the usual dark veil. `mobileImage` is
+   a portrait crop purpose-built for the pinned mobile slider — same idea as
+   the Core Value pillars above. */
 const PHASES: {
   num: string;
   title: string;
   body: string;
   deliverables: string;
   image?: string;
+  mobileImage?: string;
 }[] = [
   {
     num: "01",
     title: "Strategic Input",
     image: "/catalyst-phase-01.webp",
+    mobileImage: "/catalyst-phase-01-mobile.png",
     body: "Everything begins with strategy. Market analysis, competitive audit, audience mapping, KPI alignment, channel selection. No creative is produced, no media is bought, until the blueprint is complete. This is your growth architecture.",
     deliverables:
       "Strategy brief, competitive landscape report, KPI dashboard setup, channel plan, content calendar framework.",
@@ -30,6 +34,7 @@ const PHASES: {
     num: "02",
     title: "The Content Factory",
     image: "/catalyst-phase-02.webp",
+    mobileImage: "/catalyst-phase-02-mobile.png",
     body: "Strategy feeds directly into content production. Platform-native copy. Storyboarding. Scripting. Every piece of content is mapped to a strategic objective and tagged to a performance metric.",
     deliverables:
       "Monthly content calendar, platform-native copy decks, script treatments, hashtag/trend analysis.",
@@ -38,6 +43,7 @@ const PHASES: {
     num: "03",
     title: "Visual Production",
     image: "/catalyst-phase-03.webp",
+    mobileImage: "/catalyst-phase-03-mobile.png",
     body: "Content meets craft. Creative design, motion graphics, Reels production, photography direction. The joint sign-off protocol ensures creative and media teams approve every asset together, with zero internal friction.",
     deliverables:
       "Creative assets (static, motion, video), brand-consistent visual guidelines, production schedule.",
@@ -46,6 +52,7 @@ const PHASES: {
     num: "04",
     title: "Handoff & Launch",
     image: "/catalyst-phase-04.webp",
+    mobileImage: "/catalyst-phase-04-mobile.png",
     body: "Automated onboarding via proprietary ClickUp templates. Day 1 transparency: every client sees every task, every deadline, every status. Campaign activation across all selected channels simultaneously.",
     deliverables:
       "ClickUp project workspace, campaign launch checklist, automated handoff documentation, real-time tracking.",
@@ -54,6 +61,7 @@ const PHASES: {
     num: "05",
     title: "Intelligence & Reporting",
     image: "/catalyst-phase-05.webp",
+    mobileImage: "/catalyst-phase-05-mobile.png",
     body: "Performance isn't a monthly PDF. It's a live system. Unified dashboards, shared KPIs, monthly retention surveys, strategic advisory sessions. You're not left guessing: you're steering.",
     deliverables:
       "Live performance dashboard, monthly strategic review, client satisfaction survey, optimization recommendations.",
@@ -133,11 +141,17 @@ const WHAT_YOU_GET = [
   },
 ];
 
-/* ── Section 3 · The Value Shift — four pillars ── */
+/* ── Section 3 · The Value Shift — four pillars ──
+   `mobileImage` is a portrait (880×1106) composite purpose-built for the
+   mobile slider: the same artwork as `media`, but pre-laid-out with a solid
+   dark band across the top where the slide's copy sits. No mobile crop
+   exists for the fourth pillar, so that slide falls back to its `media`
+   video as the background instead. */
 const VALUE_SHIFT = [
   {
     title: "Guaranteed Operational Alignment",
     media: { src: "/value-alignment.webp", type: "image" as const },
+    mobileImage: "/value-alignment.png",
     icon: (
       <>
         <path
@@ -160,7 +174,8 @@ const VALUE_SHIFT = [
   },
   {
     title: "True Velocity via Automated Workflows",
-    media: { src: "/value-velocity.webp", type: "image" as const },
+    media: { src: "/value-velocity-desk-top.png", type: "image" as const },
+    mobileImage: "/value-velocity.png",
     icon: (
       <>
         <path
@@ -178,11 +193,12 @@ const VALUE_SHIFT = [
         />
       </>
     ),
-    body: "Powered by proprietary ClickUp architecture, onboarding and project execution start on Day 1 with zero setup friction or lag.",
+    body: "Powered by proprietary management system architecture, onboarding and project execution start on Day 1 with zero setup friction or lag.",
   },
   {
     title: "Data-Attributed Creative (The Content Factory)",
     media: { src: "/value-content-factory.webp", type: "image" as const },
+    mobileImage: "/value-content-factory.png",
     icon: (
       <>
         <circle cx="12" cy="12" r="8.6" stroke="url(#valueShiftStroke)" strokeWidth="1.4" />
@@ -415,32 +431,16 @@ function ParticleRing() {
 
 function SlideMedia({ item }: { item: (typeof VALUE_SHIFT)[0] }) {
   const { media } = item;
-  // `contain` keeps the whole frame in view rather than cropping to fill, and
-  // the slight downscale leaves margin around the subject. The artwork is
-  // black-backed, so the letterboxing is invisible against the page.
-  const common: React.CSSProperties = {
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "contain",
-    // Anchored right: the frame sits flush to the section's right edge and
-    // the inset scale shrinks toward that edge rather than the centre, so the
-    // artwork stays balanced against the copy column on the left.
-    objectPosition: "right center",
-    transform: "scale(1)",
-    transformOrigin: "right center",
-  };
 
   if (media.type === "video") {
     return (
-      <video autoPlay muted loop playsInline aria-hidden="true" style={common}>
+      <video autoPlay muted loop playsInline aria-hidden="true" className="catalyst-vs-asset">
         <source src={media.src} type="video/mp4" />
       </video>
     );
   }
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={media.src} alt="" aria-hidden="true" style={common} />;
+  return <img src={media.src} alt="" aria-hidden="true" className="catalyst-vs-asset" />;
 }
 
 function ValueShiftStory() {
@@ -454,8 +454,11 @@ function ValueShiftStory() {
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Pinned and scroll-driven at every width — see the CSS comment on
+    // .catalyst-vs-wrap for why this section doesn't get the lg-only
+    // treatment the 5 Phases slider below it uses.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let ticking = false;
 
     function update() {
@@ -479,8 +482,8 @@ function ValueShiftStory() {
         // Hold at full strength through the middle, then clear quickly. The
         // fade has to finish before the neighbouring slide starts arriving —
         // otherwise two headlines sit legibly on top of each other. Holding
-        // to 0.32 and reaching zero by 0.5 means a slide is fully gone by the
-        // time its neighbour reaches the same point.
+        // to 0.32 and reaching zero by 0.5 means a slide is fully gone by
+        // the time its neighbour reaches the same point.
         const raw = dist <= 0.32 ? 1 : Math.max(0, 1 - (dist - 0.32) / 0.18);
         // Smoothstep, so the fade eases rather than ramping linearly.
         const opacity = raw * raw * (3 - 2 * raw);
@@ -535,41 +538,62 @@ function ValueShiftStory() {
   return (
     <div
       ref={wrapRef}
-      className="relative"
-      style={{ height: `${VALUE_SHIFT.length * 100}vh` }}
+      className="relative catalyst-vs-wrap"
+      style={{ "--slides": VALUE_SHIFT.length } as React.CSSProperties}
     >
-      <div ref={stageRef} className="sticky top-0 h-screen overflow-hidden">
+      <div ref={stageRef} className="catalyst-vs-stage">
         {VALUE_SHIFT.map((item, i) => (
           <div
             key={item.title}
             ref={(el) => {
               slideRefs.current[i] = el;
             }}
-            className="absolute inset-0 flex items-center px-6"
-            style={{ opacity: 0, willChange: "opacity" }}
+            className="catalyst-vs-slide"
+            style={{ willChange: "opacity" }}
           >
-            {/* Background plane — the slide's own artwork, full bleed. */}
+            {/* Artwork — full-bleed behind the copy at every width. Below lg
+                this renders the portrait crop (pre-composed with a dark band
+                up top for the copy); from lg, the original landscape asset. */}
             <div
               ref={(el) => {
                 visualRefs.current[i] = el;
               }}
-              className="absolute inset-0 overflow-hidden catalyst-value-media"
+              className="overflow-hidden catalyst-vs-media"
               // Grow from the right edge, so the parallax scale never pushes
               // the artwork past it mid-transition.
               style={{ willChange: "transform", transformOrigin: "right center" }}
               aria-hidden="true"
             >
-              <SlideMedia item={item} />
+              <div className="catalyst-vs-media-mobile">
+                {item.mobileImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.mobileImage}
+                    alt=""
+                    aria-hidden="true"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    className="catalyst-vs-asset"
+                  />
+                ) : (
+                  <video autoPlay muted loop playsInline aria-hidden="true" className="catalyst-vs-asset">
+                    <source src={item.media.src} type="video/mp4" />
+                  </video>
+                )}
+              </div>
+              <div className="catalyst-vs-media-desktop">
+                <SlideMedia item={item} />
+              </div>
             </div>
-            {/* Legibility scrim — weighted to the left, clearing before the
-                right side so the artwork keeps its focal area. */}
+            {/* Legibility scrim — left-weighted from lg (clearing before the
+                artwork's focal side), top-weighted below it (clearing before
+                the artwork's own reserved copy band). */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 catalyst-value-scrim pointer-events-none"
+              className="absolute inset-0 catalyst-vs-scrim pointer-events-none"
             />
 
-            <div className="relative w-full max-w-6xl mx-auto">
-              {/* Copy — left */}
+            <div className="relative w-full max-w-6xl mx-auto catalyst-vs-copy">
+              {/* Copy — left from lg; full width, top-anchored below it. */}
               <div
                 ref={(el) => {
                   textRefs.current[i] = el;
@@ -577,26 +601,16 @@ function ValueShiftStory() {
                 className="lg:max-w-[38%]"
                 style={{ willChange: "transform" }}
               >
-                <Eyebrow className="mb-6">{`0${i + 1} · Core value`}</Eyebrow>
+                <Eyebrow className="mb-4 lg:mb-6">{`0${i + 1} · Core value`}</Eyebrow>
                 <h3
-                  className="font-bold"
-                  style={{
-                    fontSize: "clamp(1.875rem, 3.8vw, 3rem)",
-                    lineHeight: 1.12,
-                    letterSpacing: "-0.02em",
-                    color: "#ffffff",
-                  }}
+                  className="font-bold catalyst-vs-title"
+                  style={{ letterSpacing: "-0.02em", color: "#ffffff" }}
                 >
                   {item.title}
                 </h3>
                 <p
-                  className="font-light mt-6"
-                  style={{
-                    fontSize: "clamp(1rem, 1.5vw, 1.125rem)",
-                    lineHeight: 1.8,
-                    color: "rgba(255,255,255,0.6)",
-                    maxWidth: "34rem",
-                  }}
+                  className="font-light mt-3 lg:mt-6 catalyst-vs-body"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
                 >
                   {item.body}
                 </p>
@@ -606,9 +620,9 @@ function ValueShiftStory() {
           </div>
         ))}
 
-        {/* Progress rail */}
+        {/* Progress rail — only meaningful while the slides share one frame */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2"
+          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 catalyst-vs-rail"
           style={{ bottom: "2.5rem", zIndex: 200 }}
           aria-hidden="true"
         >
@@ -745,124 +759,130 @@ function PhasesRail() {
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const last = PHASES.length - 1;
-    let ticking = false;
 
-    function update() {
-      ticking = false;
-      const rect = wrap!.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const screens = -rect.top / vh;
+    // Pinned and scroll-driven at every width now — same reasoning as the
+    // Core Value slider above (see its CSS comment): one native page scroll
+    // throughout, never a nested "stacked below lg" fallback.
+    {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const last = PHASES.length - 1;
+      let ticking = false;
 
-      // ── Intro beat ──────────────────────────────────────────────────────
-      // The title owns the first screen, then travels up and fades out.
-      const introT = phaseClamp(screens / 0.85, 0, 1);
-      const introEase = introT * introT * (3 - 2 * introT);
-      const introFade = String((1 - introEase).toFixed(3));
-      if (introBgRef.current) introBgRef.current.style.opacity = introFade;
-      if (introBgRef2.current) introBgRef2.current.style.opacity = introFade;
-      if (introRef.current) {
-        introRef.current.style.opacity = String((1 - introEase).toFixed(3));
-        introRef.current.style.transform = `translate3d(0, ${(-introEase * 170).toFixed(1)}px, 0)`;
-      }
+      function update() {
+        ticking = false;
+        const rect = wrap!.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const screens = -rect.top / vh;
 
-      // ── Phases ──────────────────────────────────────────────────────────
-      // They only begin once the intro has cleared, so the two never share
-      // the frame and the section never feels cramped.
-      const exact = phaseClamp(screens - 1, 0, last);
-      const revealT = phaseClamp((screens - 0.7) / 0.3, 0, 1);
-      const reveal = revealT * revealT * (3 - 2 * revealT);
-
-      if (timelineRef.current) {
-        timelineRef.current.style.opacity = String(reveal.toFixed(3));
-      }
-      if (fillRef.current) {
-        fillRef.current.style.width = `${((exact / last) * 100).toFixed(2)}%`;
-      }
-
-      PHASES.forEach((_, i) => {
-        const slide = slideRefs.current[i];
-        if (!slide) return;
-        // Clamped progress: before the section pins, phase 01 stays fully
-        // visible, and phase 05 holds after it ends — otherwise the stage
-        // reads blank while the section scrolls in or out.
-        const t = exact - i;
-        const dist = Math.min(Math.abs(t), 1.4);
-
-        // Hold through the middle, gone by half a screen — no two phases
-        // legible at the same time.
-        const raw = dist <= 0.32 ? 1 : Math.max(0, 1 - (dist - 0.32) / 0.18);
-        const opacity = raw * raw * (3 - 2 * raw);
-
-        slide.style.opacity = (opacity * reveal).toFixed(3);
-        slide.style.zIndex = String(100 - Math.round(dist * 100));
-        slide.style.pointerEvents = opacity > 0.6 ? "auto" : "none";
-        slide.style.filter =
-          dist <= 0.32
-            ? "none"
-            : `blur(${(Math.min((dist - 0.32) / 0.18, 1) * 8).toFixed(1)}px)`;
-
-        if (!reduceMotion) {
-          // Background is the far plane, so it travels least.
-          const art = artRefs.current[i];
-          const copy = copyRefs.current[i];
-          if (art) {
-            art.style.transform = `translate3d(0, ${(-t * 40).toFixed(1)}px, 0) scale(${(1 + Math.min(dist, 1) * 0.05).toFixed(4)})`;
-          }
-          if (copy) {
-            copy.style.transform = `translate3d(0, ${(-t * 120).toFixed(1)}px, 0)`;
-          }
+        // ── Intro beat ──────────────────────────────────────────────────
+        // The title owns the first screen, then travels up and fades out.
+        const introT = phaseClamp(screens / 0.85, 0, 1);
+        const introEase = introT * introT * (3 - 2 * introT);
+        const introFade = String((1 - introEase).toFixed(3));
+        if (introBgRef.current) introBgRef.current.style.opacity = introFade;
+        if (introBgRef2.current) introBgRef2.current.style.opacity = introFade;
+        if (introRef.current) {
+          introRef.current.style.opacity = String((1 - introEase).toFixed(3));
+          introRef.current.style.transform = `translate3d(0, ${(-introEase * 170).toFixed(1)}px, 0)`;
         }
 
-        // Indicator follows scroll — nearest slide wins.
-        const node = nodeRefs.current[i];
-        if (node) {
-          const on = dist < 0.5;
-          node.style.color = on ? "#ffffff" : "rgba(255,255,255,0.4)";
-          const dot = node.firstElementChild as HTMLElement | null;
-          if (dot) {
-            dot.style.background = on
-              ? "linear-gradient(120deg, #5aa2ff 0%, #ff9a5a 100%)"
-              : "rgba(255,255,255,0.25)";
-            dot.style.transform = on ? "scale(1.5)" : "scale(1)";
-            dot.style.boxShadow = on ? "0 0 14px rgba(90,162,255,0.8)" : "none";
-          }
+        // ── Phases ────────────────────────────────────────────────────────
+        // They only begin once the intro has cleared, so the two never share
+        // the frame and the section never feels cramped.
+        const exact = phaseClamp(screens - 1, 0, last);
+        const revealT = phaseClamp((screens - 0.7) / 0.3, 0, 1);
+        const reveal = revealT * revealT * (3 - 2 * revealT);
+
+        if (timelineRef.current) {
+          timelineRef.current.style.opacity = String(reveal.toFixed(3));
         }
-      });
-    }
+        if (fillRef.current) {
+          fillRef.current.style.width = `${((exact / last) * 100).toFixed(2)}%`;
+        }
 
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    }
+        PHASES.forEach((_, i) => {
+          const slide = slideRefs.current[i];
+          if (!slide) return;
+          // Clamped progress: before the section pins, phase 01 stays fully
+          // visible, and phase 05 holds after it ends — otherwise the stage
+          // reads blank while the section scrolls in or out.
+          const t = exact - i;
+          const dist = Math.min(Math.abs(t), 1.4);
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    document.addEventListener("visibilitychange", update);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      document.removeEventListener("visibilitychange", update);
-    };
+          // Hold through the middle, gone by half a screen — no two phases
+          // legible at the same time.
+          const raw = dist <= 0.32 ? 1 : Math.max(0, 1 - (dist - 0.32) / 0.18);
+          const opacity = raw * raw * (3 - 2 * raw);
+
+          slide.style.opacity = (opacity * reveal).toFixed(3);
+          slide.style.zIndex = String(100 - Math.round(dist * 100));
+          slide.style.pointerEvents = opacity > 0.6 ? "auto" : "none";
+          slide.style.filter =
+            dist <= 0.32
+              ? "none"
+              : `blur(${(Math.min((dist - 0.32) / 0.18, 1) * 8).toFixed(1)}px)`;
+
+          if (!reduceMotion) {
+            // Background is the far plane, so it travels least.
+            const art = artRefs.current[i];
+            const copy = copyRefs.current[i];
+            if (art) {
+              art.style.transform = `translate3d(0, ${(-t * 40).toFixed(1)}px, 0) scale(${(1 + Math.min(dist, 1) * 0.05).toFixed(4)})`;
+            }
+            if (copy) {
+              copy.style.transform = `translate3d(0, ${(-t * 120).toFixed(1)}px, 0)`;
+            }
+          }
+
+          // Indicator follows scroll — nearest slide wins.
+          const node = nodeRefs.current[i];
+          if (node) {
+            const on = dist < 0.5;
+            node.style.color = on ? "#ffffff" : "rgba(255,255,255,0.4)";
+            const dot = node.firstElementChild as HTMLElement | null;
+            if (dot) {
+              dot.style.background = on
+                ? "linear-gradient(120deg, #5aa2ff 0%, #ff9a5a 100%)"
+                : "rgba(255,255,255,0.25)";
+              dot.style.transform = on ? "scale(1.5)" : "scale(1)";
+              dot.style.boxShadow = on ? "0 0 14px rgba(90,162,255,0.8)" : "none";
+            }
+          }
+        });
+      }
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+
+      update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      document.addEventListener("visibilitychange", update);
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        document.removeEventListener("visibilitychange", update);
+      };
+    }
   }, []);
 
   return (
     <section id="the-system" style={{ scrollMarginTop: "7rem" }}>
       <div
         ref={wrapRef}
-        className="relative"
-        style={{ height: `${(PHASES.length + 1) * 100}vh` }}
+        className="relative catalyst-ph-wrap"
+        style={{ "--slides": PHASES.length + 1 } as React.CSSProperties}
       >
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="w-full catalyst-ph-stage">
           {/* Ambient field behind the intro — brand glows over the flat black,
               fading out with the title so the phases start clean. */}
           <div
             ref={introBgRef}
             aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none catalyst-ph-ambient"
             style={{
               zIndex: 190,
               background: `
@@ -876,7 +896,7 @@ function PhasesRail() {
           <div
             ref={introBgRef2}
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 pointer-events-none"
+            className="absolute left-1/2 top-1/2 pointer-events-none catalyst-ph-ambient"
             style={{
               zIndex: 190,
               width: "min(46rem, 88vw)",
@@ -892,7 +912,7 @@ function PhasesRail() {
               and clears out before the phases arrive. */}
           <div
             ref={introRef}
-            className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center pointer-events-none"
+            className="flex flex-col items-center justify-center px-6 text-center pointer-events-none catalyst-ph-intro"
             style={{ zIndex: 200, willChange: "transform, opacity" }}
           >
             <Eyebrow>The 5 Phases · Deep Dive</Eyebrow>
@@ -928,34 +948,40 @@ function PhasesRail() {
               ref={(el) => {
                 slideRefs.current[i] = el;
               }}
-              // Centred where there is room; top-aligned on small screens, where the
-              // copy is taller than the space and centring would ride up under
-              // the heading.
-              className="absolute inset-0 flex items-start lg:items-center px-6 pt-28 sm:pt-32 lg:pt-24 pb-[8rem] overflow-y-auto lg:overflow-visible"
-              style={{ opacity: i === 0 ? 1 : 0, willChange: "opacity" }}
+              className="catalyst-ph-slide"
+              style={{ willChange: "opacity" }}
             >
-              {/* Background plane — full bleed, anchored right */}
+              {/* Artwork — full bleed behind the copy at every width. Below
+                  lg this is the portrait crop (pre-composed with a dark band
+                  up top for the copy); from lg, the original landscape one. */}
               {phase.image && (
                 <div
                   ref={(el) => {
                     artRefs.current[i] = el;
                   }}
                   aria-hidden="true"
-                  className="absolute inset-0 overflow-hidden"
+                  className="overflow-hidden catalyst-ph-media"
                   style={{ willChange: "transform", transformOrigin: "right center" }}
                 >
-                  <Image
-                    src={phase.image}
-                    alt=""
-                    fill
-                    sizes="100vw"
-                    style={{ objectFit: "contain", objectPosition: "right center" }}
-                  />
+                  {/* Plain img rather than next/image: under next/image these
+                      five rendered blank once the phases stopped sharing one
+                      pinned screen. The core-value artwork alongside uses the
+                      same element and renders. */}
+                  {phase.mobileImage ? (
+                    <div className="catalyst-ph-media-mobile">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={phase.mobileImage} alt="" aria-hidden="true" className="catalyst-ph-img" />
+                    </div>
+                  ) : null}
+                  <div className="catalyst-ph-media-desktop">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={phase.image} alt="" aria-hidden="true" className="catalyst-ph-img" />
+                  </div>
                 </div>
               )}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 pointer-events-none catalyst-value-scrim"
+                className="absolute inset-0 pointer-events-none catalyst-ph-scrim"
               />
 
               {/* Copy */}
@@ -963,33 +989,25 @@ function PhasesRail() {
                 ref={(el) => {
                   copyRefs.current[i] = el;
                 }}
-                className="relative w-full max-w-6xl mx-auto"
+                className="relative w-full max-w-6xl mx-auto catalyst-ph-copy"
                 style={{ willChange: "transform" }}
               >
                 <div className="lg:max-w-[42%]">
-                  <h3
-                    className="font-bold"
-                    style={{
-                      fontSize: "clamp(1.625rem, 3.2vw, 2.5rem)",
-                      lineHeight: 1.14,
-                      letterSpacing: "-0.02em",
-                      color: "#ffffff",
-                    }}
-                  >
+                  {/* Below lg the timeline bar (which normally carries this
+                      numbering) is hidden, so each slide gets its own tag
+                      instead — same pattern as the Core Value pillars. */}
+                  <Eyebrow className="mb-4 lg:hidden">{`${phase.num} · ${PHASE_LABELS[i]}`}</Eyebrow>
+                  <h3 className="font-bold catalyst-ph-title" style={{ letterSpacing: "-0.02em", color: "#ffffff" }}>
                     {phase.title}
                   </h3>
                   <p
-                    className="font-light mt-5"
-                    style={{
-                      fontSize: "clamp(0.9375rem, 1.3vw, 1.0625rem)",
-                      lineHeight: 1.8,
-                      color: "rgba(255,255,255,0.6)",
-                    }}
+                    className="font-light mt-3 lg:mt-5 catalyst-ph-body"
+                    style={{ color: "rgba(255,255,255,0.6)" }}
                   >
                     {phase.body}
                   </p>
                   <div
-                    className="mt-6 pt-6"
+                    className="mt-4 pt-4 lg:mt-6 lg:pt-6"
                     style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
                   >
                     <p
@@ -1004,8 +1022,8 @@ function PhasesRail() {
                       Deliverables
                     </p>
                     <p
-                      className="font-light mt-2"
-                      style={{ fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}
+                      className="font-light mt-2 catalyst-ph-deliverables"
+                      style={{ color: "rgba(255,255,255,0.5)" }}
                     >
                       {phase.deliverables}
                     </p>
@@ -1020,7 +1038,7 @@ function PhasesRail() {
               z-index of up to 100, which was covering this bar. */}
           <div
             ref={timelineRef}
-            className="absolute inset-x-0 bottom-0 px-6 pb-10 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 px-6 pb-10 pointer-events-none catalyst-ph-timeline"
             style={{ zIndex: 200, opacity: 0 }}
           >
             <div className="relative max-w-5xl mx-auto">
@@ -1131,24 +1149,206 @@ export function CatalystSystemPageContent() {
           }
         }
 
-        /* Core-value artwork spans the full frame so it renders as large as
-           possible; object-fit contain keeps it uncropped, anchored right so
-           the subject sits opposite the copy column. */
-        .catalyst-value-media { inset: 0; }
-
-        /* Core-value slide scrim. Vertical on small screens, where the copy
-           spans the frame; left-weighted from lg so the artwork's focal side
-           stays clear. */
-        .catalyst-value-scrim {
+        /* ── 5 Phases slider ──────────────────────────────────────────────
+           Pinned and paged by real page scroll at every width now, same
+           mechanism (and same reasoning) as the Core Value slider below.
+           Only the presentation — copy position, artwork crop, scrim
+           direction, whether the timeline bar shows — changes below lg. */
+        .catalyst-ph-wrap { height: calc(var(--slides) * 100vh); }
+        .catalyst-ph-stage {
+          position: sticky;
+          top: 0;
+          height: 100dvh;
+          overflow: hidden;
+        }
+        .catalyst-ph-slide {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          opacity: 0;
+          /* Bottom padding keeps the copy clear of the timeline bar. */
+          padding-top: 6rem;
+          padding-bottom: 8rem;
+        }
+        .catalyst-ph-copy,
+        .catalyst-ph-media { order: 0; }
+        /* Artwork spans the full frame so it renders as large as possible;
+           object-fit contain keeps it uncropped, anchored right so the
+           subject sits opposite the copy column. */
+        .catalyst-ph-media {
+          position: absolute;
+          inset: 0;
+          width: auto;
+        }
+        .catalyst-ph-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: right center;
+          transform-origin: right center;
+        }
+        /* Two crops per slide, toggled by width — same technique as the
+           Core Value artwork above. */
+        .catalyst-ph-media-mobile { display: none; }
+        .catalyst-ph-media-desktop { display: block; }
+        .catalyst-ph-intro {
+          position: absolute;
+          inset: 0;
+          padding-bottom: 0;
+        }
+        .catalyst-ph-timeline,
+        .catalyst-ph-ambient { display: block; }
+        /* Left-weighted so the artwork's focal side stays clear. */
+        .catalyst-ph-scrim {
+          display: block;
           background: linear-gradient(
-            180deg,
-            rgba(3,3,8,0.86) 0%,
-            rgba(3,3,8,0.78) 55%,
-            rgba(3,3,8,0.9) 100%
+            90deg,
+            rgba(3,3,8,0.94) 0%,
+            rgba(3,3,8,0.88) 34%,
+            rgba(3,3,8,0.6) 50%,
+            rgba(3,3,8,0.18) 64%,
+            rgba(3,3,8,0) 76%
           );
         }
+
+        /* Sized for a phone by default; the min-width override below
+           restores the original desktop scale. */
+        .catalyst-ph-title { font-size: clamp(1.5rem, 6vw, 1.875rem); line-height: 1.16; }
+        .catalyst-ph-body { font-size: 0.875rem; line-height: 1.6; }
+        .catalyst-ph-deliverables { font-size: 0.8125rem; line-height: 1.55; }
+
+        @media (max-width: 1023.98px) {
+          .catalyst-ph-slide {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 6.5rem 1.5rem 2.5rem;
+          }
+          .catalyst-ph-img {
+            object-fit: cover;
+            object-position: center top;
+            transform-origin: center top;
+          }
+          .catalyst-ph-media-mobile { display: block; }
+          .catalyst-ph-media-desktop { display: none; }
+
+          /* Top-weighted, since copy sits above the artwork here. */
+          .catalyst-ph-scrim {
+            background: linear-gradient(
+              180deg,
+              rgba(3,3,8,0.82) 0%,
+              rgba(3,3,8,0.55) 34%,
+              rgba(3,3,8,0.05) 55%,
+              transparent 68%
+            );
+          }
+
+          /* The rail and ambient glows are sized for the desktop split
+             layout; below lg the artwork itself carries the scene. */
+          .catalyst-ph-timeline,
+          .catalyst-ph-ambient { display: none; }
+        }
+
         @media (min-width: 1024px) {
-          .catalyst-value-scrim {
+          .catalyst-ph-title { font-size: clamp(1.625rem, 3.2vw, 2.5rem); line-height: 1.14; }
+          .catalyst-ph-body { font-size: clamp(0.9375rem, 1.3vw, 1.0625rem); line-height: 1.8; }
+          .catalyst-ph-deliverables { font-size: 0.875rem; line-height: 1.7; }
+        }
+
+        /* ── Core Value slider ──────────────────────────────────────────
+           Unlike the 5 Phases slider above, this one is pinned and paged by
+           real page scroll at every width, not just from lg — the mechanism
+           (tall wrapper + sticky stage + JS reading scroll position to
+           crossfade slides) is exactly what the desktop version has always
+           used, so there is one native page scrollbar throughout and never
+           a nested scrollable box. Only the *presentation* — where the copy
+           sits, which crop of the artwork shows, which direction the scrim
+           reads — changes below lg. */
+        .catalyst-vs-wrap { height: calc(var(--slides) * 100vh); }
+        .catalyst-vs-stage {
+          position: sticky;
+          top: 0;
+          height: 100dvh;
+          overflow: hidden;
+        }
+        .catalyst-vs-slide {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          padding: 6.5rem 1.5rem 2.5rem;
+          opacity: 0;
+        }
+        .catalyst-vs-copy { order: 0; }
+        .catalyst-vs-media {
+          order: 0;
+          position: absolute;
+          inset: 0;
+          width: auto;
+        }
+        .catalyst-vs-asset {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+        /* Two crops per slide, toggled by width rather than by JS — the
+           portrait crop is purpose-built for a phone screen (a dark band
+           reserved up top for copy) and would mis-crop badly if stretched
+           across a desktop viewport, and vice versa. */
+        .catalyst-vs-media-mobile { display: block; }
+        .catalyst-vs-media-desktop { display: none; }
+
+        /* Top-weighted scrim, since copy sits above the artwork here. The
+           mobile crops already reserve a dark band for it, but the fourth
+           pillar falls back to its (non pre-composed) video, so every slide
+           gets this as a safety net rather than relying on the artwork
+           alone. */
+        .catalyst-vs-scrim {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(3,3,8,0.82) 0%,
+            rgba(3,3,8,0.55) 34%,
+            rgba(3,3,8,0.05) 55%,
+            transparent 68%
+          );
+        }
+
+        .catalyst-vs-rail { display: none; }
+
+        /* Sized for a phone by default; the lg override below restores the
+           original desktop scale (that one still leans on vw so it keeps
+           scaling smoothly across very wide viewports). */
+        .catalyst-vs-title { font-size: clamp(1.5rem, 6vw, 1.875rem); line-height: 1.16; }
+        .catalyst-vs-body { font-size: 0.875rem; line-height: 1.6; max-width: none; }
+
+        @media (min-width: 1024px) {
+          .catalyst-vs-slide {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+          }
+          .catalyst-vs-media { width: auto; }
+          .catalyst-vs-asset {
+            object-fit: contain;
+            object-position: right center;
+            transform-origin: right center;
+          }
+          .catalyst-vs-media-mobile { display: none; }
+          .catalyst-vs-media-desktop { display: block; }
+
+          /* Left-weighted so the artwork's focal side stays clear. */
+          .catalyst-vs-scrim {
             background: linear-gradient(
               90deg,
               rgba(3,3,8,0.94) 0%,
@@ -1158,6 +1358,11 @@ export function CatalystSystemPageContent() {
               rgba(3,3,8,0) 76%
             );
           }
+
+          .catalyst-vs-rail { display: flex; }
+
+          .catalyst-vs-title { font-size: clamp(1.875rem, 3.8vw, 3rem); line-height: 1.12; }
+          .catalyst-vs-body { font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.8; max-width: 34rem; }
         }
 
         /* Enterprise logo ticker */
@@ -1261,7 +1466,7 @@ export function CatalystSystemPageContent() {
         {/* ══════════════ THE PROBLEM WE REPLACE ══════════════ */}
         <section
           className="relative px-6 overflow-hidden"
-          style={{ padding: "clamp(5rem, 9vw, 8rem) 1.5rem" }}
+          style={{ padding: "clamp(3.25rem, 9vw, 8rem) 1.5rem" }}
         >
           {/* Black field — faded at top/bottom so it dissolves into the
               surrounding page gradient instead of cutting off with a hard edge */}
@@ -1394,7 +1599,7 @@ export function CatalystSystemPageContent() {
         </section>
 
         {/* ══════════════ THE VALUE SHIFT — 4 PILLARS ══════════════ */}
-        <section className="relative px-6 py-24">
+        <section className="relative px-6 py-14 sm:py-24">
           <div className="relative max-w-6xl mx-auto">
             {/* Shared gradient for the four pillar icons */}
             <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
@@ -1437,11 +1642,12 @@ export function CatalystSystemPageContent() {
           </div>
         </section>
 
-        {/* Four full-screen slides, one per pillar. */}
+        {/* Four full-screen slides, one per pillar — pinned and scroll-driven
+            at every width. */}
         <ValueShiftStory />
 
         {/* ══════════════ ENTERPRISE SOCIAL PROOF — LOGO TICKER ══════════════ */}
-        <section className="relative overflow-hidden" style={{ padding: "5rem 0" }}>
+        <section className="relative overflow-hidden" style={{ padding: "clamp(2.75rem, 8vw, 5rem) 0" }}>
           <div className="relative max-w-4xl mx-auto text-center px-6 mb-14">
             <Reveal>
               <Eyebrow>Enterprise Client Social Proof</Eyebrow>
@@ -1524,7 +1730,7 @@ export function CatalystSystemPageContent() {
         <PhasesRail />
 
         {/* ══════════════ WHAT YOU GET ══════════════ */}
-        <section className="relative px-6 py-28 sm:py-36">
+        <section className="relative px-6 py-14 sm:py-28 lg:py-36">
           {/* Shared gradient for the four card icons */}
           <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
             <defs>
@@ -1566,7 +1772,7 @@ export function CatalystSystemPageContent() {
         <OfficesSection />
 
         {/* ══════════════ CTA ══════════════ */}
-        <section className="relative px-6 py-24 sm:py-32 overflow-hidden">
+        <section className="relative px-6 py-14 sm:py-24 lg:py-32 overflow-hidden">
           {/* Uploaded wave-mesh artwork — full-bleed section background, not
               clipped to the card, so it shows behind and around it */}
           <div

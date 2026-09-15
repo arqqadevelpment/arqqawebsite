@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Preloader } from "@/components/preloader/Preloader";
 
 /**
@@ -10,11 +13,18 @@ import { Preloader } from "@/components/preloader/Preloader";
  *
  * It renders `children` underneath, so the incoming page is mounting and
  * loading behind the overlay rather than after it.
+ *
+ * The dashboard and its login page are an internal tool, not the marketing
+ * site — they skip this overlay entirely rather than just hiding it, so none
+ * of the gating/scroll-lock side effects it drives ever fire there.
  */
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isInternalTool = pathname === "/login" || pathname.startsWith("/dashboard");
+
   return (
     <>
-      <Preloader />
+      {!isInternalTool && <Preloader />}
       {children}
     </>
   );

@@ -22,7 +22,10 @@ export type VideoProject = {
   /** Client mark, shown on the page and the hub card when present */
   logo?: string;
   vimeoId: string;
-  vimeoHash: string;
+  /** Privacy hash from the share URL (player.vimeo.com/video/<id>?h=<hash>).
+      Omitted for videos with no domain-privacy restriction, which don't
+      carry one. */
+  vimeoHash?: string;
   /** Production stills / behind-the-scenes frames shown below the video, as
       an authored sequence of rows, each row's own image count sets that
       row's column count (1, 2, or 3). Optional: most video projects rely on
@@ -211,6 +214,22 @@ export const VIDEO_PROJECTS: VideoProject[] = [
       summary: "A brand film introducing Dawi Clinics' Family Doctor service to the families who rely on it.",
       image: "/work/video/dawi-family.webp",
       accent: "orange",
+    },
+  },
+  {
+    slug: "aljazira-takaful-brand-launch",
+    client: "Aljazira Takaful",
+    title: "Aljazira Takaful, Brand Launch",
+    subtitle: "A brand launch film for a new era of Takaful protection.",
+    description:
+      "A brand launch film for Aljazira Takaful, introducing a new standard of protection and peace of mind, built to carry trust, innovation, and modern financial security to the market it's entering.",
+    logo: "/logos/clients/Aljazira-Takaful.png",
+    vimeoId: "1226383206",
+    card: {
+      market: "Saudi Arabia",
+      summary: "A brand launch film introducing Aljazira Takaful's new standard of protection and peace of mind.",
+      image: "/work/video/aljazira-takaful-brand-launch.jpg",
+      accent: "blue",
     },
   },
 ];

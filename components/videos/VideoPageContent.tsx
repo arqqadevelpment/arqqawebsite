@@ -156,7 +156,7 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
           >
             <iframe
               title={project.title}
-              src={`https://player.vimeo.com/video/${project.vimeoId}?h=${project.vimeoHash}`}
+              src={`https://player.vimeo.com/video/${project.vimeoId}${project.vimeoHash ? `?h=${project.vimeoHash}` : ""}`}
               className="absolute inset-0 w-full h-full"
               frameBorder="0"
               referrerPolicy="strict-origin-when-cross-origin"

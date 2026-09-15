@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ShowcaseTemplate } from "@/components/showcase/ShowcaseTemplate";
 import { BRANDING_PROJECTS, getBrandingProject } from "@/components/branding/branding-data";
 
@@ -18,10 +20,10 @@ export async function generateMetadata({
   const project = getBrandingProject(slug);
   if (!project) return { title: "Our Work | ARQQA" };
 
-  return {
+  return getPageSeo(`/branding/${slug}`, {
     title: `${project.title} | ARQQA`,
     description: project.intro,
-  };
+  });
 }
 
 export default async function BrandingProjectPage({
@@ -37,6 +39,7 @@ export default async function BrandingProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/branding/${slug}`} />
       <ShowcaseTemplate project={project} basePath="/branding" nextProject={next} />
     </PageShell>
   );

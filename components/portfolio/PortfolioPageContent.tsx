@@ -735,20 +735,36 @@ export function PortfolioPageContent() {
      "Performance" selects the media case studies, "Video & Animation" selects
      the Vimeo-hosted video projects, "Social Media Production" and
      "Branding" select their own content-production collections, and "All"
-     shows everything. The legacy CASE_STUDIES (Fawry, Africa Music
-     Initiative) keep their `industry` label on the card itself but are no
-     longer filterable by it, since those tabs were retired. */
+     shows everything. The legacy CASE_STUDIES (Africa Music Initiative) keep
+     their `industry` label on the card itself but are no longer filterable
+     by it, since those tabs were retired.
+
+     Nile Air and Kenz'up are social-content productions, but their outcomes
+     (237x ROAS, 5M+ installs) read as performance results, so their cards
+     are pulled out of Social Media Production and shown under Performance
+     instead — same /social pages, different tab. Fawry (from the legacy
+     CASE_STUDIES set) joins Performance the same way. */
   const isAll = filter === "All";
+  const isPerformance = isAll || filter === "Performance";
+  const PERFORMANCE_SOCIAL_SLUGS = ["nile-air", "kenzup"];
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
-  const performance = isAll || filter === "Performance" ? PERFORMANCE_CASE_STUDIES : [];
+  const performance = isPerformance ? PERFORMANCE_CASE_STUDIES : [];
+  const performanceSocials = isPerformance
+    ? SOCIAL_PROJECTS.filter((p) => PERFORMANCE_SOCIAL_SLUGS.includes(p.slug))
+    : [];
+  const performanceLegacy = filter === "Performance" ? CASE_STUDIES.filter((c) => c.slug === "fawry") : [];
   const videos = isAll || filter === "Video & Animation" ? VIDEO_PROJECTS : [];
-  const socials = isAll || filter === "Social Media Production" ? SOCIAL_PROJECTS : [];
+  const socials = isAll || filter === "Social Media Production"
+    ? SOCIAL_PROJECTS.filter((p) => !PERFORMANCE_SOCIAL_SLUGS.includes(p.slug))
+    : [];
   const brands = isAll || filter === "Branding" ? BRANDING_PROJECTS : [];
   const allCaseStudies = isAll ? CASE_STUDIES : [];
   const total =
     allCaseStudies.length +
     showcases.length +
     performance.length +
+    performanceSocials.length +
+    performanceLegacy.length +
     videos.length +
     socials.length +
     brands.length;
@@ -858,11 +874,34 @@ export function PortfolioPageContent() {
                 delay={Math.min((showcases.length + i) * 0.08, 0.32)}
               />
             ))}
+            {performanceSocials.map((project, i) => (
+              <ShowcaseCard
+                key={`perf-social-${project.slug}`}
+                project={project}
+                basePath="/social"
+                eyebrowLabel="Performance"
+                delay={Math.min((showcases.length + performance.length + i) * 0.08, 0.32)}
+              />
+            ))}
+            {performanceLegacy.map((caseStudy, i) => (
+              <CaseStudyCard
+                key={`perf-legacy-${caseStudy.slug}`}
+                caseStudy={caseStudy}
+                delay={Math.min(
+                  (showcases.length + performance.length + performanceSocials.length + i) * 0.08,
+                  0.32
+                )}
+              />
+            ))}
             {videos.map((project, i) => (
               <VideoCard
                 key={`video-${project.slug}`}
                 project={project}
-                delay={Math.min((showcases.length + performance.length + i) * 0.08, 0.32)}
+                delay={Math.min(
+                  (showcases.length + performance.length + performanceSocials.length + performanceLegacy.length + i) *
+                    0.08,
+                  0.32
+                )}
               />
             ))}
             {socials.map((project, i) => (
@@ -872,7 +911,13 @@ export function PortfolioPageContent() {
                 basePath="/social"
                 eyebrowLabel="Social Media Production"
                 delay={Math.min(
-                  (showcases.length + performance.length + videos.length + i) * 0.08,
+                  (showcases.length +
+                    performance.length +
+                    performanceSocials.length +
+                    performanceLegacy.length +
+                    videos.length +
+                    i) *
+                    0.08,
                   0.32
                 )}
               />
@@ -884,7 +929,13 @@ export function PortfolioPageContent() {
                 basePath="/branding"
                 eyebrowLabel="Branding"
                 delay={Math.min(
-                  (showcases.length + performance.length + videos.length + socials.length + i) *
+                  (showcases.length +
+                    performance.length +
+                    performanceSocials.length +
+                    performanceLegacy.length +
+                    videos.length +
+                    socials.length +
+                    i) *
                     0.08,
                   0.32
                 )}
@@ -897,6 +948,8 @@ export function PortfolioPageContent() {
                 delay={Math.min(
                   (showcases.length +
                     performance.length +
+                    performanceSocials.length +
+                    performanceLegacy.length +
                     videos.length +
                     socials.length +
                     brands.length +

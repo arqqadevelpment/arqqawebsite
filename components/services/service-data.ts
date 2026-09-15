@@ -12,6 +12,12 @@ export type ServiceDetail = {
   slug: string;
   num: string;
   title: string;
+  /**
+   * Hero h1 override. The h1 carries the page's search term, which is longer
+   * than the name that reads well in a CTA sentence or a card, so those keep
+   * using `title`. Falls back to `title` when unset.
+   */
+  heroTitle?: string;
   /** Short label used in the hub's orbit wheel */
   short: string;
   /** One-line positioning statement under the hero title */
@@ -77,7 +83,7 @@ export type ServiceDetail = {
 
 export const SERVICES: ServiceDetail[] = [
   {
-    slug: "strategy-consulting",
+    slug: "marketing-strategy-digital-assessment",
     num: "01",
     title: "Marketing Strategy & Digital Assessment",
     short: "Strategy",
@@ -106,25 +112,25 @@ export const SERVICES: ServiceDetail[] = [
           num: "01",
           title: "Paid Discovery Workshop",
           body: "A structured half- or full-day session with our senior strategists, pre-briefed, rigorously facilitated, and documented in real time. Your team leaves with one agreed growth direction, not a deck that gets argued over for six weeks.",
-          href: "/services/strategy-consulting/discovery-workshops",
+          href: "/services/marketing-strategy-digital-assessment/discovery-workshops",
         },
         {
           num: "02",
           title: "Growth Audit",
           body: "A seven-dimension diagnostic, strategy clarity, creative integration, media efficiency, technology stack, data maturity, team structure, and reporting quality, scored and benchmarked against category norms.",
-          href: "/services/strategy-consulting/growth-audit",
+          href: "/services/marketing-strategy-digital-assessment/growth-audit",
         },
         {
           num: "03",
           title: "Competitive Analysis",
           body: "Messaging deconstruction, media spend estimation, and positioning-gap identification across up to eight competitors. An intelligence operation, not a slide of logos.",
-          href: "/services/strategy-consulting/competitive-analysis",
+          href: "/services/marketing-strategy-digital-assessment/competitive-analysis",
         },
         {
           num: "04",
           title: "Go-to-Market Strategy",
           body: "Market mapping, audience architecture, and channel selection, translated into a phased 30/90/180-day roadmap with clear KPIs at every gate.",
-          href: "/services/strategy-consulting/go-to-market",
+          href: "/services/marketing-strategy-digital-assessment/go-to-market",
         },
       ],
     },
@@ -163,13 +169,14 @@ export const SERVICES: ServiceDetail[] = [
         { value: "350K", label: "SAR total spend" },
       ],
     },
-    related: ["catalyst-system", "asset-building", "technology"],
+    related: ["catalyst-system", "brand-strategy-positioning", "web-app-development"],
     playbook: "Marketing Strategy & Digital Assessment",
   },
   {
-    slug: "asset-building",
+    slug: "brand-strategy-positioning",
     num: "02",
     title: "Brand Strategy & Positioning",
+    heroTitle: "Brand Identity Design, Strategy & Positioning",
     short: "Branding",
     positioning:
       "How you look is how you're remembered, the permanent visual and verbal infrastructure of your brand, built to compound in value the longer it's used.",
@@ -196,19 +203,19 @@ export const SERVICES: ServiceDetail[] = [
           num: "01",
           title: "Brand Identity & Design",
           body: "Logo architecture, colour systems, typography, tone of voice, and usage guidelines, documented in a master brand book built to be used, not filed.",
-          href: "/services/asset-building/branding",
+          href: "/services/brand-strategy-positioning/branding",
         },
         {
           num: "02",
           title: "Company Profiles & Collateral",
           body: "Corporate profiles, pitch decks, capability statements, and credential documents, designed for impact, written for decision-makers.",
-          href: "/services/asset-building/company-profiles",
+          href: "/services/brand-strategy-positioning/company-profiles",
         },
         {
           num: "03",
           title: "Visual Identity Rollout Kits",
           body: "Every template your team actually needs, social, advertising, email, presentation, and document formats, pre-built and production-ready from day one.",
-          href: "/services/asset-building/visual-identity",
+          href: "/services/brand-strategy-positioning/visual-identity",
         },
       ],
       cta: {
@@ -251,12 +258,107 @@ export const SERVICES: ServiceDetail[] = [
         { value: "3.5x", label: "conversion lift" },
       ],
     },
-    related: ["technology", "community-management", "video-production"],
+    related: ["web-app-development", "social-media-management", "social-media-video-production"],
     playbook: "Brand Asset",
   },
   {
-    slug: "catalyst-system",
+    slug: "social-media-management",
     num: "03",
+    title: "Social Media Management",
+    heroTitle: "Social Media Management Agency in Egypt",
+    short: "Social",
+    positioning:
+      "Your brand is what people say when you're not in the room, we own that conversation, 24 hours a day.",
+    cep: "When your community is growing but nobody is managing it.",
+    image: "/services/community.webp",
+    banner: "/services/community-banner.webp",
+    accent: "blue",
+    summary:
+      "Community moderation. Social listening. Crisis handling. Social CX automation. Owning the conversation instead of reacting to it, in Arabic and English, across every platform.",
+    problem: {
+      heading: "An unmanaged community is a brand liability compounding in public.",
+      body: "Unanswered questions signal neglect. Unresolved complaints escalate. Missed brand mentions become missed opportunities. Community management done correctly is one of the highest-ROI activities in digital marketing, it costs less than acquisition and retains more than any campaign can replace.",
+      stats: [
+        { value: "42%", label: "expect a reply within 60 minutes" },
+        { value: "5.4x", label: "reach of an unanswered complaint" },
+        { value: "88%", label: "less likely to buy after ignored contact" },
+      ],
+    },
+    approach: {
+      heading: "Community as a customer-experience channel.",
+      body: "We run community as operations, not as posting, with response SLAs, escalation paths, and listening that feeds insight straight back into the Catalyst content cycle.",
+      steps: [
+        {
+          num: "01",
+          title: "Community Moderation",
+          body: "Brand-trained moderation across Instagram, Facebook, LinkedIn, TikTok, X, Snapchat, and YouTube, Arabic and English, 7 days a week, with a 2-hour response SLA.",
+          href: "/services/social-media-management/moderation",
+        },
+        {
+          num: "02",
+          title: "Social Listening",
+          body: "Brand, competitor, and category monitoring across the entire digital landscape, not just owned channels, converted into weekly sentiment reports and monthly strategic briefings.",
+          href: "/services/social-media-management/listening",
+        },
+        {
+          num: "03",
+          title: "Crisis Handling",
+          body: "Pre-built playbooks, real-time monitoring, and a 30-minute crisis-lead response SLA. A crisis handled in the first hour costs a fraction of one handled in the first day.",
+          href: "/services/social-media-management/crisis",
+        },
+        {
+          num: "04",
+          title: "Social CX Automation",
+          body: "Intelligent workflows and chatbot technology across WhatsApp Business, Messenger, and Instagram DM, handling the routine so the human team can focus on the complex.",
+          href: "/services/social-media-management/cx-automation",
+        },
+      ],
+      cta: {
+        primary: { label: "Activate Community Moderation", href: "/start#book-strategy-call" },
+        secondary: { label: "See Our Community Management SLA", href: "/start#growth-audit" },
+      },
+    },
+    included: {
+      groups: [
+        {
+          title: "Daily Management",
+          items: [
+            "Comment and DM moderation across all channels (Arabic + English)",
+            "7-day coverage with 2-hour response SLA (business hours)",
+            "Social CX automation and chatbot flow design",
+            "Weekly moderation and community health reporting",
+          ],
+        },
+        {
+          title: "Intelligence & Protection",
+          items: [
+            "Social listening across platforms, news, and forums",
+            "Competitor monitoring (up to 5 competitors) and share-of-voice tracking",
+            "Crisis playbook development and 24/7 on-call response",
+            "Monthly strategic intelligence briefing",
+          ],
+        },
+      ],
+      timeline: "Ongoing retainer, full coverage live within 2 weeks",
+      tooling: ["Sprout Social", "Meta Business Suite", "WhatsApp Business API", "Brandwatch", "ClickUp"],
+    },
+    proof: {
+      client: "Africa Music Initiative",
+      market: "UAE / Africa",
+      metric: "52",
+      metricLabel: "Countries engaged",
+      body: "Managing a pan-continental community across 52 countries produced 50,000 artist submissions and 120,000 visits without a single unresolved escalation.",
+      secondary: [
+        { value: "50K", label: "artist submissions" },
+        { value: "120K", label: "campaign visits" },
+      ],
+    },
+    related: ["catalyst-system", "marketing-strategy-digital-assessment", "web-app-development"],
+    playbook: "Community Operations",
+  },
+  {
+    slug: "catalyst-system",
+    num: "04",
     title: "The Catalyst System™",
     short: "Catalyst",
     positioning:
@@ -264,7 +366,7 @@ export const SERVICES: ServiceDetail[] = [
     cep: "When your teams don't talk to each other.",
     image: "/services/catalyst.webp",
     banner: "/services/catalyst-banner.webp",
-    accent: "blue",
+    accent: "orange",
     summary:
       "The integrated engine: social media management + performance marketing + content creation. Google, Meta, TikTok, Snapchat. Platform-native content. Guaranteed synergy between creative and media.",
     problem: {
@@ -337,12 +439,12 @@ export const SERVICES: ServiceDetail[] = [
         { value: "100K", label: "organic installs" },
       ],
     },
-    related: ["strategy-consulting", "community-management", "asset-building"],
+    related: ["marketing-strategy-digital-assessment", "social-media-management", "brand-strategy-positioning"],
     playbook: "Catalyst System",
   },
   {
-    slug: "technology",
-    num: "04",
+    slug: "web-app-development",
+    num: "05",
     title: "Web & App Development",
     short: "Development",
     positioning:
@@ -350,7 +452,7 @@ export const SERVICES: ServiceDetail[] = [
     cep: "When your product doesn't convert and your stack doesn't talk.",
     image: "/services/technology.webp",
     banner: "/services/technology-banner.webp",
-    accent: "orange",
+    accent: "blue",
     summary:
       "Website design & development. Mobile app design & development. UI/UX design. CRM integration & automation. E-commerce (HubSpot / Shopify / Salla). Built for speed, conversion, and scale.",
     problem: {
@@ -370,31 +472,31 @@ export const SERVICES: ServiceDetail[] = [
           num: "01",
           title: "Website Design & Development",
           body: "Conversion-first information architecture, mobile-first UX, and performance-engineered development, every project built to clear a Lighthouse score above 90 and load in under 2.5 seconds.",
-          href: "/services/technology/website",
+          href: "/services/web-app-development/website",
         },
         {
           num: "02",
           title: "Mobile App Design & Development",
           body: "Research-driven UX, platform-native design systems, and staged releases, built to fix the 77% first-three-day drop-off most apps never diagnose.",
-          href: "/services/technology/mobile-apps",
+          href: "/services/web-app-development/mobile-apps",
         },
         {
           num: "03",
           title: "UI/UX Design",
           body: "Evidence-based design, independent of development, user research, usability testing, and a full component library handed off with developer annotation.",
-          href: "/services/technology/ux-design",
+          href: "/services/web-app-development/ux-design",
         },
         {
           num: "04",
           title: "CRM Integration & Automation",
           body: "HubSpot, Salesforce, or Zoho wired to every touchpoint, lead scoring, nurture sequences, and WhatsApp Business API, so no lead sits unfollowed for four hours.",
-          href: "/services/technology/crm",
+          href: "/services/web-app-development/crm",
         },
         {
           num: "05",
           title: "E-commerce",
           body: "Shopify and Salla store builds engineered for conversion, not just launch, product pages, checkout flow, and post-launch CRO built to move MENA stores from a 1–2% baseline toward 4–6%.",
-          href: "/services/technology/ecommerce",
+          href: "/services/web-app-development/ecommerce",
         },
       ],
       cta: {
@@ -437,107 +539,14 @@ export const SERVICES: ServiceDetail[] = [
         { value: "<2s", label: "median load time" },
       ],
     },
-    related: ["strategy-consulting", "asset-building", "community-management"],
+    related: ["marketing-strategy-digital-assessment", "brand-strategy-positioning", "social-media-management"],
     playbook: "Conversion Engineering",
   },
   {
-    slug: "community-management",
-    num: "05",
-    title: "Social Media Management",
-    short: "Social",
-    positioning:
-      "Your brand is what people say when you're not in the room, we own that conversation, 24 hours a day.",
-    cep: "When your community is growing but nobody is managing it.",
-    image: "/services/community.webp",
-    banner: "/services/community-banner.webp",
-    accent: "blue",
-    summary:
-      "Community moderation. Social listening. Crisis handling. Social CX automation. Owning the conversation instead of reacting to it, in Arabic and English, across every platform.",
-    problem: {
-      heading: "An unmanaged community is a brand liability compounding in public.",
-      body: "Unanswered questions signal neglect. Unresolved complaints escalate. Missed brand mentions become missed opportunities. Community management done correctly is one of the highest-ROI activities in digital marketing, it costs less than acquisition and retains more than any campaign can replace.",
-      stats: [
-        { value: "42%", label: "expect a reply within 60 minutes" },
-        { value: "5.4x", label: "reach of an unanswered complaint" },
-        { value: "88%", label: "less likely to buy after ignored contact" },
-      ],
-    },
-    approach: {
-      heading: "Community as a customer-experience channel.",
-      body: "We run community as operations, not as posting, with response SLAs, escalation paths, and listening that feeds insight straight back into the Catalyst content cycle.",
-      steps: [
-        {
-          num: "01",
-          title: "Community Moderation",
-          body: "Brand-trained moderation across Instagram, Facebook, LinkedIn, TikTok, X, Snapchat, and YouTube, Arabic and English, 7 days a week, with a 2-hour response SLA.",
-          href: "/services/community-management/moderation",
-        },
-        {
-          num: "02",
-          title: "Social Listening",
-          body: "Brand, competitor, and category monitoring across the entire digital landscape, not just owned channels, converted into weekly sentiment reports and monthly strategic briefings.",
-          href: "/services/community-management/listening",
-        },
-        {
-          num: "03",
-          title: "Crisis Handling",
-          body: "Pre-built playbooks, real-time monitoring, and a 30-minute crisis-lead response SLA. A crisis handled in the first hour costs a fraction of one handled in the first day.",
-          href: "/services/community-management/crisis",
-        },
-        {
-          num: "04",
-          title: "Social CX Automation",
-          body: "Intelligent workflows and chatbot technology across WhatsApp Business, Messenger, and Instagram DM, handling the routine so the human team can focus on the complex.",
-          href: "/services/community-management/cx-automation",
-        },
-      ],
-      cta: {
-        primary: { label: "Activate Community Moderation", href: "/start#book-strategy-call" },
-        secondary: { label: "See Our Community Management SLA", href: "/start#growth-audit" },
-      },
-    },
-    included: {
-      groups: [
-        {
-          title: "Daily Management",
-          items: [
-            "Comment and DM moderation across all channels (Arabic + English)",
-            "7-day coverage with 2-hour response SLA (business hours)",
-            "Social CX automation and chatbot flow design",
-            "Weekly moderation and community health reporting",
-          ],
-        },
-        {
-          title: "Intelligence & Protection",
-          items: [
-            "Social listening across platforms, news, and forums",
-            "Competitor monitoring (up to 5 competitors) and share-of-voice tracking",
-            "Crisis playbook development and 24/7 on-call response",
-            "Monthly strategic intelligence briefing",
-          ],
-        },
-      ],
-      timeline: "Ongoing retainer, full coverage live within 2 weeks",
-      tooling: ["Sprout Social", "Meta Business Suite", "WhatsApp Business API", "Brandwatch", "ClickUp"],
-    },
-    proof: {
-      client: "Africa Music Initiative",
-      market: "UAE / Africa",
-      metric: "52",
-      metricLabel: "Countries engaged",
-      body: "Managing a pan-continental community across 52 countries produced 50,000 artist submissions and 120,000 visits without a single unresolved escalation.",
-      secondary: [
-        { value: "50K", label: "artist submissions" },
-        { value: "120K", label: "campaign visits" },
-      ],
-    },
-    related: ["catalyst-system", "strategy-consulting", "technology"],
-    playbook: "Community Operations",
-  },
-  {
-    slug: "video-production",
+    slug: "social-media-video-production",
     num: "06",
     title: "Social Media Video Production",
+    heroTitle: "Video Production Agency in Egypt — Social Media Video Production",
     short: "Video",
     positioning:
       "The feed belongs to video. Your brand belongs in it, content built for performance, not broadcast.",
@@ -564,37 +573,37 @@ export const SERVICES: ServiceDetail[] = [
           num: "01",
           title: "Reels & Short-Form Content",
           body: "Hooks-first production for Instagram, TikTok, YouTube Shorts, and Snapchat Spotlight, shot vertical-first, edited at the pace the algorithm rewards, with high-performing organic cuts flagged straight to paid media.",
-          href: "/services/video-production/reels",
+          href: "/services/social-media-video-production/reels",
         },
         {
           num: "02",
           title: "Brand Films & Commercials",
           body: "Narrative-first long-form production, from 60-second brand manifestos to documentary-style films, built on a signed-off script before a single frame is shot.",
-          href: "/services/video-production/brand-films",
+          href: "/services/social-media-video-production/brand-films",
         },
         {
           num: "03",
           title: "Product & Service Videos",
           body: "Objection-mapped product demos, explainers, and service walkthroughs that let outcomes, not adjectives, do the selling, structured around the buyer's decision moment.",
-          href: "/services/video-production/product-videos",
+          href: "/services/social-media-video-production/product-videos",
         },
         {
           num: "04",
           title: "Testimonial & Case Study Videos",
           body: "Structured client interviews and story-led edits that let your best clients do the selling, real outcomes, on camera, the most credible proof point a brand can publish.",
-          href: "/services/video-production/testimonials",
+          href: "/services/social-media-video-production/testimonials",
         },
         {
           num: "05",
           title: "Motion Graphics & Animation",
           body: "Animation for the ideas too complex to film, explainers, infographics, and logo motion that make the invisible tangible and the abstract concrete.",
-          href: "/services/video-production/motion-graphics",
+          href: "/services/social-media-video-production/motion-graphics",
         },
         {
           num: "06",
           title: "Content Creator Direction & Scripting",
           body: "Creator briefs that translate brand strategy into a creator-native voice, without stripping the authenticity that earned the audience.",
-          href: "/services/video-production/scripting",
+          href: "/services/social-media-video-production/scripting",
         },
       ],
       cta: {
@@ -637,11 +646,11 @@ export const SERVICES: ServiceDetail[] = [
         { value: "6M+", label: "total app installs" },
       ],
     },
-    related: ["catalyst-system", "asset-building", "community-management"],
+    related: ["catalyst-system", "brand-strategy-positioning", "social-media-management"],
     playbook: "Video Production",
   },
   {
-    slug: "performance-marketing",
+    slug: "performance-marketing-app-growth",
     num: "07",
     title: "Performance Marketing & App Growth",
     short: "Performance",
@@ -727,7 +736,7 @@ export const SERVICES: ServiceDetail[] = [
         { value: "4 wks", label: "to a verified measurement baseline" },
       ],
     },
-    related: ["catalyst-system", "strategy-consulting", "community-management"],
+    related: ["catalyst-system", "marketing-strategy-digital-assessment", "social-media-management"],
     playbook: "Performance Marketing & App Growth",
   },
   {
@@ -817,7 +826,7 @@ export const SERVICES: ServiceDetail[] = [
         { value: "89%", label: "Closed without a human" },
       ],
     },
-    related: ["catalyst-system", "community-management", "technology"],
+    related: ["catalyst-system", "social-media-management", "web-app-development"],
     playbook: "CRM, Automation & AI Solutions",
   },
 ];

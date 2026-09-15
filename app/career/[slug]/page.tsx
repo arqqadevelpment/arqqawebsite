@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { JobPageContent } from "@/components/career/JobPageContent";
 import { JOBS, getJob } from "@/components/career/career-data";
 
@@ -18,10 +20,10 @@ export async function generateMetadata({
   const job = getJob(slug);
   if (!job) return { title: "Careers | ARQQA" };
 
-  return {
+  return getPageSeo(`/career/${slug}`, {
     title: `${job.title} | Careers at ARQQA`,
     description: job.intro,
-  };
+  });
 }
 
 export default async function JobPage({
@@ -35,6 +37,7 @@ export default async function JobPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/career/${slug}`} />
       <JobPageContent job={job} />
     </PageShell>
   );

@@ -10,9 +10,15 @@
 export function Eyebrow({
   children,
   className = "",
+  wrap = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  /**
+   * Lets the pill run to several lines. Off by default: a label short enough
+   * to sit on one line should never break, and every other use is short.
+   */
+  wrap?: boolean;
 }) {
   return (
     <span
@@ -27,7 +33,9 @@ export function Eyebrow({
       }}
     >
       <span
-        className="inline-flex items-center font-semibold"
+        // Flex lays the text out as flex items, which wrap far narrower than
+        // the pill; normal inline layout is what makes it break on words.
+        className={`${wrap ? "block" : "inline-flex items-center"} font-semibold`}
         style={{
           padding: "0.42rem 0.95rem",
           borderRadius: "0.75rem",
@@ -36,7 +44,9 @@ export function Eyebrow({
           fontSize: "0.6875rem",
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          whiteSpace: "nowrap",
+          ...(wrap
+            ? { whiteSpace: "normal", textAlign: "center", lineHeight: 1.9 }
+            : { whiteSpace: "nowrap" }),
         }}
       >
         {children}

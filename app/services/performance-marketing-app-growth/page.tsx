@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
+import { getFormFields } from "@/lib/forms/getFormFields";
+import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
+import { PerformanceMarketingPageContent } from "@/components/services/PerformanceMarketingPageContent";
+import { FAQS } from "@/components/services/performance-marketing-data";
+
+/* A static segment takes precedence over the dynamic /services/[slug] route,
+   so this landing page replaces the generic service template at the same URL. */
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSeo("/services/performance-marketing-app-growth", {
+    title: "Performance Marketing Agency | Proven Results Across MENA | ARQQA",
+    description: "101M+ impressions served, 17,350+ leads generated. ARQQA runs performance marketing systems for brands across MENA. Get a free audit.",
+  });
+}
+
+/* FAQPage schema — Google rich results, which also feed Ads Quality Score. */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+export default async function PerformanceMarketingPage() {
+  const fields = await getFormFields("performance-lead");
+
+  return (
+    <PageShell>
+      <PageSchema path={"/services/performance-marketing-app-growth"} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <PerformanceMarketingPageContent fields={fields} />
+    </PageShell>
+  );
+}

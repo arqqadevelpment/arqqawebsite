@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { ServiceDetail } from "./service-data";
 import { SERVICES } from "./service-data";
+import type { GrowthStep, SubService } from "./growth-steps-data";
+import { GROWTH_STEPS } from "./growth-steps-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import Link from "next/link";
@@ -195,7 +198,13 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                   width: "clamp(3.25rem, 16vw, 4.75rem)",
                   height: "clamp(3.25rem, 16vw, 4.75rem)",
                   padding: "0 0.2rem",
-                  overflow: "hidden",
+                  // Labels like "Development"/"Automation" don't fit inside the
+                  // circle at mobile widths — `overflow: hidden` combined with
+                  // wrapping used to break them mid-word ("AUTOMATIO N"). Kept
+                  // on one line instead, letting the widest labels spill a
+                  // little past the circle's own edge rather than mangling
+                  // the word.
+                  overflow: "visible",
                   /* Same white glass as the centre emblem — translucent, so
                      the artwork reads through instead of a dark disc */
                   background:
@@ -221,16 +230,14 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
                 <span
                   className="font-light mt-0.5"
                   style={{
-                    fontSize: "clamp(0.4375rem, 1.8vw, 0.5rem)",
+                    fontSize: "clamp(0.375rem, 1.6vw, 0.5rem)",
                     lineHeight: 1.05,
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.03em",
                     textTransform: "uppercase",
                     color: "rgba(255,255,255,0.8)",
                     textShadow: "0 1px 8px rgba(0,0,0,0.5)",
                     textAlign: "center",
-                    whiteSpace: "normal",
-                    overflowWrap: "break-word",
-                    maxWidth: "88%",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {s.short}
@@ -240,6 +247,150 @@ function OrbitDiagram({ onSelect }: { onSelect: (i: number) => void }) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+/* One bullet point inside a Growth Ecosystem card — a real link to its own
+   section on the step's page (`/services/<step>#<sub>`), nested inside the
+   whole card's own click target. stopPropagation keeps a point click from
+   also firing the card's click-through to the page's top. */
+function GrowthPoint({ sub, stepSlug, accent }: { sub: SubService; stepSlug: string; accent: string }) {
+  const [hovered, setHovered] = useState(false);
+  const href = sub.crossLinkHref ?? `/services/${stepSlug}#${sub.slug}`;
+
+  return (
+    <li>
+      <Link
+        href={href}
+        onClick={(e) => e.stopPropagation()}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="flex items-start gap-2.5 w-full text-left"
+        style={{
+          padding: "0.3rem 0",
+          transform: hovered ? "translateX(4px)" : "translateX(0)",
+          transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1)",
+        }}
+      >
+        <span
+          aria-hidden="true"
+          className="shrink-0"
+          style={{
+            marginTop: "0.5rem",
+            width: "5px",
+            height: "5px",
+            borderRadius: "999px",
+            background: accent,
+            boxShadow: hovered ? `0 0 8px ${accent}` : "none",
+            transition: "box-shadow 0.35s ease",
+          }}
+        />
+        <span
+          className="font-light"
+          style={{
+            fontSize: "0.875rem",
+            lineHeight: 1.6,
+            color: hovered ? "#ffffff" : "rgba(255,255,255,0.6)",
+            transition: "color 0.3s ease",
+          }}
+        >
+          {sub.title}
+        </span>
+      </Link>
+    </li>
+  );
+}
+
+/* One step of the Growth Ecosystem. The whole card click-throughs to
+   `/services/<step slug>` (its own overview at the top of the page); each
+   point inside is independently a link straight to its section (see
+   GrowthPoint above, which stops its own click from also firing the card's).
+   A plain div rather than a wrapping <Link>, since <a> can't nest inside
+   <a> — router.push covers the "click anywhere else on the card" case. */
+function GrowthEcosystemCard({ step }: { step: GrowthStep }) {
+  const [hovered, setHovered] = useState(false);
+  const isOrange = step.accent === "orange";
+  const router = useRouter();
+  const href = `/services/${step.slug}`;
+
+  return (
+    <div
+      role="link"
+      tabIndex={0}
+      aria-label={`Open ${step.title}`}
+      onClick={() => router.push(href)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") router.push(href);
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col h-full rounded-3xl cursor-pointer"
+      style={{
+        padding: "2rem",
+        background: "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        border: hovered ? "1px solid rgba(255,138,90,0.5)" : "1px solid rgba(255,255,255,0.11)",
+        boxShadow: hovered
+          ? "0 -14px 40px -18px rgba(255,122,61,0.3), 0 24px 50px -22px rgba(47,107,255,0.28), inset 0 1px 0 rgba(255,175,130,0.2)"
+          : "inset 0 1px 0 rgba(255,255,255,0.05)",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+        transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
+      }}
+    >
+      {/* Icon */}
+      <span
+        className="inline-flex items-center justify-center rounded-2xl shrink-0"
+        style={{
+          width: "3rem",
+          height: "3rem",
+          border: "1px solid rgba(255,255,255,0.14)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          {step.icon}
+        </svg>
+      </span>
+
+      {/* Step label + title */}
+      <div className="mt-6">
+        <span
+          className="font-bold"
+          style={{
+            fontSize: "0.75rem",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            backgroundImage: isOrange
+              ? "linear-gradient(120deg, #ff9a5a 0%, #ffc29a 60%, #9fc8ff 100%)"
+              : "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          {step.step}
+        </span>
+        <h3
+          className="font-bold mt-2"
+          style={{
+            fontSize: "clamp(1.125rem, 2vw, 1.375rem)",
+            lineHeight: 1.25,
+            letterSpacing: "-0.01em",
+            color: "#ffffff",
+          }}
+        >
+          {step.title}
+        </h3>
+      </div>
+
+      {/* Bullet points — each one is its own clickable unit */}
+      <ul className="mt-5 flex flex-col">
+        {step.subServices.map((sub) => (
+          <GrowthPoint key={sub.slug} sub={sub} stepSlug={step.slug} accent={isOrange ? "#ff9a5a" : "#5aa2ff"} />
+        ))}
+      </ul>
     </div>
   );
 }
@@ -414,6 +565,56 @@ export function ServicesPageContent() {
         </div>
       </section>
 
+      {/* ══ The ARQQA Growth Ecosystem — the four-step engine ══ */}
+      <section className="relative w-full" style={{ padding: "5rem 1.5rem 6rem" }}>
+        {/* Shared gradient for the four step icons */}
+        <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+          <defs>
+            <linearGradient id="growthEcosystemStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#5aa2ff" />
+              <stop offset="50%" stopColor="#9fc8ff" />
+              <stop offset="100%" stopColor="#ff7a3d" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div className="relative max-w-6xl mx-auto">
+          <Reveal className="text-center mb-14 max-w-3xl mx-auto">
+            <Eyebrow className="mb-5">THE ARQQA GROWTH ECOSYSTEM</Eyebrow>
+            <h2
+              className="font-bold"
+              style={{
+                fontSize: "clamp(1.75rem, 3.3vw, 2.6rem)",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                color: "#ffffff",
+              }}
+            >
+              Four Steps.{" "}
+              <span
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
+                }}
+              >
+                One Engine.
+              </span>
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {GROWTH_STEPS.map((step, i) => (
+              <Reveal key={step.step} delay={Math.min(i * 0.08, 0.32)} className="h-full">
+                <GrowthEcosystemCard step={step} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ Service index — the full list ══ */}
       <section className="relative w-full" style={{ padding: "6rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
@@ -580,21 +781,6 @@ export function ServicesPageContent() {
                   Book a Discovery Call
                 </span>
               </Link>
-
-              {/* Nurture CTA */}
-              <Link
-                href="/start#growth-audit"
-                className="inline-flex items-center justify-center rounded-2xl font-medium"
-                style={{
-                  padding: "1rem 2.25rem",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  color: "#ffffff",
-                  fontSize: "0.9375rem",
-                }}
-              >
-                Download the Playbook
-              </Link>
             </div>
           </Reveal>
         </div>
@@ -613,7 +799,13 @@ function ServiceRow({ service, flash }: { service: Service; flash?: boolean }) {
   return (
     <Link
       id={`service-${service.num}`}
-      href={service.slug === "autonomous" ? "/autonomous" : `/services/${service.slug}`}
+      href={
+        service.slug === "autonomous"
+          ? "/autonomous"
+          : service.slug === "catalyst-system"
+            ? "/catalyst-system"
+            : `/services/${service.slug}`
+      }
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col sm:flex-row rounded-3xl overflow-hidden"

@@ -61,7 +61,11 @@ function slideOpacity(progress: number, w: (typeof WINDOWS)[0]): number {
 // frame, the scroll-driven remainder is decimated 3:1 to cut payload with no
 // visible loss.
 const TOTAL_FRAMES  = 281;
-const INTRO_FRAME   = 50;   // index where the intro hands off to scroll (t=2s)
+// Index where the intro hands off to scroll. Frame 50 (t=2s) lands mid-motion
+// with the two glass discs still merged into one connected loop; holding a
+// few frames longer settles on them fully separated, which is the shot the
+// handoff should freeze on.
+const INTRO_FRAME   = 55;
 const INTRO_MS      = 2000;
 const LOAD_POOL     = 6;    // concurrent frame downloads per phase
 
@@ -94,8 +98,10 @@ export function HeroSection() {
     if (!ctx) return;
 
     let destroyed = false;
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const variant  = isMobile ? "mobile" : "desktop";
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    let variant = mobileQuery.matches ? "mobile" : "desktop";
+    let variantSwitched = false;
+    let scrollMode = false;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function frameSrc(i: number) {
@@ -113,7 +119,7 @@ export function HeroSection() {
     // back to the nearest neighbour it has.
     const unregisterHero = registerHero(INTRO_FRAME);
     function settleIntroFrame(i: number) {
-      if (i >= INTRO_FRAME) return;
+      if (variantSwitched || i >= INTRO_FRAME) return;
       reportHeroFrame();
       // Paint frame 0 the moment it exists. The reveal then lands on the true
       // opening frame instead of an empty canvas, so the sequence never looks
@@ -349,6 +355,7 @@ export function HeroSection() {
 
     // ── Hand-off: intro → scroll mode ───────────────────────────────────
     function activateScrollMode() {
+      scrollMode = true;
       unlockScroll();
       seek();
       window.addEventListener("scroll", onScroll, { passive: true });
@@ -362,6 +369,31 @@ export function HeroSection() {
       lastDrawn = idx;
     }
     window.addEventListener("resize", onResize);
+
+    // ── Variant switch: reload the sequence at the other aspect ratio ────
+    // The frame folder is picked per breakpoint, so anything that crosses it
+    // after mount — a phone turned to landscape, a dragged window — would keep
+    // painting frames cut for the other shape.
+    function onVariantChange() {
+      const next = mobileQuery.matches ? "mobile" : "desktop";
+      if (destroyed || next === variant) return;
+      variant = next;
+      variantSwitched = true;
+      frames.fill(null);
+      loading.clear();
+      lastDrawn = -1;
+      // The frame on screen outranks the pool's starting point — without this
+      // the canvas holds a stale-variant image until the pool works its way up
+      // to wherever the user actually is.
+      ensureFrame(desiredFrame, () => drawIndex(desiredFrame));
+      // Intro frames are never drawn again once scroll takes over, so re-fetching
+      // them on every rotation would be pure cost on the one device that rotates.
+      if (!scrollMode) makePool(0, INTRO_FRAME);
+      idle(() => {
+        if (!destroyed) makePool(INTRO_FRAME, TOTAL_FRAMES);
+      });
+    }
+    mobileQuery.addEventListener("change", onVariantChange);
 
     // ── Boot sequence ─────────────────────────────────────────────────────
     lockScroll();
@@ -403,6 +435,7 @@ export function HeroSection() {
       cancelGateWait();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      mobileQuery.removeEventListener("change", onVariantChange);
       unlockScroll();
     };
   }, []);
@@ -467,7 +500,7 @@ export function HeroSection() {
           >
             {/* Title — uniformly bold across every beat, same font inherited
                 from the site's own stack (globals.css), no italic. */}
-            <h1
+            <h2
               style={{
                 fontSize: "clamp(2.25rem, 6vw, 5.5rem)",
                 fontWeight: 800,
@@ -479,7 +512,7 @@ export function HeroSection() {
             >
               {slide.lead}
               {slide.emphasis}
-            </h1>
+            </h2>
 
             {/* Slide number — bottom right */}
             <span

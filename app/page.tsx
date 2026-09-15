@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { FactsSection } from "@/components/facts/FactsSection";
 import { FolkloreSection } from "@/components/folklore/FolkloreSection";
@@ -24,6 +27,14 @@ import { ClosingSection } from "@/components/closing/ClosingSection";
  * Closing (the dual-CTA fork) stays last, as it did before this reorder —
  * it wasn't named in the requested order and is kept as the page's closer.
  */
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageSeo("/", {
+    title: "ARQQA — Agencies Sell Creativity. We Deliver Certainty.",
+    description:
+      "ARQQA is a MarTech Growth System. 13 years, 4 MENA markets, 50+ specialists — one integrated engine for strategy, creative, media, and technology.",
+  });
+}
+
 export default function Home() {
   return (
     <PageShell
@@ -31,6 +42,7 @@ export default function Home() {
       above={<HeroSection />}
       seam
     >
+      <PageSchema path="/" />
       <FactsSection />
       <CatalystSection />
       <ServicesSection />

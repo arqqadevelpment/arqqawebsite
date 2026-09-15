@@ -105,7 +105,7 @@ export const INDUSTRIES: Industry[] = [
     playbook: "Digital Revenue for Airlines: The Attribution Framework",
   },
   {
-    slug: "technology",
+    slug: "web-app-development",
     name: "Technology & SaaS",
     accent: "blue",
     heroHeadline: "B2B buyers are three demos deep before your ad ever mattered.",

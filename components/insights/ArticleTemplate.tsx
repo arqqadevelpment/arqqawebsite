@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Article } from "./insights-data";
-import { getRelatedArticles } from "./insights-data";
+import { DEFAULT_AUTHOR_NAME, getArticleUrl, getRelatedArticles } from "./insights-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Link from "next/link";
+import { submitForm } from "@/lib/forms/submitForm";
 
 /* ── Shared reveal-on-scroll wrapper ── */
 function Reveal({
@@ -65,6 +66,7 @@ const glass: React.CSSProperties = {
 export function ArticleTemplate({ article }: { article: Article }) {
   const isOrange = article.accent === "orange";
   const related = getRelatedArticles(article.related);
+  const authorName = article.author?.name ?? DEFAULT_AUTHOR_NAME;
 
   return (
     <>
@@ -272,25 +274,21 @@ export function ArticleTemplate({ article }: { article: Article }) {
                   color: "#ffffff",
                 }}
               >
-                {article.author ? article.author.name.charAt(0) : "A"}
+                {authorName.charAt(0)}
               </div>
               <div>
                 <p className="font-bold" style={{ fontSize: "0.9375rem", color: "#ffffff" }}>
-                  {article.author ? (
-                    article.author.href ? (
-                      <a
-                        href={article.author.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "#ffffff", borderBottom: "1px solid rgba(255,138,90,0.6)", paddingBottom: "2px" }}
-                      >
-                        {article.author.name}
-                      </a>
-                    ) : (
-                      article.author.name
-                    )
+                  {article.author?.href ? (
+                    <a
+                      href={article.author.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#ffffff", borderBottom: "1px solid rgba(255,138,90,0.6)", paddingBottom: "2px" }}
+                    >
+                      {authorName}
+                    </a>
                   ) : (
-                    "The ARQQA Editorial Team"
+                    authorName
                   )}
                   {article.author && (
                     <span className="font-light" style={{ color: "rgba(255,255,255,0.5)" }}>
@@ -372,9 +370,18 @@ export function ArticleTemplate({ article }: { article: Article }) {
             </p>
             <form
               className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7 max-w-md mx-auto"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = Object.fromEntries(new FormData(form).entries());
+                submitForm("newsletter", data).catch(() => {
+                  // Fails silently — no confirmation UI exists here to update either way.
+                });
+                form.reset();
+              }}
             >
               <input
+                name="email"
                 type="email"
                 required
                 placeholder="you@company.com"
@@ -416,7 +423,7 @@ function RelatedArticleCard({ article }: { article: Article }) {
 
   return (
     <Link
-      href={`/insights/${article.slug}`}
+      href={getArticleUrl(article)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col h-full rounded-3xl overflow-hidden"

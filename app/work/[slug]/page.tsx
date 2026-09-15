@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { CaseStudyTemplate } from "@/components/portfolio/CaseStudyTemplate";
 import { CASE_STUDIES, getCaseStudy } from "@/components/portfolio/portfolio-data";
 
@@ -18,10 +20,10 @@ export async function generateMetadata({
   const caseStudy = getCaseStudy(slug);
   if (!caseStudy) return { title: "Case Study | ARQQA" };
 
-  return {
+  return getPageSeo(`/work/${slug}`, {
     title: `${caseStudy.client} | ARQQA`,
     description: caseStudy.heroLine,
-  };
+  });
 }
 
 export default async function CaseStudyPage({
@@ -35,6 +37,7 @@ export default async function CaseStudyPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/work/${slug}`} />
       <CaseStudyTemplate caseStudy={caseStudy} />
     </PageShell>
   );

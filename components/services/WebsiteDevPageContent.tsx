@@ -6,6 +6,9 @@ import type { ApproachPage } from "./approach-pages-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { submitForm } from "@/lib/forms/submitForm";
+import type { FormFieldMap } from "@/lib/forms/getFormFields";
+import { getArticle, getArticleUrl } from "@/components/insights/insights-data";
 
 /* ══════════════════════════════════════════════════════════════════════
    Shared primitives
@@ -59,16 +62,20 @@ function SectionHead({
   title,
   accentTail,
   body,
+  // The page's h1 sits on a section heading rather than the hero, so one
+  // caller needs h1 while the rest stay h2. Styling is identical either way.
+  as: Heading = "h2",
 }: {
   eyebrow: string;
   title: string;
   accentTail?: string;
   body?: string;
+  as?: "h1" | "h2";
 }) {
   return (
     <Reveal className="text-center mx-auto max-w-3xl mb-14">
       <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
-      <h2
+      <Heading
         className="font-bold"
         style={{
           fontSize: "clamp(1.625rem, 3.3vw, 2.5rem)",
@@ -91,7 +98,7 @@ function SectionHead({
             {accentTail}
           </span>
         )}
-      </h2>
+      </Heading>
       {body && (
         <p
           className="font-light mt-5"
@@ -133,7 +140,7 @@ function MaskedHeading({ lines }: { lines: string[] }) {
   }, []);
 
   return (
-    <h1
+    <h2
       className="font-bold mt-6"
       style={{
         fontSize: "clamp(2.25rem, 5vw, 4rem)",
@@ -169,15 +176,28 @@ function MaskedHeading({ lines }: { lines: string[] }) {
           </span>
         </span>
       ))}
-    </h1>
+    </h2>
   );
 }
 
 /* Primary gradient-rimmed pill CTA — the site's standard */
 function PrimaryCTA({ href, label, small }: { href: string; label: string; small?: boolean }) {
+  // Next.js's Link only auto-scrolls a #hash target when the pathname is
+  // also changing — clicking a same-page "#id" href just updates the URL
+  // hash and leaves scroll position untouched. Handle that case ourselves.
+  function handleClick(e: React.MouseEvent) {
+    if (!href.startsWith("#")) return;
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", href);
+  }
+
   return (
     <Link
       href={href}
+      onClick={handleClick}
       className="relative inline-flex rounded-2xl"
       style={{
         padding: "1px",
@@ -1528,14 +1548,24 @@ const labelStyle: React.CSSProperties = {
   color: "rgba(255,255,255,0.55)",
 };
 
-function LeadForm() {
+function LeadForm({ fields = {} }: { fields?: FormFieldMap }) {
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  const hasConfig = Object.keys(fields).length > 0;
+  const isVisible = (key: string) => !hasConfig || key in fields;
+  const isRequired = (key: string, fallback = true) => fields[key]?.required ?? fallback;
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // NOTE: no backend is wired up yet — this is a UI-only confirmation.
-    // Real submissions need HubSpot form/API wiring with the account's own credentials.
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     setSubmitted(true);
+    try {
+      await submitForm("website-dev-lead", data);
+    } catch {
+      // The confirmation already shows — a failed background submit just
+      // means this lead won't appear in the dashboard.
+    }
   }
 
   if (submitted) {
@@ -1554,62 +1584,78 @@ function LeadForm() {
   return (
     <form onSubmit={handleSubmit} className="rounded-3xl p-8" style={glass}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label style={labelStyle}>Full Name *</label>
-          <input required type="text" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Company Name *</label>
-          <input required type="text" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Email Address *</label>
-          <input required type="email" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Phone Number *</label>
-          <input required type="tel" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Country *</label>
-          <select required style={inputStyle} defaultValue="">
-            <option value="" disabled>
-              Select a country
-            </option>
-            <option>Egypt</option>
-            <option>Saudi Arabia</option>
-            <option>UAE</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div>
-          <label style={labelStyle}>What type of website do you need? *</label>
-          <select required style={inputStyle} defaultValue="">
-            <option value="" disabled>
-              Select a type
-            </option>
-            <option>Corporate</option>
-            <option>E-Commerce</option>
-            <option>Shopify</option>
-            <option>Interactive</option>
-            <option>Not Sure</option>
-          </select>
-        </div>
-        <div>
-          <label style={labelStyle}>Estimated Budget Range</label>
-          <select style={inputStyle} defaultValue="">
-            <option value="">Select a range</option>
-            <option>Under $5K</option>
-            <option>$5K–$15K</option>
-            <option>$15K–$50K</option>
-            <option>$50K+</option>
-            <option>Not Sure</option>
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label style={labelStyle}>Tell us about your project</label>
-          <textarea rows={3} style={{ ...inputStyle, resize: "vertical" }} />
-        </div>
+        {isVisible("fullName") && (
+          <div>
+            <label style={labelStyle}>Full Name *</label>
+            <input required={isRequired("fullName")} name="fullName" type="text" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("companyName") && (
+          <div>
+            <label style={labelStyle}>Company Name *</label>
+            <input required={isRequired("companyName")} name="companyName" type="text" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("email") && (
+          <div>
+            <label style={labelStyle}>Email Address *</label>
+            <input required={isRequired("email")} name="email" type="email" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("phone") && (
+          <div>
+            <label style={labelStyle}>Phone Number *</label>
+            <input required={isRequired("phone")} name="phone" type="tel" style={inputStyle} />
+          </div>
+        )}
+        {isVisible("country") && (
+          <div>
+            <label style={labelStyle}>Country *</label>
+            <select required={isRequired("country")} name="country" style={inputStyle} defaultValue="">
+              <option value="" disabled>
+                Select a country
+              </option>
+              <option>Egypt</option>
+              <option>Saudi Arabia</option>
+              <option>UAE</option>
+              <option>Other</option>
+            </select>
+          </div>
+        )}
+        {isVisible("websiteType") && (
+          <div>
+            <label style={labelStyle}>What type of website do you need? *</label>
+            <select required={isRequired("websiteType")} name="websiteType" style={inputStyle} defaultValue="">
+              <option value="" disabled>
+                Select a type
+              </option>
+              <option>Corporate</option>
+              <option>E-Commerce</option>
+              <option>Shopify</option>
+              <option>Interactive</option>
+              <option>Not Sure</option>
+            </select>
+          </div>
+        )}
+        {isVisible("budget") && (
+          <div>
+            <label style={labelStyle}>Estimated Budget Range</label>
+            <select required={isRequired("budget", false)} name="budget" style={inputStyle} defaultValue="">
+              <option value="">Select a range</option>
+              <option>Under $5K</option>
+              <option>$5K–$15K</option>
+              <option>$15K–$50K</option>
+              <option>$50K+</option>
+              <option>Not Sure</option>
+            </select>
+          </div>
+        )}
+        {isVisible("message") && (
+          <div className="sm:col-span-2">
+            <label style={labelStyle}>Tell us about your project</label>
+            <textarea required={isRequired("message", false)} name="message" rows={3} style={{ ...inputStyle, resize: "vertical" }} />
+          </div>
+        )}
       </div>
       <div className="mt-7 flex justify-center">
         <button type="submit" className="relative inline-flex rounded-2xl" style={{ padding: "1px", background: "linear-gradient(120deg, #ff7a3d 0%, #b6541f 22%, rgba(255,255,255,0.14) 50%, #2f6bff 82%, #5aa2ff 100%)", boxShadow: "0 -10px 32px -6px rgba(255,122,61,0.35), 0 10px 32px -10px rgba(47,107,255,0.3)" }}>
@@ -1632,7 +1678,7 @@ function LeadForm() {
    Page
    ══════════════════════════════════════════════════════════════════════ */
 
-export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
+export function WebsiteDevPageContent({ page, fields = {} }: { page: ApproachPage; fields?: FormFieldMap }) {
   const accentGlow = "rgba(60,125,255,";
   const [activeTier, setActiveTier] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -1677,7 +1723,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
             </p>
 
             <div className="mt-8">
-              <PrimaryCTA href="/start#book-strategy-call" label="🚀 Get Your Free Website Consultation" />
+              <PrimaryCTA href="#website-dev-form" label="🚀 Get Your Free Website Consultation" />
             </div>
           </Reveal>
         </div>
@@ -1706,9 +1752,10 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
       <section className="relative w-full" style={{ padding: "7rem 1.5rem" }}>
         <div className="relative max-w-6xl mx-auto">
           <SectionHead
+            as="h1"
             eyebrow="THE PROBLEM"
-            title="Your Website Is Costing You Customers."
-            accentTail="Every Single Day."
+            title="Web & App Development"
+            accentTail="Company in Egypt"
             body="You already know something is wrong. Visitors land and leave. Your site looks outdated. It doesn't work on mobile. Your competitors are outranking you. You've hired freelancers or cheap agencies before, and the result was always the same: delays, excuses, and a website you're embarrassed to share."
           />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -2071,7 +2118,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
       </section>
 
       {/* ══ 10 · Lead Form ══ */}
-      <section className="relative w-full" style={{ padding: "5rem 1.5rem" }}>
+      <section id="website-dev-form" className="relative w-full scroll-mt-24" style={{ padding: "5rem 1.5rem" }}>
         <div className="relative max-w-3xl mx-auto">
           <Reveal className="text-center">
             <h2 className="font-bold" style={{ fontSize: "clamp(1.625rem, 3.3vw, 2.5rem)", lineHeight: 1.2, letterSpacing: "-0.02em", color: "#ffffff" }}>
@@ -2096,7 +2143,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
             </p>
           </Reveal>
           <Reveal delay={0.15} className="mt-12">
-            <LeadForm />
+            <LeadForm fields={fields} />
           </Reveal>
         </div>
       </section>
@@ -2124,7 +2171,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {RELATED_INSIGHTS.map((a, i) => (
               <Reveal key={a.slug} delay={Math.min(i * 0.08, 0.24)}>
-                <Link href={`/insights/${a.slug}`} className="relative flex flex-col h-full rounded-3xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.11)" }}>
+                <Link href={getArticleUrl(getArticle(a.slug)!)} className="relative flex flex-col h-full rounded-3xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.11)" }}>
                   <div
                     aria-hidden="true"
                     style={{ aspectRatio: "16 / 9", backgroundImage: `url(${a.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -2195,7 +2242,7 @@ export function WebsiteDevPageContent({ page }: { page: ApproachPage }) {
               to work?
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-9">
-              <PrimaryCTA href="/start#book-strategy-call" label="Get Your Free Website Consultation" />
+              <PrimaryCTA href="#website-dev-form" label="Get Your Free Website Consultation" />
               <SecondaryLink href="/work" label="See Our Website Portfolio" />
             </div>
           </Reveal>

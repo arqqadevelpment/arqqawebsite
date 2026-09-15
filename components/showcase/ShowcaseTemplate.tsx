@@ -117,6 +117,161 @@ function Figure({
   );
 }
 
+/* ── Counting numbers ──
+   Splits a stat's display string into numeric runs and static text, then
+   animates each numeric run up from zero once the block scrolls into view.
+   Handles everything from "83M SAR" (one run) to "7% → 25%" (two runs) to
+   plain strings like "First" (no run — rendered as-is, no animation). */
+function useCountUp(target: number, start: boolean, duration = 1400) {
+  const [value, setValue] = useState(start ? 0 : target);
+
+  useEffect(() => {
+    if (!start) return;
+    let raf: number;
+    const startedAt = performance.now();
+
+    function tick(now: number) {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(target * eased);
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    }
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [start, target, duration]);
+
+  return value;
+}
+
+function AnimatedNumber({
+  target,
+  decimals,
+  start,
+}: {
+  target: number;
+  decimals: number;
+  start: boolean;
+}) {
+  const value = useCountUp(target, start);
+  return <>{value.toFixed(decimals)}</>;
+}
+
+function StatValue({ value, start }: { value: string; start: boolean }) {
+  const parts = value.split(/(\d+\.?\d*)/g).filter((part) => part !== "");
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        /^\d+\.?\d*$/.test(part) ? (
+          <AnimatedNumber
+            key={i}
+            target={parseFloat(part)}
+            decimals={part.includes(".") ? part.split(".")[1].length : 0}
+            start={start}
+          />
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
+/* ── Results / stats row ── */
+function StatsBlock({
+  heading,
+  items,
+}: {
+  heading: string;
+  items: { value: string; label: string }[];
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="text-center">
+      <Eyebrow className="mb-5">{heading}</Eyebrow>
+      <h2
+        className="font-bold"
+        style={{
+          fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+          lineHeight: 1.2,
+          letterSpacing: "-0.02em",
+          color: "#ffffff",
+          marginBottom: "2.5rem",
+        }}
+      >
+        Hard numbers,{" "}
+        <span
+          style={{
+            backgroundImage: "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
+          }}
+        >
+          not adjectives.
+        </span>
+      </h2>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "1.25rem",
+        }}
+      >
+        {items.map((item) => (
+          <div key={item.label} className="showcase-metric rounded-2xl p-6 text-center">
+            <div
+              className="font-bold"
+              style={{
+                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                backgroundImage:
+                  "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              <StatValue value={item.value} start={visible} />
+            </div>
+            <p
+              className="font-light mt-3"
+              style={{
+                fontSize: "0.875rem",
+                lineHeight: 1.6,
+                color: "rgba(255,255,255,0.58)",
+              }}
+            >
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ShowcaseTemplate({
   project,
   basePath = "/our-work",
@@ -287,6 +442,14 @@ export function ShowcaseTemplate({
               );
             }
 
+            if (block.type === "stats") {
+              return (
+                <Reveal key={`stats-${i}`}>
+                  <StatsBlock heading={block.heading ?? "The Results"} items={block.items} />
+                </Reveal>
+              );
+            }
+
             if (block.type === "figure") {
               return (
                 <Reveal key={block.media.src} delay={0.05}>
@@ -440,6 +603,13 @@ export function ShowcaseTemplate({
       </section>
 
       <style>{`
+        .showcase-metric {
+          background: linear-gradient(170deg, rgba(14,16,26,0.62) 0%, rgba(6,8,14,0.72) 100%);
+          border: 1px solid rgba(255,255,255,0.1);
+          transition: border-color 0.4s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
+        }
+        .showcase-metric:hover { border-color: rgba(255,138,90,0.4); transform: translateY(-4px); }
+
         .showcase-back {
           color: rgba(255,255,255,0.5);
           transition: color 0.25s ease;

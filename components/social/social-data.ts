@@ -237,6 +237,14 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         ],
       },
       {
+        type: "stats",
+        items: [
+          { value: "5M+", label: "App installs" },
+          { value: "7% → 25%", label: "Registration conversion rate improvement" },
+          { value: "3.5x", label: "Conversion rate increase" },
+        ],
+      },
+      {
         type: "text",
         body: "The strategy paired targeted online advertising with partner-business promotions and always-on feature content. It grew active users on the platform, strengthened partner relationships, boosted customer loyalty, and lifted engagement with the app's core features.",
       },
@@ -282,7 +290,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       },
     ],
     card: {
-      tier: "Social Media",
+      tier: "Performance",
       market: "Morocco",
       summary:
         "Referral and feature content that turned a loyalty app's downloads into an active, referring user base.",
@@ -355,6 +363,15 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
         ],
       },
       {
+        type: "stats",
+        items: [
+          { value: "83M SAR", label: "Digital revenue generated" },
+          { value: "350K SAR", label: "Total ad spend" },
+          { value: "237x", label: "Return on ad spend" },
+          { value: "First", label: "Amadeus-advertising platform integration in the region" },
+        ],
+      },
+      {
         type: "text",
         body: "National holidays and short-haul video carried the same calendar, greeting content timed to the day, and a summer campaign built to move beyond the still frame.",
       },
@@ -413,7 +430,7 @@ export const SOCIAL_PROJECTS: ShowcaseProject[] = [
       },
     ],
     card: {
-      tier: "Social Media",
+      tier: "Performance",
       market: "Egypt",
       summary:
         "Destination campaigns, service features, and always-on content that kept a national carrier's feed worth following.",

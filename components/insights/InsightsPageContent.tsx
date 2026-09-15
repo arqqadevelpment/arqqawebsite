@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ARTICLES, CATEGORIES } from "./insights-data";
+import { ARTICLES, CATEGORIES, getArticleUrl } from "./insights-data";
 import type { Article, Category } from "./insights-data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import Link from "next/link";
@@ -57,7 +57,7 @@ function ArticleCard({ article, delay }: { article: Article; delay: number }) {
   return (
     <Reveal delay={delay} className="h-full">
       <Link
-        href={`/insights/${article.slug}`}
+        href={getArticleUrl(article)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative flex flex-col h-full rounded-3xl overflow-hidden"

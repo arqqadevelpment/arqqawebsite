@@ -78,10 +78,16 @@ export type Article = {
   /** Filename in /public/insights/, e.g. "my-article.jpg" — omit if none */
   image?: string;
   body: ArticleBlock[];
-  /** Byline. Falls back to the ARQQA editorial card when omitted. */
+  /** Byline. Falls back to {@link DEFAULT_AUTHOR_NAME} when omitted. */
   author?: { name: string; role: string; href?: string; bio?: string };
   related: string[];
 };
+
+/**
+ * Byline for articles with no named author. Also used as the Article
+ * schema's author, so the visible credit and the structured data agree.
+ */
+export const DEFAULT_AUTHOR_NAME = "ARQQA Digital";
 
 export const ARTICLES: Article[] = [
   {
@@ -305,7 +311,7 @@ export const ARTICLES: Article[] = [
       {
         type: "link",
         text: "Explore ARQQA’s Social Media & Community Management services",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
     ],
     related: [
@@ -370,7 +376,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "When strategy, design, messaging, and visual elements align cohesively, businesses achieve stronger market positioning and customer recognition.",
       },
-      { type: "link", text: "Explore ARQQA's Asset Building services", href: "/services/asset-building" },
+      { type: "link", text: "Explore ARQQA's Asset Building services", href: "/services/brand-strategy-positioning" },
     ],
     related: [
       "best-branding-agency-in-egypt-how-to-choose-the-right-partner",
@@ -426,7 +432,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "ARQQA combines strategic thinking with visual design across multiple touchpoints. Successful branding partnerships require understanding of business objectives, audience needs, and market positioning.",
       },
-      { type: "link", text: "Explore ARQQA's branding services", href: "/services/asset-building" },
+      { type: "link", text: "Explore ARQQA's branding services", href: "/services/brand-strategy-positioning" },
     ],
     related: [
       "branding-services-guide-what-your-brand-actually-needs-beyond-a-logo",
@@ -874,7 +880,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "The most frequent failure isn't budget size, it's treating SEO as a one-time project, running PPC without proper tracking or negative-keyword strategy, and appointing separate vendors for SEO and PPC with no shared KPIs.",
       },
-      { type: "link", text: "Explore ARQQA's Strategy & Consulting services", href: "/services/strategy-consulting" },
+      { type: "link", text: "Explore ARQQA's Strategy & Consulting services", href: "/services/marketing-strategy-digital-assessment" },
     ],
     related: [
       "seo-services-in-egypt",
@@ -2552,6 +2558,16 @@ export const ARTICLES: Article[] = [
     ],
   },
 ];
+
+/** URL segment for a category, e.g. "Social Media Management" -> "social-media-management". */
+export function categorySlug(category: Category): string {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+/** The article's full public path, e.g. /insights/seo/best-seo-company. */
+export function getArticleUrl(article: Pick<Article, "slug" | "category">): string {
+  return `/insights/${categorySlug(article.category)}/${article.slug}`;
+}
 
 export function getArticle(slug: string) {
   return ARTICLES.find((a) => a.slug === slug);

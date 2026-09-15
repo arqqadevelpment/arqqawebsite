@@ -7,11 +7,11 @@ const LINKS = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "The Catalyst System™", href: "/catalyst-system" },
-  { label: "Autonomous", href: "/autonomous" },
-  { label: "Work", href: "/work" },
+  { label: "Works", href: "/works" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
   { label: "Career", href: "/career" },
+  { label: "Autonomous", href: "/autonomous" },
 ];
 
 function NavLink({
@@ -22,6 +22,10 @@ function NavLink({
   onClick?: () => void;
 }) {
   const [hovered, setHovered] = useState(false);
+  // Autonomous carries the site's brand gradient (same ramp used for
+  // accent spans elsewhere) instead of the plain white/gray nav text, so
+  // it reads as the standout link rather than one item in a flat list.
+  const isAutonomous = link.label === "Autonomous";
 
   return (
     <Link
@@ -30,12 +34,28 @@ function NavLink({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="font-light whitespace-nowrap"
-      style={{
-        fontSize: "0.875rem",
-        letterSpacing: "0.01em",
-        color: hovered ? "#ffffff" : "rgba(255,255,255,0.6)",
-        transition: "color 0.3s ease",
-      }}
+      style={
+        isAutonomous
+          ? {
+              fontSize: "0.875rem",
+              letterSpacing: "0.01em",
+              fontWeight: 600,
+              backgroundImage: hovered
+                ? "none"
+                : "linear-gradient(90deg, #3444e0 0%, #6f5be0 45%, #ff5a2b 100%)",
+              WebkitBackgroundClip: hovered ? "border-box" : "text",
+              backgroundClip: hovered ? "border-box" : "text",
+              color: hovered ? "#ffffff" : "transparent",
+              opacity: hovered ? 1 : 0.85,
+              transition: "opacity 0.3s ease, color 0.3s ease",
+            }
+          : {
+              fontSize: "0.875rem",
+              letterSpacing: "0.01em",
+              color: hovered ? "#ffffff" : "rgba(255,255,255,0.6)",
+              transition: "color 0.3s ease",
+            }
+      }
     >
       {link.label}
     </Link>

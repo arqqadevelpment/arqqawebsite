@@ -63,8 +63,10 @@ export const HERO = {
 };
 
 export const PROBLEM = {
-  heading: "Most Performance Marketing",
-  headingAccent: "Isn't Performing.",
+  // Carries the page's h1: the search term, then the hero's own line, which
+  // moved down here when the hero became an h2.
+  heading: "Performance Marketing Agency —",
+  headingAccent: `${HERO.headline} ${HERO.headlineAccent}`,
   body: "You've run ads before. Maybe you're running them right now. But impressions without strategy is just spend. Clicks without a funnel is just traffic. And leads without qualification is just noise. The problem isn't that performance marketing doesn't work, it's that most of it isn't built as a system.",
   cards: [
     {

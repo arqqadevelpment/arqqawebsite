@@ -32,7 +32,11 @@ export type ShowcaseBlock =
   | { type: "pair"; media: [ShowcaseMedia, ShowcaseMedia] }
   /** 2 or 3 figures actually side by side, stacking to one column on
       mobile, for content that reads as a set (e.g. a reel next to a reel) */
-  | { type: "grid"; media: ShowcaseMedia[] };
+  | { type: "grid"; media: ShowcaseMedia[] }
+  /** A row of headline metrics, e.g. "The Results". Numeric runs inside
+      `value` (including ones embedded mid-string, like "7% → 25%") count up
+      from zero the first time the block scrolls into view. */
+  | { type: "stats"; heading?: string; items: { value: string; label: string }[] };
 
 export type ShowcaseProject = {
   /** URL slug — the page lives at /our-work/<slug> */
@@ -57,7 +61,7 @@ export type ShowcaseProject = {
   /** How this project shows up as a card on the /work hub. */
   card: {
     /** Build tier, used as the card's category label */
-    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media" | "Branding";
+    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media" | "Branding" | "Performance";
     market: string;
     summary: string;
     image: string;

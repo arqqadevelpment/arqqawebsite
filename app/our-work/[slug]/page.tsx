@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { getPageSeo } from "@/lib/content/seo";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
+import { PageSchema } from "@/components/seo/PageSchema";
 import { ShowcaseTemplate } from "@/components/showcase/ShowcaseTemplate";
 import {
   SHOWCASE_PROJECTS,
@@ -21,10 +23,10 @@ export async function generateMetadata({
   const project = getShowcaseProject(slug);
   if (!project) return { title: "Our Work | ARQQA" };
 
-  return {
+  return getPageSeo(`/our-work/${slug}`, {
     title: `${project.title} | ARQQA`,
     description: project.intro,
-  };
+  });
 }
 
 export default async function ShowcaseProjectPage({
@@ -38,6 +40,7 @@ export default async function ShowcaseProjectPage({
 
   return (
     <PageShell>
+      <PageSchema path={`/our-work/${slug}`} />
       <ShowcaseTemplate project={project} />
     </PageShell>
   );

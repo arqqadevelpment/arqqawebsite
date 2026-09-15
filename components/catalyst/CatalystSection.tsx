@@ -37,24 +37,40 @@ const PHASES: Phase[] = [
   },
 ];
 
-/* ── Below this width, the diagram switches from hover-anchored side/top
-   cards to a single tap-to-open card centred above the whole stage. Matches
-   the point where the ring itself gets tight enough that per-point card
-   placement starts crowding the screen edges. */
-function useIsMobile(breakpointPx = 640) {
-  /* Starts false so the client's first render matches the server-rendered
-     HTML (desktop layout) — the real value is read after mount, same as any
-     window-dependent state. */
-  const [isMobile, setIsMobile] = useState(false);
+/* Tiny helper: track a media query's live value, re-syncing on change
+   (viewport resize, or a DevTools device-mode toggle after mount). Starts
+   `false` so the client's first render matches the server-rendered HTML —
+   the real value is read after mount, same as any window-dependent state. */
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpointPx}px)`);
+    const mq = window.matchMedia(query);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from an external source (matchMedia), the documented exception to this rule
-    setIsMobile(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setMatches(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
-  }, [breakpointPx]);
-  return isMobile;
+  }, [query]);
+  return matches;
+}
+
+/* Below this width, the diagram switches from per-point side/top cards to a
+   single card centred above the whole stage — the ring gets tight enough
+   that per-point placement starts crowding the screen edges. Purely a
+   layout call, independent of how the visitor interacts with it. */
+function useIsNarrow(breakpointPx = 640) {
+  return useMediaQuery(`(max-width: ${breakpointPx}px)`);
+}
+
+/* Whether the pointer can hover at all — a touch phone can't, but neither
+   can a touch-primary laptop at a wide viewport, and a narrow desktop
+   window still can. This must not be inferred from screen width: that
+   conflated the two and left touch devices in the (641-767px) gap between
+   this component's old 640px cutoff and the hero's 767px one starved of
+   any way to open a card, and left wide touchscreen laptops stuck offering
+   hover that can never fire. */
+function useHasHover() {
+  return useMediaQuery("(hover: hover) and (pointer: fine)");
 }
 
 /* ── Shared reveal-on-scroll wrapper (fade-in on mount, matches the rest of the site) ── */
@@ -278,7 +294,8 @@ export function CatalystSection() {
   const [active, setActive] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isMobile = useIsMobile();
+  const isNarrow = useIsNarrow();
+  const hasHover = useHasHover();
 
   function handleEnter(i: number) {
     setActive(i);
@@ -449,24 +466,24 @@ export function CatalystSection() {
                 <NumberedPoint
                   phase={phase}
                   active={active === i}
-                  onEnter={isMobile ? () => {} : () => handleEnter(i)}
-                  onLeave={isMobile ? () => {} : handleLeave}
+                  onEnter={hasHover ? () => handleEnter(i) : () => {}}
+                  onLeave={hasHover ? handleLeave : () => {}}
                   onTap={() => handleTap(i)}
                 />
-                {/* Desktop: card anchored beside/above its own point.
-                    Mobile: skipped here — one shared card renders below,
-                    centred above the whole stage instead. */}
-                {!isMobile && (
+                {/* Wide layout: card anchored beside/above its own point.
+                    Narrow layout: skipped here — one shared card renders
+                    below, centred above the whole stage instead. */}
+                {!isNarrow && (
                   <PhaseCard phase={phase} placement={placement} visible={active === i} />
                 )}
               </div>
             );
           })}
 
-          {/* Mobile — single card, always above the central shape, never
-              beside it. Anchored to the stage itself so it stays centred
-              regardless of which point is active. */}
-          {isMobile && active !== null && (
+          {/* Narrow layout — single card, always above the central shape,
+              never beside it. Anchored to the stage itself so it stays
+              centred regardless of which point is active. */}
+          {isNarrow && active !== null && (
             <PhaseCard phase={PHASES[active]} placement="top" visible />
           )}
         </div>

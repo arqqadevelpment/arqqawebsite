@@ -348,9 +348,9 @@ export function FactsSection() {
         style={{ willChange: "transform, opacity" }}
       >
         {/* Heading */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-16 mx-auto">
           <Eyebrow className="mb-5">BY THE NUMBERS</Eyebrow>
-          <h2
+          <h1
             className="font-bold"
             style={{
               fontSize: "clamp(1.875rem, 4vw, 3rem)",
@@ -360,7 +360,8 @@ export function FactsSection() {
               textShadow: "0 2px 24px rgba(0,0,0,0.5)",
             }}
           >
-            The Numbers Behind{" "}
+            Digital Marketing Agency in Egypt
+            <br />
             <span
               style={{
                 backgroundImage:
@@ -369,12 +370,11 @@ export function FactsSection() {
                 backgroundClip: "text",
                 color: "transparent",
                 filter: "drop-shadow(0 0 30px rgba(52,68,224,0.35))",
-                whiteSpace: "nowrap",
               }}
             >
-              the&nbsp;Certainty
+              Agencies Sell Creativity.
             </span>
-          </h2>
+          </h1>
           <p
             className="font-light mt-5"
             style={{

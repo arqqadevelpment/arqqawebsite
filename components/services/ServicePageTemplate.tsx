@@ -228,7 +228,7 @@ export function ServicePageTemplate({ service }: { service: ServiceDetail }) {
                 textShadow: "0 2px 40px rgba(0,0,0,0.6)",
               }}
             >
-              {service.title}
+              {service.heroTitle ?? service.title}
             </h1>
 
             <p

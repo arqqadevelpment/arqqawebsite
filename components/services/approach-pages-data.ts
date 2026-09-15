@@ -26,8 +26,20 @@ export type ApproachPage = {
   /** Optional background image for the closing CTA panel */
   ctaImage?: string;
 
+  /**
+   * Moves the page's h1 off the hero tagline and onto the problem heading,
+   * so the heading can carry the page's search term. One flag drives both
+   * tags, so they can't drift into two h1s or none.
+   */
+  problemCarriesH1?: boolean;
+
   problem: {
     heading: string;
+    /**
+     * Replaces the shared "THE PROBLEM WE SOLVE" label. `null` drops the
+     * label entirely; omit to keep the shared one.
+     */
+    eyebrow?: string | null;
     body: string;
   };
 
@@ -62,7 +74,7 @@ export type ApproachPage = {
 
 export const APPROACH_PAGES: ApproachPage[] = [
   {
-    parentSlug: "strategy-consulting",
+    parentSlug: "marketing-strategy-digital-assessment",
     parentTitle: "Strategy & Consulting",
     slug: "go-to-market",
     title: "Go-to-Market Strategy",
@@ -73,8 +85,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
     accent: "blue",
     image: "/services/go-to-market-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
+    problemCarriesH1: true,
     problem: {
-      heading: "Most go-to-market failures aren't execution failures. They're alignment failures.",
+      heading:
+        "Go-to-Market Strategy — You Don't Have a Launch Problem. You Have a Strategy Problem.",
+      eyebrow:
+        "Most go-to-market failures aren't execution failures. They're alignment failures.",
       body: "Teams move in different directions. Creative builds for the wrong audience. Media buys on the wrong channels. The brand launches, and nothing moves. A go-to-market strategy isn't a presentation. It's a decision-making framework that every team operates from on day one.",
     },
     approach: {
@@ -116,7 +132,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Growth Audit",
         description: "Validate your current baseline before launching.",
-        href: "/services/strategy-consulting/growth-audit",
+        href: "/services/marketing-strategy-digital-assessment/growth-audit",
       },
       {
         label: "The Catalyst System™",
@@ -126,7 +142,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Media & Community Management",
         description: "Activate the channel plan.",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
     ],
     cta: {
@@ -135,7 +151,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "strategy-consulting",
+    parentSlug: "marketing-strategy-digital-assessment",
     parentTitle: "Strategy & Consulting",
     slug: "growth-audit",
     title: "Growth Audit",
@@ -181,12 +197,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Go-to-Market Strategy",
         description: "Act on what the audit reveals.",
-        href: "/services/strategy-consulting/go-to-market",
+        href: "/services/marketing-strategy-digital-assessment/go-to-market",
       },
       {
         label: "Technology",
         description: "Restructure the media mix and fix the data infrastructure.",
-        href: "/services/technology",
+        href: "/services/web-app-development",
       },
       {
         label: "The Catalyst System™",
@@ -200,7 +216,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "strategy-consulting",
+    parentSlug: "marketing-strategy-digital-assessment",
     parentTitle: "Strategy & Consulting",
     slug: "competitive-analysis",
     title: "Competitive Analysis",
@@ -253,12 +269,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Go-to-Market Strategy",
         description: "Use the intelligence to build the plan.",
-        href: "/services/strategy-consulting/go-to-market",
+        href: "/services/marketing-strategy-digital-assessment/go-to-market",
       },
       {
         label: "Asset Building",
         description: "Differentiate visually as well as strategically.",
-        href: "/services/asset-building",
+        href: "/services/brand-strategy-positioning",
       },
       {
         label: "The Catalyst System™",
@@ -272,7 +288,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "strategy-consulting",
+    parentSlug: "marketing-strategy-digital-assessment",
     parentTitle: "Strategy & Consulting",
     slug: "discovery-workshops",
     title: "Paid Discovery Workshops",
@@ -321,7 +337,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Go-to-Market Strategy",
         description: "The natural next step after the workshop.",
-        href: "/services/strategy-consulting/go-to-market",
+        href: "/services/marketing-strategy-digital-assessment/go-to-market",
       },
       {
         label: "The Catalyst System™",
@@ -331,7 +347,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Growth Audit",
         description: "If a deeper diagnostic is needed before the workshop.",
-        href: "/services/strategy-consulting/growth-audit",
+        href: "/services/marketing-strategy-digital-assessment/growth-audit",
       },
     ],
     cta: {
@@ -340,7 +356,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "asset-building",
+    parentSlug: "brand-strategy-positioning",
     parentTitle: "Asset Building",
     slug: "branding",
     title: "Brand Identity & Design",
@@ -416,17 +432,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Visual Identity Rollout Kits",
         description: "Deploy the brand across all channels.",
-        href: "/services/asset-building/visual-identity",
+        href: "/services/brand-strategy-positioning/visual-identity",
       },
       {
         label: "Technology",
         description: "Translate the brand to digital.",
-        href: "/services/technology",
+        href: "/services/web-app-development",
       },
       {
         label: "Social Media Video Production",
         description: "Bring the brand to life in motion.",
-        href: "/services/video-production",
+        href: "/services/social-media-video-production",
       },
     ],
     cta: {
@@ -435,7 +451,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "asset-building",
+    parentSlug: "brand-strategy-positioning",
     parentTitle: "Asset Building",
     slug: "company-profiles",
     title: "Company Profiles & Collateral",
@@ -446,8 +462,11 @@ export const APPROACH_PAGES: ApproachPage[] = [
     accent: "blue",
     image: "/services/asset-building-approach-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
+    problemCarriesH1: true,
     problem: {
-      heading: "Collateral is often the first thing a prospect judges.",
+      heading:
+        "Company Profile Design Services — Every Touchpoint Is a Brand Impression. Make It Count.",
+      eyebrow: "Collateral is often the first thing a prospect judges.",
       body: "A poorly designed company profile or a generic capability statement signals that your attention to detail stops at the front door. ARQQA builds collateral that communicates credibility before you've said a word.",
     },
     approach: {
@@ -484,17 +503,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Brand Identity & Design",
         description: "Ensure collateral is built on a solid brand foundation.",
-        href: "/services/asset-building/branding",
+        href: "/services/brand-strategy-positioning/branding",
       },
       {
         label: "Visual Identity Rollout Kits",
         description: "Deploy across all additional touchpoints.",
-        href: "/services/asset-building/visual-identity",
+        href: "/services/brand-strategy-positioning/visual-identity",
       },
       {
         label: "Social Media Video Production",
         description: "Extend the narrative into motion.",
-        href: "/services/video-production",
+        href: "/services/social-media-video-production",
       },
     ],
     cta: {
@@ -503,7 +522,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "asset-building",
+    parentSlug: "brand-strategy-positioning",
     parentTitle: "Asset Building",
     slug: "visual-identity",
     title: "Visual Identity Rollout Kits",
@@ -552,17 +571,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Brand Identity & Design",
         description: "The prerequisite for any rollout kit.",
-        href: "/services/asset-building/branding",
+        href: "/services/brand-strategy-positioning/branding",
       },
       {
         label: "Social Media & Community Management",
         description: "Operate with the templates day-to-day.",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
       {
         label: "Social Media Video Production",
         description: "Add motion to the visual identity.",
-        href: "/services/video-production",
+        href: "/services/social-media-video-production",
       },
     ],
     cta: {
@@ -571,7 +590,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "technology",
+    parentSlug: "web-app-development",
     parentTitle: "Technology",
     slug: "website",
     title: "Website Design & Development",
@@ -628,12 +647,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "UI/UX Design",
         description: "Deep-dive UX research for complex products.",
-        href: "/services/technology/ux-design",
+        href: "/services/web-app-development/ux-design",
       },
       {
         label: "CRM Integration & Automation",
         description: "Connect the website to your sales pipeline.",
-        href: "/services/technology/crm",
+        href: "/services/web-app-development/crm",
       },
       {
         label: "The Catalyst System™",
@@ -647,7 +666,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "technology",
+    parentSlug: "web-app-development",
     parentTitle: "Technology",
     slug: "mobile-apps",
     title: "Mobile App Design & Development",
@@ -658,8 +677,10 @@ export const APPROACH_PAGES: ApproachPage[] = [
     accent: "orange",
     image: "/services/technology-website-hero.webp",
     ctaImage: "/services/go-to-market-cta.webp",
+    problemCarriesH1: true,
     problem: {
-      heading: "App abandonment is a design and onboarding problem, not a marketing problem.",
+      heading: "Mobile App Development Company — An App Nobody Uses Is Infrastructure Nobody Needed.",
+      eyebrow: "App abandonment is a design and onboarding problem, not a marketing problem.",
       body: "Most apps lose 77% of their daily active users within three days of install. The failure point is almost always the onboarding experience, too many steps, too little clarity, too much friction before the first value moment. We eliminate that friction before launch.",
     },
     approach: {
@@ -705,7 +726,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "UI/UX Design",
         description: "Extended research for complex product experiences.",
-        href: "/services/technology/ux-design",
+        href: "/services/web-app-development/ux-design",
       },
       {
         label: "The Catalyst System™",
@@ -715,7 +736,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "CRM Integration & Automation",
         description: "Connect app user data to the marketing stack.",
-        href: "/services/technology/crm",
+        href: "/services/web-app-development/crm",
       },
     ],
     cta: {
@@ -724,7 +745,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "technology",
+    parentSlug: "web-app-development",
     parentTitle: "Technology",
     slug: "ux-design",
     title: "UI/UX Design",
@@ -778,17 +799,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Website Design & Development",
         description: "Full-stack execution of the UX design.",
-        href: "/services/technology/website",
+        href: "/services/web-app-development/website",
       },
       {
         label: "Mobile App Design & Development",
         description: "Product design with development included.",
-        href: "/services/technology/mobile-apps",
+        href: "/services/web-app-development/mobile-apps",
       },
       {
         label: "E-commerce",
         description: "Conversion-optimized UX for store experiences.",
-        href: "/services/technology/ecommerce",
+        href: "/services/web-app-development/ecommerce",
       },
     ],
     cta: {
@@ -797,7 +818,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "technology",
+    parentSlug: "web-app-development",
     parentTitle: "Technology",
     slug: "crm",
     title: "CRM Integration & Automation",
@@ -857,12 +878,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Website Design & Development",
         description: "Ensure the site feeds the CRM correctly.",
-        href: "/services/technology/website",
+        href: "/services/web-app-development/website",
       },
       {
         label: "Strategy & Consulting",
         description: "Define the pipeline before the CRM is built.",
-        href: "/services/strategy-consulting/go-to-market",
+        href: "/services/marketing-strategy-digital-assessment/go-to-market",
       },
     ],
     cta: {
@@ -871,7 +892,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "technology",
+    parentSlug: "web-app-development",
     parentTitle: "Technology",
     slug: "ecommerce",
     title: "E-commerce",
@@ -930,12 +951,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Media & Community Management",
         description: "Build the social audience that feeds the store.",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
       {
         label: "CRM Integration & Automation",
         description: "Connect the store to your customer data stack.",
-        href: "/services/technology/crm",
+        href: "/services/web-app-development/crm",
       },
     ],
     cta: {
@@ -944,7 +965,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "community-management",
+    parentSlug: "social-media-management",
     parentTitle: "Social Media & Community Management",
     slug: "moderation",
     title: "Community Moderation",
@@ -993,17 +1014,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Listening",
         description: "Monitor beyond your own profiles.",
-        href: "/services/community-management/listening",
+        href: "/services/social-media-management/listening",
       },
       {
         label: "Crisis Handling",
         description: "Rapid response when moderation becomes a PR situation.",
-        href: "/services/community-management/crisis",
+        href: "/services/social-media-management/crisis",
       },
       {
         label: "Social CX Automation",
         description: "Automate high-volume, low-complexity responses.",
-        href: "/services/community-management/cx-automation",
+        href: "/services/social-media-management/cx-automation",
       },
     ],
     cta: {
@@ -1012,7 +1033,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "community-management",
+    parentSlug: "social-media-management",
     parentTitle: "Social Media & Community Management",
     slug: "listening",
     title: "Social Listening",
@@ -1061,17 +1082,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Crisis Handling",
         description: "Act immediately on the intelligence listening surfaces.",
-        href: "/services/community-management/crisis",
+        href: "/services/social-media-management/crisis",
       },
       {
         label: "Community Moderation",
         description: "Respond to what listening uncovers on owned channels.",
-        href: "/services/community-management/moderation",
+        href: "/services/social-media-management/moderation",
       },
       {
         label: "Competitive Analysis",
         description: "Combine listening data with structured competitor intelligence.",
-        href: "/services/strategy-consulting/competitive-analysis",
+        href: "/services/marketing-strategy-digital-assessment/competitive-analysis",
       },
     ],
     cta: {
@@ -1080,7 +1101,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "community-management",
+    parentSlug: "social-media-management",
     parentTitle: "Social Media & Community Management",
     slug: "crisis",
     title: "Crisis Handling",
@@ -1133,12 +1154,12 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Listening",
         description: "Early warning infrastructure.",
-        href: "/services/community-management/listening",
+        href: "/services/social-media-management/listening",
       },
       {
         label: "Community Moderation",
         description: "First line of defense before escalation.",
-        href: "/services/community-management/moderation",
+        href: "/services/social-media-management/moderation",
       },
     ],
     cta: {
@@ -1147,7 +1168,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "community-management",
+    parentSlug: "social-media-management",
     parentTitle: "Social Media & Community Management",
     slug: "cx-automation",
     title: "Social CX Automation",
@@ -1200,17 +1221,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Community Moderation",
         description: "Human coverage for escalated and complex interactions.",
-        href: "/services/community-management/moderation",
+        href: "/services/social-media-management/moderation",
       },
       {
         label: "CRM Integration & Automation",
         description: "Connect automation to your CRM for lead capture.",
-        href: "/services/technology/crm",
+        href: "/services/web-app-development/crm",
       },
       {
         label: "Social Listening",
         description: "Monitor what the automation misses.",
-        href: "/services/community-management/listening",
+        href: "/services/social-media-management/listening",
       },
     ],
     cta: {
@@ -1219,7 +1240,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "reels",
     title: "Reels & Short-Form Content",
@@ -1272,7 +1293,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Media & Community Management",
         description: "Integrate Reels into the full content calendar.",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
       {
         label: "The Catalyst System™",
@@ -1282,7 +1303,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Content Creator Direction & Scripting",
         description: "For creator-led content strategy.",
-        href: "/services/video-production/scripting",
+        href: "/services/social-media-video-production/scripting",
       },
     ],
     cta: {
@@ -1291,7 +1312,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "brand-films",
     title: "Brand Films & Commercials",
@@ -1346,7 +1367,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Motion Graphics & Animation",
         description: "Integrated into brand films for added production value.",
-        href: "/services/video-production/motion-graphics",
+        href: "/services/social-media-video-production/motion-graphics",
       },
       {
         label: "The Catalyst System™",
@@ -1356,7 +1377,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Brand Identity & Design",
         description: "Ensure the film is consistent with brand architecture.",
-        href: "/services/asset-building/branding",
+        href: "/services/brand-strategy-positioning/branding",
       },
     ],
     cta: {
@@ -1365,7 +1386,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "product-videos",
     title: "Product & Service Videos",
@@ -1414,7 +1435,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Motion Graphics & Animation",
         description: "For SaaS, fintech, or complex service explanations.",
-        href: "/services/video-production/motion-graphics",
+        href: "/services/social-media-video-production/motion-graphics",
       },
       {
         label: "The Catalyst System™",
@@ -1424,7 +1445,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "E-commerce",
         description: "Embed in product pages for direct conversion impact.",
-        href: "/services/technology/ecommerce",
+        href: "/services/web-app-development/ecommerce",
       },
     ],
     cta: {
@@ -1433,7 +1454,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "testimonials",
     title: "Testimonial & Case Study Videos",
@@ -1482,7 +1503,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Brand Films & Commercials",
         description: "More produced narrative alongside authentic testimonials.",
-        href: "/services/video-production/brand-films",
+        href: "/services/social-media-video-production/brand-films",
       },
       {
         label: "Portfolio",
@@ -1501,7 +1522,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "motion-graphics",
     title: "Motion Graphics & Animation",
@@ -1550,17 +1571,17 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Brand Films & Commercials",
         description: "Combine animation with live-action production.",
-        href: "/services/video-production/brand-films",
+        href: "/services/social-media-video-production/brand-films",
       },
       {
         label: "Product & Service Videos",
         description: "Animated explainer as product demo.",
-        href: "/services/video-production/product-videos",
+        href: "/services/social-media-video-production/product-videos",
       },
       {
         label: "Reels & Short-Form Content",
         description: "Animated content for organic social.",
-        href: "/services/video-production/reels",
+        href: "/services/social-media-video-production/reels",
       },
     ],
     cta: {
@@ -1569,7 +1590,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     },
   },
   {
-    parentSlug: "video-production",
+    parentSlug: "social-media-video-production",
     parentTitle: "Social Media Video Production",
     slug: "scripting",
     title: "Content Creator Direction & Scripting",
@@ -1622,7 +1643,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Reels & Short-Form Content",
         description: "ARQQA-produced content alongside creator content.",
-        href: "/services/video-production/reels",
+        href: "/services/social-media-video-production/reels",
       },
       {
         label: "The Catalyst System™",
@@ -1632,7 +1653,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Social Media & Community Management",
         description: "Integrate creator content into the content calendar.",
-        href: "/services/community-management",
+        href: "/services/social-media-management",
       },
     ],
     cta: {
