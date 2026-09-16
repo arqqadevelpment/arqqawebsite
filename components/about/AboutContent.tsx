@@ -18,11 +18,15 @@ const MILESTONES = [
 ];
 
 const LEADERSHIP = [
-  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael.png" },
-  { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-saad.png" },
-  { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman.png" },
-  { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna.png" },
-  { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar.png" },
+  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.png" },
+  { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.png" },
+  { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.png" },
+  { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.png" },
+  { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar01.png" },
+  { name: "Abd el Rahman Abo Dief", title: "Head of SEO", image: "/team/Abd-el-rahman-dief.png" },
+  { name: "Bahaa El Gendy", title: "Senior Web Developer", image: "/team/Bahaa.png" },
+  { name: "Madonna Bassem", title: "Senior Technical Account Manager", image: "/team/Madonna.png" },
+  { name: "Mariam Zaki", title: "Senior Creative Content Creator", image: "/team/Mariam-zaki.png" },
 ];
 
 const BELIEFS = [
