@@ -32,7 +32,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
    wide wordmark on the same frame and read as smaller. These get a larger cap
    to even that out optically. The wrapper is tall enough for the biggest of
    them, so every card keeps identical spacing regardless. */
-const LOGO_BUMPED = ["ebc", "allure", "nile-air", "pizza-hut", "coffee-fellows"];
+const LOGO_BUMPED = ["ebc", "allure", "nile-air", "pizza-hut", "coffee-fellows", "Aljazeera"];
 
 function CardLogo({
   src,
@@ -44,7 +44,7 @@ function CardLogo({
   hovered: boolean;
 }) {
   if (!src) return null;
-  const file = src.split("/").pop()?.replace(".webp", "") ?? "";
+  const file = src.split("/").pop()?.replace(/\.(webp|png|jpg|jpeg)$/i, "") ?? "";
   const bumped = LOGO_BUMPED.includes(file);
 
   return (

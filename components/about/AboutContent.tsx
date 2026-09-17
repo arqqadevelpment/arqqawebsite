@@ -17,16 +17,25 @@ const MILESTONES = [
   { year: "2026", text: "50+ team. 4 markets. Rebranded from agency to MarTech Growth System." },
 ];
 
-const LEADERSHIP = [
+const LEADERSHIP: { name: string; title: string; image?: string }[] = [
   { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.png" },
   { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.png" },
   { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.png" },
   { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.png" },
   { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar01.png" },
   { name: "Abd el Rahman Abo Dief", title: "Head of SEO", image: "/team/Abd-el-rahman-dief.png" },
+  { name: "Ahmed Badr", title: "Head of Sales & BD" },
   { name: "Bahaa El Gendy", title: "Senior Web Developer", image: "/team/Bahaa.png" },
   { name: "Madonna Bassem", title: "Senior Technical Account Manager", image: "/team/Madonna.png" },
   { name: "Mariam Zaki", title: "Senior Creative Content Creator", image: "/team/Mariam-zaki.png" },
+  { name: "Fatma Gadallah", title: "Creative Strategist", image: "/team/Fatma-Gadallah.png" },
+  { name: "Abdullah Barii", title: "Senior Motion Graphics & Video Editing", image: "/team/Abdullah.png" },
+  { name: "Mo'men Abdaltwab", title: "Art Director", image: "/team/mo'men.png" },
+  { name: "Maria Asaad", title: "Senior Performance Media Buyer" },
+  { name: "Mustafa Magdi", title: "Senior Performance Media Buyer" },
+  { name: "Sanaa", title: "HR Generalist" },
+  { name: "Rana Salah", title: "Traffic Specialist" },
+  { name: "Asmaa Mardishy", title: "Community Manager" },
 ];
 
 const BELIEFS = [
@@ -302,25 +311,56 @@ function LeadershipCard({ member }: { member: (typeof LEADERSHIP)[0] }) {
       }}
     >
       <div className="relative w-full" style={{ aspectRatio: "3 / 4" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={member.image}
-          alt={member.name}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            filter: hovered ? "saturate(1.05)" : "saturate(0.96)",
-            transform: hovered ? "scale(1.04)" : "scale(1)",
-            transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease",
-          }}
-        />
-        {/* Name + title overlay — hidden until hover/focus */}
+        {member.image ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={member.image}
+            alt={member.name}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              filter: hovered ? "saturate(1.05)" : "saturate(0.96)",
+              transform: hovered ? "scale(1.04)" : "scale(1)",
+              transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease",
+            }}
+          />
+        ) : (
+          /* Placeholder until a headshot is uploaded — initials on the same
+             blue-to-orange gradient used for icon strokes elsewhere. */
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ background: "linear-gradient(170deg, rgba(90,162,255,0.16) 0%, rgba(255,122,61,0.14) 100%)" }}
+          >
+            <span
+              className="font-bold"
+              style={{
+                fontSize: "1.75rem",
+                letterSpacing: "0.02em",
+                backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              {member.name
+                .split(" ")
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((w) => w[0])
+                .join("")
+                .toUpperCase()}
+            </span>
+          </div>
+        )}
+        {/* Name + title overlay — hidden until hover/focus once a photo is
+            set; shown by default on placeholder cards so people are still
+            identifiable before their headshot is uploaded. */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-end text-center"
           style={{
             padding: "1.25rem 1rem",
             background: "linear-gradient(180deg, transparent 35%, rgba(6,7,12,0.92) 100%)",
-            opacity: hovered ? 1 : 0,
+            opacity: member.image ? (hovered ? 1 : 0) : 1,
             transition: "opacity 0.35s ease",
           }}
         >

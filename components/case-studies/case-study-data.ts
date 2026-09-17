@@ -95,6 +95,11 @@ export type PerformanceCaseStudy = {
     outcomeBg?: string;
     /** Sits to the right of the Takeaway points. */
     outcome?: string;
+    /** Full-width images shown after the Outcome/Takeaway section, each
+        stacked on its own row — same treatment as `socialProof`, just
+        placed later in the page for studies that want proof after the
+        "why it worked" narrative rather than before it. */
+    afterOutcome?: string[];
   };
 
   card: {
@@ -687,6 +692,92 @@ export const PERFORMANCE_CASE_STUDIES: PerformanceCaseStudy[] = [
       approach: "/portfolio/joviality-approach.webp",
       outcomeBg: "/portfolio/joviality-takeaway-bg.webp",
       socialProof: ["/portfolio/joviality-social-01.webp"],
+    },
+  },
+
+  {
+    slug: "aljazeera",
+    client: "Aljazeera",
+    category: "Fragrance & Beauty",
+    market: "Saudi Arabia · Kuwait",
+    flag: "🇸🇦",
+    service: "Reactive Trend Campaign, 2 Markets · 3 Platforms",
+    logo: "/logos/clients/Aljazeera.png",
+    accent: "amber",
+    heroHeadline: "Turning a Cultural Moment\nInto 10x ROAS.",
+    heroSub:
+      "When an unexpected on-camera fragrance mention broke during the Champions League final, Onyx had a narrow window to turn attention into demand. We moved within the same news cycle, launching across KSA and Kuwait before the conversation cooled and turning one organic moment into a 10x accumulated ROAS month in Kuwait.",
+    challenge:
+      "During the Champions League final, a globally followed footballer named Aljazeera as his fragrance of choice on camera. The mention was completely organic, but within minutes it was driving conversation and demand across the Gulf. The challenge wasn't creating the moment, it was reacting fast enough to capture it. Search interest and demand moved across Saudi Arabia and Kuwait at the same time, while the useful life of the trend was measured in days rather than weeks. Every hour between the original moment and the first campaign impression mattered.",
+    approach: {
+      intro:
+        "We built the campaign around one priority: speed. Instead of adding complexity, we created a structure that could launch quickly, read clearly and move budget as demand evolved.",
+      moves: [
+        {
+          num: "01",
+          title: "Moved Inside the Same News Cycle",
+          body: "The trend was identified as it broke, not after it peaked, so Onyx could enter the conversation while attention was still active.",
+        },
+        {
+          num: "02",
+          title: "Kept the Structure Deliberately Flat",
+          body: "A simple structure across three platforms and two markets meant faster decisions and the ability to redirect budget within hours, not days.",
+        },
+        {
+          num: "03",
+          title: "Put Onyx at the Center",
+          body: "Onyx became the hero SKU, turning one product's moment into broader momentum for the wider Aljazeera portfolio without diluting the star of the conversation.",
+        },
+        {
+          num: "04",
+          title: "Let Budget Follow the Signal",
+          body: "Spend was monitored daily and followed demand in real time, letting the campaign scale around the market instead of a fixed media plan.",
+        },
+        {
+          num: "05",
+          title: "Rebuilt the Creative Opportunity",
+          body: "With the original player footage unavailable, we built a new high-end visual world around the product itself, cinematic enough to earn attention on its own.",
+        },
+      ],
+    },
+    results: {
+      intro:
+        "Against a regular-month benchmark of approximately 4x ROAS, the trend campaign generated 10x accumulated ROAS in Kuwait:",
+      metrics: [
+        { value: "10x", label: "Accumulated ROAS in Kuwait" },
+        { value: "+150%", label: "ROAS versus the regular-month baseline" },
+        { value: "2.5x", label: "The efficiency of a normal trading month" },
+        { value: "2 Markets", label: "Saudi Arabia and Kuwait" },
+        { value: "3 Platforms", label: "Activated through one simplified campaign structure" },
+      ],
+      note: "The result wasn't driven by manufacturing demand. Demand was already there. The performance came from putting the right product in front of it quickly enough to benefit before attention moved somewhere else.",
+    },
+    outcome: {
+      title: "Why It Worked",
+      points: [
+        "Monitoring became part of media: cultural listening wasn't treated as something separate from performance marketing, and spotting the signal early was the first media decision.",
+        "Simplicity made speed possible: a flat campaign structure allowed budget to follow performance within hours instead of getting trapped behind unnecessary complexity.",
+        "Creative replaced the asset we couldn't use: without access to the original footage, production quality became even more important, and the product had to earn attention on its own.",
+        "Reaction time became the advantage: the opportunity itself was organic, and the advantage came from minimizing the time between the cultural moment and the first paid impression.",
+      ],
+    },
+    whatsNext:
+      "Trends don't reward the biggest budget, they reward the fastest team. The Onyx campaign showed that reactive performance marketing is less about chasing every cultural moment and more about having the systems to recognize the right one and act before its commercial value disappears. Monitoring, media, creative and decision-making had to operate as one system, because when attention moves in hours, marketing has to move with it.",
+    card: {
+      sector: "Fragrance & Beauty",
+      summary:
+        "A reactive trend campaign turned one organic on-camera moment into a 10x accumulated ROAS month in Kuwait.",
+      image: "/work/Aljazeera/hero.png",
+    },
+    related: ["joviality", "perfect-body"],
+    sectionMedia: {
+      hero: "/work/Aljazeera/hero.png",
+      parallax: true,
+      challengeBanner: true,
+      challenge: "/work/Aljazeera/01.png",
+      approach: "/work/Aljazeera/Approach.png",
+      outcomeBg: "/work/Aljazeera/Why-It-Worked-.png",
+      socialProof: ["/work/Aljazeera/02.png", "/work/Aljazeera/03.png"],
     },
   },
 ];
