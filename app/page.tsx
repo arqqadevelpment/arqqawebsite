@@ -7,6 +7,7 @@ import { FactsSection } from "@/components/facts/FactsSection";
 import { FolkloreSection } from "@/components/folklore/FolkloreSection";
 import { CatalystSection } from "@/components/catalyst/CatalystSection";
 import { ProofSection } from "@/components/proof/ProofSection";
+import { TeamPreviewSection } from "@/components/team/TeamPreviewSection";
 import { ServicesSection } from "@/components/services/ServicesSection";
 import { ShiftSection } from "@/components/shift/ShiftSection";
 import { TrustSignalsSection } from "@/components/trust/TrustSignalsSection";
@@ -48,6 +49,7 @@ export default function Home() {
       <ServicesSection />
       <TrustSignalsSection />
       <ProofSection />
+      <TeamPreviewSection />
       <FolkloreSection />
       <ShiftSection />
       <TestimonialsSection />

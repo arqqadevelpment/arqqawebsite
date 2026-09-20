@@ -18,19 +18,19 @@ const MILESTONES = [
 ];
 
 const LEADERSHIP: { name: string; title: string; image?: string }[] = [
-  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.png" },
-  { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.png" },
-  { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.png" },
-  { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.png" },
-  { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar01.png" },
-  { name: "Abd el Rahman Abo Dief", title: "Head of SEO", image: "/team/Abd-el-rahman-dief.png" },
+  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.webp" },
+  { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.webp" },
+  { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.webp" },
+  { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar01.webp" },
+  { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.webp" },
+  { name: "Abd el Rahman Abo Dief", title: "Head of SEO", image: "/team/Abd-el-rahman-dief.webp" },
   { name: "Ahmed Badr", title: "Head of Sales & BD" },
-  { name: "Bahaa El Gendy", title: "Senior Web Developer", image: "/team/Bahaa.png" },
-  { name: "Madonna Bassem", title: "Senior Technical Account Manager", image: "/team/Madonna.png" },
-  { name: "Mariam Zaki", title: "Senior Creative Content Creator", image: "/team/Mariam-zaki.png" },
-  { name: "Fatma Gadallah", title: "Creative Strategist", image: "/team/Fatma-Gadallah.png" },
-  { name: "Abdullah Barii", title: "Senior Motion Graphics & Video Editing", image: "/team/Abdullah.png" },
-  { name: "Mo'men Abdaltwab", title: "Art Director", image: "/team/mo'men.png" },
+  { name: "Bahaa El Gendy", title: "Senior Web Developer", image: "/team/Bahaa.webp" },
+  { name: "Madonna Bassem", title: "Senior Technical Account Manager", image: "/team/Madonna.webp" },
+  { name: "Mariam Zaki", title: "Senior Creative Content Creator", image: "/team/Mariam-zaki.webp" },
+  { name: "Fatma Gadallah", title: "Creative Strategist", image: "/team/Fatma-Gadallah.webp" },
+  { name: "Abdullah Barii", title: "Senior Motion Graphics & Video Editing", image: "/team/Abdullah.webp" },
+  { name: "Mo'men Abdaltwab", title: "Art Director", image: "/team/mo'men.webp" },
   { name: "Maria Asaad", title: "Senior Performance Media Buyer" },
   { name: "Mustafa Magdi", title: "Senior Performance Media Buyer" },
   { name: "Sanaa", title: "HR Generalist" },
@@ -279,113 +279,96 @@ function BeliefCard({ belief }: { belief: (typeof BELIEFS)[0] }) {
   );
 }
 
-/* Leadership headshot card — same glass surface and hover lift as
-   BeliefCard. Name and title live in an overlay that fades in on
-   hover/focus, so the photo grid reads clean until someone looks closer. */
+/* Leadership headshot card — the photo fills the whole card, name and
+   title sit on top of a soft gradient fade at the foot of it (always
+   visible, no hover), rather than a separate solid block underneath. */
 function LeadershipCard({ member }: { member: (typeof LEADERSHIP)[0] }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
-      tabIndex={0}
       className="relative rounded-3xl overflow-hidden"
       style={{
-        width: "clamp(7.5rem, 17vw, 12rem)",
-        background:
-          "linear-gradient(170deg, rgba(14,16,26,0.6) 0%, rgba(6,8,14,0.68) 100%)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        border: hovered
-          ? "1px solid rgba(255,138,90,0.55)"
-          : "1px solid rgba(255,255,255,0.12)",
-        boxShadow: hovered
-          ? "0 -14px 40px -18px rgba(255,122,61,0.35), 0 24px 50px -22px rgba(47,107,255,0.3), inset 0 1px 0 rgba(255,175,130,0.25)"
-          : "inset 0 1px 0 rgba(255,255,255,0.06)",
-        transform: hovered ? "translateY(-5px)" : "translateY(0)",
-        transition:
-          "transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease",
+        aspectRatio: "3 / 4",
+        border: "1px solid rgba(255,255,255,0.12)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
     >
-      <div className="relative w-full" style={{ aspectRatio: "3 / 4" }}>
-        {member.image ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={member.image}
-            alt={member.name}
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              filter: hovered ? "saturate(1.05)" : "saturate(0.96)",
-              transform: hovered ? "scale(1.04)" : "scale(1)",
-              transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease",
-            }}
-          />
-        ) : (
-          /* Placeholder until a headshot is uploaded — initials on the same
-             blue-to-orange gradient used for icon strokes elsewhere. */
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ background: "linear-gradient(170deg, rgba(90,162,255,0.16) 0%, rgba(255,122,61,0.14) 100%)" }}
-          >
-            <span
-              className="font-bold"
-              style={{
-                fontSize: "1.75rem",
-                letterSpacing: "0.02em",
-                backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              {member.name
-                .split(" ")
-                .filter(Boolean)
-                .slice(0, 2)
-                .map((w) => w[0])
-                .join("")
-                .toUpperCase()}
-            </span>
-          </div>
-        )}
-        {/* Name + title overlay — hidden until hover/focus once a photo is
-            set; shown by default on placeholder cards so people are still
-            identifiable before their headshot is uploaded. */}
+      {member.image ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={member.image}
+          alt={member.name}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "saturate(0.96)" }}
+        />
+      ) : (
+        /* Placeholder until a headshot is uploaded — initials on the same
+           blue-to-orange gradient used for icon strokes elsewhere. */
         <div
-          className="absolute inset-0 flex flex-col items-center justify-end text-center"
-          style={{
-            padding: "1.25rem 1rem",
-            background: "linear-gradient(180deg, transparent 35%, rgba(6,7,12,0.92) 100%)",
-            opacity: member.image ? (hovered ? 1 : 0) : 1,
-            transition: "opacity 0.35s ease",
-          }}
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ background: "linear-gradient(170deg, rgba(90,162,255,0.16) 0%, rgba(255,122,61,0.14) 100%)" }}
         >
-          <h3
+          <span
             className="font-bold"
             style={{
-              fontSize: "1rem",
-              lineHeight: 1.3,
-              letterSpacing: "-0.01em",
-              color: "#ffffff",
-            }}
-          >
-            {member.name}
-          </h3>
-          <p
-            className="font-light mt-1"
-            style={{
-              fontSize: "0.75rem",
+              fontSize: "1.75rem",
               letterSpacing: "0.02em",
-              color: "#9fc8ff",
+              backgroundImage: "linear-gradient(120deg, #5aa2ff 0%, #9fc8ff 45%, #ff9a5a 100%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
             }}
           >
-            {member.title}
-          </p>
+            {member.name
+              .split(" ")
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((w) => w[0])
+              .join("")
+              .toUpperCase()}
+          </span>
         </div>
+      )}
+      {/* Smooth fade into the image — no hard-edged box behind the text.
+          Tall enough to stay clear of the face even when a longer name
+          wraps to two or three lines on a narrow (3-per-row) card. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: "78%",
+          background: "linear-gradient(180deg, transparent 0%, rgba(4,5,10,0.32) 38%, rgba(4,5,10,0.9) 100%)",
+        }}
+      />
+      {/* Name + title — always visible, nudged up from the bottom edge */}
+      <div
+        className="absolute inset-x-0 bottom-0 text-center"
+        style={{ padding: "0.75rem 0.6rem 1.25rem" }}
+      >
+        <h3
+          className="font-bold"
+          style={{
+            fontSize: "clamp(0.75rem, 3.4vw, 1rem)",
+            lineHeight: 1.2,
+            letterSpacing: "-0.01em",
+            color: "#ffffff",
+            textShadow: "0 1px 12px rgba(0,0,0,0.6)",
+          }}
+        >
+          {member.name}
+        </h3>
+        <p
+          className="font-light mt-1"
+          style={{
+            fontSize: "clamp(0.625rem, 2.6vw, 0.75rem)",
+            lineHeight: 1.3,
+            letterSpacing: "0.01em",
+            color: "#9fc8ff",
+            textShadow: "0 1px 10px rgba(0,0,0,0.6)",
+          }}
+        >
+          {member.title}
+        </p>
       </div>
     </div>
   );
@@ -812,8 +795,9 @@ export function AboutContent() {
 
       {/* ══ Leadership — the people behind the system ══ */}
       <section
+        id="team"
         className="relative w-full overflow-hidden"
-        style={{ padding: "6rem 1.5rem 7rem" }}
+        style={{ padding: "6rem 1.5rem 7rem", scrollMarginTop: "6rem" }}
       >
         <div className="relative max-w-6xl mx-auto">
           <Reveal className="text-center mb-14">
@@ -831,7 +815,7 @@ export function AboutContent() {
             </h2>
           </Reveal>
 
-          <div className="flex flex-wrap justify-center gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             {LEADERSHIP.map((member, i) => (
               <Reveal key={member.name} delay={Math.min(i * 0.08, 0.32)}>
                 <LeadershipCard member={member} />
