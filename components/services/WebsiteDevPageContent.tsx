@@ -2243,7 +2243,7 @@ export function WebsiteDevPageContent({ page, fields = {} }: { page: ApproachPag
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-9">
               <PrimaryCTA href="#website-dev-form" label="Get Your Free Website Consultation" />
-              <SecondaryLink href="/work" label="See Our Website Portfolio" />
+              <SecondaryLink href="/works" label="See Our Website Portfolio" />
             </div>
           </Reveal>
         </div>

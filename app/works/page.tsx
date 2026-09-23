@@ -5,7 +5,7 @@ import { PageSchema } from "@/components/seo/PageSchema";
 import { PortfolioPageContent } from "@/components/portfolio/PortfolioPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageSeo("/work", {
+  return getPageSeo("/works", {
     title: "Work | ARQQA",
     description: "Outcomes, not portfolios. Every ARQQA project measured in business impact. Filter by industry, market, or service.",
   });
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function WorkPage() {
   return (
     <PageShell>
-      <PageSchema path={"/work"} />
+      <PageSchema path={"/works"} />
       <PortfolioPageContent />
     </PageShell>
   );

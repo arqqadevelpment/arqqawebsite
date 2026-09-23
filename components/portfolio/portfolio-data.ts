@@ -142,6 +142,7 @@ export const INDUSTRY_FILTERS = [
   "All",
   "Web Design",
   "Performance",
+  "SEO",
   "Video & Animation",
   "Branding",
   "Social Media Production",

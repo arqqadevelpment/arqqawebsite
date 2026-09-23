@@ -464,7 +464,7 @@ export function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
         <div className="relative max-w-6xl mx-auto" style={{ marginLeft: "auto", marginRight: "auto", transform: "translateX(clamp(-2.5rem, -3vw, -1rem))" }}>
           <Reveal>
             <Link
-              href="/work"
+              href="/works"
               className="inline-flex items-center gap-2 font-light"
               style={{
                 fontSize: "0.6875rem",
@@ -1024,7 +1024,7 @@ function RelatedCard({ caseStudy }: { caseStudy: CaseStudy }) {
 
   return (
     <Link
-      href={`/work/${caseStudy.slug}`}
+      href={`/works/${caseStudy.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col h-full rounded-3xl overflow-hidden"

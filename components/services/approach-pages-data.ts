@@ -212,7 +212,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Book a Strategy Session", href: "/start#book-strategy-call" },
-      secondary: { label: "See How We Applied This for Nile Air", href: "/work/nile-air" },
+      secondary: { label: "See How We Applied This for Nile Air", href: "/works/nile-air" },
     },
   },
   {
@@ -284,7 +284,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Commission a Competitive Analysis", href: "/start#book-strategy-call" },
-      secondary: { label: "See How We Applied This for Fawry", href: "/work/fawry" },
+      secondary: { label: "See How We Applied This for Fawry", href: "/works/fawry" },
     },
   },
   {
@@ -447,7 +447,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start a Brand Project", href: "/start#book-strategy-call" },
-      secondary: { label: "See Our Brand Identity Work", href: "/work/kenzup" },
+      secondary: { label: "See Our Brand Identity Work", href: "/works/kenzup" },
     },
   },
   {
@@ -586,7 +586,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Get a Rollout Kit Built", href: "/start#book-strategy-call" },
-      secondary: { label: "See What's Inside a Full Kit", href: "/work/kenzup" },
+      secondary: { label: "See What's Inside a Full Kit", href: "/works/kenzup" },
     },
   },
   {
@@ -662,7 +662,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start a Website Project", href: "/start#book-strategy-call" },
-      secondary: { label: "See Our Website Portfolio", href: "/work/nile-air" },
+      secondary: { label: "See Our Website Portfolio", href: "/works/nile-air" },
     },
   },
   {
@@ -741,7 +741,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start an App Project", href: "/start#book-strategy-call" },
-      secondary: { label: "See the Fawry App Case Study", href: "/work/fawry" },
+      secondary: { label: "See the Fawry App Case Study", href: "/works/fawry" },
     },
   },
   {
@@ -1308,7 +1308,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start a Reels Package", href: "/start#book-strategy-call" },
-      secondary: { label: "See Sample Reels Work", href: "/work" },
+      secondary: { label: "See Sample Reels Work", href: "/works" },
     },
   },
   {
@@ -1382,7 +1382,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start a Brand Film", href: "/start#book-strategy-call" },
-      secondary: { label: "See Our Commercial Showreel", href: "/work" },
+      secondary: { label: "See Our Commercial Showreel", href: "/works" },
     },
   },
   {
@@ -1450,7 +1450,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Commission a Product Video", href: "/start#book-strategy-call" },
-      secondary: { label: "See Product Video Examples", href: "/work" },
+      secondary: { label: "See Product Video Examples", href: "/works" },
     },
   },
   {
@@ -1508,7 +1508,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
       {
         label: "Portfolio",
         description: "Embed directly in case study pages.",
-        href: "/work",
+        href: "/works",
       },
       {
         label: "The Catalyst System™",
@@ -1518,7 +1518,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Commission a Testimonial Video", href: "/start#book-strategy-call" },
-      secondary: { label: "See Testimonial Examples", href: "/work" },
+      secondary: { label: "See Testimonial Examples", href: "/works" },
     },
   },
   {
@@ -1586,7 +1586,7 @@ export const APPROACH_PAGES: ApproachPage[] = [
     ],
     cta: {
       primary: { label: "Start a Motion Project", href: "/start#book-strategy-call" },
-      secondary: { label: "See Our Animation Showreel", href: "/work" },
+      secondary: { label: "See Our Animation Showreel", href: "/works" },
     },
   },
   {

@@ -154,19 +154,25 @@ function AnimatedNumber({
   start: boolean;
 }) {
   const value = useCountUp(target, start);
-  return <>{value.toFixed(decimals)}</>;
+  return (
+    <>{value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}</>
+  );
 }
 
+/* Matches a full number token, including thousands-separator commas (e.g.
+   "5,055"), so a comma-grouped figure counts up and re-formats as one
+   number instead of being split at the comma and losing a leading zero
+   (naive digit-only matching turned "5,055" into "5,55"). */
 function StatValue({ value, start }: { value: string; start: boolean }) {
-  const parts = value.split(/(\d+\.?\d*)/g).filter((part) => part !== "");
+  const parts = value.split(/(\d[\d,]*\.?\d*)/g).filter((part) => part !== "");
 
   return (
     <>
       {parts.map((part, i) =>
-        /^\d+\.?\d*$/.test(part) ? (
+        /^\d[\d,]*\.?\d*$/.test(part) ? (
           <AnimatedNumber
             key={i}
-            target={parseFloat(part)}
+            target={parseFloat(part.replace(/,/g, ""))}
             decimals={part.includes(".") ? part.split(".")[1].length : 0}
             start={start}
           />
@@ -330,7 +336,7 @@ export function ShowcaseTemplate({
         >
           <Reveal>
             <Link
-              href="/work"
+              href="/works"
               className="showcase-back inline-flex items-center gap-2 mb-8"
               style={{ fontSize: "0.8125rem", letterSpacing: "0.06em" }}
             >
@@ -426,11 +432,13 @@ export function ShowcaseTemplate({
         >
           {project.story.map((block, i) => {
             if (block.type === "text") {
+              const centered = block.align === "center";
               return (
-                <Reveal key={`t-${i}`}>
+                <Reveal key={`t-${i}`} className={centered ? "text-center" : ""}>
                   <p
+                    className={centered ? "mx-auto" : ""}
                     style={{
-                      maxWidth: "42rem",
+                      maxWidth: "56rem",
                       color: "rgba(255,255,255,0.72)",
                       fontSize: "clamp(1.05rem, 1.35vw, 1.18rem)",
                       lineHeight: 1.75,
@@ -469,7 +477,7 @@ export function ShowcaseTemplate({
                     <p
                       className="mt-6 mx-auto"
                       style={{
-                        maxWidth: "42rem",
+                        maxWidth: "56rem",
                         color: "rgba(255,255,255,0.72)",
                         fontSize: "clamp(1.05rem, 1.35vw, 1.18rem)",
                         lineHeight: 1.75,
@@ -553,9 +561,9 @@ export function ShowcaseTemplate({
                   src={project.logo}
                   alt={`${project.client} logo`}
                   style={{
-                    height: "clamp(3.5rem, 6vw, 5rem)",
+                    height: "clamp(6rem, 10vw, 8.5rem)",
                     width: "auto",
-                    maxWidth: "min(100%, 22rem)",
+                    maxWidth: "min(100%, 32rem)",
                     objectFit: "contain",
                     opacity: 0.9,
                   }}
@@ -590,7 +598,7 @@ export function ShowcaseTemplate({
       <section className="relative mx-auto w-full max-w-6xl px-6 pb-24">
         <Reveal>
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "2.5rem" }}>
-            <Link href="/work" className="showcase-back inline-flex items-center gap-2">
+            <Link href="/works" className="showcase-back inline-flex items-center gap-2">
               <span aria-hidden="true" className="showcase-back-arrow">
                 ←
               </span>{" "}

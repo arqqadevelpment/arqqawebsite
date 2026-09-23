@@ -318,7 +318,7 @@ export function IndustryPageTemplate({ industry }: { industry: Industry }) {
                 </p>
                 {industry.featuredCaseStudy.workSlug && (
                   <Link
-                    href={`/work/${industry.featuredCaseStudy.workSlug}`}
+                    href={`/works/${industry.featuredCaseStudy.workSlug}`}
                     className="inline-flex items-center gap-2 font-medium mt-8 self-start"
                     style={{
                       fontSize: "0.875rem",

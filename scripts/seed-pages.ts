@@ -36,7 +36,7 @@ const STATIC_PAGES: PageRow[] = [
   { path: "/get-started", parent_path: null, title: "Get Started", page_type: "static" },
   { path: "/start", parent_path: null, title: "Start / Contact", page_type: "static" },
   { path: "/testimonials", parent_path: null, title: "Testimonials", page_type: "static" },
-  { path: "/work", parent_path: null, title: "Work", page_type: "static" },
+  { path: "/works", parent_path: null, title: "Work", page_type: "static" },
   { path: "/career", parent_path: null, title: "Career", page_type: "static" },
   { path: "/industries", parent_path: null, title: "Industries", page_type: "static" },
   { path: "/insights", parent_path: null, title: "Insights", page_type: "static" },
@@ -111,8 +111,8 @@ const rows: PageRow[] = [
   })),
 
   ...PORTFOLIO_CASE_STUDIES.map((c) => ({
-    path: `/work/${c.slug}`,
-    parent_path: "/work",
+    path: `/works/${c.slug}`,
+    parent_path: "/works",
     title: c.client,
     page_type: "case-study",
   })),

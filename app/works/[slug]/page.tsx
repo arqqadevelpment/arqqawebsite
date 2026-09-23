@@ -20,7 +20,7 @@ export async function generateMetadata({
   const caseStudy = getCaseStudy(slug);
   if (!caseStudy) return { title: "Case Study | ARQQA" };
 
-  return getPageSeo(`/work/${slug}`, {
+  return getPageSeo(`/works/${slug}`, {
     title: `${caseStudy.client} | ARQQA`,
     description: caseStudy.heroLine,
   });
@@ -37,7 +37,7 @@ export default async function CaseStudyPage({
 
   return (
     <PageShell>
-      <PageSchema path={`/work/${slug}`} />
+      <PageSchema path={`/works/${slug}`} />
       <CaseStudyTemplate caseStudy={caseStudy} />
     </PageShell>
   );

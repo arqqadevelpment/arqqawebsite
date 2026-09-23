@@ -659,7 +659,7 @@ export function ServicePageTemplate({ service }: { service: ServiceDetail }) {
 
                 {PROOF_CLIENT_SLUG[service.proof.client] ? (
                   <Link
-                    href={`/work/${PROOF_CLIENT_SLUG[service.proof.client]}`}
+                    href={`/works/${PROOF_CLIENT_SLUG[service.proof.client]}`}
                     className="inline-flex items-center gap-2 font-medium mt-10 self-start"
                     style={{
                       fontSize: "0.875rem",

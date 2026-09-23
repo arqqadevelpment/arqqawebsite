@@ -577,7 +577,7 @@ function HighlightCard({ item }: { item: Highlight }) {
 
   return (
     <Link
-      href={`/case-studies/${item.slug}`}
+      href={item.href ?? `/case-studies/${item.slug}`}
       className="perf-hl relative rounded-3xl overflow-hidden flex flex-col"
     >
       <div aria-hidden="true" className="perf-hl-art absolute inset-0 pointer-events-none" />

@@ -81,7 +81,7 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
         >
           <Reveal>
             <Link
-              href="/work"
+              href="/works"
               className="showcase-back inline-flex items-center gap-2 mb-8"
               style={{ fontSize: "0.8125rem", letterSpacing: "0.06em" }}
             >
@@ -243,7 +243,7 @@ export function VideoPageContent({ project }: { project: VideoProject }) {
       >
         <Reveal delay={0.06}>
           <div style={{ paddingTop: "2.5rem", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-            <Link href="/work" className="showcase-back inline-flex items-center gap-2">
+            <Link href="/works" className="showcase-back inline-flex items-center gap-2">
               <span aria-hidden="true" className="showcase-back-arrow">
                 ←
               </span>{" "}

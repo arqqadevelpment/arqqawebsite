@@ -51,7 +51,7 @@ function Reveal({
 /* A short lineup, not the full roster on /about#team — same five people
    the "View More" button leads straight to at the top of that section. */
 const TEAM_PREVIEW = [
-  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.webp" },
+  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-03.webp" },
   { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.webp" },
   { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.webp" },
   { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.webp" },

@@ -27,7 +27,7 @@ const CASES: CaseStudy[] = [
     story:
       "1M active users. First fintech app in MENA. 100K organic installs.",
     glow: "#5aa2ff",
-    href: "/work/fawry",
+    href: "/works/fawry",
   },
   {
     key: "nileair",
@@ -453,7 +453,7 @@ export function ProofSection() {
       <div className="relative flex flex-col sm:flex-row items-center justify-center gap-5 mt-16 px-6">
         {/* Secondary — quiet glass pill */}
         <Link
-          href="/work"
+          href="/works"
           className="group inline-flex items-center justify-center rounded-2xl font-medium"
           style={{
             padding: "0.9375rem 2rem",

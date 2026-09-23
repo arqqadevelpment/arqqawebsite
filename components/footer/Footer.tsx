@@ -12,7 +12,7 @@ const TOP_SERVICES = [
 const QUICK_LINKS = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/work" },
+  { label: "Portfolio", href: "/works" },
   { label: "Career", href: "/career" },
   { label: "Contact Us", href: "/start" },
 ];

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { submitForm } from "@/lib/forms/submitForm";
 import {
-  BUDGET_RANGES,
   CONTACT_METHODS,
   DIAL_CODES,
   INDUSTRIES,
@@ -28,7 +27,6 @@ type Brief = {
   teamSize: string;
   objectives: string[];
   problem: string;
-  budget: string;
   timeline: string;
   contactMethod: string;
 };
@@ -36,7 +34,7 @@ type Brief = {
 const EMPTY: Brief = {
   name: "", email: "", dial: "+20", phone: "", hasWebsite: "", website: "",
   industry: "", teamSize: "", objectives: [], problem: "",
-  budget: "", timeline: "", contactMethod: "",
+  timeline: "", contactMethod: "",
 };
 
 /* ── Shared field chrome ── */
@@ -560,24 +558,6 @@ export function BriefFormContent() {
         {/* ══ Step 4 — how we reach you ══ */}
         {step === 3 && (
           <div>
-            <Field
-              label="Monthly budget range"
-              hint="This shapes what we propose, not whether we reply."
-            >
-              <select
-                value={data.budget}
-                onChange={(e) => set("budget", e.target.value)}
-                style={{ ...inputBase, border: borderFor(false, focus === "budget") }}
-                onFocus={() => setFocus("budget")}
-                onBlur={() => setFocus("")}
-              >
-                <option value="" style={{ background: "#0b0c12" }}>Choose a range</option>
-                {BUDGET_RANGES.map((b) => (
-                  <option key={b} value={b} style={{ background: "#0b0c12" }}>{b}</option>
-                ))}
-              </select>
-            </Field>
-
             <Field label="When do you want to start?">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {TIMELINES.map((t) => (
@@ -609,6 +589,12 @@ export function BriefFormContent() {
             <PrimaryButton label="Continue" onClick={next} />
           )}
           {step > 0 && <GhostButton label="Back" onClick={back} />}
+          {step >= 1 && (
+            <GhostButton
+              label="Skip"
+              onClick={step === STEPS.length - 1 ? submit : next}
+            />
+          )}
         </div>
 
         {/* ── Footer rail ── */}

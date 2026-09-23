@@ -260,7 +260,7 @@ export const BREAKDOWN = {
       body: "Individually structured, tested, and optimized campaigns across healthcare and fashion e-commerce clients, each one a data point in a repeatable system, not a one-off bet.",
     },
   ],
-  cta: { label: "See the Full Case Studies", href: "/work" },
+  cta: { label: "See the Full Case Studies", href: "/works" },
 };
 
 /* Each highlight is a vertical card in an auto-scrolling rail, linking to its
@@ -279,12 +279,45 @@ export type Highlight = {
       the frame height is the same for all, so a mark occupying 28% of its
       frame renders far smaller than one occupying 86%. */
   logoScale?: number;
+  /** Overrides the default /case-studies/<slug> link, for clients whose
+      full write-up lives under a different route (/works, /social). */
+  href?: string;
 };
 
 export const HIGHLIGHTS = {
   heading: "A Few of the Systems",
   headingAccent: "Behind These Numbers.",
   cards: [
+    {
+      slug: "fawry",
+      client: "Fawry",
+      logo: "/logos/clients/fawry.webp",
+      sector: "Fintech",
+      market: "Egypt",
+      flag: "🇪🇬",
+      body: "6M+ app installs and 1M active users within 18 months, mass adoption built on financial-behavior segmentation, not vanity installs.",
+      href: "/works/fawry",
+    },
+    {
+      slug: "nile-air",
+      client: "Nile Air",
+      logo: "/logos/clients/nile-air.webp",
+      sector: "Airlines",
+      market: "Saudi Arabia",
+      flag: "🇸🇦",
+      body: "237x ROAS and 83M SAR in digital revenue on just 350K SAR of spend, powered by a full Amadeus reservation-system integration.",
+      href: "/social/nile-air",
+    },
+    {
+      slug: "kenzup",
+      client: "Kenz'up",
+      logo: "/logos/clients/kenzup.webp",
+      sector: "App / E-Commerce",
+      market: "Morocco",
+      flag: "🇲🇦",
+      body: "5M+ app installs and a 3.5x lift in registration conversion, entering a new market with ASO and a re-engineered onboarding funnel.",
+      href: "/social/kenzup",
+    },
     {
       slug: "everher",
       client: "Everher",
@@ -295,22 +328,13 @@ export const HIGHLIGHTS = {
       body: "+105% ROAS, +272% peak conversion lift, 100% inventory sold out, a full-funnel transformation from struggling to profitable.",
     },
     {
-      slug: "ntra",
-      client: "NTRA",
-      logo: "/logos/clients/ntra.webp",
-      sector: "Government & Public Sector",
+      slug: "merova",
+      client: "Merova",
+      logo: "/logos/clients/merova.webp",
+      sector: "Fashion E-Commerce",
       market: "Egypt",
       flag: "🇪🇬",
-      body: "+71.5% follower growth and 7.37M engagements in six months, scaling a national regulator's public voice.",
-    },
-    {
-      slug: "perfect-body",
-      client: "Perfect Body",
-      logo: "/logos/clients/perfect-body-white.webp",
-      sector: "Fashion E-Commerce",
-      market: "Kuwait",
-      flag: "🇰🇼",
-      body: "4.07x average ROAS sustained across a full year and 76 campaigns of continuous testing and scaling.",
+      body: "Monthly sales nearly doubled and 3.5–4.0x ROAS sustained through peak season, premium pricing held against heavy competitor discounting.",
     },
     {
       slug: "allure-clinics",
@@ -322,13 +346,13 @@ export const HIGHLIGHTS = {
       body: "17,367+ leads generated across three platforms, a diversified, repeatable acquisition engine for a multi-doctor healthcare brand.",
     },
     {
-      slug: "merova",
-      client: "Merova",
-      logo: "/logos/clients/merova.webp",
-      sector: "Fashion E-Commerce",
+      slug: "ntra",
+      client: "NTRA",
+      logo: "/logos/clients/ntra.webp",
+      sector: "Government & Public Sector",
       market: "Egypt",
       flag: "🇪🇬",
-      body: "Monthly sales nearly doubled and 3.5–4.0x ROAS sustained through peak season, premium pricing held against heavy competitor discounting.",
+      body: "+71.5% follower growth and 7.37M engagements in six months, scaling a national regulator's public voice.",
     },
     {
       slug: "gts-holding",
@@ -350,8 +374,36 @@ export const HIGHLIGHTS = {
       flag: "🇸🇦",
       body: "A full-funnel ABM system across Google, LinkedIn, SEO, and automation, built for KSA banking's stakeholder-heavy buying committees.",
     },
+    {
+      slug: "perfect-body",
+      client: "Perfect Body",
+      logo: "/logos/clients/perfect-body-white.webp",
+      sector: "Fashion E-Commerce",
+      market: "Kuwait",
+      flag: "🇰🇼",
+      body: "4.07x average ROAS sustained across a full year and 76 campaigns of continuous testing and scaling.",
+    },
+    {
+      slug: "aljazeera",
+      client: "Aljazeera",
+      logo: "/logos/clients/Aljazeera.png",
+      sector: "Fragrance & Beauty",
+      market: "Saudi Arabia · Kuwait",
+      flag: "🇸🇦",
+      body: "A reactive trend campaign turned one organic on-camera moment into a 10x accumulated ROAS month in Kuwait.",
+    },
+    {
+      slug: "joviality",
+      client: "Joviality",
+      logo: "/logos/clients/joviality.webp",
+      logoScale: 0.7,
+      sector: "Beauty & Personal Care · E-Commerce",
+      market: "Egypt",
+      flag: "🇪🇬",
+      body: "Paid media spend scaled +103% and gross sales grew +114%, with blended ROAS improving to 4.38x instead of collapsing under scale.",
+    },
   ] as Highlight[],
-  cta: { label: "View All Case Studies", href: "/work" },
+  cta: { label: "View All Case Studies", href: "/works" },
 };
 
 /* Marquee roster. Every mark here is a light/white or high-contrast version —

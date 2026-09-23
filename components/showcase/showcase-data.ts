@@ -24,7 +24,7 @@ export type ShowcaseMedia = {
 
 export type ShowcaseBlock =
   /** One short paragraph, held to a comfortable reading measure */
-  | { type: "text"; body: string }
+  | { type: "text"; body: string; align?: "left" | "center" }
   /** One figure at full container width */
   | { type: "figure"; media: ShowcaseMedia }
   /** Two figures stacked, each at full width — for visuals that each want
@@ -65,7 +65,7 @@ export type ShowcaseProject = {
   /** How this project shows up as a card on the /work hub. */
   card: {
     /** Build tier, used as the card's category label */
-    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media" | "Branding" | "Performance";
+    tier: "Corporate" | "E-Commerce" | "Shopify" | "Interactive" | "Social Media" | "Branding" | "Performance" | "SEO";
     market: string;
     summary: string;
     image: string;

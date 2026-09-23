@@ -220,7 +220,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
       cta: {
         primary: { label: "Start a Brand Project", href: "/start#book-strategy-call" },
-        secondary: { label: "See Our Brand Identity Work", href: "/work/kenzup" },
+        secondary: { label: "See Our Brand Identity Work", href: "/works/kenzup" },
       },
     },
     included: {
@@ -501,7 +501,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
       cta: {
         primary: { label: "Start a Website Project", href: "/start#book-strategy-call" },
-        secondary: { label: "See Our Website Portfolio", href: "/work/nile-air" },
+        secondary: { label: "See Our Website Portfolio", href: "/works/nile-air" },
       },
     },
     included: {
@@ -608,7 +608,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
       cta: {
         primary: { label: "Start a Reels Package", href: "/start#book-strategy-call" },
-        secondary: { label: "See Sample Reels Work", href: "/work" },
+        secondary: { label: "See Sample Reels Work", href: "/works" },
       },
     },
     included: {
@@ -698,7 +698,7 @@ export const SERVICES: ServiceDetail[] = [
       ],
       cta: {
         primary: { label: "Book a Media Audit", href: "/start#book-strategy-call" },
-        secondary: { label: "See Performance Work", href: "/work" },
+        secondary: { label: "See Performance Work", href: "/works" },
       },
     },
     included: {

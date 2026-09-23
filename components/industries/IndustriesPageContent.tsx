@@ -26,7 +26,7 @@ const INDUSTRY_ICONS: Record<string, React.ReactNode> = {
       fill="rgba(255,255,255,0.05)"
     />
   ),
-  technology: (
+  "web-app-development": (
     <>
       <rect x="7" y="7" width="10" height="10" rx="1.5" stroke="url(#industryStroke)" strokeWidth="1.4" fill="rgba(255,255,255,0.04)" />
       <rect x="10" y="10" width="4" height="4" rx="0.8" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />

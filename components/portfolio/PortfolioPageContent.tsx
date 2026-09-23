@@ -32,7 +32,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
    wide wordmark on the same frame and read as smaller. These get a larger cap
    to even that out optically. The wrapper is tall enough for the biggest of
    them, so every card keeps identical spacing regardless. */
-const LOGO_BUMPED = ["ebc", "allure", "nile-air", "pizza-hut", "coffee-fellows", "Aljazeera"];
+const LOGO_BUMPED = ["ebc", "allure", "nile-air", "pizza-hut", "coffee-fellows", "Aljazeera", "Alex_Bank_Logo", "Dream-2000"];
 
 function CardLogo({
   src,
@@ -231,7 +231,7 @@ function CaseStudyCard({ caseStudy, delay }: { caseStudy: CaseStudy; delay: numb
   return (
     <Reveal delay={delay} className="h-full">
       <Link
-        href={`/work/${caseStudy.slug}`}
+        href={`/works/${caseStudy.slug}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative flex flex-col h-full rounded-3xl overflow-hidden"
@@ -731,31 +731,39 @@ function VideoCard({ project, delay }: { project: VideoProject; delay: number })
 export function PortfolioPageContent() {
   const [filter, setFilter] = useState<(typeof INDUSTRY_FILTERS)[number]>("All");
 
-  /* Six sources feed one grid. "Web Design" selects the website showcases,
-     "Performance" selects the media case studies, "Video & Animation" selects
-     the Vimeo-hosted video projects, "Social Media Production" and
-     "Branding" select their own content-production collections, and "All"
-     shows everything. The legacy CASE_STUDIES (Africa Music Initiative) keep
-     their `industry` label on the card itself but are no longer filterable
-     by it, since those tabs were retired.
+  /* Seven sources feed one grid. "Web Design" selects the website showcases,
+     "Performance" selects the media case studies, "SEO" selects the SEO
+     case studies, "Video & Animation" selects the Vimeo-hosted video
+     projects, "Social Media Production" and "Branding" select their own
+     content-production collections, and "All" shows everything. The legacy
+     CASE_STUDIES (Africa Music Initiative) keep their `industry` label on
+     the card itself but are no longer filterable by it, since those tabs
+     were retired.
 
-     Nile Air and Kenz'up are social-content productions, but their outcomes
-     (237x ROAS, 5M+ installs) read as performance results, so their cards
-     are pulled out of Social Media Production and shown under Performance
-     instead — same /social pages, different tab. Fawry (from the legacy
-     CASE_STUDIES set) joins Performance the same way. */
+     Nile Air, Kenz'up, Aman, Alex Bank, and Masheed Gate are social-content
+     productions, but their outcomes read as performance results, so their
+     cards are pulled out of Social Media Production and shown under
+     Performance instead — same /social pages, different tab. Fawry (from
+     the legacy CASE_STUDIES set) joins Performance the same way. Dream 2000
+     and Fawry's SEO program (a separate engagement from its app-growth
+     case study above) get the same treatment under the SEO tab. */
   const isAll = filter === "All";
   const isPerformance = isAll || filter === "Performance";
-  const PERFORMANCE_SOCIAL_SLUGS = ["nile-air", "kenzup"];
+  const isSEO = isAll || filter === "SEO";
+  const PERFORMANCE_SOCIAL_SLUGS = ["nile-air", "kenzup", "aman", "alex-bank", "masheed-gate"];
+  const SEO_SOCIAL_SLUGS = ["dream-2000", "fawry-seo"];
   const showcases = isAll || filter === "Web Design" ? SHOWCASE_PROJECTS : [];
   const performance = isPerformance ? PERFORMANCE_CASE_STUDIES : [];
   const performanceSocials = isPerformance
     ? SOCIAL_PROJECTS.filter((p) => PERFORMANCE_SOCIAL_SLUGS.includes(p.slug))
     : [];
   const performanceLegacy = filter === "Performance" ? CASE_STUDIES.filter((c) => c.slug === "fawry") : [];
+  const seoSocials = isSEO ? SOCIAL_PROJECTS.filter((p) => SEO_SOCIAL_SLUGS.includes(p.slug)) : [];
   const videos = isAll || filter === "Video & Animation" ? VIDEO_PROJECTS : [];
   const socials = isAll || filter === "Social Media Production"
-    ? SOCIAL_PROJECTS.filter((p) => !PERFORMANCE_SOCIAL_SLUGS.includes(p.slug))
+    ? SOCIAL_PROJECTS.filter(
+        (p) => !PERFORMANCE_SOCIAL_SLUGS.includes(p.slug) && !SEO_SOCIAL_SLUGS.includes(p.slug)
+      )
     : [];
   const brands = isAll || filter === "Branding" ? BRANDING_PROJECTS : [];
   const allCaseStudies = isAll ? CASE_STUDIES : [];
@@ -765,6 +773,7 @@ export function PortfolioPageContent() {
     performance.length +
     performanceSocials.length +
     performanceLegacy.length +
+    seoSocials.length +
     videos.length +
     socials.length +
     brands.length;
@@ -893,12 +902,34 @@ export function PortfolioPageContent() {
                 )}
               />
             ))}
+            {seoSocials.map((project, i) => (
+              <ShowcaseCard
+                key={`seo-${project.slug}`}
+                project={project}
+                basePath="/social"
+                eyebrowLabel="SEO"
+                delay={Math.min(
+                  (showcases.length +
+                    performance.length +
+                    performanceSocials.length +
+                    performanceLegacy.length +
+                    i) *
+                    0.08,
+                  0.32
+                )}
+              />
+            ))}
             {videos.map((project, i) => (
               <VideoCard
                 key={`video-${project.slug}`}
                 project={project}
                 delay={Math.min(
-                  (showcases.length + performance.length + performanceSocials.length + performanceLegacy.length + i) *
+                  (showcases.length +
+                    performance.length +
+                    performanceSocials.length +
+                    performanceLegacy.length +
+                    seoSocials.length +
+                    i) *
                     0.08,
                   0.32
                 )}
@@ -915,6 +946,7 @@ export function PortfolioPageContent() {
                     performance.length +
                     performanceSocials.length +
                     performanceLegacy.length +
+                    seoSocials.length +
                     videos.length +
                     i) *
                     0.08,
@@ -933,6 +965,7 @@ export function PortfolioPageContent() {
                     performance.length +
                     performanceSocials.length +
                     performanceLegacy.length +
+                    seoSocials.length +
                     videos.length +
                     socials.length +
                     i) *
@@ -950,6 +983,7 @@ export function PortfolioPageContent() {
                     performance.length +
                     performanceSocials.length +
                     performanceLegacy.length +
+                    seoSocials.length +
                     videos.length +
                     socials.length +
                     brands.length +

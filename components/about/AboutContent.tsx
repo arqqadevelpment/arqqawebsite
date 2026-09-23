@@ -18,24 +18,24 @@ const MILESTONES = [
 ];
 
 const LEADERSHIP: { name: string; title: string; image?: string }[] = [
-  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-02.webp" },
+  { name: "Wael Saad", title: "CEO & Founder", image: "/team/wael-03.webp" },
   { name: "Ahmed Saad", title: "Co-Founder & Commercial Director", image: "/team/ahmed-01.webp" },
   { name: "Menna Yousry", title: "Head Of Communication", image: "/team/menna-01.webp" },
   { name: "Samar Mohamed", title: "Head Of Creative", image: "/team/samar01.webp" },
   { name: "Abdel Rhman Sharaf", title: "Head Of Performance", image: "/team/abd-el-rahman-01.webp" },
   { name: "Abd el Rahman Abo Dief", title: "Head of SEO", image: "/team/Abd-el-rahman-dief.webp" },
-  { name: "Ahmed Badr", title: "Head of Sales & BD" },
+  { name: "Ahmed Badr", title: "Head of Sales & BD", image: "/team/ahmed-badr.webp" },
   { name: "Bahaa El Gendy", title: "Senior Web Developer", image: "/team/Bahaa.webp" },
   { name: "Madonna Bassem", title: "Senior Technical Account Manager", image: "/team/Madonna.webp" },
   { name: "Mariam Zaki", title: "Senior Creative Content Creator", image: "/team/Mariam-zaki.webp" },
   { name: "Fatma Gadallah", title: "Creative Strategist", image: "/team/Fatma-Gadallah.webp" },
   { name: "Abdullah Barii", title: "Senior Motion Graphics & Video Editing", image: "/team/Abdullah.webp" },
   { name: "Mo'men Abdaltwab", title: "Art Director", image: "/team/mo'men.webp" },
-  { name: "Maria Asaad", title: "Senior Performance Media Buyer" },
-  { name: "Mustafa Magdi", title: "Senior Performance Media Buyer" },
-  { name: "Sanaa", title: "HR Generalist" },
-  { name: "Rana Salah", title: "Traffic Specialist" },
-  { name: "Asmaa Mardishy", title: "Community Manager" },
+  { name: "Maria Asaad", title: "Senior Performance Media Buyer", image: "/team/maria.webp" },
+  { name: "Mustafa Magdi", title: "Senior Performance Media Buyer", image: "/team/mostafa.webp" },
+  { name: "Sanaa", title: "HR Generalist", image: "/team/sanaa.webp" },
+  { name: "Rana Salah", title: "Traffic Specialist", image: "/team/rana.webp" },
+  { name: "Asmaa Mardishy", title: "Community Manager", image: "/team/asmaa.webp" },
 ];
 
 const BELIEFS = [
